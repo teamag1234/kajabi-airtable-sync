@@ -5,3 +5,6 @@ node_modules/
 *.log
 .DS_Store
 .vercel
+
+# Exports con datos personales (listas de teléfonos, contactos)
+*.csv
