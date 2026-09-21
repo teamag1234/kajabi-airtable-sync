@@ -73,11 +73,18 @@ test('sin precio configurado se habla de precio de alumno', () => {
 });
 
 test('catálogo: detección de cursos y renovaciones por nombre de oferta', () => {
-  assert.equal(buscarCursoPorOferta('Directo al APTIS Express').key, 'aptis-6m');
-  assert.equal(buscarCursoPorOferta('curso aptis 3 MESES (pago único)').key, 'aptis-3m');
+  assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€').key, 'directo-express');
+  assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS" 1 PAGO 747€').key, 'directo');
+  assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS EXPRESS TUTORIZADO" 1').key, 'directo-express-tutorizado');
+  assert.equal(buscarCursoPorOferta('Acceso a “Aptis Expert”  12 pagos 77€').key, 'expert');
+  assert.equal(buscarCursoPorOferta('"APTIS EXPERT EXPRESS" 6 PAGOS 117€').key, 'expert-express');
+  assert.equal(buscarCursoPorOferta('Aptis Level - Policía Nacional ').key, 'level-policia');
+  assert.equal(buscarCursoPorOferta('Aptis Level Express').key, 'level-express');
+  assert.equal(buscarCursoPorOferta('Aptis Infinity ⭐️').key, 'infinity');
   assert.equal(buscarCursoPorOferta('Masterclass gratis'), null);
-  assert.equal(buscarCurso('aptis-12m').meses, 12);
-  assert.equal(buscarCurso('Curso APTIS 1 año').meses, 12);
+  assert.equal(buscarCurso('directo-tutorizado').meses, 12);
+  assert.equal(buscarCurso('Directo al Aptis Turbo Pro').meses, 4);
   assert.equal(buscarRenovacionPorOferta('Renovacion 6 meses').meses, 6);
+  assert.equal(buscarRenovacionPorOferta('Renovación cada 6 meses Acceso a “Aptis Expert”').meses, 6);
   assert.equal(buscarRenovacionPorOferta('Renovación 1 año').meses, 12);
 });

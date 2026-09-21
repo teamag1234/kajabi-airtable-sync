@@ -25,7 +25,7 @@ Sistema automático de sincronización de pagos desde Kajabi a Airtable con dete
 ```env
 KAJABI_API_KEY=tu_api_key
 AIRTABLE_TOKEN=tu_token
-AIRTABLE_BASE_ID=tu_base_id
+AIRTABLE_BASE_ID=appN0vx5OPGi81zB5   # base "CURSOS ONLINE"
 AIRTABLE_RENEWALS_TABLE=Renovaciones
 CRON_SECRET=un_secreto_largo
 
@@ -70,7 +70,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 ### Cómo funciona
 
-1. Cada alumno con acceso limitado tiene una fila en la tabla **Renovaciones** de Airtable con su email, curso y fecha de inicio.
+1. Cada alumno con acceso limitado tiene una fila en la tabla **Renovaciones** de Airtable (base CURSOS ONLINE) con su email, curso y fecha de inicio.
 2. El sistema calcula la **fecha de fin** (inicio + meses del curso) y la **fecha límite de renovación** (fin + 7 días).
 3. Cada día a las 9:00 el cron revisa la tabla y envía como máximo un email por alumno según dónde esté respecto a su fecha de fin:
 
@@ -110,7 +110,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 ### Tabla Renovaciones en Airtable
 
-Crea una tabla llamada `Renovaciones` (o el nombre que pongas en `AIRTABLE_RENEWALS_TABLE`) con estos campos:
+La tabla `Renovaciones` ya existe en la base **CURSOS ONLINE** (`appN0vx5OPGi81zB5`, tabla `tblAgRrCPuDelcSqu`). Si hay que recrearla en otra base, estos son sus campos:
 
 | Campo | Tipo |
 |-------|------|
@@ -137,7 +137,7 @@ Las escrituras usan `typecast`, así que las opciones de Estado se crean solas l
 
 ### Catálogo de cursos
 
-En `lib/renewal/courses.js` está la lista de cursos principales con sus meses de acceso y los nombres de las ofertas de Kajabi que los venden. Ajusta ahí nombres y duraciones; la comparación ignora mayúsculas y acentos.
+En `lib/renewal/courses.js` está la lista de cursos principales con sus meses de acceso y los nombres de las ofertas de Kajabi que los venden (tomados de la tabla CURSOS KAJABI). Los meses marcados `CONFIRMAR` se han deducido de las fechas de esa tabla; ajústalos si no cuadran. La comparación ignora mayúsculas y acentos y, si varias ofertas coinciden, gana el nombre más largo.
 
 ### Vista previa de los emails
 
