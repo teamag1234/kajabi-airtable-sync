@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { elegirPaso, estaCerrado, generarEmail, PASOS } from '../lib/renewal/sequence.js';
+import { elegirPaso, estaCerrado, generarEmail, PASOS, primerNombre } from '../lib/renewal/sequence.js';
 import { buscarCursoPorOferta, buscarCurso, buscarRenovacionPorOferta, ofertasRenovacionDeCurso, duracionCurso, duracionTexto } from '../lib/renewal/courses.js';
 
 test('elegirPaso manda cada paso el día que toca y solo una vez', () => {
@@ -109,4 +109,26 @@ test('catálogo: detección de cursos y renovaciones por nombre de oferta', () =
   assert.equal(buscarRenovacionPorOferta('Renovacion 6 meses').meses, 6);
   assert.equal(buscarRenovacionPorOferta('Renovación cada 6 meses Acceso a “Aptis Expert”').meses, 6);
   assert.equal(buscarRenovacionPorOferta('Renovación 1 año').meses, 12);
+});
+
+test('primerNombre salta iniciales y arregla mayúsculas', () => {
+  assert.equal(primerNombre('M. Inmaculada Durillo Perales'), 'Inmaculada');
+  assert.equal(primerNombre('Mª Carmen López'), 'Carmen');
+  assert.equal(primerNombre('J. Ismael Ibáñez Cebrián '), 'Ismael');
+  assert.equal(primerNombre('Ana Mª Carmona Casado'), 'Ana');
+  assert.equal(primerNombre('BELEN REYES GARCIA'), 'Belen');
+  assert.equal(primerNombre('ADRIÁN PROTO MORENO'), 'Adrián');
+  assert.equal(primerNombre('francisco javier martin'), 'Francisco');
+  assert.equal(primerNombre('María López'), 'María');
+  assert.equal(primerNombre('JJ Gordon'), '');
+  assert.equal(primerNombre('Aa'), '');
+  assert.equal(primerNombre('M.'), 'María');
+  assert.equal(primerNombre('ana@mail.com'), '');
+  assert.equal(primerNombre(''), '');
+});
+
+test('sin nombre fiable el saludo es "Hola," a secas', () => {
+  const mail = generarEmail(1, { ...ctxBase, nombre: 'Aa', diasHastaFin: 7, diasHastaLimite: 14 });
+  assert.match(mail.texto, /^Hola,\n/);
+  assert.match(mail.asunto, /^Te quedan 7 días/);
 });
