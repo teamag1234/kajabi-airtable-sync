@@ -114,6 +114,8 @@ test('catálogo: detección de cursos y renovaciones por nombre de oferta', () =
 test('primerNombre salta iniciales y arregla mayúsculas', () => {
   assert.equal(primerNombre('M. Inmaculada Durillo Perales'), 'Inmaculada');
   assert.equal(primerNombre('Mª Carmen López'), 'Carmen');
+  assert.equal(primerNombre('Mª del Carmen López '), 'Carmen');
+  assert.equal(primerNombre('M TERESA LEÓN ROJAS'), 'Teresa');
   assert.equal(primerNombre('J. Ismael Ibáñez Cebrián '), 'Ismael');
   assert.equal(primerNombre('Ana Mª Carmona Casado'), 'Ana');
   assert.equal(primerNombre('BELEN REYES GARCIA'), 'Belen');
