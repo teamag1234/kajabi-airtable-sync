@@ -7,10 +7,18 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [lastSync, setLastSync] = useState(null);
   const [renewals, setRenewals] = useState(null);
+  const [secret, setSecret] = useState('');
+
+  // El secreto (CRON_SECRET) se guarda solo en este navegador
+  const authHeaders = () => (secret ? { Authorization: `Bearer ${secret}` } : {});
+  const saveSecret = (value) => {
+    setSecret(value);
+    try { localStorage.setItem('ag_cron_secret', value); } catch {}
+  };
 
   const loadRenewals = async () => {
     try {
-      const response = await fetch('/api/renewal-summary');
+      const response = await fetch('/api/renewal-summary', { headers: authHeaders() });
       const data = await response.json();
       setRenewals(data.success ? data.data : { error: data.error });
     } catch (error) {
@@ -21,7 +29,7 @@ export default function Home() {
   const runRenewals = async (dry) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/renewal-sequence${dry ? '?dry=1' : ''}`);
+      const response = await fetch(`/api/renewal-sequence${dry ? '?dry=1' : ''}`, { headers: authHeaders() });
       const data = await response.json();
       setSyncStatus(data);
       if (!dry) loadRenewals();
@@ -34,7 +42,7 @@ export default function Home() {
   const manualSync = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/sync-kajabi');
+      const response = await fetch('/api/sync-kajabi', { headers: authHeaders() });
       const data = await response.json();
       setSyncStatus(data);
       setLastSync(new Date());
@@ -47,7 +55,7 @@ export default function Home() {
   const checkPayments = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/check-failed-payments');
+      const response = await fetch('/api/check-failed-payments', { headers: authHeaders() });
       const data = await response.json();
       setSyncStatus(data);
     } catch (error) {
@@ -58,13 +66,39 @@ export default function Home() {
 
   useEffect(() => {
     fetch('/api/health').catch(console.error);
-    loadRenewals();
+    try { setSecret(localStorage.getItem('ag_cron_secret') || ''); } catch {}
   }, []);
+
+  useEffect(() => {
+    loadRenewals();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [secret]);
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
       <h1>🔄 Kajabi-Airtable Sync</h1>
       <p>Sistema automático de sincronización de pagos</p>
+
+      <div style={{
+        border: '1px solid #ccc',
+        padding: '16px 20px',
+        borderRadius: '8px',
+        marginBottom: '20px',
+        backgroundColor: '#fffbeb'
+      }}>
+        <label htmlFor="ag-secret" style={{ display: 'block', fontWeight: 'bold', marginBottom: '6px' }}>🔑 Clave de acceso (CRON_SECRET)</label>
+        <input
+          id="ag-secret"
+          type="password"
+          value={secret}
+          onChange={(e) => saveSecret(e.target.value)}
+          placeholder="Pega aquí la clave. Se guarda solo en este navegador."
+          style={{ width: '100%', maxWidth: '520px', padding: '8px 10px', border: '1px solid #ccc', borderRadius: '4px', fontFamily: 'monospace' }}
+        />
+        <p style={{ fontSize: '13px', color: '#666', margin: '6px 0 0 0' }}>
+          {secret ? 'Clave guardada. Los botones ya funcionan.' : 'Sin clave, los botones devolverán "Unauthorized".'}
+        </p>
+      </div>
 
       <div style={{
         border: '1px solid #ccc',
@@ -140,7 +174,7 @@ export default function Home() {
           </div>
         )}
         {renewals && renewals.error && (
-          <p style={{ color: '#fca5a5', fontSize: '14px' }}>No se pudo cargar el resumen: {renewals.error}</p>
+          <p style={{ color: '#fca5a5', fontSize: '14px' }}>No se pudo cargar el resumen: {renewals.error}{renewals.error === 'Unauthorized' ? ' (pega la clave de acceso arriba)' : ''}</p>
         )}
 
         <button
