@@ -7,6 +7,9 @@ import { join } from 'node:path';
 import { PASOS, generarEmail } from '../lib/renewal/sequence.js';
 import { buscarCurso, ofertasRenovacionDeCurso } from '../lib/renewal/courses.js';
 import { sumarDias, hoyMadrid } from '../lib/renewal/dates.js';
+import { urlAprobado } from '../lib/renewal/links.js';
+
+process.env.CRON_SECRET = process.env.CRON_SECRET || 'preview';
 
 const out = process.argv[2] || join(process.cwd(), 'scripts', 'preview');
 mkdirSync(out, { recursive: true });
@@ -17,6 +20,7 @@ const ctxBase = {
   curso: buscarCurso(process.env.PREVIEW_CURSO || 'directo-express').nombre,
   fechaFin,
   fechaLimite: sumarDias(fechaFin, 7),
+  urlAprobado: urlAprobado({ email: 'maria@ejemplo.com', cursoKey: process.env.PREVIEW_CURSO || 'directo-express' }),
   ofertas: ofertasRenovacionDeCurso(buscarCurso(process.env.PREVIEW_CURSO || 'directo-express')),
 };
 

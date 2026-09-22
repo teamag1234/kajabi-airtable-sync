@@ -58,6 +58,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - `POST /api/renewal-enroll` - Alta de alumnos (uno o array)
 - `PATCH /api/renewal-enroll` - Marcar aprobado / pausar / aplicar renovación
 - `GET /api/renewal-summary` - Recuento por estado
+- `GET /api/renewal-aprobado?t=<token>` - Página pública del botón "Ya lo he conseguido" (marca Aprobado y pide reseña en Google o WhatsApp a Jesu)
 - `GET /` - Dashboard
 
 ## 🔄 Cron Jobs (UTC)
@@ -107,7 +108,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 ### Quién sale de la secuencia
 
-- **Aprobado** (casilla): el alumno ya tiene el título. También por API: `PATCH /api/renewal-enroll` con `{ "email": "...", "aprobado": true }`.
+- **Aprobado** (casilla): el alumno ya tiene el título. Cada email lleva un botón "Ya lo he conseguido" con un enlace firmado que marca la casilla al pulsarlo y pide una reseña. También por API: `PATCH /api/renewal-enroll` con `{ "email": "...", "aprobado": true }`.
 - **Pausar** (casilla): no enviar nada temporalmente.
 - **Renovación**: si el sync detecta el pago de una oferta de renovación (o llega `PATCH` con `{ "email": "...", "renovar": { "meses": 6 } }`), se amplía la fecha de fin desde el fin anterior y la secuencia se reinicia para el nuevo periodo.
 

@@ -34,7 +34,10 @@ test('la secuencia tiene 7 pasos entre -7 y +7', () => {
   assert.deepEqual(PASOS.map((p) => p.offset), [-7, -3, -1, 0, 3, 6, 7]);
 });
 
+process.env.CRON_SECRET = process.env.CRON_SECRET || 'secreto-de-prueba';
+
 const ctxBase = {
+  urlAprobado: 'https://ejemplo.test/api/renewal-aprobado?t=abc.def',
   nombre: 'María López',
   curso: 'Curso APTIS 6 meses',
   fechaFin: '2026-09-24',
@@ -52,9 +55,13 @@ test('generarEmail produce asunto, texto y html personalizados en cada paso', ()
     assert.match(mail.html, /offers\/sKLnwNsW/);
     assert.match(mail.html, /97 €/);
     assert.match(mail.html, /Klarna/);
+    assert.match(mail.html, /Ya lo he conseguido/);
+    assert.match(mail.html, /renewal-aprobado\?t=abc\.def/);
+    assert.match(mail.html, /<img src="https:\/\/kajabi-storefronts-production[^"]+" alt="AG Academy"/);
+    assert.match(mail.texto, /dejamos de escribirte/);
     assert.match(mail.html, /#FFBD59/);
     assert.match(mail.html, /Poppins/);
-    assert.match(mail.texto, /Jesu$/);
+    assert.match(mail.texto, /\nJesu\n/);
   }
 });
 
