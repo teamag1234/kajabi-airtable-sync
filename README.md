@@ -44,6 +44,8 @@ EMAIL_SIGNATURE=Jesu
 
 Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bearer <CRON_SECRET>` (Vercel Cron lo envía automáticamente).
 
+**Modo prueba**: con `RENEWAL_TEST_TO=correo@vuestro.com` la secuencia envía todos los emails del día a esa dirección (el alumno real va en el asunto) y no anota nada en Airtable. Al quitar la variable, los mismos emails salen a los alumnos.
+
 ## 📞 Endpoints
 
 - `GET /api/health` - Health check

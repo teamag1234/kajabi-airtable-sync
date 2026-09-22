@@ -191,7 +191,7 @@ export default function Home() {
           backgroundColor: syncStatus.success ? '#dcfce7' : '#fee2e2',
           marginTop: '20px'
         }}>
-          <h3>{syncStatus.success ? '✅ Éxito' : '❌ Error'}</h3>
+          <h3>{syncStatus.success ? '✅ Éxito' : '❌ Error'}{syncStatus.data && syncStatus.data.modoPrueba ? ` · modo prueba (emails a ${syncStatus.data.testTo})` : ''}</h3>
           <pre style={{
             backgroundColor: '#f3f4f6',
             padding: '10px',
