@@ -40,11 +40,6 @@ EMAIL_FROM=hola@agacademyaptis.com
 EMAIL_FROM_NAME=Jesu · AG Academy
 EMAIL_REPLY_TO=
 EMAIL_SIGNATURE=Jesu
-
-# Ofertas de renovación (precio en euros, enlace al checkout de Kajabi)
-RENEWAL_PRICE_1M=  RENEWAL_URL_1M=
-RENEWAL_PRICE_6M=  RENEWAL_URL_6M=
-RENEWAL_PRICE_12M= RENEWAL_URL_12M=
 ```
 
 Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bearer <CRON_SECRET>` (Vercel Cron lo envía automáticamente).
@@ -90,7 +85,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 4. Pasado el día +7 la fila pasa a **Cerrado** y no recibe más emails.
 5. Si un día el cron no se ejecuta, al siguiente solo se envía el email más reciente pendiente, nunca los atrasados.
-6. Cada email ofrece tres opciones (1 mes, 6 meses, 1 año) con precio y enlace configurados en las variables `RENEWAL_*`.
+6. Cada email ofrece las renovaciones de pago único del curso del alumno (precio y checkout de Kajabi, definidos en `lib/renewal/courses.js`). En el checkout se puede fraccionar en 3 con Klarna. Si el curso no tiene renovación de pago único, el email pide responder para gestionarla.
 
 ### Cómo entra un alumno
 
@@ -146,15 +141,16 @@ Las escrituras usan `typecast`, así que las opciones de Estado se crean solas l
 
 En `lib/renewal/courses.js` está la lista de cursos principales con su acceso y los nombres de las ofertas de Kajabi que los venden (tomados de la tabla CURSOS KAJABI). La comparación ignora mayúsculas y acentos y, si varias ofertas coinciden, gana el nombre más largo.
 
-| Curso | Acceso |
-|-------|--------|
-| Directo al Aptis Express / Express Tutorizado | 6 meses |
-| Directo al Aptis / Tutorizado | 12 meses |
-| Aptis Expert / Expert Express / Expert Express Tutorizado / Expert Tutorizado | 6 meses |
-| Aptis Accelerator (Lite, Plus) | 4 meses |
-| Aptis Level (Policía Nacional) | 3 meses |
-| Aptis Level Express | 50 días |
-| Ten tu Aptis | 4 meses (por defecto) u 8 meses si la oferta lo indica |
+| Curso | Acceso | Renovaciones en el email |
+|-------|--------|--------------------------|
+| Directo al Aptis Express / Express Tutorizado | 6 meses | 1 mes 97 €, 6 meses 297 €, 1 año 497 € |
+| Directo al Aptis / Tutorizado | 12 meses | 1 mes 97 €, 6 meses 297 €, 1 año 497 € |
+| Aptis Accelerator (Lite, Plus) | 4 meses | 4 meses 197 € |
+| Aptis Level (Policía Nacional) | 3 meses | 50 días 115 €, 3 meses 157 € |
+| Aptis Level Express | 50 días | 50 días 115 €, 3 meses 157 € |
+| Ten tu Aptis | 4 meses (por defecto) u 8 meses si la oferta lo indica | ninguna de pago único en Kajabi |
+
+Las ofertas de "Aptis Expert" (curso ya retirado) se tratan como Directo al Aptis.
 
 Aptis Infinity es suscripción mensual y queda fuera de la secuencia.
 

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { elegirPaso, estaCerrado, generarEmail, PASOS } from '../lib/renewal/sequence.js';
-import { buscarCursoPorOferta, buscarCurso, buscarRenovacionPorOferta, getOfertasRenovacion, duracionCurso, duracionTexto } from '../lib/renewal/courses.js';
+import { buscarCursoPorOferta, buscarCurso, buscarRenovacionPorOferta, ofertasRenovacionDeCurso, duracionCurso, duracionTexto } from '../lib/renewal/courses.js';
 
 test('elegirPaso manda cada paso el día que toca y solo una vez', () => {
   assert.equal(elegirPaso(-10, 0), null);
@@ -39,7 +39,7 @@ const ctxBase = {
   curso: 'Curso APTIS 6 meses',
   fechaFin: '2026-09-24',
   fechaLimite: '2026-10-01',
-  ofertas: getOfertasRenovacion({ RENEWAL_PRICE_1M: '47', RENEWAL_URL_1M: 'https://x/1m', RENEWAL_PRICE_6M: '97', RENEWAL_URL_6M: 'https://x/6m' }),
+  ofertas: ofertasRenovacionDeCurso(buscarCurso('directo-express')),
 };
 
 test('generarEmail produce asunto, texto y html personalizados en cada paso', () => {
@@ -49,8 +49,9 @@ test('generarEmail produce asunto, texto y html personalizados en cada paso', ()
     assert.ok(mail.asunto.length > 5, `paso ${p.paso} sin asunto`);
     assert.match(mail.texto, /Hola María,/);
     assert.match(mail.html, /Curso APTIS 6 meses/);
-    assert.match(mail.html, /https:\/\/x\/1m/);
-    assert.match(mail.html, /47 €/);
+    assert.match(mail.html, /offers\/sKLnwNsW/);
+    assert.match(mail.html, /97 €/);
+    assert.match(mail.html, /Klarna/);
     assert.match(mail.html, /#FFBD59/);
     assert.match(mail.html, /Poppins/);
     assert.match(mail.texto, /Jesu$/);
@@ -67,18 +68,25 @@ test('el copy usa los días reales para quien entra a mitad de ventana', () => {
   assert.match(primero.asunto, /5 días/);
 });
 
-test('sin precio configurado se habla de precio de alumno', () => {
-  const mail = generarEmail(2, { ...ctxBase, ofertas: getOfertasRenovacion({}), diasHastaFin: 3, diasHastaLimite: 10 });
-  assert.match(mail.html, /precio de alumno/);
+test('curso sin ofertas de renovación: el email pide responder', () => {
+  const mail = generarEmail(2, { ...ctxBase, ofertas: ofertasRenovacionDeCurso(buscarCurso('ten-tu-aptis-4m')), diasHastaFin: 3, diasHastaLimite: 10 });
+  assert.match(mail.html, /Responde a este email/);
+  assert.doesNotMatch(mail.html, /Klarna/);
+});
+
+test('cada curso lleva sus renovaciones de pago único', () => {
+  assert.deepEqual(ofertasRenovacionDeCurso(buscarCurso('directo')).map((o) => o.precio), ['97', '297', '497']);
+  assert.deepEqual(ofertasRenovacionDeCurso(buscarCurso('level-express')).map((o) => o.etiqueta), ['50 días más', '3 meses más']);
+  assert.deepEqual(ofertasRenovacionDeCurso(buscarCurso('accelerator')).map((o) => o.precio), ['197']);
 });
 
 test('catálogo: detección de cursos y renovaciones por nombre de oferta', () => {
   assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€').key, 'directo-express');
   assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS" 1 PAGO 747€').key, 'directo');
   assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS EXPRESS TUTORIZADO" 1').key, 'directo-express-tutorizado');
-  assert.equal(buscarCursoPorOferta('Acceso a “Aptis Expert”  12 pagos 77€').key, 'expert');
-  assert.equal(buscarCursoPorOferta('"APTIS EXPERT EXPRESS" 6 PAGOS 117€').key, 'expert-express');
-  assert.equal(buscarCursoPorOferta('Aptis Expert Express Tutorizado 1 pago').key, 'expert-express-tutorizado');
+  assert.equal(buscarCursoPorOferta('Acceso a “Aptis Expert”  12 pagos 77€').key, 'directo');
+  assert.equal(buscarCursoPorOferta('Renovación cada 6 meses Acceso a “Aptis Expert”').key, 'directo');
+  assert.equal(buscarCursoPorOferta('Aptis Expert Tutorizado 1 pago').key, 'directo-tutorizado');
   assert.equal(buscarCursoPorOferta('Aptis Level - Policía Nacional ').key, 'level');
   assert.equal(buscarCursoPorOferta('Aptis Level  🚀').key, 'level');
   assert.equal(buscarCursoPorOferta('Aptis Level Express').key, 'level-express');
