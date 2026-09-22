@@ -10,6 +10,7 @@ export const maxDuration = 60;
  * Body: { email, nombre, curso, fecha_inicio, meses? }  o un array de esos objetos.
  *   - curso: key del catálogo (aptis-6m), nombre del curso o nombre de la oferta de Kajabi
  *   - fecha_inicio: YYYY-MM-DD (fecha de compra)
+ *   - fecha_fin: YYYY-MM-DD opcional; si llega manda sobre la duración del catálogo
  *   - meses (o dias): solo necesario si el curso no está en el catálogo
  */
 export async function POST(req) {
@@ -27,6 +28,7 @@ export async function POST(req) {
           nombre: item.nombre || item.name,
           curso: item.curso || item.course || item.oferta || item.offer,
           fechaInicio: item.fecha_inicio || item.fechaInicio || item.start_date,
+          fechaFin: item.fecha_fin || item.fechaFin || item.end_date,
           meses: item.meses || item.months,
           dias: item.dias || item.days,
           origen: item.origen || 'api',

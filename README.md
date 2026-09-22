@@ -23,7 +23,8 @@ Sistema automático de sincronización de pagos desde Kajabi a Airtable con dete
 ## 📋 Variables de Entorno
 
 ```env
-KAJABI_API_KEY=tu_api_key
+KAJABI_CLIENT_ID=tu_client_id
+KAJABI_CLIENT_SECRET=tu_client_secret
 AIRTABLE_TOKEN=tu_token
 AIRTABLE_BASE_ID=appN0vx5OPGi81zB5   # base "CURSOS ONLINE"
 AIRTABLE_RENEWALS_TABLE=Renovaciones
@@ -53,6 +54,8 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - `GET /api/health` - Health check
 - `GET /api/sync-kajabi` - Sincronización manual
 - `GET /api/check-failed-payments` - Verificación de pagos
+- `GET /api/renewal-import` - Importa accesos desde Kajabi a la tabla Renovaciones (incremental, últimos 3 días)
+  - `?dry=1` simula; `?desde=2025-08-01` revisa compras creadas desde esa fecha; `?completo=1` recorre por fecha de creación en vez de actualización
 - `GET /api/renewal-sequence` - Proceso diario de la secuencia de renovación
   - `?dry=1` simula sin enviar ni escribir; `?dry=1&hoy=2026-10-01` simula otro día
 - `POST /api/renewal-enroll` - Alta de alumnos (uno o array)
@@ -64,6 +67,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 - **2:00**: Sincronización automática de pagos
 - **10:00**: Verificación de pagos fallidos
+- **6:30**: importación incremental de accesos desde Kajabi
 - **7:00** (9:00 hora peninsular en verano, 8:00 en invierno): secuencia de renovación
 
 ## 🔁 Sistema de renovación
@@ -90,7 +94,9 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 ### Cómo entra un alumno
 
-- **Automático**: el sync de pagos reconoce la oferta comprada por su nombre (ver `lib/renewal/courses.js`) y crea la fila con la fecha de compra como inicio.
+- **Automático desde Kajabi** (la vía principal): cada día a las 6:30 UTC el endpoint `/api/renewal-import` recorre las compras actualizadas en Kajabi en los últimos 3 días. Para cada compra cuya oferta esté en el catálogo (o sea una renovación de un curso del catálogo) toma la **fecha de fin de acceso que fija Kajabi** (`deactivated_at`, que es la caducidad programada) y crea o actualiza la fila del alumno. Si un alumno tiene varias compras del mismo curso se queda la que termina más tarde. Las suscripciones activas y las ofertas fuera del catálogo se ignoran.
+  - Carga inicial: `node scripts/import-kajabi.mjs --dry` (simula) y `node scripts/import-kajabi.mjs` (importa los últimos 14 meses de compras y marca Aprobado a quien conste como aprobado en CURSOS KAJABI).
+- **Sync de pagos**: el sync antiguo también reconoce la oferta comprada y da de alta al alumno, pero el importador de arriba es más fiable porque usa la caducidad real.
 - **Por API** (n8n, Zapier, webhook de Kajabi):
   ```http
   POST /api/renewal-enroll
