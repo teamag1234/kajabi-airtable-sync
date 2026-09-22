@@ -9,6 +9,7 @@ export const maxDuration = 300;
  * GET /api/renewal-sequence          → envía los emails que toquen hoy
  * GET /api/renewal-sequence?dry=1    → simula sin enviar ni escribir
  * GET /api/renewal-sequence?hoy=YYYY-MM-DD → simula como si fuera otro día (solo con dry=1)
+ * GET /api/renewal-sequence?max=1     → envía como máximo N emails (para pruebas)
  */
 export async function GET(req) {
   if (!isAuthorized(req)) return json({ success: false, error: 'Unauthorized' }, 401);
@@ -18,7 +19,8 @@ export async function GET(req) {
     const dryRun = ['1', 'true'].includes(url.searchParams.get('dry') || '');
     const hoy = dryRun ? url.searchParams.get('hoy') || undefined : undefined;
 
-    const result = await procesarSecuencia({ dryRun, hoy });
+    const max = parseInt(url.searchParams.get('max') || '', 10) || null;
+    const result = await procesarSecuencia({ dryRun, hoy, max });
 
     return json({
       success: true,
