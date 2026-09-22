@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { elegirPaso, estaCerrado, generarEmail, PASOS } from '../lib/renewal/sequence.js';
-import { buscarCursoPorOferta, buscarCurso, buscarRenovacionPorOferta, getOfertasRenovacion } from '../lib/renewal/courses.js';
+import { buscarCursoPorOferta, buscarCurso, buscarRenovacionPorOferta, getOfertasRenovacion, duracionCurso, duracionTexto } from '../lib/renewal/courses.js';
 
 test('elegirPaso manda cada paso el día que toca y solo una vez', () => {
   assert.equal(elegirPaso(-10, 0), null);
@@ -78,12 +78,19 @@ test('catálogo: detección de cursos y renovaciones por nombre de oferta', () =
   assert.equal(buscarCursoPorOferta('"DIRECTO AL APTIS EXPRESS TUTORIZADO" 1').key, 'directo-express-tutorizado');
   assert.equal(buscarCursoPorOferta('Acceso a “Aptis Expert”  12 pagos 77€').key, 'expert');
   assert.equal(buscarCursoPorOferta('"APTIS EXPERT EXPRESS" 6 PAGOS 117€').key, 'expert-express');
-  assert.equal(buscarCursoPorOferta('Aptis Level - Policía Nacional ').key, 'level-policia');
+  assert.equal(buscarCursoPorOferta('Aptis Expert Express Tutorizado 1 pago').key, 'expert-express-tutorizado');
+  assert.equal(buscarCursoPorOferta('Aptis Level - Policía Nacional ').key, 'level');
+  assert.equal(buscarCursoPorOferta('Aptis Level  🚀').key, 'level');
   assert.equal(buscarCursoPorOferta('Aptis Level Express').key, 'level-express');
-  assert.equal(buscarCursoPorOferta('Aptis Infinity ⭐️').key, 'infinity');
+  assert.equal(buscarCursoPorOferta('Ten tu Aptis 1 pago de 397€').key, 'ten-tu-aptis-4m');
+  assert.equal(buscarCursoPorOferta('Ten tu Aptis 8 meses').key, 'ten-tu-aptis-8m');
+  assert.equal(buscarCursoPorOferta('Aptis Infinity ⭐️'), null);
   assert.equal(buscarCursoPorOferta('Masterclass gratis'), null);
   assert.equal(buscarCurso('directo-tutorizado').meses, 12);
-  assert.equal(buscarCurso('Directo al Aptis Turbo Pro').meses, 4);
+  assert.equal(buscarCurso('Aptis Accelerator').meses, 4);
+  assert.deepEqual(duracionCurso(buscarCurso('level-express')), { dias: 50 });
+  assert.equal(duracionTexto({ dias: 50 }), '50 días');
+  assert.equal(duracionTexto({ meses: 1 }), '1 mes');
   assert.equal(buscarRenovacionPorOferta('Renovacion 6 meses').meses, 6);
   assert.equal(buscarRenovacionPorOferta('Renovación cada 6 meses Acceso a “Aptis Expert”').meses, 6);
   assert.equal(buscarRenovacionPorOferta('Renovación 1 año').meses, 12);

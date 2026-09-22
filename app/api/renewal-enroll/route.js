@@ -10,7 +10,7 @@ export const maxDuration = 60;
  * Body: { email, nombre, curso, fecha_inicio, meses? }  o un array de esos objetos.
  *   - curso: key del catálogo (aptis-6m), nombre del curso o nombre de la oferta de Kajabi
  *   - fecha_inicio: YYYY-MM-DD (fecha de compra)
- *   - meses: solo necesario si el curso no está en el catálogo
+ *   - meses (o dias): solo necesario si el curso no está en el catálogo
  */
 export async function POST(req) {
   if (!isAuthorized(req)) return json({ success: false, error: 'Unauthorized' }, 401);
@@ -28,6 +28,7 @@ export async function POST(req) {
           curso: item.curso || item.course || item.oferta || item.offer,
           fechaInicio: item.fecha_inicio || item.fechaInicio || item.start_date,
           meses: item.meses || item.months,
+          dias: item.dias || item.days,
           origen: item.origen || 'api',
         });
         resultados.push({ email: item.email, ...r });

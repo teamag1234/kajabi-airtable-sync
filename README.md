@@ -99,7 +99,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
   { "email": "alumno@mail.com", "nombre": "María López", "curso": "aptis-6m", "fecha_inicio": "2026-09-01" }
   ```
-  `curso` admite la key del catálogo, el nombre del curso o el nombre de la oferta de Kajabi. Si el curso no está en el catálogo, añade `"meses": 4`. Se puede enviar un array para altas masivas.
+  `curso` admite la key del catálogo, el nombre del curso o el nombre de la oferta de Kajabi. Si el curso no está en el catálogo, añade `"meses": 4` (o `"dias": 50`). Se puede enviar un array para altas masivas.
 - **A mano en Airtable**: crea la fila con Email, Nombre, Curso y Fecha inicio. El cron completa el resto de fechas en su siguiente pasada.
 
 ### Quién sale de la secuencia
@@ -120,6 +120,7 @@ La tabla `Renovaciones` ya existe en la base **CURSOS ONLINE** (`appN0vx5OPGi81z
 | Curso key | Texto |
 | Fecha inicio | Fecha |
 | Meses acceso | Número |
+| Días acceso | Número (solo cursos con acceso en días, como Level Express) |
 | Fecha fin | Fecha |
 | Fecha límite renovación | Fecha |
 | Estado | Selección única (Activo, En secuencia, Cerrado, Aprobado, Pausado) |
@@ -137,7 +138,19 @@ Las escrituras usan `typecast`, así que las opciones de Estado se crean solas l
 
 ### Catálogo de cursos
 
-En `lib/renewal/courses.js` está la lista de cursos principales con sus meses de acceso y los nombres de las ofertas de Kajabi que los venden (tomados de la tabla CURSOS KAJABI). Los meses marcados `CONFIRMAR` se han deducido de las fechas de esa tabla; ajústalos si no cuadran. La comparación ignora mayúsculas y acentos y, si varias ofertas coinciden, gana el nombre más largo.
+En `lib/renewal/courses.js` está la lista de cursos principales con su acceso y los nombres de las ofertas de Kajabi que los venden (tomados de la tabla CURSOS KAJABI). La comparación ignora mayúsculas y acentos y, si varias ofertas coinciden, gana el nombre más largo.
+
+| Curso | Acceso |
+|-------|--------|
+| Directo al Aptis Express / Express Tutorizado | 6 meses |
+| Directo al Aptis / Tutorizado | 12 meses |
+| Aptis Expert / Expert Express / Expert Express Tutorizado / Expert Tutorizado | 6 meses |
+| Aptis Accelerator (Lite, Plus) | 4 meses |
+| Aptis Level (Policía Nacional) | 3 meses |
+| Aptis Level Express | 50 días |
+| Ten tu Aptis | 4 meses (por defecto) u 8 meses si la oferta lo indica |
+
+Aptis Infinity es suscripción mensual y queda fuera de la secuencia.
 
 ### Vista previa de los emails
 

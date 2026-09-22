@@ -18,12 +18,23 @@ test('sumarDias y diferenciaDias no se ven afectados por el cambio de hora', () 
   assert.equal(diferenciaDias('2026-10-31', '2026-10-24'), -7);
 });
 
-test('calcularFechas devuelve fin y límite (fin + 7)', () => {
+test('calcularFechas devuelve fin y límite (fin + 7), en meses o en días', () => {
   assert.deepEqual(calcularFechas('2026-06-01', 3), {
     fechaInicio: '2026-06-01',
     fechaFin: '2026-09-01',
     fechaLimite: '2026-09-08',
   });
+  assert.deepEqual(calcularFechas('2026-06-01', { meses: 12 }), {
+    fechaInicio: '2026-06-01',
+    fechaFin: '2027-06-01',
+    fechaLimite: '2027-06-08',
+  });
+  assert.deepEqual(calcularFechas('2026-09-22', { dias: 50 }), {
+    fechaInicio: '2026-09-22',
+    fechaFin: '2026-11-11',
+    fechaLimite: '2026-11-18',
+  });
+  assert.throws(() => calcularFechas('2026-09-22', {}));
 });
 
 test('hoyMadrid devuelve la fecha peninsular aunque UTC vaya por detrás', () => {
