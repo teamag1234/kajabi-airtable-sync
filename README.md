@@ -59,6 +59,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - `PATCH /api/renewal-enroll` - Marcar aprobado / pausar / aplicar renovación
 - `GET /api/renewal-summary` - Recuento por estado
 - `GET /api/renewal-aprobado?t=<token>` - Página pública del botón "Ya lo he conseguido" (marca Aprobado y pide reseña en Google o WhatsApp a Jesu)
+- `GET /api/renewal-click?t=<token>&o=<oferta>&p=<paso>` - Enlace de las ofertas del email: registra el clic (Clics, Último clic, Oferta clicada, Paso del clic) y redirige al checkout con UTMs
 - `GET /` - Dashboard
 
 ## 🔄 Cron Jobs (UTC)
@@ -112,6 +113,10 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - **Pausar** (casilla): no enviar nada temporalmente.
 - **Renovación**: si el sync detecta el pago de una oferta de renovación (o llega `PATCH` con `{ "email": "...", "renovar": { "meses": 6 } }`), se amplía la fecha de fin desde el fin anterior y la secuencia se reinicia para el nuevo periodo.
 
+### Atribución de renovaciones al email
+
+Los botones de oferta del email pasan por `/api/renewal-click`, que anota el clic en la fila del alumno y redirige al checkout de Kajabi con `utm_source=email`, `utm_medium=renovacion`, `utm_campaign=renovacion-paso-N` y `utm_content=<oferta>`. Cuando el importador detecta después una compra de renovación de ese alumno, amplía su fila (conserva el curso, suma **Nº renovaciones**, guarda **Última renovación**, **Oferta renovación**, **Importe renovación** y **Paso al renovar**) y marca **Renovado desde email** solo si hubo un clic en el email en los 30 días anteriores a la compra. Las renovaciones que llegan por otros caminos (enlaces que mandan los teachers, WhatsApp) quedan registradas pero sin esa marca.
+
 ### Tabla Renovaciones en Airtable
 
 La tabla `Renovaciones` ya existe en la base **CURSOS ONLINE** (`appN0vx5OPGi81zB5`, tabla `tblAgRrCPuDelcSqu`). Si hay que recrearla en otra base, estos son sus campos:
@@ -137,6 +142,14 @@ La tabla `Renovaciones` ya existe en la base **CURSOS ONLINE** (`appN0vx5OPGi81z
 | Última renovación | Fecha |
 | Origen | Texto |
 | Notas | Texto largo |
+| Renovado desde email | Casilla |
+| Paso al renovar | Número |
+| Importe renovación | Número |
+| Oferta renovación | Texto |
+| Clics | Número |
+| Último clic | Fecha |
+| Oferta clicada | Texto |
+| Paso del clic | Número |
 
 Las escrituras usan `typecast`, así que las opciones de Estado se crean solas la primera vez.
 

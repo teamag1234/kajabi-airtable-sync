@@ -52,7 +52,7 @@ test('generarEmail produce asunto, texto y html personalizados en cada paso', ()
     assert.ok(mail.asunto.length > 5, `paso ${p.paso} sin asunto`);
     assert.match(mail.texto, /Hola María,/);
     assert.match(mail.html, /Curso APTIS 6 meses/);
-    assert.match(mail.html, /offers\/sKLnwNsW/);
+    assert.match(mail.html, /offers\/sKLnwNsW|renewal-click/);
     assert.match(mail.html, /97 €/);
     assert.match(mail.html, /Klarna/);
     assert.match(mail.html, /Ya lo he conseguido/);
