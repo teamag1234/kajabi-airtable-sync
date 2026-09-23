@@ -14,6 +14,14 @@ test('usa deactivated_at de Kajabi como fecha fin', () => {
   assert.equal(r.email, 'ana@mail.com');
   assert.equal(r.cursoKey, 'directo-express');
   assert.deepEqual([r.fechaInicio, r.fechaFin, r.fuenteFin], ['2026-09-22', '2027-03-22', 'kajabi']);
+  assert.equal(r.familia, 'directo');
+});
+
+test('la compra trae importe y fecha de compra', () => {
+  const r = mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-22T10:00:00Z', created_at: '2026-09-22T10:00:00Z', amount_in_cents: 9700 }), offer: offer('Renovación mensual “Directo al aptis”'), customer, hoy: '2026-09-22' });
+  assert.equal(r.importe, 97);
+  assert.equal(r.fechaCompra, '2026-09-22');
+  assert.equal(r.esRenovacion, true);
 });
 
 test('sin deactivated_at calcula con el catálogo', () => {
@@ -38,13 +46,15 @@ test('omite ofertas fuera de catálogo, suscripciones activas y accesos ya cerra
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-03-15T00:00:00Z', deactivated_at: '2026-09-16T00:00:00Z', deactivation_reason: 'access_expired' }), offer: offer('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€'), customer, hoy: '2026-09-22' }).fechaFin, '2026-09-16');
 });
 
-test('consolidarAccesos se queda con el acceso que termina más tarde por alumno y curso', () => {
+test('consolidarAccesos se queda con el acceso que termina más tarde por alumno y familia', () => {
   const r = consolidarAccesos([
-    { email: 'a@x.com', cursoKey: 'directo', fechaFin: '2026-10-01' },
-    { email: 'a@x.com', cursoKey: 'directo', fechaFin: '2027-03-01' },
-    { email: 'a@x.com', cursoKey: 'level', fechaFin: '2026-10-01' },
-    { email: 'b@x.com', cursoKey: 'directo', fechaFin: '2026-12-01' },
+    { email: 'a@x.com', cursoKey: 'directo-express', familia: 'directo', fechaFin: '2026-10-01' },
+    { email: 'a@x.com', cursoKey: 'directo', familia: 'directo', fechaFin: '2027-03-01', esRenovacion: true },
+    { email: 'a@x.com', cursoKey: 'level', familia: 'level', fechaFin: '2026-10-01' },
+    { email: 'b@x.com', cursoKey: 'directo', familia: 'directo', fechaFin: '2026-12-01' },
   ]);
   assert.equal(r.length, 3);
-  assert.equal(r.find((x) => x.email === 'a@x.com' && x.cursoKey === 'directo').fechaFin, '2027-03-01');
+  const a = r.find((x) => x.email === 'a@x.com' && x.familia === 'directo');
+  assert.equal(a.fechaFin, '2027-03-01');
+  assert.equal(a.esRenovacion, true);
 });

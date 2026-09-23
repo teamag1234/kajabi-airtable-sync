@@ -165,6 +165,10 @@ export default function Home() {
               ['Cerrados', renewals.cerrados],
               ['Aprobados', renewals.aprobados],
               ['Pausados', renewals.pausados],
+              ['Con clic en oferta', renewals.conClic],
+              ['Renovados', renewals.renovados],
+              ['Renovados desde email', renewals.renovadosDesdeEmail],
+              ['€ desde email', renewals.ingresosDesdeEmail],
             ].map(([label, value]) => (
               <div key={label} style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '8px', padding: '10px 14px', minWidth: '110px' }}>
                 <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#FFBD59' }}>{value}</div>
