@@ -1,5 +1,6 @@
 import { createOrUpdateRecord, getRecords, updateRecord, escapeFormulaValue } from '../../../lib/airtable.js';
-import { filaDesdeTest, filaDesdeClic, TABLA_TEST } from '../../../lib/level-test/lead.js';
+import { filaConMensaje, filaDesdeClic, TABLA_TEST } from '../../../lib/level-test/lead.js';
+import { camposMensaje } from '../../../lib/level-test/mensaje.js';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,11 +47,15 @@ export async function POST(req) {
       const fila = filaDesdeClic(body);
       if (fila.error) return responder(req, { ok: false, error: fila.error }, 400);
       const [registro] = await getRecords(tabla, `LOWER({Email}) = "${escapeFormulaValue(fila.email)}"`, { maxRecords: 1 });
-      if (registro) await updateRecord(tabla, registro.id, fila.fields, { typecast: true });
+      // El mensaje del closer se reescribe para mencionar el curso que ha mirado.
+      if (registro) {
+        const campos = { ...fila.fields, ...camposMensaje({ ...registro.fields, ...fila.fields }) };
+        await updateRecord(tabla, registro.id, campos, { typecast: true });
+      }
       return responder(req, { ok: true, actualizado: Boolean(registro) });
     }
 
-    const fila = filaDesdeTest(body);
+    const fila = filaConMensaje(body);
     if (fila.error) return responder(req, { ok: false, error: fila.error }, 400);
     // Una fila por persona: si repite el test se actualiza con el último resultado.
     await createOrUpdateRecord(tabla, fila.fields, `LOWER({Email}) = "${escapeFormulaValue(fila.email)}"`, { typecast: true });
