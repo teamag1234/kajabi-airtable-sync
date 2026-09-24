@@ -58,6 +58,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - `POST /api/renewal-enroll` - Alta de alumnos (uno o array)
 - `PATCH /api/renewal-enroll` - Marcar aprobado / pausar / aplicar renovación
 - `GET /api/renewal-summary` - Recuento por estado
+- `POST /api/test-nivel` - Leads del test de nivel de la web (público, lo llama el widget; ver abajo)
 - `GET /api/renewal-aprobado?t=<token>` - Página pública del botón "Ya lo he conseguido" (marca Aprobado y pide reseña en Google o WhatsApp a Jesu)
 - `GET /api/renewal-click?t=<token>&o=<oferta>&p=<paso>` - Enlace de las ofertas del email: registra el clic (Clics, Último clic, Oferta clicada, Paso del clic) y redirige al checkout con UTMs
 - `GET /` - Dashboard
@@ -178,3 +179,23 @@ node scripts/preview-emails.mjs   # genera los 7 emails en scripts/preview/
 ```
 
 Creado con ❤️ para automatizar el seguimiento de pagos de tu academia.
+
+## 🎯 Test de nivel con oferta (agacademyaptis.com/test-nivel)
+
+Sustituye el assessment de Kajabi por un test interactivo: 34 preguntas tipo APTIS, nota sobre 10, nivel (100% = B2), desglose por partes y el curso que mejor le encaja con 300 € de descuento durante 20 minutos.
+
+- `lib/level-test/quiz.js` – preguntas con su respuesta correcta, tramos de nivel (A1 < 30% ≤ A2 < 55% ≤ B1 < 85% ≤ B2) y reglas de recomendación. Lo usan el widget y el servidor.
+- `kajabi/test-nivel.template.html` + `kajabi/test-nivel.css` – pantallas y estilos.
+- `kajabi/test-nivel.html` – **generado** con `npm run build:test-nivel`. Es lo que se pega en Kajabi. Un test falla si no está al día.
+- `POST /api/test-nivel` – guarda cada lead en la tabla `Test de nivel` (una fila por email, recalculando la nota) y anota el clic en la oferta.
+
+Puesta en marcha:
+
+1. **Cupón en Kajabi** (Sales → Coupons): código `TEST300`, importe fijo 300 €, válido en las 3 ofertas de la store (Level `aLwrqozM`, Express `TRchWq3V`, Tutorizado `422hix8o`). El widget lo aplica solo con `?coupon_code=TEST300` en el checkout; nunca se muestra el código.
+2. **Tabla en Airtable**: `node scripts/create-level-test-table.mjs` (token con `schema.bases:write`), o créala a mano con los campos de `CAMPOS_TABLA` en `lib/level-test/lead.js`.
+3. **Página de Kajabi** `/test-nivel`: quita el bloque del assessment y añade un bloque *Custom Code* con todo el contenido de `kajabi/test-nivel.html`.
+4. Prueba el flujo completo y verifica que en el checkout aparece el descuento aplicado.
+
+Cambiar cupón, importe, minutos de la oferta o WhatsApp: bloque `CONFIG` al principio del `<script>` de la plantilla, y `npm run build:test-nivel`. Cambiar preguntas, tramos o reglas de curso: `quiz.js` y lo mismo.
+
+Eventos para Google Tag Manager (`dataLayer`): `test_nivel_inicio`, `test_nivel_completado` (nivel, nota, curso_recomendado) y `test_nivel_oferta_click` (curso, con_descuento). Si está el píxel de Meta se lanza `Lead`. El GCLID que ya guardáis en `localStorage`/cookie viaja con el lead a Airtable.

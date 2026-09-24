@@ -1,0 +1,904 @@
+<!--
+  AG ACADEMY · TEST DE NIVEL INTERACTIVO
+  NO EDITES kajabi/test-nivel.html A MANO: se genera con `npm run build:test-nivel`
+  a partir de kajabi/test-nivel.template.html y lib/level-test/quiz.js.
+  Pega el contenido de kajabi/test-nivel.html en un bloque "Custom Code" de la página /test-nivel.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+#ag-tn {
+  --ag-navy: #0a0e27 !important;
+  --ag-navy-2: #121838;
+  --ag-navy-3: #1b2350;
+  --ag-gold: #FFBD59 !important;
+  --ag-gold-2: #ffcf85;
+  --ag-text: #f3f4fa !important;
+  --ag-muted: #a7acc9 !important;
+  --ag-ok: #3ddc97 !important;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+  color: var(--ag-text) !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  padding: 24px 16px !important;
+  box-sizing: border-box !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+}
+#ag-tn *, #ag-tn *::before, #ag-tn *::after { box-sizing: border-box !important; }
+#ag-tn .ag-tn-card {
+  background: radial-gradient(120% 80% at 100% 0%, rgba(255, 189, 89, 0.10) 0%, rgba(255, 189, 89, 0) 55%), linear-gradient(180deg, var(--ag-navy-2) 0%, var(--ag-navy) 100%) !important;
+  border: 1px solid rgba(255, 189, 89, 0.18) !important;
+  border-radius: 24px !important;
+  padding: 36px 32px !important;
+  box-shadow: 0 24px 60px rgba(10, 14, 39, 0.35) !important;
+  min-height: 420px !important;
+}
+#ag-tn .ag-tn-in { animation: ag-tn-in 0.35s ease both !important; }
+@keyframes ag-tn-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+#ag-tn h2, #ag-tn h3, #ag-tn p, #ag-tn ul, #ag-tn li { font-family: inherit !important; color: inherit !important; margin: 0 !important; padding: 0 !important; letter-spacing: 0 !important; text-transform: none !important; }
+#ag-tn .ag-tn-badge {
+  display: inline-block !important;
+  background: rgba(255, 189, 89, 0.14) !important;
+  color: var(--ag-gold) !important;
+  border: 1px solid rgba(255, 189, 89, 0.35) !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-bottom: 18px !important;
+}
+#ag-tn .ag-tn-h1 { font-size: 30px !important; line-height: 1.2 !important; font-weight: 800 !important; margin-bottom: 14px !important; color: #fff !important; }
+#ag-tn .ag-tn-gold { color: var(--ag-gold) !important; }
+#ag-tn .ag-tn-lead { font-size: 16px !important; color: var(--ag-muted) !important; margin-bottom: 24px !important; }
+#ag-tn .ag-tn-hi { font-size: 15px !important; color: var(--ag-gold) !important; font-weight: 600 !important; margin-bottom: 10px !important; }
+#ag-tn .ag-tn-muted { color: var(--ag-muted) !important; font-size: 14px !important; }
+#ag-tn .ag-tn-small { color: var(--ag-muted) !important; font-size: 13px !important; margin-top: 16px !important; }
+#ag-tn .ag-tn-small a, #ag-tn .ag-tn-consent a { color: var(--ag-gold) !important; text-decoration: underline !important; }
+#ag-tn .ag-tn-center { text-align: center !important; }
+
+#ag-tn .ag-tn-steps { list-style: none !important; display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; margin-bottom: 26px !important; }
+#ag-tn .ag-tn-steps li { background: rgba(255, 255, 255, 0.04) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 14px !important; padding: 14px 12px !important; list-style: none !important; }
+#ag-tn .ag-tn-steps b { display: block !important; color: var(--ag-gold) !important; font-size: 18px !important; font-weight: 700 !important; }
+#ag-tn .ag-tn-steps span { display: block !important; font-size: 12.5px !important; color: var(--ag-muted) !important; line-height: 1.35 !important; margin-top: 2px !important; }
+
+#ag-tn .ag-tn-form { display: flex !important; flex-direction: column !important; gap: 10px !important; }
+#ag-tn .ag-tn-label { font-size: 14px !important; font-weight: 600 !important; color: #fff !important; margin-top: 4px !important; }
+#ag-tn .ag-tn-input {
+  width: 100% !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  outline: none !important;
+  transition: border-color 0.2s, background 0.2s !important;
+  height: auto !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+#ag-tn .ag-tn-input::placeholder { color: rgba(167, 172, 201, 0.6) !important; }
+#ag-tn .ag-tn-input:focus { border-color: var(--ag-gold) !important; background: rgba(255, 189, 89, 0.06) !important; }
+#ag-tn .ag-tn-consent { display: flex !important; gap: 10px !important; align-items: flex-start !important; font-size: 13px !important; color: var(--ag-muted) !important; margin-top: 6px !important; cursor: pointer !important; }
+#ag-tn .ag-tn-consent input { margin-top: 3px !important; accent-color: #FFBD59 !important; width: 16px !important; height: 16px !important; flex: none !important; }
+#ag-tn .ag-tn-error { color: #ff8a8a !important; font-size: 14px !important; }
+
+#ag-tn .ag-tn-btn {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  font-family: inherit !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--ag-navy) !important;
+  background: var(--ag-gold) !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  padding: 16px 20px !important;
+  margin-top: 10px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s !important;
+  box-shadow: 0 10px 24px rgba(255, 189, 89, 0.25) !important;
+  line-height: 1.3 !important;
+}
+#ag-tn .ag-tn-btn-gold { font-size: 18px !important; padding: 18px 20px !important; }
+#ag-tn .ag-tn-link { background: none !important; border: 0 !important; padding: 0 !important; font: inherit !important; color: var(--ag-gold) !important; text-decoration: underline !important; cursor: pointer !important; }
+
+#ag-tn .ag-tn-progress { margin-bottom: 26px !important; }
+#ag-tn .ag-tn-progress-top { display: flex !important; justify-content: space-between !important; font-size: 13px !important; font-weight: 600 !important; color: var(--ag-muted) !important; margin-bottom: 8px !important; }
+#ag-tn .ag-tn-progress-top span:first-child { color: var(--ag-gold) !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; }
+#ag-tn .ag-tn-progress-bar { height: 8px !important; background: rgba(255, 255, 255, 0.08) !important; border-radius: 999px !important; overflow: hidden !important; }
+#ag-tn .ag-tn-progress-fill { height: 100% !important; width: 0 !important; background: linear-gradient(90deg, #f5a623, #FFBD59) !important; border-radius: 999px !important; transition: width 0.6s ease !important; }
+
+#ag-tn .ag-tn-context { color: var(--ag-muted) !important; font-size: 14px !important; margin-bottom: 10px !important; }
+#ag-tn .ag-tn-q { font-size: 22px !important; font-weight: 700 !important; line-height: 1.35 !important; color: #fff !important; margin-bottom: 20px !important; }
+#ag-tn .ag-tn-q-sm { font-size: 16px !important; color: var(--ag-gold) !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; margin-bottom: 14px !important; }
+#ag-tn .ag-tn-blank { color: var(--ag-gold) !important; letter-spacing: 0.1em !important; }
+#ag-tn .ag-tn-letter {
+  background: #fdfaf3 !important;
+  color: #1c1f33 !important;
+  border-radius: 14px !important;
+  padding: 18px 20px !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+  margin-bottom: 20px !important;
+  box-shadow: inset 4px 0 0 #FFBD59 !important;
+}
+#ag-tn .ag-tn-gap { display: inline-block !important; font-weight: 600 !important; color: #8a8fa8 !important; padding: 0 4px !important; }
+#ag-tn .ag-tn-gap-on { background: #FFBD59 !important; color: #0a0e27 !important; border-radius: 6px !important; padding: 0 8px !important; animation: ag-tn-pulse 1.6s ease-in-out infinite !important; }
+#ag-tn .ag-tn-gap-done { color: #0a0e27 !important; border-bottom: 2px solid #3ddc97 !important; padding: 0 2px !important; }
+@keyframes ag-tn-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 189, 89, 0.6); } 50% { box-shadow: 0 0 0 6px rgba(255, 189, 89, 0); } }
+
+#ag-tn .ag-tn-options { display: flex !important; flex-direction: column !important; gap: 10px !important; }
+#ag-tn .ag-tn-grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+#ag-tn .ag-tn-opt {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  width: 100% !important;
+  text-align: left !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 14px !important;
+  padding: 14px 16px !important;
+  cursor: pointer !important;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+#ag-tn .ag-tn-grid .ag-tn-opt { justify-content: center !important; text-align: center !important; padding: 12px 10px !important; font-size: 15px !important; }
+#ag-tn .ag-tn-letterkey {
+  flex: none !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 9px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: var(--ag-gold) !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#ag-tn .ag-tn-opt-picked { border-color: var(--ag-gold) !important; background: rgba(255, 189, 89, 0.18) !important; transform: scale(0.98) !important; }
+#ag-tn .ag-tn-opt-picked .ag-tn-letterkey { background: var(--ag-gold) !important; color: var(--ag-navy) !important; }
+
+#ag-tn .ag-tn-section-intro { text-align: center !important; padding: 30px 0 10px !important; }
+#ag-tn .ag-tn-section-num { color: var(--ag-gold) !important; font-weight: 700 !important; font-size: 13px !important; letter-spacing: 0.12em !important; text-transform: uppercase !important; margin-bottom: 10px !important; }
+#ag-tn .ag-tn-section-intro .ag-tn-h1 { font-size: 40px !important; }
+#ag-tn .ag-tn-section-intro .ag-tn-btn { max-width: 280px !important; margin: 20px auto 0 !important; }
+
+#ag-tn .ag-tn-check {
+  width: 64px !important;
+  height: 64px !important;
+  margin: 0 auto 16px !important;
+  border-radius: 50% !important;
+  background: rgba(61, 220, 151, 0.15) !important;
+  color: var(--ag-ok) !important;
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#ag-tn .ag-tn-loading { padding-top: 80px !important; }
+#ag-tn .ag-tn-spinner {
+  width: 56px !important;
+  height: 56px !important;
+  margin: 0 auto 20px !important;
+  border-radius: 50% !important;
+  border: 4px solid rgba(255, 189, 89, 0.2) !important;
+  border-top-color: #FFBD59 !important;
+  animation: ag-tn-spin 0.9s linear infinite !important;
+}
+@keyframes ag-tn-spin { to { transform: rotate(360deg); } }
+
+#ag-tn .ag-tn-result-head { text-align: center !important; }
+#ag-tn .ag-tn-ring { position: relative !important; width: 170px !important; height: 170px !important; margin: 6px auto 10px !important; }
+#ag-tn .ag-tn-ring svg { width: 100% !important; height: 100% !important; transform: rotate(-90deg) !important; }
+#ag-tn .ag-tn-ring circle { fill: none !important; stroke-width: 10 !important; }
+#ag-tn .ag-tn-ring-bg { stroke: rgba(255, 255, 255, 0.08) !important; }
+#ag-tn .ag-tn-ring-fg { stroke: #FFBD59 !important; stroke-linecap: round !important; stroke-dasharray: 327 !important; stroke-dashoffset: 327 !important; transition: stroke-dashoffset 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important; }
+#ag-tn .ag-tn-ring-txt { position: absolute !important; inset: 0 !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; }
+#ag-tn .ag-tn-ring-txt b { font-size: 46px !important; font-weight: 800 !important; color: #fff !important; line-height: 1 !important; }
+#ag-tn .ag-tn-ring-txt span { font-size: 14px !important; color: var(--ag-gold) !important; font-weight: 600 !important; margin-top: 6px !important; }
+
+#ag-tn .ag-tn-scale { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 6px !important; margin: 22px 0 6px !important; }
+#ag-tn .ag-tn-scale-step { text-align: center !important; padding: 10px 0 !important; border-radius: 10px !important; background: rgba(255, 255, 255, 0.05) !important; color: var(--ag-muted) !important; font-weight: 700 !important; font-size: 14px !important; border: 1.5px solid transparent !important; }
+#ag-tn .ag-tn-scale-on { background: #FFBD59 !important; color: #0a0e27 !important; }
+#ag-tn .ag-tn-scale-goal { border: 1.5px dashed #FFBD59 !important; color: #FFBD59 !important; }
+#ag-tn .ag-tn-scale-goal span::after { content: ' · objetivo' !important; font-weight: 500 !important; font-size: 11px !important; }
+#ag-tn .ag-tn-scale-note { display: block !important; text-align: center !important; font-size: 12px !important; color: var(--ag-muted) !important; }
+
+#ag-tn .ag-tn-skills { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 14px 18px !important; margin: 22px 0 14px !important; }
+#ag-tn .ag-tn-skill-top { display: flex !important; justify-content: space-between !important; font-size: 13px !important; font-weight: 600 !important; margin-bottom: 6px !important; }
+#ag-tn .ag-tn-skill-top span:last-child { color: var(--ag-muted) !important; }
+#ag-tn .ag-tn-insight { font-size: 14px !important; color: var(--ag-muted) !important; background: rgba(255, 255, 255, 0.04) !important; border-radius: 12px !important; padding: 12px 14px !important; margin-bottom: 26px !important; }
+#ag-tn .ag-tn-insight b { color: #fff !important; }
+
+#ag-tn .ag-tn-offer {
+  position: relative !important;
+  background: linear-gradient(180deg, rgba(255, 189, 89, 0.12) 0%, rgba(255, 189, 89, 0.03) 100%) !important;
+  border: 1.5px solid #FFBD59 !important;
+  border-radius: 20px !important;
+  padding: 30px 24px 22px !important;
+}
+#ag-tn .ag-tn-offer-off { border-color: rgba(255, 255, 255, 0.2) !important; background: rgba(255, 255, 255, 0.03) !important; }
+#ag-tn .ag-tn-offer-tag {
+  position: absolute !important;
+  top: -13px !important;
+  left: 24px !important;
+  background: #FFBD59 !important;
+  color: #0a0e27 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  padding: 4px 12px !important;
+  border-radius: 999px !important;
+}
+#ag-tn .ag-tn-offer-name { font-size: 22px !important; font-weight: 800 !important; color: #fff !important; line-height: 1.25 !important; }
+#ag-tn .ag-tn-offer-sub { color: var(--ag-gold) !important; font-size: 14px !important; font-weight: 600 !important; margin: 4px 0 12px !important; }
+#ag-tn .ag-tn-offer-why { font-size: 15px !important; color: var(--ag-text) !important; margin-bottom: 14px !important; }
+#ag-tn .ag-tn-list { list-style: none !important; margin-bottom: 18px !important; }
+#ag-tn .ag-tn-list li { position: relative !important; padding-left: 26px !important; font-size: 14.5px !important; margin-bottom: 7px !important; list-style: none !important; color: var(--ag-text) !important; }
+#ag-tn .ag-tn-list li::before { content: '✓' !important; position: absolute !important; left: 0 !important; top: 0 !important; color: var(--ag-ok) !important; font-weight: 700 !important; }
+#ag-tn .ag-tn-gift { background: rgba(61, 220, 151, 0.1) !important; border: 1px solid rgba(61, 220, 151, 0.35) !important; color: #d8fbe9 !important; border-radius: 12px !important; padding: 10px 14px !important; font-size: 14px !important; }
+#ag-tn .ag-tn-gift b { color: var(--ag-ok) !important; }
+#ag-tn .ag-tn-gift-off { background: rgba(255, 255, 255, 0.05) !important; border-color: rgba(255, 255, 255, 0.12) !important; color: var(--ag-muted) !important; }
+#ag-tn .ag-tn-price { display: flex !important; align-items: baseline !important; justify-content: center !important; gap: 14px !important; margin: 16px 0 4px !important; }
+#ag-tn .ag-tn-price s { color: var(--ag-muted) !important; font-size: 20px !important; }
+#ag-tn .ag-tn-price b { color: #fff !important; font-size: 42px !important; font-weight: 800 !important; line-height: 1 !important; }
+#ag-tn .ag-tn-timer { text-align: center !important; font-size: 13px !important; color: var(--ag-muted) !important; }
+#ag-tn .ag-tn-timer b { color: var(--ag-gold) !important; font-variant-numeric: tabular-nums !important; }
+#ag-tn .ag-tn-guarantee { display: flex !important; gap: 10px !important; align-items: flex-start !important; font-size: 14px !important; color: var(--ag-text) !important; background: rgba(255, 255, 255, 0.04) !important; border-radius: 12px !important; padding: 12px 14px !important; margin-top: 14px !important; }
+#ag-tn .ag-tn-guarantee b { color: #fff !important; }
+
+#ag-tn .ag-tn-others { margin: 18px 0 4px !important; }
+#ag-tn .ag-tn-others summary { cursor: pointer !important; color: var(--ag-muted) !important; font-size: 14px !important; text-align: center !important; list-style: none !important; padding: 8px !important; }
+#ag-tn .ag-tn-others summary::-webkit-details-marker { display: none !important; }
+#ag-tn .ag-tn-others summary::after { content: ' ▾' !important; }
+#ag-tn .ag-tn-alt {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 14px !important;
+  padding: 14px 16px !important;
+  margin-top: 10px !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  transition: border-color 0.15s !important;
+}
+#ag-tn .ag-tn-alt b { display: block !important; font-size: 15px !important; }
+#ag-tn .ag-tn-alt small { display: block !important; font-size: 12.5px !important; color: var(--ag-muted) !important; }
+#ag-tn .ag-tn-alt-price { text-align: right !important; font-weight: 700 !important; white-space: nowrap !important; color: #FFBD59 !important; }
+#ag-tn .ag-tn-alt-price s { color: var(--ag-muted) !important; font-weight: 400 !important; font-size: 13px !important; }
+
+@media (hover: hover) {
+  #ag-tn .ag-tn-btn:hover { background: var(--ag-gold-2) !important; transform: translateY(-1px) !important; color: var(--ag-navy) !important; text-decoration: none !important; }
+  #ag-tn .ag-tn-opt:hover { border-color: rgba(255, 189, 89, 0.7) !important; background: rgba(255, 189, 89, 0.08) !important; transform: translateY(-1px) !important; }
+  #ag-tn .ag-tn-alt:hover { border-color: #FFBD59 !important; color: #fff !important; text-decoration: none !important; }
+}
+
+@media (max-width: 560px) {
+  #ag-tn { padding: 12px 0 !important; }
+  #ag-tn .ag-tn-card { padding: 26px 18px !important; border-radius: 18px !important; }
+  #ag-tn .ag-tn-h1 { font-size: 25px !important; }
+  #ag-tn .ag-tn-q { font-size: 19px !important; }
+  #ag-tn .ag-tn-steps { grid-template-columns: 1fr !important; }
+  #ag-tn .ag-tn-steps li { display: flex !important; gap: 10px !important; align-items: baseline !important; }
+  #ag-tn .ag-tn-skills { grid-template-columns: 1fr !important; }
+  #ag-tn .ag-tn-price b { font-size: 36px !important; }
+  #ag-tn .ag-tn-alt { flex-direction: column !important; align-items: flex-start !important; }
+  #ag-tn .ag-tn-alt-price { text-align: left !important; }
+}
+</style>
+<div id="ag-tn" class="ag-tn"><div class="ag-tn-card"><p class="ag-tn-muted">Cargando tu test…</p></div></div>
+<script>
+(function () {
+  'use strict';
+
+  // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────
+  var CONFIG = {
+    // Cupón de Kajabi (importe fijo, 300 €) válido en las 3 ofertas. Se aplica solo en el checkout.
+    cupon: 'TEST300',
+    descuento: 300,
+    // Minutos que dura la oferta desde que ve el resultado.
+    minutosOferta: 20,
+    // Dónde se guarda el lead (Airtable). Vacío = no se envía nada.
+    endpoint: 'https://kajabi-airtable-sync-d9nm.vercel.app/api/test-nivel',
+    privacidad: 'https://www.agacademyaptis.com/privacidad',
+    whatsapp: '34601926127',
+    storageKey: 'ag_tn_v1'
+  };
+
+  // ─── PREGUNTAS Y CORRECCIÓN (lib/level-test/quiz.js) ─────────────────────
+  /**
+ * Test de nivel APTIS: preguntas, corrección, nivel y curso recomendado.
+ *
+ * Este archivo lo usan tanto el servidor (/api/test-nivel) como el widget de
+ * Kajabi: scripts/build-test-nivel.mjs lo incrusta tal cual en
+ * kajabi/test-nivel.html. Por eso no importa nada y solo usa JS de navegador.
+ *
+ * Las preguntas son las 34 puntuables del assessment de Kajabi (/test-nivel).
+ * `correcta` es el índice de la opción buena. El 100% equivale a B2.
+ */
+
+const SECCIONES = {
+  writing: { titulo: 'Writing', intro: 'Mensajes cortos, un texto breve y emails formales e informales. Igual que en el examen.' },
+  reading: { titulo: 'Reading', intro: 'Un email con 5 huecos. Elige la palabra que encaja en cada uno.' },
+  grammar: { titulo: 'Grammar', intro: '10 frases. Elige la opción correcta.' },
+  vocab: { titulo: 'Vocabulary', intro: 'Definiciones y palabras que suelen ir juntas. Aquí se ve el nivel de verdad.' },
+};
+
+const MUSIC = 'Te has unido a un club de música. Otro miembro te escribe. Responde en 1-5 palabras.';
+const EMAILS = 'En el Aptis escribirás un email informal y otro formal. ¿Sabes cómo se hacen?';
+const CARTA = 'Dear Susan,\nThank you for offering to find information about Technology courses in London.\nI want to come from the {1} of July. I {2} love to share a flat with other students. And remember I only want to attend classes {3} the evening, ok?\nAnd if possible, could we go on a {4} together for a weekend to know the place?\nI {5} from you.\nBest wishes,\nSteven.';
+const GRAMMAR = 'Elige la opción correcta.';
+const DEFINICIONES = ['Make out', 'Take after', 'Aid', 'Purchase', 'Control', 'Sprint', 'Empty', 'Lay', 'Remove', 'Calculate'];
+const COLOCACIONES = ['Bomb', 'Audition', 'Scissors', 'Rod', 'Classes', 'Strings', 'Salesman', 'Seep', 'Minister', 'Seat'];
+
+const PREGUNTAS = [
+  { seccion: 'writing', contexto: MUSIC, enunciado: 'What do you do?', opciones: ["I'm listening to music.", 'I am an engineer.', 'I work right now.'], correcta: 1 },
+  { seccion: 'writing', contexto: MUSIC, enunciado: 'Can you play any musical instruments?', opciones: ["No, I'm not.", 'I know play the guitar.', 'Yes, I play the piano.'], correcta: 2 },
+  { seccion: 'writing', contexto: MUSIC, enunciado: "What's your favourite music band?", opciones: ['My favourite band is Coldplay.', 'I love a Rolling Stones.', 'I play with my friends in a band.'], correcta: 0 },
+  { seccion: 'writing', contexto: MUSIC, enunciado: 'What are you doing this weekend?', opciones: ['I play with my band', "I'm meeting my cousins", 'I go for lunch'], correcta: 1 },
+  {
+    seccion: 'writing', contexto: 'Completa tu ficha del club con frases completas (20-30 palabras).',
+    enunciado: 'Please, tell us who you currently enjoy your free time with and what type of music you like.',
+    opciones: [
+      'I like to stay with my friends in my free time because we really love staying together.',
+      'Nowadays I love to spend time with my friend Joe. We always listen to our favourite kind of music, hip hop.',
+      'I used to like pop music and spend time together. We are so happy when we do these things.',
+    ],
+    correcta: 1,
+  },
+  { seccion: 'writing', contexto: EMAILS, enunciado: 'How would you start a formal email for the secretary of the club?', opciones: ['Dear Madam,', 'Hello Mrs Secretary,', 'Dear Sir or Madam,'], correcta: 2 },
+  { seccion: 'writing', contexto: EMAILS, enunciado: "What's the best way to finish an informal email?", opciones: ['Yours sincerely.', 'Yours faithfully.', 'Take care.'], correcta: 2 },
+  { seccion: 'writing', contexto: EMAILS, enunciado: 'Which sentence belongs to a formal email?', opciones: ['How are things? I hope everything is ok.', 'Let me know if you need further information.', 'Send me the information soon, please.'], correcta: 1 },
+  {
+    seccion: 'writing', contexto: EMAILS, enunciado: 'Choose the correct statement:',
+    opciones: ['Phrasal verbs cannot be used in informal emails.', 'You can use contractions in formal emails, but not phrasal verbs.', 'You can use phrasal verbs and contractions in informal emails.'],
+    correcta: 2,
+  },
+  { seccion: 'reading', texto: CARTA, hueco: 1, enunciado: 'Hueco 1', opciones: ['end', 'ending', 'begin'], correcta: 0 },
+  { seccion: 'reading', texto: CARTA, hueco: 2, enunciado: 'Hueco 2', opciones: ['–', 'would', 'could'], correcta: 1 },
+  { seccion: 'reading', texto: CARTA, hueco: 3, enunciado: 'Hueco 3', opciones: ['for', 'in', 'at'], correcta: 1 },
+  { seccion: 'reading', texto: CARTA, hueco: 4, enunciado: 'Hueco 4', opciones: ['hotel', 'trip', 'travel'], correcta: 1 },
+  { seccion: 'reading', texto: CARTA, hueco: 5, enunciado: 'Hueco 5', opciones: ['am looking forward to hearing', 'look forward to hear', 'would like to hearing'], correcta: 0 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'If you were a better cook, you _____ need to eat out all the time.', opciones: ["hadn't", "wouldn't", "won't"], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'She reads every day _____ she isn’t serious.', opciones: ['but', 'because', 'and'], correcta: 0 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'The children _____ playing football for two hours before it started raining.', opciones: ['have been', 'had been', 'has been'], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: "I don't think it's right _____ children to play with toy guns.", opciones: ['for', 'that', 'to'], correcta: 0 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'I _____ to work when I saw Steve.', opciones: ['went', 'going', 'was going'], correcta: 2 },
+  { seccion: 'grammar', contexto: "That man's so unreliable – you can't trust him.", enunciado: '¿Qué respuesta suena natural?', opciones: ['I wouldn’t work frankly with him.', 'Frankly, I wouldn’t work with him.', 'I wouldn’t frankly work with him.'], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'We could cook dinner. _____, we could buy some take away food.', opciones: ['Although', 'Therefore', 'On the other hand'], correcta: 2 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'In those days, my father _____ never eat dinner after eight o’clock.', opciones: ['will', 'used to', 'would'], correcta: 2 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'There were _____ than fifty people in the audience last night.', opciones: ['lesser', 'fewer', 'few'], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'We _____ have caught the early train, as the football match was delayed.', opciones: ["didn't", "mustn't", "needn't"], correcta: 2 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To run quickly is to…', opciones: DEFINICIONES, correcta: 5 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To look like an older member of your family is to…', opciones: DEFINICIONES, correcta: 1 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To help is to…', opciones: DEFINICIONES, correcta: 2 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To remove or consume the contents is to…', opciones: DEFINICIONES, correcta: 6 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To determine by mathematical methods is to…', opciones: DEFINICIONES, correcta: 9 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Aerobics', opciones: COLOCACIONES, correcta: 4 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Agriculture', opciones: COLOCACIONES, correcta: 8 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Aisle', opciones: COLOCACIONES, correcta: 9 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Apron', opciones: COLOCACIONES, correcta: 5 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Atom', opciones: COLOCACIONES, correcta: 0 },
+];
+
+/** Preguntas de perfil (no puntúan). Deciden el curso recomendado. */
+const PERFIL = {
+  para: {
+    pregunta: '¿Para qué necesitas el APTIS?',
+    opciones: [
+      { valor: 'oposiciones', texto: 'Oposiciones docentes' },
+      { valor: 'universidad', texto: 'Terminar la carrera / máster' },
+      { valor: 'policia', texto: 'Policía Nacional' },
+      { valor: 'trabajo', texto: 'Trabajo' },
+      { valor: 'otro', texto: 'Otro motivo' },
+    ],
+  },
+  necesita: {
+    pregunta: '¿Qué nivel te piden?',
+    opciones: [
+      { valor: 'A2', texto: 'A2' },
+      { valor: 'B1', texto: 'B1' },
+      { valor: 'B2', texto: 'B2' },
+      { valor: 'C1', texto: 'C1' },
+      { valor: 'no-se', texto: 'Aún no lo sé' },
+    ],
+  },
+  cuando: {
+    pregunta: '¿Cuándo quieres examinarte?',
+    opciones: [
+      { valor: 'menos-1-mes', texto: 'En menos de 1 mes' },
+      { valor: '1-3-meses', texto: 'En 1-3 meses' },
+      { valor: '3-6-meses', texto: 'En 3-6 meses' },
+      { valor: 'sin-fecha', texto: 'Aún no tengo fecha' },
+    ],
+  },
+};
+
+const NIVELES = ['A1', 'A2', 'B1', 'B2', 'C1'];
+
+/**
+ * Porcentaje de aciertos → nivel. El 100% es B2 (el test no llega a medir C1).
+ * El umbral es el mínimo de aciertos (%) para tener ese nivel.
+ */
+const UMBRALES = [
+  { nivel: 'B2', desde: 85 },
+  { nivel: 'B1', desde: 55 },
+  { nivel: 'A2', desde: 30 },
+  { nivel: 'A1', desde: 0 },
+];
+
+function nivelDesdePorcentaje(porcentaje) {
+  return UMBRALES.find((u) => porcentaje >= u.desde).nivel;
+}
+
+/**
+ * Corrige las respuestas (array de índices, una por pregunta, null si falta).
+ * Devuelve aciertos, nota sobre 10, porcentaje, nivel y aciertos por sección.
+ */
+function corregir(respuestas = []) {
+  const porSeccion = {};
+  let aciertos = 0;
+  PREGUNTAS.forEach((p, i) => {
+    const s = (porSeccion[p.seccion] ||= { aciertos: 0, total: 0 });
+    s.total += 1;
+    if (respuestas[i] === p.correcta) {
+      s.aciertos += 1;
+      aciertos += 1;
+    }
+  });
+  const total = PREGUNTAS.length;
+  const porcentaje = Math.round((aciertos / total) * 100);
+  return {
+    aciertos,
+    total,
+    porcentaje,
+    nota: Math.round((aciertos / total) * 100) / 10,
+    nivel: nivelDesdePorcentaje(porcentaje),
+    porSeccion,
+  };
+}
+
+/**
+ * Cursos de la store. `url` es el checkout de Kajabi. El descuento del test se
+ * resta del precio y se aplica con el cupón en la URL.
+ */
+const CURSOS_TEST = {
+  level: {
+    nombre: 'APTIS Level',
+    subtitulo: '3 meses · A2 y B1',
+    precio: 647,
+    url: 'https://www.agacademyaptis.com/offers/aLwrqozM/checkout',
+    incluye: ['3 meses de acceso completo', 'Material por niveles (A1-A2-B1)', '7 clases en directo cada semana', 'Guías paso a paso de cada parte del examen', 'Simulacros con soluciones'],
+  },
+  express: {
+    nombre: 'Directo a tu Certificado Express',
+    subtitulo: '6 meses · del A1 al C2 · garantía de aprobado',
+    precio: 947,
+    url: 'https://www.agacademyaptis.com/offers/TRchWq3V/checkout',
+    incluye: ['6 meses de acceso (A1 a C2)', '+500 lecciones con trucos y atajos', '7 clases en directo cada semana', '+10 simulacros tipo examen real', 'Garantía: si no apruebas, te pagamos los exámenes'],
+  },
+  tutorizado: {
+    nombre: 'Directo a tu Certificado Tutorizado',
+    subtitulo: '6 meses · tutor personal · garantía de aprobado',
+    precio: 1247,
+    url: 'https://www.agacademyaptis.com/offers/422hix8o/checkout',
+    incluye: ['Todo lo del Express', '10 sesiones 1 a 1 de Speaking y Writing', 'WhatsApp directo con tus tutores', 'Seguimiento personalizado', 'Garantía: te pagamos todos los exámenes hasta aprobar'],
+  },
+};
+
+const OBJETIVO = { A2: 1, B1: 2, B2: 3, C1: 4, 'no-se': 2 };
+
+/**
+ * Elige el curso según el nivel actual, el que le piden y el tiempo que tiene.
+ * Level solo llega a B1; para B2/C1 siempre es Directo. Cuanto más salto de
+ * nivel y menos tiempo, más acompañamiento (Tutorizado).
+ */
+function recomendarCurso({ necesita, cuando } = {}, nivel) {
+  const actual = NIVELES.indexOf(nivel);
+  const objetivo = OBJETIVO[necesita] ?? 2;
+  const nivelObjetivo = NIVELES[objetivo];
+  const salto = objetivo - actual;
+  const prisa = cuando === 'menos-1-mes';
+  const pocoTiempo = prisa || cuando === '1-3-meses';
+  const plazo = prisa ? 'en menos de un mes' : pocoTiempo ? 'en pocos meses' : 'a tu ritmo';
+
+  let curso;
+  let motivo;
+  if (salto <= 0) {
+    curso = objetivo >= 3 ? 'express' : 'level';
+    motivo = `Ya tienes el ${nivelObjetivo}. Lo que te falta es conocer el examen por dentro y no dejar puntos por el camino.`;
+  } else if (objetivo >= 3) {
+    curso = salto >= 2 || prisa ? 'tutorizado' : 'express';
+    motivo = curso === 'tutorizado'
+      ? `Pasar de ${nivel} a ${nivelObjetivo} ${plazo} se hace mucho más fácil con alguien que te corrija y te diga qué te falta.`
+      : `Para el ${nivelObjetivo} necesitas el método completo, del nivel que tienes hasta el que te piden.`;
+  } else if (salto === 1) {
+    curso = prisa ? 'express' : 'level';
+    motivo = prisa
+      ? `Te separa un nivel del ${nivelObjetivo} y vas con el tiempo justo: necesitas ir directo a lo que puntúa.`
+      : `Te separa un solo nivel del ${nivelObjetivo}. Con 3 meses de método bien organizado llegas.`;
+  } else {
+    curso = pocoTiempo ? 'tutorizado' : 'express';
+    motivo = pocoTiempo
+      ? `De ${nivel} a ${nivelObjetivo} ${plazo} se puede, pero no solo. Con tutor sabes cada semana dónde estás.`
+      : `De ${nivel} a ${nivelObjetivo} hay camino, y con 6 meses y el método completo lo recorres sin agobios.`;
+  }
+  return { curso, motivo, nivelObjetivo, salto };
+}
+
+  // ─── ESTADO ───────────────────────────────────────────────────────────────
+  var root = document.getElementById('ag-tn');
+  var ORDEN_PERFIL = ['para', 'necesita', 'cuando'];
+  var estado = cargar() || { paso: 'intro', nombre: '', perfil: {}, respuestas: [], i: 0 };
+
+  function cargar() {
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)); } catch (e) { return null; }
+  }
+  function guardar() {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+  }
+  function reiniciar() {
+    // El reloj de la oferta no se reinicia repitiendo el test.
+    var expira = estado.expira;
+    estado = { paso: 'intro', nombre: '', perfil: {}, respuestas: [], i: 0, expira: expira };
+    guardar();
+    pintar();
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function euros(n) { return n.toLocaleString('es-ES') + ' €'; }
+  function primerNombre() { return esc((estado.nombre || '').trim().split(/\s+/)[0]); }
+  function track(evento, datos) {
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: evento }, datos || {})); } catch (e) {}
+  }
+
+  // ─── ATRIBUCIÓN (GCLID + UTMs) ────────────────────────────────────────────
+  function param(n) { try { return new URLSearchParams(location.search).get(n) || ''; } catch (e) { return ''; } }
+  function cookie(n) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function gclid() {
+    var g = param('gclid');
+    try { g = g || localStorage.getItem('gclid') || ''; } catch (e) {}
+    return g || cookie('gclid');
+  }
+  function atribucion() {
+    return {
+      gclid: gclid(), utm_source: param('utm_source'), utm_medium: param('utm_medium'),
+      utm_campaign: param('utm_campaign'), utm_content: param('utm_content'), pagina: location.href.split('#')[0]
+    };
+  }
+  if (!estado.atribucion || (!estado.atribucion.gclid && gclid())) { estado.atribucion = atribucion(); guardar(); }
+
+  function enviar(datos) {
+    if (!CONFIG.endpoint) return;
+    var body = JSON.stringify(datos);
+    // text/plain evita la petición previa de CORS; el servidor lo lee como JSON.
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(CONFIG.endpoint, new Blob([body], { type: 'text/plain' }))) return;
+    } catch (e) {}
+    try { fetch(CONFIG.endpoint, { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+  }
+
+  // ─── PANTALLAS ────────────────────────────────────────────────────────────
+  function pintar() {
+    var html = PANTALLAS[estado.paso]();
+    root.innerHTML = '<div class="ag-tn-card ag-tn-in">' + html + '</div>';
+    var foco = root.querySelector('[autofocus]');
+    if (foco) foco.focus();
+    if (estado.paso === 'resultado') animarResultado();
+    var top = root.getBoundingClientRect().top;
+    if (top < 0) window.scrollTo({ top: window.scrollY + top - 16, behavior: 'smooth' });
+  }
+
+  function barra(actual, total, etiqueta) {
+    var pct = Math.round((actual / total) * 100);
+    return '<div class="ag-tn-progress"><div class="ag-tn-progress-top"><span>' + etiqueta + '</span><span>' + actual + ' / ' + total + '</span></div>' +
+      '<div class="ag-tn-progress-bar"><div class="ag-tn-progress-fill" style="width:' + pct + '% !important"></div></div></div>';
+  }
+
+  var PANTALLAS = {
+    intro: function () {
+      return '<div class="ag-tn-badge">Test de nivel gratuito · 10 min</div>' +
+        '<h2 class="ag-tn-h1">¿Qué nivel de inglés tienes <span class="ag-tn-gold">de verdad</span>?</h2>' +
+        '<p class="ag-tn-lead">Mismo formato que el APTIS. Al terminar te decimos tu nivel (A1-B2), en qué parte fallas y qué camino te lleva más rápido a tu certificado.</p>' +
+        '<ul class="ag-tn-steps"><li><b>34</b><span>preguntas tipo examen</span></li><li><b>4</b><span>partes: Writing, Reading, Grammar y Vocabulary</span></li><li><b>Al momento</b><span>tu nota y tu nivel</span></li></ul>' +
+        '<form class="ag-tn-form" data-accion="nombre">' +
+        '<label class="ag-tn-label" for="ag-tn-nombre">¿Cómo te llamas?</label>' +
+        '<input id="ag-tn-nombre" class="ag-tn-input" name="nombre" autocomplete="given-name" required maxlength="60" placeholder="Tu nombre" value="' + esc(estado.nombre) + '" autofocus>' +
+        '<button class="ag-tn-btn" type="submit">Empezar el test →</button></form>' +
+        '<p class="ag-tn-small">Sin volver atrás, como en el examen real. Responde lo que sepas, sin mirar.</p>';
+    },
+
+    perfil: function () {
+      var clave = ORDEN_PERFIL[estado.i];
+      var q = PERFIL[clave];
+      var saludo = estado.i === 0 ? '<p class="ag-tn-hi">Genial, ' + primerNombre() + '. Antes de empezar, 3 cosas rápidas:</p>' : '';
+      return barra(estado.i + 1, ORDEN_PERFIL.length, 'Sobre ti') + saludo +
+        '<h3 class="ag-tn-q">' + q.pregunta + '</h3><div class="ag-tn-options">' +
+        q.opciones.map(function (o) {
+          return '<button type="button" class="ag-tn-opt" data-accion="perfil" data-valor="' + o.valor + '">' + o.texto + '</button>';
+        }).join('') + '</div>';
+    },
+
+    seccion: function () {
+      var p = PREGUNTAS[estado.i];
+      var s = SECCIONES[p.seccion];
+      var claves = Object.keys(SECCIONES);
+      var n = claves.indexOf(p.seccion) + 1;
+      var total = PREGUNTAS.filter(function (x) { return x.seccion === p.seccion; }).length;
+      return '<div class="ag-tn-section-intro"><div class="ag-tn-section-num">Parte ' + n + ' de ' + claves.length + '</div>' +
+        '<h2 class="ag-tn-h1">' + s.titulo + '</h2><p class="ag-tn-lead">' + s.intro + '</p>' +
+        '<p class="ag-tn-small">' + total + ' preguntas</p>' +
+        '<button class="ag-tn-btn" type="button" data-accion="empezar-seccion" autofocus>Vamos →</button></div>';
+    },
+
+    pregunta: function () {
+      var p = PREGUNTAS[estado.i];
+      var s = SECCIONES[p.seccion];
+      var cabecera = '';
+      if (p.texto) {
+        var carta = esc(p.texto).replace(/\{(\d)\}/g, function (_, n) {
+          var num = Number(n);
+          var previa = PREGUNTAS.findIndex(function (x) { return x.texto && x.hueco === num; });
+          var r = estado.respuestas[previa];
+          if (num === p.hueco) return '<span class="ag-tn-gap ag-tn-gap-on">(' + n + ') ____</span>';
+          if (r != null) return '<span class="ag-tn-gap ag-tn-gap-done">' + esc(PREGUNTAS[previa].opciones[r]) + '</span>';
+          return '<span class="ag-tn-gap">(' + n + ')</span>';
+        }).replace(/\n/g, '<br>');
+        cabecera = '<div class="ag-tn-letter">' + carta + '</div>';
+      } else if (p.contexto) {
+        cabecera = '<p class="ag-tn-context">' + esc(p.contexto) + '</p>';
+      }
+      var enunciado = esc(p.enunciado).replace(/_{3,}/g, '<span class="ag-tn-blank">_____</span>');
+      var muchas = p.opciones.length > 4;
+      return barra(estado.i + 1, PREGUNTAS.length, s.titulo) + cabecera +
+        '<h3 class="ag-tn-q' + (p.texto ? ' ag-tn-q-sm' : '') + '">' + enunciado + '</h3>' +
+        '<div class="ag-tn-options' + (muchas ? ' ag-tn-grid' : '') + '">' +
+        p.opciones.map(function (o, k) {
+          return '<button type="button" class="ag-tn-opt" data-accion="responder" data-valor="' + k + '">' +
+            (muchas ? '' : '<span class="ag-tn-letterkey">' + 'ABC'[k] + '</span>') + '<span>' + esc(o) + '</span></button>';
+        }).join('') + '</div>';
+    },
+
+    datos: function () {
+      return '<div class="ag-tn-center"><div class="ag-tn-check">✓</div>' +
+        '<h2 class="ag-tn-h1">¡Terminado, ' + primerNombre() + '!</h2>' +
+        '<p class="ag-tn-lead">Tu resultado está listo. ¿Dónde te lo mandamos para que lo tengas guardado?</p></div>' +
+        '<form class="ag-tn-form" data-accion="datos" novalidate>' +
+        '<label class="ag-tn-label" for="ag-tn-email">Email</label>' +
+        '<input id="ag-tn-email" class="ag-tn-input" type="email" name="email" autocomplete="email" required maxlength="120" placeholder="tu@email.com" value="' + esc(estado.email) + '" autofocus>' +
+        '<label class="ag-tn-label" for="ag-tn-tel">WhatsApp</label>' +
+        '<input id="ag-tn-tel" class="ag-tn-input" type="tel" name="telefono" autocomplete="tel" required maxlength="20" placeholder="600 000 000" value="' + esc(estado.telefono) + '">' +
+        '<label class="ag-tn-consent"><input type="checkbox" name="acepto" required> <span>Acepto la <a href="' + CONFIG.privacidad + '" target="_blank" rel="noopener">política de privacidad</a> y que AG Academy me escriba sobre mi resultado.</span></label>' +
+        '<p class="ag-tn-error" hidden></p>' +
+        '<button class="ag-tn-btn" type="submit">Ver mi nivel →</button></form>';
+    },
+
+    calculando: function () {
+      return '<div class="ag-tn-center ag-tn-loading"><div class="ag-tn-spinner"></div>' +
+        '<h3 class="ag-tn-q">Corrigiendo tu test…</h3><p class="ag-tn-muted" id="ag-tn-loadmsg">Revisando Writing y Reading</p></div>';
+    },
+
+    resultado: function () {
+      var r = estado.resultado;
+      var rec = estado.recomendacion;
+      var curso = CURSOS_TEST[rec.curso];
+      var escala = ['A1', 'A2', 'B1', 'B2'].map(function (n) {
+        var cls = n === r.nivel ? ' ag-tn-scale-on' : '';
+        if (n === rec.nivelObjetivo && n !== r.nivel) cls += ' ag-tn-scale-goal';
+        return '<div class="ag-tn-scale-step' + cls + '"><span>' + n + '</span></div>';
+      }).join('');
+      var objetivoTxt = rec.nivelObjetivo === 'C1' ? '<span class="ag-tn-scale-note">Te piden C1: el test llega hasta B2</span>' : '';
+      var secciones = Object.keys(SECCIONES).map(function (k) {
+        var s = r.porSeccion[k];
+        var pct = Math.round((s.aciertos / s.total) * 100);
+        return '<div class="ag-tn-skill"><div class="ag-tn-skill-top"><span>' + SECCIONES[k].titulo + '</span><span>' + s.aciertos + '/' + s.total + '</span></div>' +
+          '<div class="ag-tn-progress-bar"><div class="ag-tn-progress-fill" data-w="' + pct + '"></div></div></div>';
+      }).join('');
+      var peor = Object.keys(SECCIONES).sort(function (a, b) {
+        return r.porSeccion[a].aciertos / r.porSeccion[a].total - r.porSeccion[b].aciertos / r.porSeccion[b].total;
+      })[0];
+
+      return '<div class="ag-tn-result-head">' +
+        '<p class="ag-tn-hi">' + primerNombre() + ', tu nivel actual es</p>' +
+        '<div class="ag-tn-ring"><svg viewBox="0 0 120 120"><circle class="ag-tn-ring-bg" cx="60" cy="60" r="52"/><circle class="ag-tn-ring-fg" cx="60" cy="60" r="52" data-pct="' + r.porcentaje + '"/></svg>' +
+        '<div class="ag-tn-ring-txt"><b>' + r.nivel + '</b><span>' + String(r.nota).replace('.', ',') + ' / 10</span></div></div>' +
+        '<p class="ag-tn-muted">' + r.aciertos + ' de ' + r.total + ' aciertos · ' + r.porcentaje + '%</p></div>' +
+        '<div class="ag-tn-scale">' + escala + '</div>' + objetivoTxt +
+        '<div class="ag-tn-skills">' + secciones + '</div>' +
+        '<p class="ag-tn-insight">Donde más puntos se te escapan: <b>' + SECCIONES[peor].titulo + '</b>. Es justo lo que vamos a trabajar primero.</p>' +
+        oferta(curso, rec) + otrasOpciones(rec.curso) +
+        '<p class="ag-tn-small ag-tn-center">¿Dudas? <a href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent('Hola! He hecho el test de nivel y me ha salido ' + r.nivel + '. Tengo una duda sobre el curso') + '" target="_blank" rel="noopener">Escríbenos por WhatsApp</a> · <button type="button" class="ag-tn-link" data-accion="repetir">Repetir el test</button></p>';
+    }
+  };
+
+  function vigente() { return estado.expira && Date.now() < estado.expira; }
+
+  function urlCheckout(key, conCupon) {
+    var u = CURSOS_TEST[key].url + '?utm_source=test-nivel&utm_medium=web&utm_campaign=oferta-test-nivel&utm_content=' + key;
+    return conCupon ? u + '&coupon_code=' + encodeURIComponent(CONFIG.cupon) : u;
+  }
+
+  function oferta(curso, rec) {
+    var activo = vigente();
+    var precio = activo ? curso.precio - CONFIG.descuento : curso.precio;
+    return '<div class="ag-tn-offer' + (activo ? '' : ' ag-tn-offer-off') + '">' +
+      '<div class="ag-tn-offer-tag">Tu plan recomendado</div>' +
+      '<h3 class="ag-tn-offer-name">' + curso.nombre + '</h3>' +
+      '<p class="ag-tn-offer-sub">' + curso.subtitulo + '</p>' +
+      '<p class="ag-tn-offer-why">' + rec.motivo + '</p>' +
+      '<ul class="ag-tn-list">' + curso.incluye.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+      (activo
+        ? '<div class="ag-tn-gift"><b>Solo por hacer el test:</b> ' + CONFIG.descuento + ' € menos. Se aplica solo al entrar, sin códigos.</div>' +
+          '<div class="ag-tn-price"><s>' + euros(curso.precio) + '</s><b>' + euros(precio) + '</b></div>' +
+          '<div class="ag-tn-timer">Tu descuento se guarda <b id="ag-tn-clock">--:--</b></div>'
+        : '<div class="ag-tn-gift ag-tn-gift-off">El descuento del test ya no está activo. Si te has quedado a medias, escríbenos y lo vemos.</div>' +
+          '<div class="ag-tn-price"><b>' + euros(precio) + '</b></div>') +
+      '<a class="ag-tn-btn ag-tn-btn-gold" data-accion="comprar" data-curso="' + rec.curso + '" href="' + urlCheckout(rec.curso, activo) + '">Quiero empezar →</a>' +
+      '<p class="ag-tn-guarantee"><span>🛡️</span> <span><b>15 días de prueba.</b> Entra, mira las clases, prueba el método. Si no te convence, te devolvemos el dinero. Sin preguntas.</span></p>' +
+      '<p class="ag-tn-small ag-tn-center">Pago en 3 cuotas sin intereses con Klarna</p></div>';
+  }
+
+  function otrasOpciones(actual) {
+    var activo = vigente();
+    var items = Object.keys(CURSOS_TEST).filter(function (k) { return k !== actual; }).map(function (k) {
+      var c = CURSOS_TEST[k];
+      return '<a class="ag-tn-alt" data-accion="comprar" data-curso="' + k + '" href="' + urlCheckout(k, activo) + '">' +
+        '<span><b>' + c.nombre + '</b><small>' + c.subtitulo + '</small></span>' +
+        '<span class="ag-tn-alt-price">' + (activo ? '<s>' + euros(c.precio) + '</s> ' : '') + euros(activo ? c.precio - CONFIG.descuento : c.precio) + '</span></a>';
+    }).join('');
+    return '<details class="ag-tn-others"><summary>Ver las otras opciones' + (activo ? ' (también con el descuento)' : '') + '</summary>' + items + '</details>';
+  }
+
+  function animarResultado() {
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        var ring = root.querySelector('.ag-tn-ring-fg');
+        if (ring) {
+          var len = 2 * Math.PI * 52;
+          ring.style.setProperty('stroke-dasharray', String(len), 'important');
+          ring.style.setProperty('stroke-dashoffset', String(len * (1 - Number(ring.getAttribute('data-pct')) / 100)), 'important');
+        }
+        root.querySelectorAll('[data-w]').forEach(function (el) { el.style.setProperty('width', el.getAttribute('data-w') + '%', 'important'); });
+      }, 60);
+    });
+    reloj();
+  }
+
+  var intervalo = null;
+  function reloj() {
+    clearInterval(intervalo);
+    if (!vigente()) return;
+    function tic() {
+      var el = document.getElementById('ag-tn-clock');
+      var ms = estado.expira - Date.now();
+      if (ms <= 0) { clearInterval(intervalo); pintar(); return; }
+      if (!el) return;
+      var m = Math.floor(ms / 60000);
+      var s = Math.floor((ms % 60000) / 1000);
+      el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    tic();
+    intervalo = setInterval(tic, 1000);
+  }
+
+  // ─── ACCIONES ─────────────────────────────────────────────────────────────
+  function siguientePregunta() {
+    if (estado.i >= PREGUNTAS.length) { estado.paso = 'datos'; return; }
+    var nueva = estado.i === 0 || PREGUNTAS[estado.i].seccion !== PREGUNTAS[estado.i - 1].seccion;
+    estado.paso = nueva ? 'seccion' : 'pregunta';
+  }
+
+  function finalizar(form) {
+    var email = form.email.value.trim();
+    var tel = form.telefono.value.replace(/[^\d+]/g, '');
+    var error = form.querySelector('.ag-tn-error');
+    var msg = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? 'Revisa el email, parece que falta algo.'
+      : tel.replace(/\D/g, '').length < 9 ? 'Pon tu número de WhatsApp (9 cifras).'
+      : !form.acepto.checked ? 'Necesitamos que aceptes la política de privacidad para enviarte el resultado.' : '';
+    if (msg) { error.textContent = msg; error.hidden = false; return; }
+
+    estado.email = email;
+    estado.telefono = tel;
+    estado.resultado = corregir(estado.respuestas);
+    estado.recomendacion = recomendarCurso(estado.perfil, estado.resultado.nivel);
+    if (!estado.expira) estado.expira = Date.now() + CONFIG.minutosOferta * 60000;
+    estado.paso = 'calculando';
+    guardar();
+    pintar();
+
+    enviar({
+      evento: 'test', nombre: estado.nombre, email: email, telefono: tel, perfil: estado.perfil,
+      respuestas: estado.respuestas, atribucion: estado.atribucion
+    });
+    track('test_nivel_completado', { nivel: estado.resultado.nivel, nota: estado.resultado.nota, curso_recomendado: estado.recomendacion.curso });
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Test de nivel' }); } catch (e) {}
+
+    var mensajes = ['Revisando Grammar y Vocabulary', 'Calculando tu nivel', 'Preparando tu plan'];
+    mensajes.forEach(function (m, k) {
+      setTimeout(function () { var el = document.getElementById('ag-tn-loadmsg'); if (el) el.textContent = m; }, 700 * (k + 1));
+    });
+    setTimeout(function () { estado.paso = 'resultado'; guardar(); pintar(); }, 2800);
+  }
+
+  root.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var form = ev.target;
+    var accion = form.getAttribute('data-accion');
+    if (accion === 'nombre') {
+      estado.nombre = form.nombre.value.trim();
+      if (!estado.nombre) return;
+      estado.paso = 'perfil';
+      estado.i = 0;
+      track('test_nivel_inicio');
+      guardar();
+      pintar();
+    } else if (accion === 'datos') {
+      finalizar(form);
+    }
+  });
+
+  var bloqueado = false;
+  root.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-accion]');
+    if (!el || el.tagName === 'FORM') return;
+    var accion = el.getAttribute('data-accion');
+
+    if (accion === 'comprar') {
+      var curso = el.getAttribute('data-curso');
+      enviar({ evento: 'clic', email: estado.email, curso: curso, conDescuento: vigente() });
+      track('test_nivel_oferta_click', { curso: curso, con_descuento: vigente() });
+      return; // el enlace sigue su curso
+    }
+    if (accion === 'repetir') { reiniciar(); return; }
+    if (accion === 'empezar-seccion') { estado.paso = 'pregunta'; guardar(); pintar(); return; }
+
+    if ((accion === 'perfil' || accion === 'responder') && !bloqueado) {
+      bloqueado = true;
+      el.classList.add('ag-tn-opt-picked');
+      setTimeout(function () {
+        bloqueado = false;
+        if (accion === 'perfil') {
+          estado.perfil[ORDEN_PERFIL[estado.i]] = el.getAttribute('data-valor');
+          estado.i += 1;
+          if (estado.i >= ORDEN_PERFIL.length) { estado.i = 0; siguientePregunta(); }
+        } else {
+          estado.respuestas[estado.i] = Number(el.getAttribute('data-valor'));
+          estado.i += 1;
+          siguientePregunta();
+        }
+        guardar();
+        pintar();
+      }, 260);
+    }
+  });
+
+  // Si se quedó "calculando" (recarga a mitad), mostramos el resultado directamente.
+  if (estado.paso === 'calculando') estado.paso = 'resultado';
+  pintar();
+})();
+</script>
