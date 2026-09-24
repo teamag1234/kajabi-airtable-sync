@@ -200,4 +200,6 @@ Cambiar cupón, importe, minutos de la oferta o WhatsApp: bloque `CONFIG` al pri
 
 **Para los closers**: cada fila llega con `Mensaje WhatsApp` ya escrito (nombre, nivel, nivel que le piden, si contestó a la carrera y el curso que miró) y `Enviar WhatsApp`, un enlace que abre el chat con ese texto. `Estado closer` lo rellenan ellos. El texto se genera en `lib/level-test/mensaje.js`.
 
+**Kajabi**: al terminar el test el servidor envía el formulario de Kajabi `Test de nivel` (o el de `KAJABI_LEVEL_TEST_FORM`) con nombre, email y teléfono, así que se crea el contacto y saltan las etiquetas, secuencias y automatizaciones de ese formulario. También le pone la etiqueta `test-nivel-a1` / `-a2` / `-b1` / `-b2` si existe en Kajabi (la API no crea etiquetas). El resultado queda en el campo `Kajabi` de la fila. Necesita que la clave de la API de Kajabi tenga permiso de escritura.
+
 Eventos para Google Tag Manager (`dataLayer`): `test_nivel_inicio`, `test_nivel_completado` (nivel, nota, curso_recomendado) y `test_nivel_oferta_click` (curso, con_descuento). Si está el píxel de Meta se lanza `Lead`. El GCLID que ya guardáis en `localStorage`/cookie viaja con el lead a Airtable.
