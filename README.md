@@ -198,4 +198,6 @@ Puesta en marcha:
 
 Cambiar cupón, importe, minutos de la oferta o WhatsApp: bloque `CONFIG` al principio del `<script>` de la plantilla, y `npm run build:test-nivel`. Cambiar preguntas, tramos o reglas de curso: `quiz.js` y lo mismo.
 
+**Para los closers**: cada fila llega con `Mensaje WhatsApp` ya escrito (nombre, nivel, nivel que le piden, si contestó a la carrera y el curso que miró) y `Enviar WhatsApp`, un enlace que abre el chat con ese texto. `Estado closer` lo rellenan ellos. El texto se genera en `lib/level-test/mensaje.js`.
+
 Eventos para Google Tag Manager (`dataLayer`): `test_nivel_inicio`, `test_nivel_completado` (nivel, nota, curso_recomendado) y `test_nivel_oferta_click` (curso, con_descuento). Si está el píxel de Meta se lanza `Lead`. El GCLID que ya guardáis en `localStorage`/cookie viaja con el lead a Airtable.
