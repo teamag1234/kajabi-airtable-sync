@@ -1,0 +1,391 @@
+<!--
+  AG ACADEMY · TEST DE NIVEL INTERACTIVO
+  NO EDITES kajabi/test-nivel.html A MANO: se genera con `npm run build:test-nivel`
+  a partir de kajabi/test-nivel.template.html y lib/level-test/quiz.js.
+  Pega el contenido de kajabi/test-nivel.html en un bloque "Custom Code" de la página /test-nivel.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/*__CSS__*/
+</style>
+<div id="ag-tn" class="ag-tn"><div class="ag-tn-card"><p class="ag-tn-muted">Cargando tu test…</p></div></div>
+<script>
+(function () {
+  'use strict';
+
+  // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────
+  var CONFIG = {
+    // Cupón de Kajabi (importe fijo, 300 €) válido en las 3 ofertas. Se aplica solo en el checkout.
+    cupon: 'TEST300',
+    descuento: 300,
+    // Minutos que dura la oferta desde que ve el resultado.
+    minutosOferta: 20,
+    // Dónde se guarda el lead (Airtable). Vacío = no se envía nada.
+    endpoint: 'https://kajabi-airtable-sync-d9nm.vercel.app/api/test-nivel',
+    privacidad: 'https://www.agacademyaptis.com/privacidad',
+    whatsapp: '34601926127',
+    storageKey: 'ag_tn_v1'
+  };
+
+  // ─── PREGUNTAS Y CORRECCIÓN (lib/level-test/quiz.js) ─────────────────────
+  /*__QUIZ__*/
+
+  // ─── ESTADO ───────────────────────────────────────────────────────────────
+  var root = document.getElementById('ag-tn');
+  var ORDEN_PERFIL = ['para', 'necesita', 'cuando'];
+  var estado = cargar() || { paso: 'intro', nombre: '', perfil: {}, respuestas: [], i: 0 };
+
+  function cargar() {
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)); } catch (e) { return null; }
+  }
+  function guardar() {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+  }
+  function reiniciar() {
+    // El reloj de la oferta no se reinicia repitiendo el test.
+    var expira = estado.expira;
+    estado = { paso: 'intro', nombre: '', perfil: {}, respuestas: [], i: 0, expira: expira };
+    guardar();
+    pintar();
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function euros(n) { return n.toLocaleString('es-ES') + ' €'; }
+  function primerNombre() { return esc((estado.nombre || '').trim().split(/\s+/)[0]); }
+  function track(evento, datos) {
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: evento }, datos || {})); } catch (e) {}
+  }
+
+  // ─── ATRIBUCIÓN (GCLID + UTMs) ────────────────────────────────────────────
+  function param(n) { try { return new URLSearchParams(location.search).get(n) || ''; } catch (e) { return ''; } }
+  function cookie(n) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function gclid() {
+    var g = param('gclid');
+    try { g = g || localStorage.getItem('gclid') || ''; } catch (e) {}
+    return g || cookie('gclid');
+  }
+  function atribucion() {
+    return {
+      gclid: gclid(), utm_source: param('utm_source'), utm_medium: param('utm_medium'),
+      utm_campaign: param('utm_campaign'), utm_content: param('utm_content'), pagina: location.href.split('#')[0]
+    };
+  }
+  if (!estado.atribucion || (!estado.atribucion.gclid && gclid())) { estado.atribucion = atribucion(); guardar(); }
+
+  function enviar(datos) {
+    if (!CONFIG.endpoint) return;
+    var body = JSON.stringify(datos);
+    // text/plain evita la petición previa de CORS; el servidor lo lee como JSON.
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(CONFIG.endpoint, new Blob([body], { type: 'text/plain' }))) return;
+    } catch (e) {}
+    try { fetch(CONFIG.endpoint, { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+  }
+
+  // ─── PANTALLAS ────────────────────────────────────────────────────────────
+  function pintar() {
+    var html = PANTALLAS[estado.paso]();
+    root.innerHTML = '<div class="ag-tn-card ag-tn-in">' + html + '</div>';
+    var foco = root.querySelector('[autofocus]');
+    if (foco) foco.focus();
+    if (estado.paso === 'resultado') animarResultado();
+    var top = root.getBoundingClientRect().top;
+    if (top < 0) window.scrollTo({ top: window.scrollY + top - 16, behavior: 'smooth' });
+  }
+
+  function barra(actual, total, etiqueta) {
+    var pct = Math.round((actual / total) * 100);
+    return '<div class="ag-tn-progress"><div class="ag-tn-progress-top"><span>' + etiqueta + '</span><span>' + actual + ' / ' + total + '</span></div>' +
+      '<div class="ag-tn-progress-bar"><div class="ag-tn-progress-fill" style="width:' + pct + '% !important"></div></div></div>';
+  }
+
+  var PANTALLAS = {
+    intro: function () {
+      return '<div class="ag-tn-badge">Test de nivel gratuito · 10 min</div>' +
+        '<h2 class="ag-tn-h1">¿Qué nivel de inglés tienes <span class="ag-tn-gold">de verdad</span>?</h2>' +
+        '<p class="ag-tn-lead">Mismo formato que el APTIS. Al terminar te decimos tu nivel (A1-B2), en qué parte fallas y qué camino te lleva más rápido a tu certificado.</p>' +
+        '<ul class="ag-tn-steps"><li><b>34</b><span>preguntas tipo examen</span></li><li><b>4</b><span>partes: Writing, Reading, Grammar y Vocabulary</span></li><li><b>Al momento</b><span>tu nota y tu nivel</span></li></ul>' +
+        '<form class="ag-tn-form" data-accion="nombre">' +
+        '<label class="ag-tn-label" for="ag-tn-nombre">¿Cómo te llamas?</label>' +
+        '<input id="ag-tn-nombre" class="ag-tn-input" name="nombre" autocomplete="given-name" required maxlength="60" placeholder="Tu nombre" value="' + esc(estado.nombre) + '" autofocus>' +
+        '<button class="ag-tn-btn" type="submit">Empezar el test →</button></form>' +
+        '<p class="ag-tn-small">Sin volver atrás, como en el examen real. Responde lo que sepas, sin mirar.</p>';
+    },
+
+    perfil: function () {
+      var clave = ORDEN_PERFIL[estado.i];
+      var q = PERFIL[clave];
+      var saludo = estado.i === 0 ? '<p class="ag-tn-hi">Genial, ' + primerNombre() + '. Antes de empezar, 3 cosas rápidas:</p>' : '';
+      return barra(estado.i + 1, ORDEN_PERFIL.length, 'Sobre ti') + saludo +
+        '<h3 class="ag-tn-q">' + q.pregunta + '</h3><div class="ag-tn-options">' +
+        q.opciones.map(function (o) {
+          return '<button type="button" class="ag-tn-opt" data-accion="perfil" data-valor="' + o.valor + '">' + o.texto + '</button>';
+        }).join('') + '</div>';
+    },
+
+    seccion: function () {
+      var p = PREGUNTAS[estado.i];
+      var s = SECCIONES[p.seccion];
+      var claves = Object.keys(SECCIONES);
+      var n = claves.indexOf(p.seccion) + 1;
+      var total = PREGUNTAS.filter(function (x) { return x.seccion === p.seccion; }).length;
+      return '<div class="ag-tn-section-intro"><div class="ag-tn-section-num">Parte ' + n + ' de ' + claves.length + '</div>' +
+        '<h2 class="ag-tn-h1">' + s.titulo + '</h2><p class="ag-tn-lead">' + s.intro + '</p>' +
+        '<p class="ag-tn-small">' + total + ' preguntas</p>' +
+        '<button class="ag-tn-btn" type="button" data-accion="empezar-seccion" autofocus>Vamos →</button></div>';
+    },
+
+    pregunta: function () {
+      var p = PREGUNTAS[estado.i];
+      var s = SECCIONES[p.seccion];
+      var cabecera = '';
+      if (p.texto) {
+        var carta = esc(p.texto).replace(/\{(\d)\}/g, function (_, n) {
+          var num = Number(n);
+          var previa = PREGUNTAS.findIndex(function (x) { return x.texto && x.hueco === num; });
+          var r = estado.respuestas[previa];
+          if (num === p.hueco) return '<span class="ag-tn-gap ag-tn-gap-on">(' + n + ') ____</span>';
+          if (r != null) return '<span class="ag-tn-gap ag-tn-gap-done">' + esc(PREGUNTAS[previa].opciones[r]) + '</span>';
+          return '<span class="ag-tn-gap">(' + n + ')</span>';
+        }).replace(/\n/g, '<br>');
+        cabecera = '<div class="ag-tn-letter">' + carta + '</div>';
+      } else if (p.contexto) {
+        cabecera = '<p class="ag-tn-context">' + esc(p.contexto) + '</p>';
+      }
+      var enunciado = esc(p.enunciado).replace(/_{3,}/g, '<span class="ag-tn-blank">_____</span>');
+      var muchas = p.opciones.length > 4;
+      return barra(estado.i + 1, PREGUNTAS.length, s.titulo) + cabecera +
+        '<h3 class="ag-tn-q' + (p.texto ? ' ag-tn-q-sm' : '') + '">' + enunciado + '</h3>' +
+        '<div class="ag-tn-options' + (muchas ? ' ag-tn-grid' : '') + '">' +
+        p.opciones.map(function (o, k) {
+          return '<button type="button" class="ag-tn-opt" data-accion="responder" data-valor="' + k + '">' +
+            (muchas ? '' : '<span class="ag-tn-letterkey">' + 'ABC'[k] + '</span>') + '<span>' + esc(o) + '</span></button>';
+        }).join('') + '</div>';
+    },
+
+    datos: function () {
+      return '<div class="ag-tn-center"><div class="ag-tn-check">✓</div>' +
+        '<h2 class="ag-tn-h1">¡Terminado, ' + primerNombre() + '!</h2>' +
+        '<p class="ag-tn-lead">Tu resultado está listo. ¿Dónde te lo mandamos para que lo tengas guardado?</p></div>' +
+        '<form class="ag-tn-form" data-accion="datos" novalidate>' +
+        '<label class="ag-tn-label" for="ag-tn-email">Email</label>' +
+        '<input id="ag-tn-email" class="ag-tn-input" type="email" name="email" autocomplete="email" required maxlength="120" placeholder="tu@email.com" value="' + esc(estado.email) + '" autofocus>' +
+        '<label class="ag-tn-label" for="ag-tn-tel">WhatsApp</label>' +
+        '<input id="ag-tn-tel" class="ag-tn-input" type="tel" name="telefono" autocomplete="tel" required maxlength="20" placeholder="600 000 000" value="' + esc(estado.telefono) + '">' +
+        '<label class="ag-tn-consent"><input type="checkbox" name="acepto" required> <span>Acepto la <a href="' + CONFIG.privacidad + '" target="_blank" rel="noopener">política de privacidad</a> y que AG Academy me escriba sobre mi resultado.</span></label>' +
+        '<p class="ag-tn-error" hidden></p>' +
+        '<button class="ag-tn-btn" type="submit">Ver mi nivel →</button></form>';
+    },
+
+    calculando: function () {
+      return '<div class="ag-tn-center ag-tn-loading"><div class="ag-tn-spinner"></div>' +
+        '<h3 class="ag-tn-q">Corrigiendo tu test…</h3><p class="ag-tn-muted" id="ag-tn-loadmsg">Revisando Writing y Reading</p></div>';
+    },
+
+    resultado: function () {
+      var r = estado.resultado;
+      var rec = estado.recomendacion;
+      var curso = CURSOS_TEST[rec.curso];
+      var escala = ['A1', 'A2', 'B1', 'B2'].map(function (n) {
+        var cls = n === r.nivel ? ' ag-tn-scale-on' : '';
+        if (n === rec.nivelObjetivo && n !== r.nivel) cls += ' ag-tn-scale-goal';
+        return '<div class="ag-tn-scale-step' + cls + '"><span>' + n + '</span></div>';
+      }).join('');
+      var objetivoTxt = rec.nivelObjetivo === 'C1' ? '<span class="ag-tn-scale-note">Te piden C1: el test llega hasta B2</span>' : '';
+      var secciones = Object.keys(SECCIONES).map(function (k) {
+        var s = r.porSeccion[k];
+        var pct = Math.round((s.aciertos / s.total) * 100);
+        return '<div class="ag-tn-skill"><div class="ag-tn-skill-top"><span>' + SECCIONES[k].titulo + '</span><span>' + s.aciertos + '/' + s.total + '</span></div>' +
+          '<div class="ag-tn-progress-bar"><div class="ag-tn-progress-fill" data-w="' + pct + '"></div></div></div>';
+      }).join('');
+      var peor = Object.keys(SECCIONES).sort(function (a, b) {
+        return r.porSeccion[a].aciertos / r.porSeccion[a].total - r.porSeccion[b].aciertos / r.porSeccion[b].total;
+      })[0];
+
+      return '<div class="ag-tn-result-head">' +
+        '<p class="ag-tn-hi">' + primerNombre() + ', tu nivel actual es</p>' +
+        '<div class="ag-tn-ring"><svg viewBox="0 0 120 120"><circle class="ag-tn-ring-bg" cx="60" cy="60" r="52"/><circle class="ag-tn-ring-fg" cx="60" cy="60" r="52" data-pct="' + r.porcentaje + '"/></svg>' +
+        '<div class="ag-tn-ring-txt"><b>' + r.nivel + '</b><span>' + String(r.nota).replace('.', ',') + ' / 10</span></div></div>' +
+        '<p class="ag-tn-muted">' + r.aciertos + ' de ' + r.total + ' aciertos · ' + r.porcentaje + '%</p></div>' +
+        '<div class="ag-tn-scale">' + escala + '</div>' + objetivoTxt +
+        '<div class="ag-tn-skills">' + secciones + '</div>' +
+        '<p class="ag-tn-insight">Donde más puntos se te escapan: <b>' + SECCIONES[peor].titulo + '</b>. Es justo lo que vamos a trabajar primero.</p>' +
+        oferta(curso, rec) + otrasOpciones(rec.curso) +
+        '<p class="ag-tn-small ag-tn-center">¿Dudas? <a href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent('Hola! He hecho el test de nivel y me ha salido ' + r.nivel + '. Tengo una duda sobre el curso') + '" target="_blank" rel="noopener">Escríbenos por WhatsApp</a> · <button type="button" class="ag-tn-link" data-accion="repetir">Repetir el test</button></p>';
+    }
+  };
+
+  function vigente() { return estado.expira && Date.now() < estado.expira; }
+
+  function urlCheckout(key, conCupon) {
+    var u = CURSOS_TEST[key].url + '?utm_source=test-nivel&utm_medium=web&utm_campaign=oferta-test-nivel&utm_content=' + key;
+    return conCupon ? u + '&coupon_code=' + encodeURIComponent(CONFIG.cupon) : u;
+  }
+
+  function oferta(curso, rec) {
+    var activo = vigente();
+    var precio = activo ? curso.precio - CONFIG.descuento : curso.precio;
+    return '<div class="ag-tn-offer' + (activo ? '' : ' ag-tn-offer-off') + '">' +
+      '<div class="ag-tn-offer-tag">Tu plan recomendado</div>' +
+      '<h3 class="ag-tn-offer-name">' + curso.nombre + '</h3>' +
+      '<p class="ag-tn-offer-sub">' + curso.subtitulo + '</p>' +
+      '<p class="ag-tn-offer-why">' + rec.motivo + '</p>' +
+      '<ul class="ag-tn-list">' + curso.incluye.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
+      (activo
+        ? '<div class="ag-tn-gift"><b>Solo por hacer el test:</b> ' + CONFIG.descuento + ' € menos. Se aplica solo al entrar, sin códigos.</div>' +
+          '<div class="ag-tn-price"><s>' + euros(curso.precio) + '</s><b>' + euros(precio) + '</b></div>' +
+          '<div class="ag-tn-timer">Tu descuento se guarda <b id="ag-tn-clock">--:--</b></div>'
+        : '<div class="ag-tn-gift ag-tn-gift-off">El descuento del test ya no está activo. Si te has quedado a medias, escríbenos y lo vemos.</div>' +
+          '<div class="ag-tn-price"><b>' + euros(precio) + '</b></div>') +
+      '<a class="ag-tn-btn ag-tn-btn-gold" data-accion="comprar" data-curso="' + rec.curso + '" href="' + urlCheckout(rec.curso, activo) + '">Quiero empezar →</a>' +
+      '<p class="ag-tn-guarantee"><span>🛡️</span> <span><b>15 días de prueba.</b> Entra, mira las clases, prueba el método. Si no te convence, te devolvemos el dinero. Sin preguntas.</span></p>' +
+      '<p class="ag-tn-small ag-tn-center">Pago en 3 cuotas sin intereses con Klarna</p></div>';
+  }
+
+  function otrasOpciones(actual) {
+    var activo = vigente();
+    var items = Object.keys(CURSOS_TEST).filter(function (k) { return k !== actual; }).map(function (k) {
+      var c = CURSOS_TEST[k];
+      return '<a class="ag-tn-alt" data-accion="comprar" data-curso="' + k + '" href="' + urlCheckout(k, activo) + '">' +
+        '<span><b>' + c.nombre + '</b><small>' + c.subtitulo + '</small></span>' +
+        '<span class="ag-tn-alt-price">' + (activo ? '<s>' + euros(c.precio) + '</s> ' : '') + euros(activo ? c.precio - CONFIG.descuento : c.precio) + '</span></a>';
+    }).join('');
+    return '<details class="ag-tn-others"><summary>Ver las otras opciones' + (activo ? ' (también con el descuento)' : '') + '</summary>' + items + '</details>';
+  }
+
+  function animarResultado() {
+    requestAnimationFrame(function () {
+      setTimeout(function () {
+        var ring = root.querySelector('.ag-tn-ring-fg');
+        if (ring) {
+          var len = 2 * Math.PI * 52;
+          ring.style.setProperty('stroke-dasharray', String(len), 'important');
+          ring.style.setProperty('stroke-dashoffset', String(len * (1 - Number(ring.getAttribute('data-pct')) / 100)), 'important');
+        }
+        root.querySelectorAll('[data-w]').forEach(function (el) { el.style.setProperty('width', el.getAttribute('data-w') + '%', 'important'); });
+      }, 60);
+    });
+    reloj();
+  }
+
+  var intervalo = null;
+  function reloj() {
+    clearInterval(intervalo);
+    if (!vigente()) return;
+    function tic() {
+      var el = document.getElementById('ag-tn-clock');
+      var ms = estado.expira - Date.now();
+      if (ms <= 0) { clearInterval(intervalo); pintar(); return; }
+      if (!el) return;
+      var m = Math.floor(ms / 60000);
+      var s = Math.floor((ms % 60000) / 1000);
+      el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    tic();
+    intervalo = setInterval(tic, 1000);
+  }
+
+  // ─── ACCIONES ─────────────────────────────────────────────────────────────
+  function siguientePregunta() {
+    if (estado.i >= PREGUNTAS.length) { estado.paso = 'datos'; return; }
+    var nueva = estado.i === 0 || PREGUNTAS[estado.i].seccion !== PREGUNTAS[estado.i - 1].seccion;
+    estado.paso = nueva ? 'seccion' : 'pregunta';
+  }
+
+  function finalizar(form) {
+    var email = form.email.value.trim();
+    var tel = form.telefono.value.replace(/[^\d+]/g, '');
+    var error = form.querySelector('.ag-tn-error');
+    var msg = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? 'Revisa el email, parece que falta algo.'
+      : tel.replace(/\D/g, '').length < 9 ? 'Pon tu número de WhatsApp (9 cifras).'
+      : !form.acepto.checked ? 'Necesitamos que aceptes la política de privacidad para enviarte el resultado.' : '';
+    if (msg) { error.textContent = msg; error.hidden = false; return; }
+
+    estado.email = email;
+    estado.telefono = tel;
+    estado.resultado = corregir(estado.respuestas);
+    estado.recomendacion = recomendarCurso(estado.perfil, estado.resultado.nivel);
+    if (!estado.expira) estado.expira = Date.now() + CONFIG.minutosOferta * 60000;
+    estado.paso = 'calculando';
+    guardar();
+    pintar();
+
+    enviar({
+      evento: 'test', nombre: estado.nombre, email: email, telefono: tel, perfil: estado.perfil,
+      respuestas: estado.respuestas, atribucion: estado.atribucion
+    });
+    track('test_nivel_completado', { nivel: estado.resultado.nivel, nota: estado.resultado.nota, curso_recomendado: estado.recomendacion.curso });
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Test de nivel' }); } catch (e) {}
+
+    var mensajes = ['Revisando Grammar y Vocabulary', 'Calculando tu nivel', 'Preparando tu plan'];
+    mensajes.forEach(function (m, k) {
+      setTimeout(function () { var el = document.getElementById('ag-tn-loadmsg'); if (el) el.textContent = m; }, 700 * (k + 1));
+    });
+    setTimeout(function () { estado.paso = 'resultado'; guardar(); pintar(); }, 2800);
+  }
+
+  root.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var form = ev.target;
+    var accion = form.getAttribute('data-accion');
+    if (accion === 'nombre') {
+      estado.nombre = form.nombre.value.trim();
+      if (!estado.nombre) return;
+      estado.paso = 'perfil';
+      estado.i = 0;
+      track('test_nivel_inicio');
+      guardar();
+      pintar();
+    } else if (accion === 'datos') {
+      finalizar(form);
+    }
+  });
+
+  var bloqueado = false;
+  root.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-accion]');
+    if (!el || el.tagName === 'FORM') return;
+    var accion = el.getAttribute('data-accion');
+
+    if (accion === 'comprar') {
+      var curso = el.getAttribute('data-curso');
+      enviar({ evento: 'clic', email: estado.email, curso: curso, conDescuento: vigente() });
+      track('test_nivel_oferta_click', { curso: curso, con_descuento: vigente() });
+      return; // el enlace sigue su curso
+    }
+    if (accion === 'repetir') { reiniciar(); return; }
+    if (accion === 'empezar-seccion') { estado.paso = 'pregunta'; guardar(); pintar(); return; }
+
+    if ((accion === 'perfil' || accion === 'responder') && !bloqueado) {
+      bloqueado = true;
+      el.classList.add('ag-tn-opt-picked');
+      setTimeout(function () {
+        bloqueado = false;
+        if (accion === 'perfil') {
+          estado.perfil[ORDEN_PERFIL[estado.i]] = el.getAttribute('data-valor');
+          estado.i += 1;
+          if (estado.i >= ORDEN_PERFIL.length) { estado.i = 0; siguientePregunta(); }
+        } else {
+          estado.respuestas[estado.i] = Number(el.getAttribute('data-valor'));
+          estado.i += 1;
+          siguientePregunta();
+        }
+        guardar();
+        pintar();
+      }, 260);
+    }
+  });
+
+  // Si se quedó "calculando" (recarga a mitad), mostramos el resultado directamente.
+  if (estado.paso === 'calculando') estado.paso = 'resultado';
+  pintar();
+})();
+</script>
