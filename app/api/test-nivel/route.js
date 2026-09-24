@@ -62,11 +62,11 @@ export async function POST(req) {
     // Una fila por persona: si repite el test se actualiza con el último resultado.
     const registro = await createOrUpdateRecord(tabla, fila.fields, `LOWER({Email}) = "${escapeFormulaValue(fila.email)}"`, { typecast: true });
 
-    // Alta en Kajabi (formulario "Test de nivel" + etiqueta de nivel). Si falla,
+    // Alta en Kajabi (formulario "Test de nivel"). Si falla,
     // el lead ya está en Airtable: se anota el motivo en la fila y seguimos.
     let kajabi;
     try {
-      kajabi = await altaEnKajabi({ nombre: fila.fields.Nombre, email: fila.email, telefono: fila.fields['Teléfono'], nivel: fila.resultado.nivel });
+      kajabi = await altaEnKajabi({ nombre: fila.fields.Nombre, email: fila.email, telefono: fila.fields['Teléfono'] });
     } catch (error) {
       kajabi = describirError(error);
       console.error('Error dando de alta en Kajabi:', error.response?.data || error.message);
