@@ -1,8 +1,10 @@
 import { createOrUpdateRecord, getRecords, updateRecord, escapeFormulaValue } from '../../../lib/airtable.js';
 import { filaConMensaje, filaDesdeClic, TABLA_TEST } from '../../../lib/level-test/lead.js';
 import { camposMensaje } from '../../../lib/level-test/mensaje.js';
+import { altaEnKajabi, describirError } from '../../../lib/level-test/kajabi.js';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 
 const ORIGENES = () => (process.env.LEVEL_TEST_ORIGINS || 'https://www.agacademyaptis.com,https://agacademyaptis.com')
   .split(',').map((o) => o.trim()).filter(Boolean);
@@ -58,8 +60,23 @@ export async function POST(req) {
     const fila = filaConMensaje(body);
     if (fila.error) return responder(req, { ok: false, error: fila.error }, 400);
     // Una fila por persona: si repite el test se actualiza con el último resultado.
-    await createOrUpdateRecord(tabla, fila.fields, `LOWER({Email}) = "${escapeFormulaValue(fila.email)}"`, { typecast: true });
-    return responder(req, { ok: true, nivel: fila.resultado.nivel, nota: fila.resultado.nota, curso: fila.recomendacion.curso });
+    const registro = await createOrUpdateRecord(tabla, fila.fields, `LOWER({Email}) = "${escapeFormulaValue(fila.email)}"`, { typecast: true });
+
+    // Alta en Kajabi (formulario "Test de nivel" + etiqueta de nivel). Si falla,
+    // el lead ya está en Airtable: se anota el motivo en la fila y seguimos.
+    let kajabi;
+    try {
+      kajabi = await altaEnKajabi({ nombre: fila.fields.Nombre, email: fila.email, telefono: fila.fields['Teléfono'], nivel: fila.resultado.nivel });
+    } catch (error) {
+      kajabi = describirError(error);
+      console.error('Error dando de alta en Kajabi:', error.response?.data || error.message);
+    }
+    try {
+      await updateRecord(tabla, registro.id, { Kajabi: kajabi });
+    } catch (error) {
+      console.error('Error anotando el alta de Kajabi:', error.message);
+    }
+    return responder(req, { ok: true, nivel: fila.resultado.nivel, nota: fila.resultado.nota, curso: fila.recomendacion.curso, kajabi });
   } catch (error) {
     console.error('Error guardando test de nivel:', error.response?.data || error.message);
     return responder(req, { ok: false, error: 'No se pudo guardar' }, 500);
