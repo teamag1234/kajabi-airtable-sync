@@ -155,7 +155,7 @@ Las escrituras usan `typecast`, así que las opciones de Estado se crean solas l
 
 ### Catálogo de cursos
 
-En `lib/renewal/courses.js` está la lista de cursos principales con su acceso y los nombres de las ofertas de Kajabi que los venden (tomados de la tabla CURSOS KAJABI). La comparación ignora mayúsculas y acentos y, si varias ofertas coinciden, gana el nombre más largo.
+En `lib/renewal/courses.js` está la lista de cursos principales con su acceso y los nombres de las ofertas de Kajabi que los venden. La comparación ignora mayúsculas y acentos y, si varias ofertas coinciden, gana el nombre más largo. Además, `PRODUCTOS_KAJABI` lista los productos principales de Kajabi por familia: cualquier oferta que dé acceso a uno de ellos cuenta como alumno de ese curso aunque su nombre no coincida y aunque sea gratuita (pago por transferencia o efectivo).
 
 | Curso | Acceso | Renovaciones en el email |
 |-------|--------|--------------------------|

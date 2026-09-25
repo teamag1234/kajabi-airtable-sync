@@ -100,6 +100,8 @@ test('catálogo: detección de cursos y renovaciones por nombre de oferta', () =
   assert.equal(buscarCursoPorOferta('Ten tu Aptis 1 pago de 397€').key, 'ten-tu-aptis-4m');
   assert.equal(buscarCursoPorOferta('Ten tu Aptis 8 meses').key, 'ten-tu-aptis-8m');
   assert.equal(buscarCursoPorOferta('Aptis Infinity ⭐️'), null);
+  assert.equal(buscarCursoPorOferta('🎉 ¡MEGA OFERTA SOLO PARA TI! 🎉').key, 'directo');
+  assert.equal(buscarCursoPorOferta('Pack especial "ENGLISH SUMMER CHANCE"').key, 'directo');
   assert.equal(buscarCursoPorOferta('Masterclass gratis'), null);
   assert.equal(buscarCurso('directo-tutorizado').meses, 12);
   assert.equal(buscarCurso('Aptis Accelerator').meses, 4);
