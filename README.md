@@ -51,7 +51,8 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - `GET /api/health` - Health check
 - `GET /api/sync-kajabi` - Sincronización manual
 - `GET /api/check-failed-payments` - Verificación de pagos
-- `GET /api/renewal-import` - Importa accesos desde Kajabi a la tabla Renovaciones (incremental, últimos 3 días)
+- `GET /api/renewal-grants` - Detecta accesos concedidos a mano en Kajabi y los da de alta (`?dry=1` simula)
+- `GET /api/renewal-import` - Importa compras desde Kajabi a la tabla Renovaciones (incremental, últimos 3 días)
   - `?dry=1` simula; `?desde=2025-08-01` revisa compras creadas desde esa fecha; `?completo=1` recorre por fecha de creación en vez de actualización
 - `GET /api/renewal-sequence` - Proceso diario de la secuencia de renovación
   - `?dry=1` simula sin enviar ni escribir; `?dry=1&hoy=2026-10-01` simula otro día
@@ -67,8 +68,12 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 - **2:00**: Sincronización automática de pagos
 - **10:00**: Verificación de pagos fallidos
-- **6:30**: importación incremental de accesos desde Kajabi
+- **6:00**: detección de accesos concedidos a mano en Kajabi (`/api/renewal-grants`)
+- **6:30**: importación incremental de compras desde Kajabi
 - **7:00** (9:00 hora peninsular en verano, 8:00 en invierno): secuencia de renovación
+- **12:00**: segunda pasada de la secuencia por si la primera no se ejecutó (no repite pasos ya enviados)
+
+En el plan Hobby de Vercel los crons se ejecutan en algún momento dentro de su hora, no en punto. Cada ejecución (cron o manual) queda apuntada en la tabla **Ejecuciones** de Airtable con hora, origen, duración y resultado.
 
 ## 🔁 Sistema de renovación
 

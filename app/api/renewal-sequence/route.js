@@ -1,5 +1,6 @@
 import { procesarSecuencia } from '../../../lib/renewal/logic.js';
 import { isAuthorized, json } from '../../../lib/auth.js';
+import { origenDe, registrarEjecucion } from '../../../lib/renewal/runlog.js';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -13,6 +14,8 @@ export const maxDuration = 300;
  */
 export async function GET(req) {
   if (!isAuthorized(req)) return json({ success: false, error: 'Unauthorized' }, 401);
+  const inicio = Date.now();
+  const origen = origenDe(req);
 
   try {
     const url = new URL(req.url);
@@ -21,6 +24,7 @@ export async function GET(req) {
 
     const max = parseInt(url.searchParams.get('max') || '', 10) || null;
     const result = await procesarSecuencia({ dryRun, hoy, max });
+    if (!dryRun) await registrarEjecucion({ endpoint: 'renewal-sequence', origen, inicio, resumen: result });
 
     return json({
       success: true,
@@ -30,6 +34,7 @@ export async function GET(req) {
     });
   } catch (error) {
     console.error('Renewal sequence error:', error);
+    await registrarEjecucion({ endpoint: 'renewal-sequence', origen, inicio, error });
     return json({ success: false, error: error.message, timestamp: new Date().toISOString() }, 500);
   }
 }
