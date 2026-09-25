@@ -58,3 +58,19 @@ test('consolidarAccesos se queda con el acceso que termina más tarde por alumno
   assert.equal(a.fechaFin, '2027-03-01');
   assert.equal(a.esRenovacion, true);
 });
+
+test('una oferta gratuita con otro nombre entra si da acceso al producto del curso', () => {
+  const o = { type: 'offers', id: '7', attributes: { title: 'Pack especial "ENGLISH AUTUMN"', internal_title: 'Transferencia' }, relationships: { products: { data: [{ id: '2149043351', type: 'products' }] } } };
+  const r = mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'free', amount_in_cents: 0 }), offer: o, customer, hoy: '2026-09-22' });
+  assert.equal(r.cursoKey, 'directo');
+  assert.equal(r.fechaFin, '2027-09-01');
+  const level = { type: 'offers', id: '8', attributes: { title: 'Oferta sin nombre claro', internal_title: '' }, relationships: { products: { data: [{ id: '2148852898', type: 'products' }] } } };
+  assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z' }), offer: level, customer, hoy: '2026-09-22' }).cursoKey, 'level');
+  const nada = { type: 'offers', id: '9', attributes: { title: 'Masterclass', internal_title: '' }, relationships: { products: { data: [{ id: '999', type: 'products' }] } } };
+  assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z' }), offer: nada, customer, hoy: '2026-09-22' }).omitido, 'oferta no catalogada');
+});
+
+test('el nombre manda sobre el producto para elegir la variante', () => {
+  const o = { type: 'offers', id: '7', attributes: { title: '"DIRECTO AL APTIS EXPRESS TUTORIZADO"', internal_title: 'TRANSFERENCIA' }, relationships: { products: { data: [{ id: '2149043351', type: 'products' }] } } };
+  assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'free' }), offer: o, customer, hoy: '2026-09-22' }).cursoKey, 'directo-express-tutorizado');
+});
