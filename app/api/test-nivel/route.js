@@ -1,5 +1,5 @@
 import { createOrUpdateRecord, getRecords, updateRecord, escapeFormulaValue } from '../../../lib/airtable.js';
-import { filaConMensaje, filaDesdeClic, TABLA_TEST } from '../../../lib/level-test/lead.js';
+import { filaConMensaje, filaDesdeClic, filaDesdeWhatsApp, TABLA_TEST } from '../../../lib/level-test/lead.js';
 import { camposMensaje } from '../../../lib/level-test/mensaje.js';
 import { altaEnKajabi, describirError } from '../../../lib/level-test/kajabi.js';
 
@@ -31,6 +31,8 @@ export function OPTIONS(req) {
  *     → crea o actualiza la fila del email en la tabla "Test de nivel"
  *   { evento: 'clic', email, curso, conDescuento }
  *     → anota en esa fila en qué oferta ha hecho clic
+ *   { evento: 'whatsapp', email }
+ *     → ha pulsado "Quiero mi plan personalizado" (se le abre WhatsApp)
  */
 export async function POST(req) {
   const origen = req.headers.get('origin');
@@ -45,6 +47,14 @@ export async function POST(req) {
 
   const tabla = TABLA_TEST();
   try {
+    if (body.evento === 'whatsapp') {
+      const fila = filaDesdeWhatsApp(body);
+      if (fila.error) return responder(req, { ok: false, error: fila.error }, 400);
+      const [registro] = await getRecords(tabla, `LOWER({Email}) = "${escapeFormulaValue(fila.email)}"`, { maxRecords: 1 });
+      if (registro) await updateRecord(tabla, registro.id, fila.fields);
+      return responder(req, { ok: true, actualizado: Boolean(registro) });
+    }
+
     if (body.evento === 'clic') {
       const fila = filaDesdeClic(body);
       if (fila.error) return responder(req, { ok: false, error: fila.error }, 400);
