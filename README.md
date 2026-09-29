@@ -209,3 +209,17 @@ Cambiar cupón, importe, minutos de la oferta o WhatsApp: bloque `CONFIG` al pri
 **Kajabi**: al terminar el test el servidor envía el formulario de Kajabi `Test de nivel` (o el de `KAJABI_LEVEL_TEST_FORM`) con nombre, email y teléfono, así que se crea el contacto y saltan las etiquetas, secuencias y automatizaciones de ese formulario. El resultado queda en el campo `Kajabi` de la fila. Necesita que la clave de la API de Kajabi tenga permiso de escritura.
 
 Eventos para Google Tag Manager (`dataLayer`): `test_nivel_inicio`, `test_nivel_completado` (nivel, nota, curso_recomendado) y `test_nivel_oferta_click` (curso, con_descuento). Si está el píxel de Meta se lanza `Lead`. El GCLID que ya guardáis en `localStorage`/cookie viaja con el lead a Airtable.
+
+## 💬 Agente de WhatsApp para los leads del test
+
+Quien pulsa "Quiero mi plan por WhatsApp" en el resultado del test nos escribe con un texto que lleva su referencia (`ref TN…`). Como escribe él primero, se abre la ventana de 24 h de WhatsApp y se le puede contestar sin plantillas de Meta.
+
+Callbell avisa de cada mensaje a `POST /api/whatsapp-agente` (evento `message_created`). El agente:
+
+- Solo habla con quien viene del test: el primer mensaje con `ref TN…` lo vincula (campo `Agente` = Activo y `Teléfono WhatsApp`); después lo reconoce por el teléfono. El resto de chats no los toca.
+- Responde con Claude (`lib/whatsapp/agente.js`) usando los datos del test y el historial. Se presenta como el asistente de AG Academy (no se hace pasar por una persona).
+- Si la persona escribe varios mensajes seguidos, espera 8 s y contesta una sola vez.
+- Se retira en cuanto un closer escribe a mano en ese chat (`Agente` = Closer al mando), o cuando él mismo ve que se atasca (`Agente` = Necesita closer + `Motivo agente`).
+- Guarda cada mensaje en la tabla `Conversaciones agente`.
+
+Puesta en marcha: variables de `.env.example` (sección del agente) en Vercel; en Callbell → API Settings → Webhooks, URL `https://kajabi-airtable-sync-d9nm.vercel.app/api/whatsapp-agente` con el evento `message_created` y "Generate secret" (va en `CALLBELL_WEBHOOK_SECRET`). Para probar, `AGENTE_SOLO_TELEFONOS` con vuestros números y `AGENTE_ACTIVO=1`. `AGENTE_ACTIVO=0` lo apaga al momento.
