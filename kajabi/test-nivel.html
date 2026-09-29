@@ -224,6 +224,18 @@
 #ag-tn .ag-tn-insight { font-size: 14px !important; color: var(--ag-muted) !important; background: rgba(255, 255, 255, 0.04) !important; border-radius: 12px !important; padding: 12px 14px !important; margin-bottom: 26px !important; }
 #ag-tn .ag-tn-insight b { color: #fff !important; }
 
+#ag-tn .ag-tn-wa {
+  background: rgba(37, 211, 102, 0.1) !important;
+  border: 1.5px solid rgba(37, 211, 102, 0.55) !important;
+  border-radius: 20px !important;
+  padding: 22px 22px 18px !important;
+  margin-bottom: 28px !important;
+  text-align: center !important;
+}
+#ag-tn .ag-tn-wa-title { font-size: 20px !important; font-weight: 800 !important; color: #fff !important; margin-bottom: 6px !important; }
+#ag-tn .ag-tn-wa-text { font-size: 14.5px !important; color: var(--ag-text) !important; margin-bottom: 4px !important; }
+#ag-tn .ag-tn-btn-wa { background: #25D366 !important; color: #06331b !important; box-shadow: 0 10px 24px rgba(37, 211, 102, 0.25) !important; }
+
 #ag-tn .ag-tn-offer {
   position: relative !important;
   background: linear-gradient(180deg, rgba(255, 189, 89, 0.12) 0%, rgba(255, 189, 89, 0.03) 100%) !important;
@@ -288,6 +300,7 @@
 @media (hover: hover) {
   #ag-tn .ag-tn-btn:hover { background: var(--ag-gold-2) !important; transform: translateY(-1px) !important; color: var(--ag-navy) !important; text-decoration: none !important; }
   #ag-tn .ag-tn-opt:hover { border-color: rgba(255, 189, 89, 0.7) !important; background: rgba(255, 189, 89, 0.08) !important; transform: translateY(-1px) !important; }
+  #ag-tn .ag-tn-btn-wa:hover { background: #3ee07a !important; color: #06331b !important; }
   #ag-tn .ag-tn-alt:hover { border-color: #FFBD59 !important; color: #fff !important; text-decoration: none !important; }
 }
 
@@ -544,6 +557,20 @@ function recomendarCurso({ necesita, cuando } = {}, nivel) {
   return { curso, motivo, nivelObjetivo, salto };
 }
 
+/**
+ * Referencia corta del lead (p. ej. "TN4K9Z2Q") que viaja en el WhatsApp que
+ * nos escribe desde el resultado. Sale del email, así el servidor y el
+ * navegador calculan la misma sin guardarla en ningún sitio. Hash FNV-1a.
+ */
+function referenciaLead(email) {
+  let h = 0x811c9dc5;
+  for (const c of String(email || '').trim().toLowerCase()) {
+    h ^= c.codePointAt(0);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return `TN${h.toString(36).toUpperCase().padStart(7, '0')}`;
+}
+
   // ─── ESTADO ───────────────────────────────────────────────────────────────
   var root = document.getElementById('ag-tn');
   var ORDEN_PERFIL = ['para', 'necesita', 'cuando'];
@@ -731,10 +758,28 @@ function recomendarCurso({ necesita, cuando } = {}, nivel) {
         '<div class="ag-tn-scale">' + escala + '</div>' + objetivoTxt +
         '<div class="ag-tn-skills">' + secciones + '</div>' +
         '<p class="ag-tn-insight">Donde más puntos se te escapan: <b>' + SECCIONES[peor].titulo + '</b>. Es justo lo que vamos a trabajar primero.</p>' +
-        oferta(curso, rec) + otrasOpciones(rec.curso) +
-        '<p class="ag-tn-small ag-tn-center">¿Dudas? <a href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent('Hola! He hecho el test de nivel y me ha salido ' + r.nivel + '. Tengo una duda sobre el curso') + '" target="_blank" rel="noopener">Escríbenos por WhatsApp</a> · <button type="button" class="ag-tn-link" data-accion="repetir">Repetir el test</button></p>';
+        planWhatsApp(r) + oferta(curso, rec) + otrasOpciones(rec.curso) +
+        '<p class="ag-tn-small ag-tn-center"><button type="button" class="ag-tn-link" data-accion="repetir">Repetir el test</button></p>';
     }
   };
+
+  // Botón principal: nos escriben ellos por WhatsApp pidiendo su plan. El texto
+  // lleva la referencia del lead para que el agente sepa quién es.
+  function urlPlanWhatsApp(r) {
+    var necesita = estado.perfil && estado.perfil.necesita;
+    var objetivo = necesita && necesita !== 'no-se' ? ' y necesito el ' + necesita : '';
+    var texto = 'Hola! Soy ' + (estado.nombre || '').trim().split(/\s+/)[0] + '. Acabo de hacer el test de nivel, me ha salido ' + r.nivel + objetivo +
+      '. Quiero mi plan personalizado 🙌 (ref ' + referenciaLead(estado.email) + ')';
+    return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(texto);
+  }
+
+  function planWhatsApp(r) {
+    return '<div class="ag-tn-wa">' +
+      '<p class="ag-tn-wa-title">¿Quieres tu plan personalizado?</p>' +
+      '<p class="ag-tn-wa-text">Escríbenos y te decimos, según tu resultado, qué trabajar primero y cómo llegar a tu nivel antes del examen.</p>' +
+      '<a class="ag-tn-btn ag-tn-btn-wa" data-accion="whatsapp" href="' + urlPlanWhatsApp(r) + '" target="_blank" rel="noopener">Quiero mi plan por WhatsApp</a>' +
+      '</div>';
+  }
 
   function vigente() { return estado.expira && Date.now() < estado.expira; }
 
@@ -873,6 +918,11 @@ function recomendarCurso({ necesita, cuando } = {}, nivel) {
       enviar({ evento: 'clic', email: estado.email, curso: curso, conDescuento: vigente() });
       track('test_nivel_oferta_click', { curso: curso, con_descuento: vigente() });
       return; // el enlace sigue su curso
+    }
+    if (accion === 'whatsapp') {
+      enviar({ evento: 'whatsapp', email: estado.email });
+      track('test_nivel_whatsapp_plan', { nivel: estado.resultado && estado.resultado.nivel });
+      return; // el enlace abre WhatsApp
     }
     if (accion === 'repetir') { reiniciar(); return; }
     if (accion === 'empezar-seccion') { estado.paso = 'pregunta'; guardar(); pintar(); return; }

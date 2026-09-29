@@ -216,6 +216,18 @@
 .ag-tn-insight { font-size: 14px; color: var(--ag-muted); background: rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 12px 14px; margin-bottom: 26px; }
 .ag-tn-insight b { color: #fff; }
 
+.ag-tn-wa {
+  background: rgba(37, 211, 102, 0.1);
+  border: 1.5px solid rgba(37, 211, 102, 0.55);
+  border-radius: 20px;
+  padding: 22px 22px 18px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+.ag-tn-wa-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.ag-tn-wa-text { font-size: 14.5px; color: var(--ag-text); margin-bottom: 4px; }
+.ag-tn-btn-wa { background: #25D366; color: #06331b; box-shadow: 0 10px 24px rgba(37, 211, 102, 0.25); }
+
 .ag-tn-offer {
   position: relative;
   background: linear-gradient(180deg, rgba(255, 189, 89, 0.12) 0%, rgba(255, 189, 89, 0.03) 100%);
@@ -281,6 +293,7 @@
 @media (hover: hover) {
   .ag-tn-btn:hover { background: var(--ag-gold-2); transform: translateY(-1px); color: var(--ag-navy); text-decoration: none; }
   .ag-tn-opt:hover { border-color: rgba(255, 189, 89, 0.7); background: rgba(255, 189, 89, 0.08); transform: translateY(-1px); }
+  .ag-tn-btn-wa:hover { background: #3ee07a; color: #06331b; }
   .ag-tn-alt:hover { border-color: #FFBD59; color: #fff; text-decoration: none; }
 }
 

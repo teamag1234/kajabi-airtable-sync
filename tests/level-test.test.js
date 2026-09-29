@@ -87,3 +87,14 @@ test('conImportant marca las declaraciones, acota a #ag-tn y respeta @keyframes'
 test('kajabi/test-nivel.html está al día (npm run build:test-nivel)', () => {
   assert.equal(readFileSync(new URL('../kajabi/test-nivel.html', import.meta.url), 'utf8'), construir());
 });
+
+test('referencia del lead estable y sin distinguir mayúsculas', async () => {
+  const { referenciaLead } = await import('../lib/level-test/quiz.js');
+  const { filaDesdeWhatsApp } = await import('../lib/level-test/lead.js');
+  assert.match(referenciaLead('ana@mail.com'), /^TN[0-9A-Z]{7}$/);
+  assert.equal(referenciaLead(' Ana@Mail.com '), referenciaLead('ana@mail.com'));
+  assert.notEqual(referenciaLead('ana@mail.com'), referenciaLead('eva@mail.com'));
+  assert.equal(filaDesdeTest({ email: 'ana@mail.com', respuestas: [] }).fields['Ref WhatsApp'], referenciaLead('ana@mail.com'));
+  assert.equal(filaDesdeWhatsApp({ email: 'ana@mail.com' }).fields['Pidió plan por WhatsApp'], true);
+  assert.ok(filaDesdeWhatsApp({ email: 'x' }).error);
+});

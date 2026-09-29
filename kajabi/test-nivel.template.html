@@ -218,10 +218,28 @@
         '<div class="ag-tn-scale">' + escala + '</div>' + objetivoTxt +
         '<div class="ag-tn-skills">' + secciones + '</div>' +
         '<p class="ag-tn-insight">Donde más puntos se te escapan: <b>' + SECCIONES[peor].titulo + '</b>. Es justo lo que vamos a trabajar primero.</p>' +
-        oferta(curso, rec) + otrasOpciones(rec.curso) +
-        '<p class="ag-tn-small ag-tn-center">¿Dudas? <a href="https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent('Hola! He hecho el test de nivel y me ha salido ' + r.nivel + '. Tengo una duda sobre el curso') + '" target="_blank" rel="noopener">Escríbenos por WhatsApp</a> · <button type="button" class="ag-tn-link" data-accion="repetir">Repetir el test</button></p>';
+        planWhatsApp(r) + oferta(curso, rec) + otrasOpciones(rec.curso) +
+        '<p class="ag-tn-small ag-tn-center"><button type="button" class="ag-tn-link" data-accion="repetir">Repetir el test</button></p>';
     }
   };
+
+  // Botón principal: nos escriben ellos por WhatsApp pidiendo su plan. El texto
+  // lleva la referencia del lead para que el agente sepa quién es.
+  function urlPlanWhatsApp(r) {
+    var necesita = estado.perfil && estado.perfil.necesita;
+    var objetivo = necesita && necesita !== 'no-se' ? ' y necesito el ' + necesita : '';
+    var texto = 'Hola! Soy ' + (estado.nombre || '').trim().split(/\s+/)[0] + '. Acabo de hacer el test de nivel, me ha salido ' + r.nivel + objetivo +
+      '. Quiero mi plan personalizado 🙌 (ref ' + referenciaLead(estado.email) + ')';
+    return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(texto);
+  }
+
+  function planWhatsApp(r) {
+    return '<div class="ag-tn-wa">' +
+      '<p class="ag-tn-wa-title">¿Quieres tu plan personalizado?</p>' +
+      '<p class="ag-tn-wa-text">Escríbenos y te decimos, según tu resultado, qué trabajar primero y cómo llegar a tu nivel antes del examen.</p>' +
+      '<a class="ag-tn-btn ag-tn-btn-wa" data-accion="whatsapp" href="' + urlPlanWhatsApp(r) + '" target="_blank" rel="noopener">Quiero mi plan por WhatsApp</a>' +
+      '</div>';
+  }
 
   function vigente() { return estado.expira && Date.now() < estado.expira; }
 
@@ -360,6 +378,11 @@
       enviar({ evento: 'clic', email: estado.email, curso: curso, conDescuento: vigente() });
       track('test_nivel_oferta_click', { curso: curso, con_descuento: vigente() });
       return; // el enlace sigue su curso
+    }
+    if (accion === 'whatsapp') {
+      enviar({ evento: 'whatsapp', email: estado.email });
+      track('test_nivel_whatsapp_plan', { nivel: estado.resultado && estado.resultado.nivel });
+      return; // el enlace abre WhatsApp
     }
     if (accion === 'repetir') { reiniciar(); return; }
     if (accion === 'empezar-seccion') { estado.paso = 'pregunta'; guardar(); pintar(); return; }
