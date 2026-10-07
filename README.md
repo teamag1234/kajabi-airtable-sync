@@ -68,8 +68,8 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 
 - **2:00**: Sincronización automática de pagos
 - **10:00**: Verificación de pagos fallidos
-- **6:00**: detección de accesos concedidos a mano en Kajabi (`/api/renewal-grants`)
-- **6:30**: importación incremental de compras desde Kajabi
+- **6:15**: importación incremental de compras desde Kajabi
+- **6:45**: detección de accesos concedidos a mano en Kajabi (`/api/renewal-grants`)
 - **7:00** (9:00 hora peninsular en verano, 8:00 en invierno): secuencia de renovación
 - **12:00**: segunda pasada de la secuencia por si la primera no se ejecutó (no repite pasos ya enviados)
 
@@ -149,6 +149,7 @@ La tabla `Renovaciones` ya existe en la base **CURSOS ONLINE** (`appN0vx5OPGi81z
 | Última renovación | Fecha |
 | Origen | Texto |
 | Notas | Texto largo |
+| Pausado hasta | Fecha (secuencia en pausa mientras tenga otro acceso vigente, p. ej. Turbo Pro) |
 | Renovado desde email | Casilla |
 | Paso al renovar | Número |
 | Importe renovación | Número |
@@ -175,7 +176,7 @@ En `lib/renewal/courses.js` está la lista de cursos principales con su acceso y
 
 Las ofertas de "Aptis Expert" (curso ya retirado) se tratan como Directo al Aptis.
 
-Aptis Infinity es suscripción mensual y queda fuera de la secuencia.
+Aptis Infinity (suscripción) y Turbo Pro quedan fuera de la secuencia, pero cuentan como **acceso paralelo**: mientras un alumno tenga uno vigente, su fila queda con **Pausado hasta** la fecha en que termina y no recibe emails.
 
 ### Vista previa de los emails
 
