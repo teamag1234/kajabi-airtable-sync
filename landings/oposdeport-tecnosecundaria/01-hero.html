@@ -1,7 +1,7 @@
-<!-- ====== SECCIÓN 1: HERO — Oposdeport × AG Academy ====== -->
+<!-- ====== SECCIÓN 1: HERO — Oposdeport + Tecnosecundaria × AG Academy ====== -->
 <!-- Pegar en un bloque de código personalizado (Custom Code) en Kajabi -->
 <!-- El botón CTA se añade como bloque nativo de Kajabi justo debajo -->
-<!-- ⚠️ Antes de publicar: subir clean-logo.png a Kajabi y cambiar la URL del logo de Oposdeport -->
+<!-- ⚠️ Antes de publicar: subir los logos de Oposdeport y Tecnosecundaria a Kajabi y cambiar sus URLs -->
 
 <style>
   /* ====== AG-EC RESET & VARIABLES ====== */
@@ -21,6 +21,9 @@
     --op-cyan: #1fb6e8;
     --op-soft: #eff9fc;
     --op-100: #dce8ec;
+    /* Paleta Tecnosecundaria */
+    --tec-main: #575A82;
+    --tec-indigo: #5c6bc0;
     --text-dark: #1a1a2e;
     --text-body: #4a4a5a;
     --text-muted: #8a8a9a;
@@ -75,8 +78,23 @@
   .ag-ec-logo-bar img {
     height: 52px !important;
     width: auto !important;
-    max-width: 42vw !important;
     object-fit: contain !important;
+  }
+
+  .ag-ec-logo-partners {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+
+  .ag-ec-logo-partners img {
+    height: 46px !important;
+  }
+
+  .ag-ec-logo-sep {
+    width: 1px !important;
+    height: 34px !important;
+    background: var(--border-light) !important;
   }
 
   .ag-ec-logo-x {
@@ -108,7 +126,7 @@
   .ag-ec-hero-badge-dot {
     width: 8px !important;
     height: 8px !important;
-    background: var(--op-cyan) !important;
+    background: linear-gradient(135deg, var(--op-cyan), var(--tec-indigo)) !important;
     border-radius: 50% !important;
     animation: ag-ec-dot-blink 2s ease-in-out infinite !important;
   }
@@ -136,6 +154,10 @@
 
   .ag-ec-hero-h1 .ag-ec-h-blue {
     color: var(--op-main) !important;
+    background: linear-gradient(90deg, var(--op-main), var(--tec-indigo)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
   }
 
   .ag-ec-hero-h1 .ag-ec-h-gold {
@@ -183,7 +205,7 @@
   .ag-ec-date-cal {
     width: 48px !important;
     height: 48px !important;
-    background: linear-gradient(135deg, var(--op-cyan), var(--op-dark)) !important;
+    background: linear-gradient(135deg, var(--op-main), var(--tec-main)) !important;
     border-radius: 12px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -250,13 +272,31 @@
       padding: 40px 16px 36px !important;
     }
 
-    .ag-ec-logo-bar img {
-      height: 34px !important;
+    .ag-ec-logo-bar {
+      flex-direction: column !important;
+      gap: 10px !important;
+      margin-bottom: 28px !important;
     }
 
-    .ag-ec-logo-bar {
+    .ag-ec-logo-partners {
       gap: 12px !important;
-      margin-bottom: 28px !important;
+    }
+
+    .ag-ec-logo-partners img {
+      height: 32px !important;
+      max-width: 40vw !important;
+    }
+
+    .ag-ec-logo-sep {
+      height: 26px !important;
+    }
+
+    .ag-ec-logo-bar > img {
+      height: 36px !important;
+    }
+
+    .ag-ec-logo-x {
+      font-size: 18px !important;
     }
 
     .ag-ec-date-pill {
@@ -284,10 +324,17 @@
 
   <!-- LOGOS -->
   <div class="ag-ec-logo-bar">
-    <img
-      src="https://oposdeport.es/wp-content/themes/oposdeport/images/clean-logo.png"
-      alt="Oposdeport"
-    >
+    <div class="ag-ec-logo-partners">
+      <img
+        src="https://oposdeport.es/wp-content/themes/oposdeport/images/clean-logo.png"
+        alt="Oposdeport"
+      >
+      <span class="ag-ec-logo-sep"></span>
+      <img
+        src="https://www.tecnosecundaria.es/images/plantilla/logo_tecnosecundaria_p.png"
+        alt="Tecnosecundaria"
+      >
+    </div>
     <span class="ag-ec-logo-x">×</span>
     <img
       src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/7b72d3d-c25-14e8-202e-1368ac826_image-19.png"
@@ -298,14 +345,14 @@
   <!-- BADGE -->
   <div class="ag-ec-hero-badge">
     <span class="ag-ec-hero-badge-dot"></span>
-    MASTERCLASS GRATUITA · SOLO ALUMNOS OPOSDEPORT
+    MASTERCLASS GRATUITA · PLAZAS LIMITADAS
   </div>
 
   <br>
 
   <!-- HEADLINE -->
   <h1 class="ag-ec-hero-h1">
-    Tu plaza de EF <span class="ag-ec-h-blue">no puede depender</span>
+    Tu plaza docente <span class="ag-ec-h-blue">no puede depender</span>
     de un <span class="ag-ec-h-gold">certificado de inglés</span>
   </h1>
 
@@ -313,7 +360,7 @@
   <p class="ag-ec-hero-sub">
     Cómo sacarte el certificado de inglés <strong>en el menor tiempo posible</strong>,
     sin quitarle ni un minuto a temas, supuestos y programación.
-    Los puntos de baremo que muchos opositores de Educación Física se dejan por el camino.
+    Los puntos de baremo que muchos opositores de EF y Tecnología se dejan por el camino.
   </p>
 
   <!-- DATE -->
@@ -330,6 +377,6 @@
 
   <!-- 👇 BOTÓN NATIVO KAJABI JUSTO DEBAJO 👇 -->
 
-  <p class="ag-ec-spots-note">🔥 <strong>Plazas limitadas</strong> · Exclusiva para opositores de Oposdeport</p>
+  <p class="ag-ec-spots-note">🔥 <strong>Exclusiva</strong> para la comunidad de Oposdeport y Tecnosecundaria</p>
 
 </div>
