@@ -9,6 +9,7 @@
     --ag-gold: #FFBD59;
     --op-main: #2a8cb0;
     --op-dark: #0a4b70;
+    --op-soft: #eff9fc;
     --tec-main: #575A82;
     --tec-indigo: #5c6bc0;
     --text-dark: #1a1a2e;
@@ -50,10 +51,11 @@
 
   .ag-ec-pres-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: 1fr 1.55fr !important;
     gap: 28px !important;
-    max-width: 1080px !important;
+    max-width: 1040px !important;
     margin: 0 auto !important;
+    align-items: stretch !important;
   }
 
   .ag-ec-pres-card {
@@ -62,6 +64,8 @@
     border-radius: 24px !important;
     overflow: hidden !important;
     transition: all 0.4s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   .ag-ec-pres-card:hover {
@@ -72,12 +76,13 @@
 
   .ag-ec-pres-accent {
     height: 4px !important;
+    flex-shrink: 0 !important;
   }
 
   .ag-ec-pres-accent-gold { background: linear-gradient(90deg, var(--ag-gold), #e6a040) !important; }
-  .ag-ec-pres-accent-op { background: linear-gradient(90deg, var(--op-main), var(--op-dark)) !important; }
-  .ag-ec-pres-accent-tec { background: linear-gradient(90deg, var(--tec-indigo), var(--tec-main)) !important; }
+  .ag-ec-pres-accent-duo { background: linear-gradient(90deg, var(--op-main), var(--tec-indigo)) !important; }
 
+  /* ====== JESU ====== */
   .ag-ec-pres-photo-wrap {
     padding: 32px 28px 0 !important;
     display: flex !important;
@@ -89,12 +94,9 @@
     height: 150px !important;
     border-radius: 50% !important;
     overflow: hidden !important;
-    border: 4px solid var(--bg-soft) !important;
+    border: 4px solid rgba(255, 189, 89, 0.25) !important;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
     background: var(--bg-soft) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
   }
 
   .ag-ec-pres-photo img {
@@ -103,36 +105,8 @@
     object-fit: cover !important;
     object-position: top center !important;
     display: block !important;
-  }
-
-  /* Foto de cuerpo entero: zoom a la cara */
-  .ag-ec-pres-photo img.ag-ec-zoom {
-    transform: scale(1.9) !important;
-    transform-origin: 50% 8% !important;
-  }
-
-  .ag-ec-pres-photo img.ag-ec-zoom-jesu {
     transform: scale(2.3) !important;
     transform-origin: 50% 22% !important;
-  }
-
-  .ag-ec-pres-photo-gold { border-color: rgba(255, 189, 89, 0.25) !important; }
-  .ag-ec-pres-photo-op { border-color: rgba(42, 140, 176, 0.2) !important; }
-  .ag-ec-pres-photo-tec { border-color: rgba(92, 107, 192, 0.2) !important; }
-
-  /* Iniciales mientras no haya foto */
-  .ag-ec-pres-initials {
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: linear-gradient(135deg, var(--tec-indigo), var(--tec-main)) !important;
-    color: #ffffff !important;
-    font-family: 'Poppins', sans-serif !important;
-    font-size: 46px !important;
-    font-weight: 800 !important;
-    letter-spacing: 1px !important;
   }
 
   .ag-ec-pres-info {
@@ -156,19 +130,14 @@
   }
 
   .ag-ec-pres-role-gold { color: #d4940a !important; }
-  .ag-ec-pres-role-op { color: var(--op-main) !important; }
-  .ag-ec-pres-role-tec { color: var(--tec-indigo) !important; }
 
   .ag-ec-pres-divider {
     width: 40px !important;
     height: 3px !important;
     border-radius: 2px !important;
     margin: 0 auto 16px !important;
+    background: var(--ag-gold) !important;
   }
-
-  .ag-ec-pres-divider-gold { background: var(--ag-gold) !important; }
-  .ag-ec-pres-divider-op { background: var(--op-main) !important; }
-  .ag-ec-pres-divider-tec { background: var(--tec-indigo) !important; }
 
   .ag-ec-pres-bio {
     font-family: 'Poppins', sans-serif !important;
@@ -182,24 +151,137 @@
     font-weight: 600 !important;
   }
 
+  /* ====== DUO: FRAN + GINÉS ====== */
+  .ag-ec-duo-top {
+    margin: 32px 28px 0 !important;
+    height: 150px !important;
+    border-radius: 18px !important;
+    background: linear-gradient(135deg, var(--op-soft), #f0f1fa) !important;
+    border: 1px solid rgba(42, 140, 176, 0.12) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+  }
+
+  .ag-ec-duo-kicker {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: var(--text-muted) !important;
+  }
+
+  .ag-ec-duo-logos {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 22px !important;
+  }
+
+  .ag-ec-duo-logos img {
+    height: 48px !important;
+    width: auto !important;
+    max-width: 44% !important;
+    object-fit: contain !important;
+  }
+
+  .ag-ec-duo-plus {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 300 !important;
+    color: var(--text-muted) !important;
+    line-height: 1 !important;
+  }
+
+  .ag-ec-duo-people {
+    display: grid !important;
+    grid-template-columns: 1fr 1px 1fr !important;
+    gap: 24px !important;
+    padding: 24px 28px 0 !important;
+    flex-grow: 1 !important;
+  }
+
+  .ag-ec-duo-sep {
+    background: var(--border-light) !important;
+  }
+
+  .ag-ec-duo-person {
+    text-align: center !important;
+  }
+
+  .ag-ec-duo-person .ag-ec-pres-name {
+    font-size: 20px !important;
+  }
+
+  .ag-ec-duo-person .ag-ec-pres-role {
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-role-op { color: var(--op-main) !important; }
+  .ag-ec-role-tec { color: var(--tec-indigo) !important; }
+
+  .ag-ec-duo-person .ag-ec-pres-divider { margin-bottom: 14px !important; }
+  .ag-ec-div-op { background: var(--op-main) !important; }
+  .ag-ec-div-tec { background: var(--tec-indigo) !important; }
+
+  .ag-ec-duo-closing {
+    margin: 22px 28px 32px !important;
+    padding-top: 18px !important;
+    border-top: 1px solid var(--border-light) !important;
+    text-align: center !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--text-dark) !important;
+    line-height: 1.6 !important;
+  }
+
   @media (max-width: 900px) {
     .ag-ec-pres-grid {
       grid-template-columns: 1fr !important;
       gap: 24px !important;
-      max-width: 420px !important;
+      max-width: 460px !important;
     }
-
     .ag-ec-presenters-wrap {
       padding: 48px 16px !important;
     }
-
     .ag-ec-pres-photo {
       width: 130px !important;
       height: 130px !important;
     }
-
     .ag-ec-pres-info {
       padding: 20px 20px 28px !important;
+    }
+    .ag-ec-duo-top {
+      margin: 24px 20px 0 !important;
+      height: 130px !important;
+    }
+    .ag-ec-duo-top {
+      padding: 0 14px !important;
+    }
+    .ag-ec-duo-logos {
+      gap: 10px !important;
+    }
+    .ag-ec-duo-logos img {
+      height: auto !important;
+      max-height: 34px !important;
+      max-width: 40% !important;
+    }
+    .ag-ec-duo-people {
+      grid-template-columns: 1fr !important;
+      gap: 22px !important;
+      padding: 22px 20px 0 !important;
+    }
+    .ag-ec-duo-sep {
+      height: 1px !important;
+      width: 60px !important;
+      margin: 0 auto !important;
+    }
+    .ag-ec-duo-closing {
+      margin: 22px 20px 28px !important;
     }
   }
 </style>
@@ -215,17 +297,18 @@
 
   <div class="ag-ec-pres-grid">
 
+    <!-- JESU -->
     <div class="ag-ec-pres-card">
       <div class="ag-ec-pres-accent ag-ec-pres-accent-gold"></div>
       <div class="ag-ec-pres-photo-wrap">
-        <div class="ag-ec-pres-photo ag-ec-pres-photo-gold">
-          <img class="ag-ec-zoom-jesu" src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/23a0e84-bdd6-3540-a5d2-8c51e0282407_4.png" alt="Jesu - Fundador de AG Academy">
+        <div class="ag-ec-pres-photo">
+          <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/23a0e84-bdd6-3540-a5d2-8c51e0282407_4.png" alt="Jesu - Fundador de AG Academy">
         </div>
       </div>
       <div class="ag-ec-pres-info">
         <h3 class="ag-ec-pres-name">Jesu</h3>
         <p class="ag-ec-pres-role ag-ec-pres-role-gold">Fundador de AG Academy</p>
-        <div class="ag-ec-pres-divider ag-ec-pres-divider-gold"></div>
+        <div class="ag-ec-pres-divider"></div>
         <p class="ag-ec-pres-bio">
           Creador del <strong>método más rápido para sacarte el certificado de inglés</strong>
           dedicándole el menor tiempo posible. Ha ayudado a miles de docentes
@@ -235,44 +318,47 @@
       </div>
     </div>
 
+    <!-- FRAN + GINÉS -->
     <div class="ag-ec-pres-card">
-      <div class="ag-ec-pres-accent ag-ec-pres-accent-op"></div>
-      <div class="ag-ec-pres-photo-wrap">
-        <div class="ag-ec-pres-photo ag-ec-pres-photo-op">
-          <img class="ag-ec-zoom" src="https://oposdeport.es/wp-content/uploads/2023/12/Francisco-J.-Martinez-Guillamon-scaled.png" alt="Francisco J. Martínez - Oposdeport">
-        </div>
-      </div>
-      <div class="ag-ec-pres-info">
-        <h3 class="ag-ec-pres-name">Fran Martínez</h3>
-        <p class="ag-ec-pres-role ag-ec-pres-role-op">Preparador de Oposdeport</p>
-        <div class="ag-ec-pres-divider ag-ec-pres-divider-op"></div>
-        <p class="ag-ec-pres-bio">
-          Funcionario de Secundaria y <strong>preparador de oposiciones de Educación Física desde 2009</strong>.
-          Con Oposdeport ha acompañado a más de 2.800 aprobados y 645 opositores con plaza.
-          Sabe lo que vale cada punto del baremo, y por eso no quiere que el inglés sea el que se te escape.
-        </p>
-      </div>
-    </div>
+      <div class="ag-ec-pres-accent ag-ec-pres-accent-duo"></div>
 
-    <div class="ag-ec-pres-card">
-      <div class="ag-ec-pres-accent ag-ec-pres-accent-tec"></div>
-      <div class="ag-ec-pres-photo-wrap">
-        <div class="ag-ec-pres-photo ag-ec-pres-photo-tec">
-          <!-- Cuando tengamos su foto: sustituir este div por <img src="URL_FOTO" alt="Ginés P. - Tecnosecundaria"> -->
-          <div class="ag-ec-pres-initials">GP</div>
+      <div class="ag-ec-duo-top">
+        <span class="ag-ec-duo-kicker">Con el respaldo de</span>
+        <div class="ag-ec-duo-logos">
+          <img src="https://oposdeport.es/wp-content/themes/oposdeport/images/clean-logo.png" alt="Oposdeport">
+          <span class="ag-ec-duo-plus">+</span>
+          <img src="https://www.tecnosecundaria.es/images/plantilla/logo_tecnosecundaria_p.png" alt="Tecnosecundaria">
         </div>
       </div>
-      <div class="ag-ec-pres-info">
-        <h3 class="ag-ec-pres-name">Ginés P.</h3>
-        <p class="ag-ec-pres-role ag-ec-pres-role-tec">Creador de Tecnosecundaria</p>
-        <div class="ag-ec-pres-divider ag-ec-pres-divider-tec"></div>
-        <p class="ag-ec-pres-bio">
-          Profesor de Tecnología e Informática y <strong>funcionario de carrera desde 2006</strong>.
-          Pasó por la oposición, así que conoce el proceso desde dentro.
-          Su web, Tecnosecundaria, ha sido premiada dos veces entre las mejores webs de la Región de Murcia
-          y es un recurso de referencia para profes y alumnos de Tecnología.
-        </p>
+
+      <div class="ag-ec-duo-people">
+        <div class="ag-ec-duo-person">
+          <h3 class="ag-ec-pres-name">Fran Martínez</h3>
+          <p class="ag-ec-pres-role ag-ec-role-op">Preparador de Oposdeport</p>
+          <div class="ag-ec-pres-divider ag-ec-div-op"></div>
+          <p class="ag-ec-pres-bio">
+            Funcionario de Secundaria y <strong>preparador de oposiciones de Educación Física desde 2009</strong>.
+            Con Oposdeport ha acompañado a más de 2.800 aprobados y 645 opositores con plaza.
+          </p>
+        </div>
+
+        <div class="ag-ec-duo-sep"></div>
+
+        <div class="ag-ec-duo-person">
+          <h3 class="ag-ec-pres-name">Ginés P.</h3>
+          <p class="ag-ec-pres-role ag-ec-role-tec">Creador de Tecnosecundaria</p>
+          <div class="ag-ec-pres-divider ag-ec-div-tec"></div>
+          <p class="ag-ec-pres-bio">
+            Profesor de Tecnología e Informática y <strong>funcionario de carrera desde 2006</strong>.
+            Su web ha sido premiada dos veces entre las mejores de la Región de Murcia.
+          </p>
+        </div>
       </div>
+
+      <p class="ag-ec-duo-closing">
+        Los dos han pasado por la oposición y saben lo que vale cada punto del baremo.
+        Por eso no quieren que el inglés sea el que se te escape.
+      </p>
     </div>
 
   </div>
