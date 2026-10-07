@@ -1,0 +1,272 @@
+<style>
+  .ag-ec-presenters-wrap *, .ag-ec-presenters-wrap *::before, .ag-ec-presenters-wrap *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-presenters-wrap {
+    --ag-gold: #FFBD59;
+    --op-main: #2a8cb0;
+    --op-dark: #0a4b70;
+    --op-soft: #eff9fc;
+    --tec-main: #0a4b70;
+    --tec-indigo: #1fb6e8;
+    --text-dark: #1a1a2e;
+    --text-body: #4a4a5a;
+    --text-muted: #8a8a9a;
+    --bg-white: #ffffff;
+    --bg-soft: #f8f9fa;
+    --border-light: #e8e9ee;
+    background: var(--bg-white) !important;
+    padding: 64px 24px !important;
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  .ag-ec-pres-header {
+    text-align: center !important;
+    margin-bottom: 48px !important;
+  }
+
+  .ag-ec-pres-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(26px, 4vw, 38px) !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .ag-ec-pres-title .ag-ec-t-blue {
+    color: var(--op-main) !important;
+    background: linear-gradient(90deg, var(--op-main), var(--tec-indigo)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .ag-ec-pres-title .ag-ec-t-gold {
+    color: var(--ag-gold) !important;
+  }
+
+  .ag-ec-pres-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    align-items: stretch !important;
+  }
+
+  .ag-ec-pres-card {
+    background: var(--bg-white) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    transition: all 0.4s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .ag-ec-pres-card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08) !important;
+    border-color: transparent !important;
+  }
+
+  .ag-ec-pres-accent {
+    height: 4px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-pres-accent-gold { background: linear-gradient(90deg, var(--ag-gold), #e6a040) !important; }
+  .ag-ec-pres-accent-duo { background: linear-gradient(90deg, var(--op-main), var(--op-dark)) !important; }
+
+  /* ====== JESU ====== */
+  .ag-ec-pres-photo-wrap {
+    padding: 32px 28px 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-pres-photo {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 4px solid rgba(255, 189, 89, 0.25) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+    background: var(--bg-soft) !important;
+  }
+
+  .ag-ec-pres-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    display: block !important;
+    transform: scale(2.3) !important;
+    transform-origin: 50% 22% !important;
+  }
+
+  .ag-ec-pres-info {
+    padding: 24px 26px 32px !important;
+    text-align: center !important;
+  }
+
+  .ag-ec-pres-name {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 4px !important;
+  }
+
+  .ag-ec-pres-role {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-pres-role-gold { color: #d4940a !important; }
+
+  .ag-ec-pres-divider {
+    width: 40px !important;
+    height: 3px !important;
+    border-radius: 2px !important;
+    margin: 0 auto 16px !important;
+    background: var(--ag-gold) !important;
+  }
+
+  .ag-ec-pres-bio {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+    color: var(--text-body) !important;
+  }
+
+  .ag-ec-pres-bio strong {
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+  }
+
+  /* ====== DUO: FRAN + GINÉS ====== */
+  .ag-ec-role-op { color: var(--op-main) !important; }
+
+  .ag-ec-div-op { background: var(--op-main) !important; }
+
+
+  @media (max-width: 900px) {
+    .ag-ec-pres-grid {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+      max-width: 460px !important;
+    }
+    .ag-ec-presenters-wrap {
+      padding: 48px 16px !important;
+    }
+    .ag-ec-pres-photo {
+      width: 130px !important;
+      height: 130px !important;
+    }
+    .ag-ec-pres-info {
+      padding: 20px 20px 28px !important;
+    }
+  }
+
+  .ag-ec-team-photo {
+    margin: 32px 28px 0 !important;
+    height: 150px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .ag-ec-team-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 30% !important;
+    display: block !important;
+  }
+
+  .ag-ec-team-logo {
+    margin: 32px 28px 0 !important;
+    height: 150px !important;
+    border-radius: 18px !important;
+    background: linear-gradient(135deg, var(--op-soft), #ffffff) !important;
+    border: 1px solid var(--border-light) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 28px !important;
+  }
+
+  .ag-ec-team-logo img {
+    max-height: 70px !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  @media (max-width: 900px) {
+    .ag-ec-team-photo, .ag-ec-team-logo {
+      margin: 24px 20px 0 !important;
+      height: 140px !important;
+    }
+  }
+</style>
+
+<div class="ag-ec-presenters-wrap">
+
+  <div class="ag-ec-pres-header">
+    <h2 class="ag-ec-pres-title">
+      Dos equipos, <span class="ag-ec-t-blue">un objetivo</span>:<br>
+      que consigas <span class="ag-ec-t-gold">tu plaza</span>
+    </h2>
+  </div>
+
+  <div class="ag-ec-pres-grid">
+
+    <!-- JESU -->
+    <div class="ag-ec-pres-card">
+      <div class="ag-ec-pres-accent ag-ec-pres-accent-gold"></div>
+      <div class="ag-ec-pres-photo-wrap">
+        <div class="ag-ec-pres-photo">
+          <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/23a0e84-bdd6-3540-a5d2-8c51e0282407_4.png" alt="Jesu - Fundador de AG Academy">
+        </div>
+      </div>
+      <div class="ag-ec-pres-info">
+        <h3 class="ag-ec-pres-name">Jesu</h3>
+        <p class="ag-ec-pres-role ag-ec-pres-role-gold">Fundador de AG Academy</p>
+        <div class="ag-ec-pres-divider"></div>
+        <p class="ag-ec-pres-bio">
+          Creador del <strong>método más rápido para sacarte el certificado de inglés</strong>
+          dedicándole el menor tiempo posible. Ha ayudado a miles de docentes
+          a quitarse el inglés de encima sin métodos eternos ni aburridos.
+          En esta masterclass te enseña cómo hacerlo compatible con tu oposición.
+        </p>
+      </div>
+    </div>
+
+    <!-- EQUIPO OPOSDEPORT -->
+    <div class="ag-ec-pres-card">
+      <div class="ag-ec-pres-accent ag-ec-pres-accent-duo"></div>
+      <div class="ag-ec-team-photo">
+        <img src="https://oposdeport.es/wp-content/uploads/2026/04/Oposdeport-26-scaled-e1775902401254.jpg" alt="Equipo de Oposdeport">
+      </div>
+      <div class="ag-ec-pres-info">
+        <h3 class="ag-ec-pres-name">Equipo Oposdeport</h3>
+        <p class="ag-ec-pres-role ag-ec-role-op">Fran Martínez y su equipo de preparadores</p>
+        <div class="ag-ec-pres-divider ag-ec-div-op"></div>
+        <p class="ag-ec-pres-bio">
+          Preparando <strong>oposiciones de Educación Física desde 2009</strong>,
+          con más de 2.800 aprobados y 645 opositores con plaza.
+          Saben lo que vale cada punto del baremo, y por eso no quieren que el inglés sea el que se te escape.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

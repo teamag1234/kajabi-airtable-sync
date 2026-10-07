@@ -1,0 +1,157 @@
+<style>
+  .ag-ec-s4 *, .ag-ec-s4 *::before, .ag-ec-s4 *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-s4 {
+    --ag-gold: #FFBD59;
+    --op-main: #5c6bc0;
+    --op-dark: #3b3f73;
+    --tec-indigo: #8f9bff;
+    --text-dark: #1a1a2e;
+    --text-body: #4a4a5a;
+    --text-muted: #8a8a9a;
+    --bg-white: #ffffff;
+    background: var(--bg-white) !important;
+    padding: 72px 24px 32px !important;
+    font-family: 'Poppins', sans-serif !important;
+    text-align: center !important;
+    position: relative !important;
+  }
+
+  .ag-ec-s4-line {
+    width: 60px !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, var(--op-main), var(--tec-indigo), var(--ag-gold)) !important;
+    border-radius: 2px !important;
+    margin: 0 auto 32px !important;
+  }
+
+  .ag-ec-s4-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(26px, 4.5vw, 42px) !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.4px !important;
+    max-width: 680px !important;
+    margin: 0 auto 20px !important;
+  }
+
+  .ag-ec-s4-title .ag-ec-s4-gold {
+    color: var(--ag-gold) !important;
+  }
+
+  .ag-ec-s4-title .ag-ec-s4-blue {
+    color: var(--op-main) !important;
+    background: linear-gradient(90deg, var(--op-main), var(--tec-indigo)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .ag-ec-s4-sub {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 17px !important;
+    color: var(--text-body) !important;
+    line-height: 1.6 !important;
+    max-width: 520px !important;
+    margin: 0 auto 36px !important;
+  }
+
+  .ag-ec-s4-points {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 32px !important;
+    margin-bottom: 40px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .ag-ec-s4-point {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+  }
+
+  .ag-ec-s4-point-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background: rgba(92, 107, 192, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-s4-date {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 8px !important;
+  }
+
+  .ag-ec-s4-date strong {
+    color: var(--text-dark) !important;
+    font-weight: 700 !important;
+  }
+
+  .ag-ec-s4-spots {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13px !important;
+    color: var(--op-dark) !important;
+    font-weight: 600 !important;
+  }
+
+  @media (max-width: 640px) {
+    .ag-ec-s4 {
+      padding: 56px 16px 24px !important;
+    }
+    .ag-ec-s4-points {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 16px !important;
+    }
+  }
+</style>
+
+<div class="ag-ec-s4">
+
+  <div class="ag-ec-s4-line"></div>
+
+  <h2 class="ag-ec-s4-title">
+    El inglés puede ser lo que te <span class="ag-ec-s4-blue">acerque</span> a tu plaza.<br>
+    O lo que te <span class="ag-ec-s4-gold">aleje</span> de ella.
+  </h2>
+
+  <p class="ag-ec-s4-sub">
+    Tú decides. Nosotros te enseñamos cómo conseguirlo
+    de la forma más rápida, sin sacrificar tu preparación.
+  </p>
+
+  <div class="ag-ec-s4-points">
+    <div class="ag-ec-s4-point">
+      <span class="ag-ec-s4-point-icon">🎯</span>
+      100% gratuita
+    </div>
+    <div class="ag-ec-s4-point">
+      <span class="ag-ec-s4-point-icon">📺</span>
+      Online por Zoom
+    </div>
+    <div class="ag-ec-s4-point">
+      <span class="ag-ec-s4-point-icon">⏱️</span>
+      Martes 20 de octubre · 17:00h
+    </div>
+  </div>
+
+  <p class="ag-ec-s4-date">Reserva ahora tu sitio — <strong>es gratis y sin compromiso</strong></p>
+  <p class="ag-ec-s4-spots">🔥 Plazas limitadas · Exclusiva para la comunidad de Tecnosecundaria</p>
+
+</div>

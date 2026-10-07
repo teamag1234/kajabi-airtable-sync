@@ -1,0 +1,378 @@
+<!-- ====== SECCIÓN 1: HERO — Tecnosecundaria × AG Academy ====== -->
+<!-- Pegar en un bloque de código personalizado (Custom Code) en Kajabi -->
+<!-- El botón CTA se añade como bloque nativo de Kajabi justo debajo -->
+<!-- ⚠️ Antes de publicar: subir el logo de Tecnosecundaria a Kajabi y cambiar su URL -->
+
+<style>
+  /* ====== AG-EC RESET & VARIABLES ====== */
+  .ag-ec-hero-wrap *, .ag-ec-hero-wrap *::before, .ag-ec-hero-wrap *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-hero-wrap {
+    --ag-navy: #0a0e27;
+    --ag-gold: #FFBD59;
+    --ag-gold-hover: #ffd080;
+    /* Paleta de marca */
+    --op-main: #5c6bc0;
+    --op-dark: #3b3f73;
+    --op-cyan: #8f9bff;
+    --op-soft: #f0f1fa;
+    --op-100: #dce8ec;
+    --tec-main: #575A82;
+    --tec-indigo: #8f9bff;
+    --text-dark: #1a1a2e;
+    --text-body: #4a4a5a;
+    --text-muted: #8a8a9a;
+    --bg-white: #ffffff;
+    --bg-soft: #f8f9fa;
+    --border-light: #e8e9ee;
+
+    background: var(--bg-white) !important;
+    padding: 60px 24px 16px !important;
+    font-family: 'Poppins', sans-serif !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Subtle decorative background elements */
+  .ag-ec-hero-wrap::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -120px !important;
+    right: -80px !important;
+    width: 400px !important;
+    height: 400px !important;
+    background: radial-gradient(circle, rgba(92,107,192,0.08) 0%, transparent 70%) !important;
+    border-radius: 50% !important;
+    pointer-events: none !important;
+  }
+
+  .ag-ec-hero-wrap::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -100px !important;
+    left: -60px !important;
+    width: 350px !important;
+    height: 350px !important;
+    background: radial-gradient(circle, rgba(255,189,89,0.05) 0%, transparent 70%) !important;
+    border-radius: 50% !important;
+    pointer-events: none !important;
+  }
+
+  /* ====== LOGO BAR ====== */
+  .ag-ec-logo-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    margin-bottom: 40px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-logo-bar img {
+    height: 52px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
+  .ag-ec-logo-partners {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+
+  .ag-ec-logo-partners img {
+    height: 46px !important;
+  }
+
+  .ag-ec-logo-sep {
+    width: 1px !important;
+    height: 34px !important;
+    background: var(--border-light) !important;
+  }
+
+  .ag-ec-logo-x {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 300 !important;
+    font-size: 24px !important;
+    color: var(--text-muted) !important;
+    line-height: 1 !important;
+  }
+
+  /* ====== BADGE ====== */
+  .ag-ec-hero-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: var(--op-soft) !important;
+    border: 1px solid rgba(92,107,192,0.25) !important;
+    border-radius: 50px !important;
+    padding: 8px 22px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--op-dark) !important;
+    margin-bottom: 28px !important;
+    letter-spacing: 0.3px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-hero-badge-dot {
+    width: 8px !important;
+    height: 8px !important;
+    background: linear-gradient(135deg, var(--op-cyan), var(--tec-indigo)) !important;
+    border-radius: 50% !important;
+    animation: ag-ec-dot-blink 2s ease-in-out infinite !important;
+  }
+
+  @keyframes ag-ec-dot-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ====== HEADLINE ====== */
+  .ag-ec-hero-h1 {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(30px, 5.5vw, 50px) !important;
+    font-weight: 800 !important;
+    line-height: 1.12 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 20px !important;
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: relative !important;
+    z-index: 2 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .ag-ec-hero-h1 .ag-ec-h-blue {
+    color: var(--op-main) !important;
+    background: linear-gradient(90deg, var(--op-main), var(--tec-indigo)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .ag-ec-hero-h1 .ag-ec-h-gold {
+    color: var(--ag-gold) !important;
+    text-shadow: 0 1px 2px rgba(255,189,89,0.15) !important;
+  }
+
+  @media (min-width: 641px) {
+    .ag-ec-hero-h1 .ag-ec-h-gold {
+      white-space: nowrap !important;
+    }
+  }
+
+  /* ====== SUBTITLE ====== */
+  .ag-ec-hero-sub {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 17px !important;
+    line-height: 1.65 !important;
+    color: var(--text-body) !important;
+    max-width: 580px !important;
+    margin: 0 auto 32px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-hero-sub strong {
+    color: var(--text-dark) !important;
+    font-weight: 700 !important;
+  }
+
+  /* ====== DATE BLOCK ====== */
+  .ag-ec-date-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    background: var(--bg-soft) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 16px !important;
+    padding: 16px 28px !important;
+    margin-bottom: 12px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-date-cal {
+    width: 48px !important;
+    height: 48px !important;
+    background: linear-gradient(135deg, var(--op-main), var(--tec-main)) !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-date-cal-month {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    color: rgba(255,255,255,0.85) !important;
+    line-height: 1 !important;
+  }
+
+  .ag-ec-date-cal-day {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    line-height: 1.1 !important;
+  }
+
+  .ag-ec-date-text {
+    text-align: left !important;
+  }
+
+  .ag-ec-date-text-main {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 2px !important;
+  }
+
+  .ag-ec-date-text-detail {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    font-weight: 400 !important;
+  }
+
+  /* ====== SPOTS NOTE ====== */
+  .ag-ec-spots-note {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    position: relative !important;
+    z-index: 2 !important;
+    margin-top: 4px !important;
+  }
+
+  .ag-ec-spots-note strong {
+    color: var(--op-dark) !important;
+    font-weight: 700 !important;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 640px) {
+    .ag-ec-hero-wrap {
+      padding: 40px 16px 36px !important;
+    }
+
+    .ag-ec-logo-bar {
+      gap: 14px !important;
+      margin-bottom: 28px !important;
+    }
+
+    .ag-ec-logo-bar img {
+      height: 38px !important;
+      max-width: 40vw !important;
+    }
+
+    .ag-ec-logo-partners {
+      gap: 12px !important;
+    }
+
+    .ag-ec-logo-partners img {
+      height: 32px !important;
+      max-width: 40vw !important;
+    }
+
+    .ag-ec-logo-sep {
+      height: 26px !important;
+    }
+
+    .ag-ec-logo-bar > img {
+      height: 36px !important;
+    }
+
+    .ag-ec-logo-x {
+      font-size: 18px !important;
+    }
+
+    .ag-ec-date-pill {
+      padding: 14px 20px !important;
+      gap: 12px !important;
+    }
+
+    .ag-ec-date-cal {
+      width: 42px !important;
+      height: 42px !important;
+    }
+
+    .ag-ec-hero-badge {
+      font-size: 11px !important;
+      padding: 7px 14px !important;
+      letter-spacing: 0 !important;
+    }
+  }
+</style>
+
+<!-- Google Fonts (si no está ya cargada en Kajabi) -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<div class="ag-ec-hero-wrap">
+
+  <!-- LOGOS -->
+  <div class="ag-ec-logo-bar">
+    <img
+      src="https://www.tecnosecundaria.es/images/plantilla/logo_tecnosecundaria_p.png"
+      alt="Tecnosecundaria"
+    >
+    <span class="ag-ec-logo-x">×</span>
+    <img
+      src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/7b72d3d-c25-14e8-202e-1368ac826_image-19.png"
+      alt="AG Academy"
+    >
+  </div>
+
+  <!-- BADGE -->
+  <div class="ag-ec-hero-badge">
+    <span class="ag-ec-hero-badge-dot"></span>
+    MASTERCLASS GRATUITA · PLAZAS LIMITADAS
+  </div>
+
+  <br>
+
+  <!-- HEADLINE -->
+  <h1 class="ag-ec-hero-h1">
+    Tu plaza de Tecnología <span class="ag-ec-h-blue">no puede depender</span>
+    de un <span class="ag-ec-h-gold">certificado de inglés</span>
+  </h1>
+
+  <!-- SUBTITLE -->
+  <p class="ag-ec-hero-sub">
+    Cómo sacarte el certificado de inglés <strong>en el menor tiempo posible</strong>,
+    sin quitarle ni un minuto a temas, supuestos y programación.
+    Los puntos de baremo que muchos opositores de Tecnología se dejan por el camino.
+  </p>
+
+  <!-- DATE -->
+  <div class="ag-ec-date-pill">
+    <div class="ag-ec-date-cal">
+      <span class="ag-ec-date-cal-month">OCT</span>
+      <span class="ag-ec-date-cal-day">20</span>
+    </div>
+    <div class="ag-ec-date-text">
+      <div class="ag-ec-date-text-main">Martes 20 de octubre · 17:00h</div>
+      <div class="ag-ec-date-text-detail">Online por ZOOM · Gratuita</div>
+    </div>
+  </div>
+
+  <!-- 👇 BOTÓN NATIVO KAJABI JUSTO DEBAJO 👇 -->
+
+  <p class="ag-ec-spots-note">🔥 <strong>Exclusiva</strong> para la comunidad de Tecnosecundaria</p>
+
+</div>
