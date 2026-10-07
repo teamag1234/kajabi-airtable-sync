@@ -40,7 +40,7 @@ test('renovación: curso base y meses del nombre de la oferta', () => {
 
 test('omite ofertas fuera de catálogo, suscripciones activas y accesos ya cerrados', () => {
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z' }), offer: offer('SÁCATE EL INGLÉS'), customer, hoy: '2026-09-22' }).omitido, 'oferta no catalogada');
-  assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z' }), offer: offer('Aptis Infinity ⭐️'), customer, hoy: '2026-09-22' }).omitido, 'oferta no catalogada');
+  assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'subscription' }), offer: offer('Aptis Infinity ⭐️'), customer, hoy: '2026-09-22' }).paralelo, 'Aptis Infinity');
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'subscription' }), offer: offer('Ten tu Aptis MENSUAL', 'TEN TU APTIS RENOVACIÓN MENSUAL'), customer, hoy: '2026-09-22' }).omitido, 'suscripción activa');
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-01-01T00:00:00Z', deactivated_at: '2026-09-10T00:00:00Z', deactivation_reason: 'admin' }), offer: offer('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€'), customer, hoy: '2026-09-22' }).omitido, 'acceso terminado fuera de ventana');
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-03-15T00:00:00Z', deactivated_at: '2026-09-16T00:00:00Z', deactivation_reason: 'access_expired' }), offer: offer('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€'), customer, hoy: '2026-09-22' }).fechaFin, '2026-09-16');
@@ -73,4 +73,13 @@ test('una oferta gratuita con otro nombre entra si da acceso al producto del cur
 test('el nombre manda sobre el producto para elegir la variante', () => {
   const o = { type: 'offers', id: '7', attributes: { title: '"DIRECTO AL APTIS EXPRESS TUTORIZADO"', internal_title: 'TRANSFERENCIA' }, relationships: { products: { data: [{ id: '2149043351', type: 'products' }] } } };
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'free' }), offer: o, customer, hoy: '2026-09-22' }).cursoKey, 'directo-express-tutorizado');
+});
+
+test('un Pack Turbo vigente se trata como acceso paralelo que pausa la secuencia', () => {
+  const o = { type: 'offers', id: '5', attributes: { title: 'PACK TURBO APTIS', internal_title: 'TURBO' }, relationships: { products: { data: [{ id: '2149016660' }] } } };
+  const r = mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-28T15:53:46Z', deactivated_at: '2026-11-07T15:53:46Z', deactivation_reason: 'access_expired', amount_in_cents: 14000 }), offer: o, customer, hoy: '2026-10-07' });
+  assert.equal(r.paralelo, 'Aptis Turbo Pro');
+  assert.equal(r.fechaFin, '2026-11-07');
+  const viejo = mapearCompra({ purchase: purchase({ effective_start_at: '2026-01-01T00:00:00Z', deactivated_at: '2026-02-10T00:00:00Z' }), offer: o, customer, hoy: '2026-10-07' });
+  assert.equal(viejo.omitido, 'acceso paralelo terminado');
 });
