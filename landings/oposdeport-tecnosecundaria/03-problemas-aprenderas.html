@@ -1,0 +1,374 @@
+<style>
+  .ag-ec-s3 *, .ag-ec-s3 *::before, .ag-ec-s3 *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-s3 {
+    --ag-gold: #FFBD59;
+    --op-main: #2a8cb0;
+    --op-dark: #0a4b70;
+    --op-soft: #eff9fc;
+    --tec-main: #575A82;
+    --tec-indigo: #5c6bc0;
+    --text-dark: #1a1a2e;
+    --text-body: #4a4a5a;
+    --text-muted: #8a8a9a;
+    --bg-white: #ffffff;
+    --bg-soft: #f8f9fa;
+    --border-light: #e8e9ee;
+    --red: #dc2626;
+    background: var(--bg-white) !important;
+    padding: 64px 24px !important;
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  .ag-ec-s3-header {
+    text-align: center !important;
+    margin-bottom: 48px !important;
+  }
+
+  .ag-ec-s3-label {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2.5px !important;
+    color: var(--op-main) !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-s3-label::before,
+  .ag-ec-s3-label::after {
+    content: '' !important;
+    width: 24px !important;
+    height: 2px !important;
+    background: var(--op-main) !important;
+    opacity: 0.3 !important;
+  }
+
+  .ag-ec-s3-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(26px, 4vw, 38px) !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.3px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .ag-ec-s3-sub {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 16px !important;
+    color: var(--text-body) !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    line-height: 1.6 !important;
+  }
+
+  .ag-ec-s3-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+    max-width: 940px !important;
+    margin: 0 auto 56px !important;
+  }
+
+  .ag-ec-s3-col {
+    border-radius: 20px !important;
+    padding: 32px 28px !important;
+  }
+
+  .ag-ec-s3-col-pain {
+    background: #fef2f2 !important;
+    border: 1px solid rgba(220, 38, 38, 0.12) !important;
+  }
+
+  .ag-ec-s3-col-sol {
+    background: var(--op-soft) !important;
+    border: 1px solid rgba(42, 140, 176, 0.18) !important;
+  }
+
+  .ag-ec-s3-col-head {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    margin-bottom: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .ag-ec-s3-col-head-red { color: var(--red) !important; }
+  .ag-ec-s3-col-head-blue { color: var(--op-main) !important; }
+
+  .ag-ec-s3-col-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-s3-col-icon-red {
+    background: rgba(220, 38, 38, 0.1) !important;
+    color: var(--red) !important;
+  }
+
+  .ag-ec-s3-col-icon-blue {
+    background: rgba(42, 140, 176, 0.12) !important;
+    color: var(--op-main) !important;
+  }
+
+  .ag-ec-s3-list {
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  .ag-ec-s3-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 14px 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .ag-ec-s3-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .ag-ec-s3-item:first-child {
+    padding-top: 0 !important;
+  }
+
+  .ag-ec-s3-bullet {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-s3-bullet-red {
+    background: rgba(220, 38, 38, 0.12) !important;
+    color: var(--red) !important;
+  }
+
+  .ag-ec-s3-bullet-blue {
+    background: rgba(42, 140, 176, 0.14) !important;
+    color: var(--op-main) !important;
+  }
+
+  .ag-ec-s3-item-text {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    color: var(--text-dark) !important;
+    font-weight: 400 !important;
+  }
+
+  .ag-ec-s3-learn-header {
+    text-align: center !important;
+    margin-bottom: 36px !important;
+  }
+
+  .ag-ec-s3-learn-title {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: clamp(22px, 3.5vw, 32px) !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    line-height: 1.2 !important;
+  }
+
+  .ag-ec-s3-learn-title span {
+    color: var(--ag-gold) !important;
+  }
+
+  .ag-ec-s3-learn-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    max-width: 940px !important;
+    margin: 0 auto !important;
+  }
+
+  .ag-ec-s3-learn-card {
+    background: var(--bg-soft) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 16px !important;
+    padding: 24px 22px !important;
+    transition: all 0.35s ease !important;
+  }
+
+  .ag-ec-s3-learn-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06) !important;
+    border-color: rgba(92, 107, 192, 0.25) !important;
+  }
+
+  .ag-ec-s3-learn-card-emoji {
+    font-size: 28px !important;
+    margin-bottom: 14px !important;
+    display: block !important;
+  }
+
+  .ag-ec-s3-learn-card h3 {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .ag-ec-s3-learn-card p {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.55 !important;
+  }
+
+  @media (max-width: 768px) {
+    .ag-ec-s3-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+    .ag-ec-s3-learn-grid {
+      grid-template-columns: 1fr !important;
+      max-width: 400px !important;
+    }
+    .ag-ec-s3 {
+      padding: 48px 16px !important;
+    }
+    .ag-ec-s3-col {
+      padding: 24px 20px !important;
+    }
+  }
+</style>
+
+<div class="ag-ec-s3">
+
+  <div class="ag-ec-s3-header">
+    <div class="ag-ec-s3-label">¿Te suena esto?</div>
+    <h2 class="ag-ec-s3-title">El inglés no tiene por qué frenarte</h2>
+    <p class="ag-ec-s3-sub">
+      Si estás preparando oposiciones de Educación Física o Tecnología
+      y el inglés es eso que siempre dejas para luego, esta masterclass es para ti.
+    </p>
+  </div>
+
+  <div class="ag-ec-s3-grid">
+
+    <div class="ag-ec-s3-col ag-ec-s3-col-pain">
+      <div class="ag-ec-s3-col-head ag-ec-s3-col-head-red">
+        <span class="ag-ec-s3-col-icon ag-ec-s3-col-icon-red">✕</span>
+        Lo que te frena
+      </div>
+      <ul class="ag-ec-s3-list">
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-red">✕</span>
+          <span class="ag-ec-s3-item-text">Entre temas, supuestos y programación, el inglés nunca encuentra hueco</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-red">✕</span>
+          <span class="ag-ec-s3-item-text">Tu nivel no es suficiente para sumar en el baremo</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-red">✕</span>
+          <span class="ag-ec-s3-item-text">Estudias por tu cuenta pero no avanzas</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-red">✕</span>
+          <span class="ag-ec-s3-item-text">No sabes qué certificado elegir ni cuánto vas a tardar</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-red">✕</span>
+          <span class="ag-ec-s3-item-text">Otros opositores suman méritos y tú sigues en el mismo punto</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ag-ec-s3-col ag-ec-s3-col-sol">
+      <div class="ag-ec-s3-col-head ag-ec-s3-col-head-blue">
+        <span class="ag-ec-s3-col-icon ag-ec-s3-col-icon-blue">✓</span>
+        Lo que vas a descubrir
+      </div>
+      <ul class="ag-ec-s3-list">
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-blue">✓</span>
+          <span class="ag-ec-s3-item-text">Cómo sacarte el certificado con solo 30 minutos al día</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-blue">✓</span>
+          <span class="ag-ec-s3-item-text">Por qué el inglés es la ventaja que más opositores dejan escapar</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-blue">✓</span>
+          <span class="ag-ec-s3-item-text">Conseguir tu nivel en semanas, no en meses ni años</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-blue">✓</span>
+          <span class="ag-ec-s3-item-text">Combinar tu oposición con el inglés sin quemarte</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-blue">✓</span>
+          <span class="ag-ec-s3-item-text">Casos reales de docentes que lo han conseguido</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="ag-ec-s3-learn-header">
+    <h2 class="ag-ec-s3-learn-title">Todo esto en <span>60 minutos</span></h2>
+  </div>
+
+  <div class="ag-ec-s3-learn-grid">
+    <div class="ag-ec-s3-learn-card">
+      <span class="ag-ec-s3-learn-card-emoji">🎯</span>
+      <h3>El mapa del inglés para opositores</h3>
+      <p>Qué certificado te sirve, qué nivel necesitas y cuánto puede sumarte en tu comunidad.</p>
+    </div>
+    <div class="ag-ec-s3-learn-card">
+      <span class="ag-ec-s3-learn-card-emoji">⚡</span>
+      <h3>El método rápido que funciona</h3>
+      <p>Cómo conseguir tu nivel en semanas dedicando solo media hora al día.</p>
+    </div>
+    <div class="ag-ec-s3-learn-card">
+      <span class="ag-ec-s3-learn-card-emoji">🧩</span>
+      <h3>Oposición + inglés: compatible</h3>
+      <p>La fórmula para que el inglés no te quite ni un minuto de temario.</p>
+    </div>
+    <div class="ag-ec-s3-learn-card">
+      <span class="ag-ec-s3-learn-card-emoji">🏆</span>
+      <h3>Tu ventaja competitiva real</h3>
+      <p>En una oposición que se decide por décimas, el inglés puede ser lo que te dé la plaza.</p>
+    </div>
+    <div class="ag-ec-s3-learn-card">
+      <span class="ag-ec-s3-learn-card-emoji">📋</span>
+      <h3>Plan de acción claro</h3>
+      <p>Saldrás con una hoja de ruta: qué hacer, cuándo y cómo organizarte.</p>
+    </div>
+    <div class="ag-ec-s3-learn-card">
+      <span class="ag-ec-s3-learn-card-emoji">🤝</span>
+      <h3>Preguntas en directo</h3>
+      <p>Jesu, Fran y Ginés responden todas tus dudas sobre inglés y oposiciones.</p>
+    </div>
+  </div>
+
+</div>
