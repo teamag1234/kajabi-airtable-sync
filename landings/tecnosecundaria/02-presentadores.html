@@ -7,16 +7,15 @@
 
   .ag-ec-presenters-wrap {
     --ag-gold: #FFBD59;
-    --op-main: #5c6bc0;
-    --op-dark: #3b3f73;
-    --op-soft: #f0f1fa;
-    --tec-main: #575A82;
-    --tec-indigo: #8f9bff;
+    --ag-navy: #0a0e27;
+    --tec-main: #5c6bc0;
+    --tec-dark: #3b3f73;
+    --tec-light: #8f9bff;
+    --tec-soft: #f0f1fa;
     --text-dark: #1a1a2e;
     --text-body: #4a4a5a;
     --text-muted: #8a8a9a;
     --bg-white: #ffffff;
-    --bg-soft: #f8f9fa;
     --border-light: #e8e9ee;
     background: var(--bg-white) !important;
     padding: 64px 24px !important;
@@ -38,8 +37,8 @@
   }
 
   .ag-ec-pres-title .ag-ec-t-blue {
-    color: var(--op-main) !important;
-    background: linear-gradient(90deg, var(--op-main), var(--tec-indigo)) !important;
+    color: var(--tec-main) !important;
+    background: linear-gradient(90deg, var(--tec-main), var(--tec-light)) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
@@ -80,33 +79,35 @@
   }
 
   .ag-ec-pres-accent-gold { background: linear-gradient(90deg, var(--ag-gold), #e6a040) !important; }
-  .ag-ec-pres-accent-duo { background: linear-gradient(90deg, var(--op-main), var(--op-dark)) !important; }
+  .ag-ec-pres-accent-tec { background: linear-gradient(90deg, var(--tec-main), var(--tec-dark)) !important; }
 
-  /* ====== JESU ====== */
-  .ag-ec-pres-photo-wrap {
-    padding: 32px 28px 0 !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .ag-ec-pres-photo {
-    width: 150px !important;
+  /* Panel con logo en lugar de foto */
+  .ag-ec-pres-logo {
+    margin: 32px 28px 0 !important;
     height: 150px !important;
-    border-radius: 50% !important;
-    overflow: hidden !important;
-    border: 4px solid rgba(255, 189, 89, 0.25) !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
-    background: var(--bg-soft) !important;
+    border-radius: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 28px !important;
+    border: 1px solid var(--border-light) !important;
   }
 
-  .ag-ec-pres-photo img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: top center !important;
-    display: block !important;
-    transform: scale(2.3) !important;
-    transform-origin: 50% 22% !important;
+  .ag-ec-pres-logo-gold {
+    background: linear-gradient(135deg, #fff8ec, #ffffff) !important;
+    border-color: rgba(255, 189, 89, 0.3) !important;
+  }
+
+  .ag-ec-pres-logo-tec {
+    background: linear-gradient(135deg, var(--tec-soft), #ffffff) !important;
+    border-color: rgba(92, 107, 192, 0.2) !important;
+  }
+
+  .ag-ec-pres-logo img {
+    max-height: 72px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    object-fit: contain !important;
   }
 
   .ag-ec-pres-info {
@@ -130,14 +131,17 @@
   }
 
   .ag-ec-pres-role-gold { color: #d4940a !important; }
+  .ag-ec-pres-role-tec { color: var(--tec-main) !important; }
 
   .ag-ec-pres-divider {
     width: 40px !important;
     height: 3px !important;
     border-radius: 2px !important;
     margin: 0 auto 16px !important;
-    background: var(--ag-gold) !important;
   }
+
+  .ag-ec-pres-divider-gold { background: var(--ag-gold) !important; }
+  .ag-ec-pres-divider-tec { background: var(--tec-main) !important; }
 
   .ag-ec-pres-bio {
     font-family: 'Poppins', sans-serif !important;
@@ -151,12 +155,6 @@
     font-weight: 600 !important;
   }
 
-  /* ====== DUO: FRAN + GINÉS ====== */
-  .ag-ec-role-op { color: var(--op-main) !important; }
-
-  .ag-ec-div-op { background: var(--op-main) !important; }
-
-
   @media (max-width: 900px) {
     .ag-ec-pres-grid {
       grid-template-columns: 1fr !important;
@@ -166,53 +164,15 @@
     .ag-ec-presenters-wrap {
       padding: 48px 16px !important;
     }
-    .ag-ec-pres-photo {
-      width: 130px !important;
+    .ag-ec-pres-logo {
+      margin: 24px 20px 0 !important;
       height: 130px !important;
+    }
+    .ag-ec-pres-logo img {
+      max-height: 60px !important;
     }
     .ag-ec-pres-info {
       padding: 20px 20px 28px !important;
-    }
-  }
-
-  .ag-ec-team-photo {
-    margin: 32px 28px 0 !important;
-    height: 150px !important;
-    border-radius: 18px !important;
-    overflow: hidden !important;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
-  }
-
-  .ag-ec-team-photo img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center 30% !important;
-    display: block !important;
-  }
-
-  .ag-ec-team-logo {
-    margin: 32px 28px 0 !important;
-    height: 150px !important;
-    border-radius: 18px !important;
-    background: linear-gradient(135deg, var(--op-soft), #ffffff) !important;
-    border: 1px solid var(--border-light) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 28px !important;
-  }
-
-  .ag-ec-team-logo img {
-    max-height: 70px !important;
-    max-width: 100% !important;
-    width: auto !important;
-  }
-
-  @media (max-width: 900px) {
-    .ag-ec-team-photo, .ag-ec-team-logo {
-      margin: 24px 20px 0 !important;
-      height: 140px !important;
     }
   }
 </style>
@@ -222,48 +182,43 @@
   <div class="ag-ec-pres-header">
     <h2 class="ag-ec-pres-title">
       Dos expertos, <span class="ag-ec-t-blue">un objetivo</span>:<br>
-      que consigas <span class="ag-ec-t-gold">tu plaza</span>
+      que el inglés <span class="ag-ec-t-gold">no te frene</span>
     </h2>
   </div>
 
   <div class="ag-ec-pres-grid">
 
-    <!-- JESU -->
     <div class="ag-ec-pres-card">
       <div class="ag-ec-pres-accent ag-ec-pres-accent-gold"></div>
-      <div class="ag-ec-pres-photo-wrap">
-        <div class="ag-ec-pres-photo">
-          <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/23a0e84-bdd6-3540-a5d2-8c51e0282407_4.png" alt="Jesu - Fundador de AG Academy">
-        </div>
+      <div class="ag-ec-pres-logo ag-ec-pres-logo-gold">
+        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/7b72d3d-c25-14e8-202e-1368ac826_image-19.png" alt="AG Academy">
       </div>
       <div class="ag-ec-pres-info">
         <h3 class="ag-ec-pres-name">Jesu</h3>
         <p class="ag-ec-pres-role ag-ec-pres-role-gold">Fundador de AG Academy</p>
-        <div class="ag-ec-pres-divider"></div>
+        <div class="ag-ec-pres-divider ag-ec-pres-divider-gold"></div>
         <p class="ag-ec-pres-bio">
           Creador del <strong>método más rápido para sacarte el certificado de inglés</strong>
-          dedicándole el menor tiempo posible. Ha ayudado a miles de docentes
+          dedicándole el menor tiempo posible. Ha ayudado a miles de profes y estudiantes
           a quitarse el inglés de encima sin métodos eternos ni aburridos.
-          En esta masterclass te enseña cómo hacerlo compatible con tu oposición.
+          En esta masterclass te enseña cómo hacerlo compatible con tu día a día.
         </p>
       </div>
     </div>
 
-    <!-- GINÉS / TECNOSECUNDARIA -->
     <div class="ag-ec-pres-card">
-      <div class="ag-ec-pres-accent ag-ec-pres-accent-duo"></div>
-      <div class="ag-ec-team-logo">
+      <div class="ag-ec-pres-accent ag-ec-pres-accent-tec"></div>
+      <div class="ag-ec-pres-logo ag-ec-pres-logo-tec">
         <img src="https://www.tecnosecundaria.es/images/plantilla/logo_tecnosecundaria_p.png" alt="Tecnosecundaria">
       </div>
       <div class="ag-ec-pres-info">
         <h3 class="ag-ec-pres-name">Ginés P.</h3>
-        <p class="ag-ec-pres-role ag-ec-role-op">Creador de Tecnosecundaria</p>
-        <div class="ag-ec-pres-divider ag-ec-div-op"></div>
+        <p class="ag-ec-pres-role ag-ec-pres-role-tec">Creador de Tecnosecundaria</p>
+        <div class="ag-ec-pres-divider ag-ec-pres-divider-tec"></div>
         <p class="ag-ec-pres-bio">
           Profesor de Tecnología e Informática y <strong>funcionario de carrera desde 2006</strong>.
-          Pasó por la oposición, así que sabe lo que vale cada punto del baremo.
-          Su web ha sido premiada dos veces entre las mejores de la Región de Murcia
-          y es un recurso de referencia para profes y alumnos de Tecnología.
+          Su web, premiada dos veces entre las mejores de la Región de Murcia,
+          es un recurso de referencia para profes y alumnos de Tecnología de ESO y Bachillerato.
         </p>
       </div>
     </div>
