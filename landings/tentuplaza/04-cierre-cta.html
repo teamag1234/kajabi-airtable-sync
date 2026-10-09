@@ -1,0 +1,161 @@
+<style>
+  .ag-ec-s4 *, .ag-ec-s4 *::before, .ag-ec-s4 *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-s4 {
+    --ag-gold: #FFBD59;
+    --ttp-green: #0BF879;
+    --ttp-green-dark: #08AE55;
+    --ttp-forest: #01302C;
+    --ttp-black: #232323;
+    --ttp-beige: #F4F1EF;
+    --text-body: #4a4a4a;
+    --text-muted: #7a7a7a;
+    background: var(--ttp-beige) !important;
+    padding: 72px 24px 32px !important;
+    font-family: 'Inter', sans-serif !important;
+    text-align: center !important;
+  }
+
+  .ag-ec-s4-line {
+    width: 64px !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, var(--ttp-green), var(--ag-gold)) !important;
+    margin: 0 auto 32px !important;
+  }
+
+  .ag-ec-s4-title {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: clamp(36px, 5.5vw, 62px) !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.5px !important;
+    max-width: 760px !important;
+    margin: 0 auto 22px !important;
+  }
+
+  .ag-ec-s4-title em {
+    font-style: italic !important;
+  }
+
+  .ag-ec-s4-title .ag-ec-hand {
+    font-family: 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    color: var(--ttp-green-dark) !important;
+    font-size: 1.1em !important;
+    margin: 0 0.12em !important;
+  }
+
+  .ag-ec-s4-sub {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
+    color: var(--text-body) !important;
+    line-height: 1.6 !important;
+    max-width: 540px !important;
+    margin: 0 auto 36px !important;
+  }
+
+  .ag-ec-s4-points {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    margin-bottom: 36px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .ag-ec-s4-point {
+    background: var(--ttp-black) !important;
+    padding: 1.5px !important;
+    clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px) !important;
+  }
+
+  .ag-ec-s4-point-in {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: #ffffff !important;
+    padding: 12px 20px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--ttp-black) !important;
+    clip-path: polygon(9.4px 0, calc(100% - 9.4px) 0, 100% 9.4px, 100% calc(100% - 9.4px), calc(100% - 9.4px) 100%, 9.4px 100%, 0 calc(100% - 9.4px), 0 9.4px) !important;
+  }
+
+  .ag-ec-s4-point-dot {
+    width: 10px !important;
+    height: 10px !important;
+    background: var(--ttp-green) !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-s4-point-hl .ag-ec-s4-point-in {
+    background: var(--ttp-green) !important;
+    color: var(--ttp-forest) !important;
+  }
+
+  .ag-ec-s4-point-hl .ag-ec-s4-point-dot {
+    background: var(--ttp-forest) !important;
+  }
+
+  .ag-ec-s4-date {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 8px !important;
+  }
+
+  .ag-ec-s4-date strong {
+    color: var(--ttp-black) !important;
+    font-weight: 700 !important;
+  }
+
+  .ag-ec-s4-spots {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    color: var(--ttp-black) !important;
+    font-weight: 600 !important;
+  }
+
+  @media (max-width: 640px) {
+    .ag-ec-s4 {
+      padding: 56px 16px 24px !important;
+    }
+    .ag-ec-s4-points {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+  }
+</style>
+
+<div class="ag-ec-s4">
+
+  <div class="ag-ec-s4-line"></div>
+
+  <h2 class="ag-ec-s4-title">
+    El inglés puede ser lo que te <span class="ag-ec-hand">acerque</span> a tu plaza.<br>
+    <em>O lo que te aleje de ella.</em>
+  </h2>
+
+  <p class="ag-ec-s4-sub">
+    Tú decides. Nosotros te enseñamos cómo resolverlo rápido,
+    sin dejar de trabajar y sin descuidar el temario.
+  </p>
+
+  <div class="ag-ec-s4-points">
+    <div class="ag-ec-s4-point"><div class="ag-ec-s4-point-in"><span class="ag-ec-s4-point-dot"></span>100% gratuita</div></div>
+    <div class="ag-ec-s4-point"><div class="ag-ec-s4-point-in"><span class="ag-ec-s4-point-dot"></span>Online por Zoom</div></div>
+    <div class="ag-ec-s4-point ag-ec-s4-point-hl"><div class="ag-ec-s4-point-in"><span class="ag-ec-s4-point-dot"></span>Lunes 19 de octubre · 18:00h</div></div>
+  </div>
+
+  <p class="ag-ec-s4-date">Reserva ahora tu sitio — <strong>es gratis y sin compromiso</strong></p>
+  <p class="ag-ec-s4-spots">🌵 Plazas limitadas · Exclusiva para la comunidad TenTuPlaza</p>
+
+</div>
