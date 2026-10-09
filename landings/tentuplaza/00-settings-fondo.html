@@ -1,0 +1,64 @@
+<style>
+  /* ====== FONDO GLOBAL — TenTuPlaza × AG Academy ====== */
+
+  html {
+    background: #F4F1EF !important;
+  }
+
+  html body {
+    background: transparent !important;
+  }
+
+  /* Capa fija: beige TenTuPlaza con halos verde neón y dorado AG */
+  html body::before {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    background:
+      radial-gradient(ellipse 55% 45% at 100% 0%, rgba(11, 248, 121, 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 0% 15%, rgba(1, 48, 44, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 45% at 50% 105%, rgba(255, 189, 89, 0.16) 0%, transparent 70%),
+      linear-gradient(180deg, #F6F4F1 0%, #F4F1EF 55%, #F7F2EA 100%) !important;
+  }
+
+  /* Malla de puntos muy sutil, se desvanece hacia abajo */
+  html body::after {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    background-image: radial-gradient(rgba(35, 35, 35, 0.08) 1px, transparent 1px) !important;
+    background-size: 22px 22px !important;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 80%) !important;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 80%) !important;
+  }
+
+  /* Secciones de Kajabi transparentes */
+  html body .section,
+  html body .section .sizer,
+  html body .section .container,
+  html body .background-image,
+  html body .section__overlay,
+  html body .header,
+  html body .footer {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  /* Nuestros bloques transparentes para que se vea el fondo */
+  html body .ag-ec-hero-wrap,
+  html body .ag-ec-presenters-wrap,
+  html body .ag-ec-s3,
+  html body .ag-ec-s4,
+  html body .ag-ec-ty {
+    background: transparent !important;
+  }
+
+  html body .ag-ec-hero-wrap::before,
+  html body .ag-ec-hero-wrap::after {
+    display: none !important;
+  }
+</style>
