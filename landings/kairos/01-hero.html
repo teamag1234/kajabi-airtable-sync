@@ -10,17 +10,18 @@
     --ag-gold-dark: #D98A1C;
     --kai-navy: #0B1B33;
     --kai-blue: #2F6BFF;
-    --text-soft: #4B5568;
+    --text-soft: rgba(255, 255, 255, 0.74);
     background:
-      radial-gradient(ellipse 55% 50% at 10% 0%, rgba(47, 107, 255, 0.14) 0%, transparent 65%),
-      radial-gradient(ellipse 50% 45% at 95% 10%, rgba(255, 189, 89, 0.22) 0%, transparent 65%),
-      #ffffff !important;
+      radial-gradient(ellipse 60% 55% at 15% 10%, rgba(47, 107, 255, 0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 50% at 90% 20%, rgba(212, 169, 106, 0.30) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 60% at 50% 110%, rgba(47, 107, 255, 0.25) 0%, transparent 60%),
+      var(--kai-navy) !important;
     padding: 56px 24px 24px !important;
     font-family: 'Inter', sans-serif !important;
     text-align: center !important;
     position: relative !important;
     overflow: hidden !important;
-    color: var(--kai-navy) !important;
+    color: #ffffff !important;
   }
 
   /* Rejilla sutil */
@@ -29,8 +30,8 @@
     position: absolute !important;
     inset: 0 !important;
     background-image:
-      linear-gradient(rgba(11, 27, 51, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(11, 27, 51, 0.05) 1px, transparent 1px) !important;
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) !important;
     background-size: 56px 56px !important;
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 0%, transparent 75%) !important;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 0%, transparent 75%) !important;
@@ -64,18 +65,21 @@
     width: auto !important;
     max-width: none !important;
     flex-shrink: 0 !important;
-    mix-blend-mode: multiply !important;
+    /* JPG con fondo blanco: se invierte y el negro se funde con el fondo, queda el logo en blanco */
+    filter: grayscale(1) invert(1) contrast(1.6) !important;
+    mix-blend-mode: screen !important;
   }
 
   .ag-ec-logo-ag {
     height: 42px !important;
     width: auto !important;
+    filter: brightness(0) invert(1) !important;
   }
 
   .ag-ec-logo-sep {
     width: 1px !important;
     height: 34px !important;
-    background: rgba(11, 27, 51, 0.18) !important;
+    background: rgba(255, 255, 255, 0.28) !important;
   }
 
   .ag-ec-hero-chips {
@@ -93,17 +97,17 @@
     font-family: 'Inter', sans-serif !important;
     font-size: 13px !important;
     font-weight: 600 !important;
-    color: var(--kai-navy) !important;
-    background: rgba(11, 27, 51, 0.04) !important;
-    border: 1px solid rgba(11, 27, 51, 0.12) !important;
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     border-radius: 999px !important;
     padding: 8px 16px !important;
   }
 
   .ag-ec-chip-gold {
-    color: #A8650A !important;
-    background: rgba(255, 189, 89, 0.16) !important;
-    border-color: rgba(217, 138, 28, 0.40) !important;
+    color: var(--ag-gold) !important;
+    background: rgba(255, 189, 89, 0.10) !important;
+    border-color: rgba(255, 189, 89, 0.45) !important;
   }
 
   .ag-ec-chip-dot {
@@ -126,12 +130,12 @@
     font-weight: 800 !important;
     line-height: 1.04 !important;
     letter-spacing: -2.2px !important;
-    color: var(--kai-navy) !important;
+    color: #ffffff !important;
     margin: 0 auto 24px !important;
   }
 
   .ag-ec-hero-h1 .ag-ec-grad {
-    background: linear-gradient(90deg, var(--kai-blue) 0%, #7B5CFF 45%, var(--ag-gold-dark) 100%) !important;
+    background: linear-gradient(90deg, #8FB0FF 0%, var(--ag-gold) 60%, #F2A93B 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
@@ -147,17 +151,18 @@
   }
 
   .ag-ec-hero-sub strong {
-    color: var(--kai-navy) !important;
+    color: #ffffff !important;
     font-weight: 600 !important;
   }
 
   .ag-ec-hero-meta {
     display: inline-grid !important;
     grid-template-columns: auto auto auto !important;
-    background: #ffffff !important;
-    border: 1px solid rgba(11, 27, 51, 0.10) !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 20px !important;
-    box-shadow: 0 18px 50px rgba(11, 27, 51, 0.10) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     overflow: hidden !important;
     margin-bottom: 18px !important;
   }
@@ -165,7 +170,7 @@
   .ag-ec-meta-cell {
     padding: 16px 26px !important;
     text-align: left !important;
-    border-right: 1px solid rgba(11, 27, 51, 0.08) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
   }
 
   .ag-ec-meta-cell:last-child {
@@ -178,7 +183,7 @@
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    color: #8A93A6 !important;
+    color: rgba(255, 255, 255, 0.5) !important;
     margin-bottom: 4px !important;
   }
 
@@ -186,23 +191,23 @@
     font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: 18px !important;
     font-weight: 700 !important;
-    color: var(--kai-navy) !important;
+    color: #ffffff !important;
     white-space: nowrap !important;
   }
 
   .ag-ec-meta-value-accent {
-    color: var(--kai-blue) !important;
+    color: var(--ag-gold) !important;
   }
 
   .ag-ec-spots-note {
     font-family: 'Inter', sans-serif !important;
     font-size: 13px !important;
-    color: #6B7385 !important;
+    color: rgba(255, 255, 255, 0.6) !important;
     margin-top: 4px !important;
   }
 
   .ag-ec-spots-note strong {
-    color: var(--kai-navy) !important;
+    color: #ffffff !important;
     font-weight: 600 !important;
   }
 
@@ -242,7 +247,7 @@
     }
     .ag-ec-meta-cell:last-child {
       grid-column: 1 / -1 !important;
-      border-top: 1px solid rgba(11, 27, 51, 0.08) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
     }
     .ag-ec-meta-value {
       font-size: 16px !important;
