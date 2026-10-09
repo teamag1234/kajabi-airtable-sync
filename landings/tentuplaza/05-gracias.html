@@ -1,0 +1,375 @@
+<style>
+  .ag-ec-ty *, .ag-ec-ty *::before, .ag-ec-ty *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-ty {
+    --ag-gold: #FFBD59;
+    --ttp-green: #0BF879;
+    --ttp-green-dark: #08AE55;
+    --ttp-forest: #01302C;
+    --ttp-black: #232323;
+    --ttp-beige: #F4F1EF;
+    --text-body: #4a4a4a;
+    --text-muted: #7a7a7a;
+    --wa-green: #25D366;
+    background: transparent !important;
+    padding: 60px 24px !important;
+    font-family: 'Inter', sans-serif !important;
+    text-align: center !important;
+  }
+
+  .ag-ec-ty-content {
+    max-width: 640px !important;
+    margin: 0 auto !important;
+  }
+
+  .ag-ec-ty-logos {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+    margin-bottom: 36px !important;
+  }
+
+  .ag-ec-ty-logos img {
+    height: 44px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
+  .ag-ec-ty-logos-x {
+    font-weight: 300 !important;
+    font-size: 22px !important;
+    color: var(--text-muted) !important;
+  }
+
+  .ag-ec-ty-check {
+    width: 76px !important;
+    height: 76px !important;
+    background: var(--ttp-green) !important;
+    color: var(--ttp-forest) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto 24px !important;
+    font-size: 38px !important;
+    font-weight: 900 !important;
+    clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px) !important;
+  }
+
+  .ag-ec-ty-title {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: clamp(40px, 6vw, 64px) !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-ty-title .ag-ec-hand {
+    font-family: 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    color: var(--ttp-green-dark) !important;
+    font-size: 1.1em !important;
+    margin: 0 0.08em !important;
+  }
+
+  .ag-ec-ty-sub {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
+    color: var(--text-body) !important;
+    line-height: 1.6 !important;
+    margin-bottom: 32px !important;
+  }
+
+  .ag-ec-ty-date {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    background: var(--ttp-black) !important;
+    color: #ffffff !important;
+    padding: 16px 30px 16px 16px !important;
+    margin-bottom: 40px !important;
+    clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px) !important;
+  }
+
+  .ag-ec-ty-cal {
+    width: 54px !important;
+    height: 54px !important;
+    background: var(--ttp-green) !important;
+    color: var(--ttp-forest) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px) !important;
+  }
+
+  .ag-ec-ty-cal-m {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1 !important;
+  }
+
+  .ag-ec-ty-cal-d {
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    line-height: 1.05 !important;
+  }
+
+  .ag-ec-ty-date-text {
+    text-align: left !important;
+  }
+
+  .ag-ec-ty-date-main {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-ty-date-detail {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+
+  .ag-ec-ty-divider {
+    width: 64px !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, var(--ttp-green), var(--ag-gold)) !important;
+    margin: 0 auto 36px !important;
+  }
+
+  .ag-ec-ty-wa-title {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: 36px !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .ag-ec-ty-wa-sub {
+    font-size: 15px !important;
+    color: var(--text-body) !important;
+    line-height: 1.6 !important;
+    max-width: 480px !important;
+    margin: 0 auto 18px !important;
+  }
+
+  .ag-ec-ty-wa-name {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--text-muted) !important;
+    margin-bottom: 20px !important;
+  }
+
+  .ag-ec-ty-wa-name strong {
+    color: var(--ttp-black) !important;
+    font-weight: 700 !important;
+  }
+
+  .ag-ec-ty-wa-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background: var(--wa-green) !important;
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 16px !important;
+    padding: 18px 40px !important;
+    border-radius: 60px !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35) !important;
+    transition: all 0.35s ease !important;
+  }
+
+  .ag-ec-ty-wa-btn:hover {
+    transform: translateY(-3px) scale(1.03) !important;
+    background: #20c05c !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+
+  .ag-ec-ty-wa-btn svg {
+    width: 22px !important;
+    height: 22px !important;
+    fill: #ffffff !important;
+  }
+
+  .ag-ec-ty-steps {
+    margin: 40px auto 0 !important;
+    max-width: 480px !important;
+    background: var(--ttp-black) !important;
+    padding: 1.5px !important;
+    clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px) !important;
+  }
+
+  .ag-ec-ty-steps-in {
+    background: #ffffff !important;
+    padding: 24px 26px 10px !important;
+    text-align: left !important;
+    clip-path: polygon(17.4px 0, calc(100% - 17.4px) 0, 100% 17.4px, 100% calc(100% - 17.4px), calc(100% - 17.4px) 100%, 17.4px 100%, 0 calc(100% - 17.4px), 0 17.4px) !important;
+  }
+
+  .ag-ec-ty-steps-title {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: var(--ttp-black) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 8px !important;
+    text-align: center !important;
+  }
+
+  .ag-ec-ty-step {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 14px 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07) !important;
+  }
+
+  .ag-ec-ty-step:last-child {
+    border-bottom: none !important;
+  }
+
+  .ag-ec-ty-step-num {
+    width: 32px !important;
+    height: 32px !important;
+    background: var(--ttp-green) !important;
+    color: var(--ttp-forest) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    flex-shrink: 0 !important;
+    clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px) !important;
+  }
+
+  .ag-ec-ty-step-text {
+    font-size: 14.5px !important;
+    color: var(--text-body) !important;
+    line-height: 1.5 !important;
+  }
+
+  .ag-ec-ty-step-text strong {
+    color: var(--ttp-black) !important;
+    font-weight: 700 !important;
+  }
+
+  .ag-ec-ty-footer {
+    margin-top: 40px !important;
+    padding-top: 22px !important;
+    border-top: 1px solid rgba(35, 35, 35, 0.12) !important;
+  }
+
+  .ag-ec-ty-footer p {
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.5 !important;
+  }
+
+  .ag-ec-ty-footer p + p {
+    margin-top: 6px !important;
+  }
+
+  @media (max-width: 640px) {
+    .ag-ec-ty {
+      padding: 40px 16px !important;
+    }
+    .ag-ec-ty-logos img {
+      height: 34px !important;
+      max-width: 40vw !important;
+    }
+    .ag-ec-ty-wa-btn {
+      font-size: 14px !important;
+      padding: 16px 30px !important;
+    }
+    .ag-ec-ty-date {
+      padding: 14px 22px 14px 14px !important;
+    }
+    .ag-ec-ty-steps-in {
+      padding: 20px 18px 6px !important;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+<div class="ag-ec-ty">
+  <div class="ag-ec-ty-content">
+
+    <div class="ag-ec-ty-logos">
+      <img src="https://tentuplaza.es/wp-content/uploads/2026/08/tentuplaza_logotipo_doslineas_negroalta-calidad-scaled-1-1024x368.png" alt="TenTuPlaza">
+      <span class="ag-ec-ty-logos-x">×</span>
+      <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/7b72d3d-c25-14e8-202e-1368ac826_image-19.png" alt="AG Academy">
+    </div>
+
+    <div class="ag-ec-ty-check">✓</div>
+
+    <h1 class="ag-ec-ty-title">
+      ¡Tu sitio está <span class="ag-ec-hand">reservado</span>!
+    </h1>
+
+    <p class="ag-ec-ty-sub">
+      Te queda un último paso para no perderte nada antes de la masterclass.
+    </p>
+
+    <div class="ag-ec-ty-date">
+      <div class="ag-ec-ty-cal">
+        <span class="ag-ec-ty-cal-m">OCT</span>
+        <span class="ag-ec-ty-cal-d">19</span>
+      </div>
+      <div class="ag-ec-ty-date-text">
+        <div class="ag-ec-ty-date-main">Lunes 19 de octubre · 18:00h</div>
+        <div class="ag-ec-ty-date-detail">Hora peninsular · En directo por Zoom</div>
+      </div>
+    </div>
+
+    <div class="ag-ec-ty-divider"></div>
+
+    <h2 class="ag-ec-ty-wa-title">Entra en el grupo de WhatsApp</h2>
+    <p class="ag-ec-ty-wa-sub">
+      Ahí te mandamos el enlace de Zoom, los recordatorios
+      y resolvemos tus dudas antes de la masterclass.
+    </p>
+    <p class="ag-ec-ty-wa-name">Grupo: <strong>🌵 Inglés para Renfe · TenTuPlaza × AG</strong></p>
+
+    <a href="https://chat.whatsapp.com/G3g87bP9cg10WcLdEHkjeB" class="ag-ec-ty-wa-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Unirme al grupo
+    </a>
+
+    <div class="ag-ec-ty-steps"><div class="ag-ec-ty-steps-in">
+      <p class="ag-ec-ty-steps-title">Próximos pasos</p>
+      <div class="ag-ec-ty-step">
+        <span class="ag-ec-ty-step-num">1</span>
+        <span class="ag-ec-ty-step-text"><strong>Entra en el grupo de WhatsApp</strong>: es donde te llega toda la info</span>
+      </div>
+      <div class="ag-ec-ty-step">
+        <span class="ag-ec-ty-step-num">2</span>
+        <span class="ag-ec-ty-step-text"><strong>Apúntalo en tu agenda:</strong> lunes 19 de octubre a las 18:00h</span>
+      </div>
+      <div class="ag-ec-ty-step">
+        <span class="ag-ec-ty-step-num">3</span>
+        <span class="ag-ec-ty-step-text"><strong>Te mandamos el enlace de Zoom</strong> por el grupo antes de empezar</span>
+      </div>
+    </div></div>
+
+    <div class="ag-ec-ty-footer">
+      <p>¿Alguna duda? Escríbenos en el grupo de WhatsApp 🌵</p>
+      <p>TenTuPlaza × AG Academy · Masterclass 19 de octubre de 2026</p>
+    </div>
+
+  </div>
+</div>
