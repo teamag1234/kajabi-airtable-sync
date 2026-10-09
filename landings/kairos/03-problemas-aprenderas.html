@@ -1,0 +1,241 @@
+<style>
+  .ag-ec-s3 *, .ag-ec-s3 *::before, .ag-ec-s3 *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-s3 {
+    --ag-gold: #FFBD59;
+    --kai-navy: #0B1B33;
+    --kai-sky: #8FB0FF;
+    --text-soft: rgba(255, 255, 255, 0.72);
+    background: var(--kai-navy) !important;
+    padding: 72px 24px 80px !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-s3-inner {
+    max-width: 1000px !important;
+    margin: 0 auto !important;
+  }
+
+  .ag-ec-s3-head {
+    text-align: center !important;
+    margin-bottom: 40px !important;
+  }
+
+  .ag-ec-s3-kicker {
+    display: inline-block !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--ag-gold) !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-s3-title {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: clamp(30px, 4.6vw, 50px) !important;
+    font-weight: 800 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -1.5px !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-s3-title .ag-ec-grad {
+    background: linear-gradient(90deg, var(--kai-sky) 0%, var(--ag-gold) 80%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  /* ---- Problemas ---- */
+  .ag-ec-pain-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 18px !important;
+    margin-bottom: 88px !important;
+  }
+
+  .ag-ec-pain {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
+    border-radius: 20px !important;
+    padding: 26px 24px !important;
+    position: relative !important;
+  }
+
+  .ag-ec-pain-x {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 99, 99, 0.12) !important;
+    border: 1px solid rgba(255, 99, 99, 0.35) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-pain-x svg {
+    width: 14px !important;
+    height: 14px !important;
+    display: block !important;
+  }
+
+  .ag-ec-pain p {
+    font-size: 15.5px !important;
+    line-height: 1.6 !important;
+    color: var(--text-soft) !important;
+  }
+
+  .ag-ec-pain strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  /* ---- Lo que aprenderás ---- */
+  .ag-ec-learn-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 18px !important;
+  }
+
+  .ag-ec-learn {
+    display: flex !important;
+    gap: 18px !important;
+    align-items: flex-start !important;
+    background: linear-gradient(160deg, rgba(47, 107, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 70%) !important;
+    border: 1px solid rgba(143, 176, 255, 0.20) !important;
+    border-radius: 20px !important;
+    padding: 26px 24px !important;
+    transition: transform 0.3s ease, border-color 0.3s ease !important;
+  }
+
+  .ag-ec-learn:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 189, 89, 0.45) !important;
+  }
+
+  .ag-ec-learn-num {
+    flex-shrink: 0 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    color: var(--kai-navy) !important;
+    background: var(--ag-gold) !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-learn h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.3px !important;
+    color: #ffffff !important;
+    margin-bottom: 6px !important;
+  }
+
+  .ag-ec-learn p {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: var(--text-soft) !important;
+  }
+
+  @media (max-width: 860px) {
+    .ag-ec-s3 {
+      padding: 52px 16px 60px !important;
+    }
+    .ag-ec-s3-head {
+      margin-bottom: 28px !important;
+    }
+    .ag-ec-pain-grid {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+      margin-bottom: 64px !important;
+    }
+    .ag-ec-learn-grid {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+    .ag-ec-pain, .ag-ec-learn {
+      padding: 22px 20px !important;
+    }
+    .ag-ec-learn h3 {
+      font-size: 17px !important;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ag-ec-s3">
+  <div class="ag-ec-s3-inner">
+
+    <div class="ag-ec-s3-head">
+      <span class="ag-ec-s3-kicker">Si estás opositando</span>
+      <h2 class="ag-ec-s3-title">¿Te suena <span class="ag-ec-grad">alguna de estas?</span></h2>
+    </div>
+
+    <div class="ag-ec-pain-grid">
+      <div class="ag-ec-pain">
+        <div class="ag-ec-pain-x"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="#FF7A7A" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>Entre temas, supuestos y programación, <strong>el inglés siempre se queda para "luego"</strong>.</p>
+      </div>
+      <div class="ag-ec-pain">
+        <div class="ag-ec-pain-x"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="#FF7A7A" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>Sabes que el certificado suma en el baremo, pero <strong>no tienes claro qué examen ni qué nivel te conviene</strong>.</p>
+      </div>
+      <div class="ag-ec-pain">
+        <div class="ag-ec-pain-x"><svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="#FF7A7A" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+        <p>Miraste academias de inglés y todas te pedían <strong>meses que ahora mismo no tienes</strong>.</p>
+      </div>
+    </div>
+
+    <div class="ag-ec-s3-head">
+      <span class="ag-ec-s3-kicker">Jueves 22 · 17:00h</span>
+      <h2 class="ag-ec-s3-title">Lo que vas a <span class="ag-ec-grad">llevarte</span></h2>
+    </div>
+
+    <div class="ag-ec-learn-grid">
+      <div class="ag-ec-learn">
+        <span class="ag-ec-learn-num">01</span>
+        <div>
+          <h3>Qué certificado te conviene</h3>
+          <p>Qué nivel necesitas y cómo encaja en el baremo de tu oposición.</p>
+        </div>
+      </div>
+      <div class="ag-ec-learn">
+        <span class="ag-ec-learn-num">02</span>
+        <div>
+          <h3>Por qué el APTIS es la vía más rápida</h3>
+          <p>Un examen oficial, con resultados en días y fechas casi todas las semanas.</p>
+        </div>
+      </div>
+      <div class="ag-ec-learn">
+        <span class="ag-ec-learn-num">03</span>
+        <div>
+          <h3>El método para sacarlo en semanas</h3>
+          <p>Cómo preparamos a nuestros alumnos para ir directos al examen, sin rodeos.</p>
+        </div>
+      </div>
+      <div class="ag-ec-learn">
+        <span class="ag-ec-learn-num">04</span>
+        <div>
+          <h3>Cómo encajarlo en tu oposición</h3>
+          <p>Un plan realista para que el inglés no le robe horas al temario.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
