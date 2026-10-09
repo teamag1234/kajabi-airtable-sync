@@ -1,0 +1,249 @@
+<style>
+  .ag-ec-presenters-wrap *, .ag-ec-presenters-wrap *::before, .ag-ec-presenters-wrap *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-presenters-wrap {
+    --ag-gold: #FFBD59;
+    --ttp-green: #0BF879;
+    --ttp-green-dark: #08AE55;
+    --ttp-forest: #01302C;
+    --ttp-black: #232323;
+    --ttp-beige: #F4F1EF;
+    --text-body: #4a4a4a;
+    background: var(--ttp-beige) !important;
+    padding: 64px 24px !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  .ag-ec-pres-header {
+    text-align: center !important;
+    margin-bottom: 48px !important;
+  }
+
+  .ag-ec-pres-title {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: clamp(34px, 5vw, 56px) !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  .ag-ec-pres-title em {
+    font-style: italic !important;
+  }
+
+  .ag-ec-pres-title .ag-ec-hand {
+    font-family: 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    color: var(--ttp-green-dark) !important;
+    font-size: 1.1em !important;
+  }
+
+  .ag-ec-pres-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+    max-width: 940px !important;
+    margin: 0 auto !important;
+    align-items: stretch !important;
+  }
+
+  /* Tarjeta con esquinas cortadas y borde negro (estilo TenTuPlaza) */
+  .ag-ec-pres-card {
+    background: var(--ttp-black) !important;
+    padding: 1.5px !important;
+    clip-path: polygon(22px 0, calc(100% - 22px) 0, 100% 22px, 100% calc(100% - 22px), calc(100% - 22px) 100%, 22px 100%, 0 calc(100% - 22px), 0 22px) !important;
+    transition: transform 0.35s ease !important;
+    display: flex !important;
+  }
+
+  .ag-ec-pres-card:hover {
+    transform: translateY(-6px) !important;
+  }
+
+  .ag-ec-pres-card-in {
+    background: #ffffff !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    clip-path: polygon(21.4px 0, calc(100% - 21.4px) 0, 100% 21.4px, 100% calc(100% - 21.4px), calc(100% - 21.4px) 100%, 21.4px 100%, 0 calc(100% - 21.4px), 0 21.4px) !important;
+  }
+
+  .ag-ec-pres-media {
+    margin: 28px 28px 0 !important;
+    height: 170px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .ag-ec-pres-photo {
+    width: 160px !important;
+    height: 160px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 4px solid var(--ag-gold) !important;
+    background: var(--ttp-beige) !important;
+  }
+
+  .ag-ec-pres-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    display: block !important;
+    transform: scale(2.3) !important;
+    transform-origin: 50% 22% !important;
+  }
+
+  .ag-ec-team-strip {
+    width: 100% !important;
+    height: 170px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+    clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px) !important;
+  }
+
+  .ag-ec-team-strip img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .ag-ec-team-strip img:first-child { object-position: 42% 30% !important; }
+  .ag-ec-team-strip img:last-child { object-position: 50% 25% !important; }
+
+  .ag-ec-pres-info {
+    padding: 24px 28px 32px !important;
+    text-align: center !important;
+  }
+
+  .ag-ec-pres-tag {
+    display: inline-block !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    padding: 5px 12px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .ag-ec-pres-tag-gold { background: var(--ag-gold) !important; color: var(--ttp-black) !important; }
+  .ag-ec-pres-tag-green { background: var(--ttp-green) !important; color: var(--ttp-forest) !important; }
+
+  .ag-ec-pres-name {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: 34px !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .ag-ec-pres-role {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--ttp-black) !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-pres-bio {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+    color: var(--text-body) !important;
+  }
+
+  .ag-ec-pres-bio strong {
+    color: var(--ttp-black) !important;
+    font-weight: 700 !important;
+  }
+
+  @media (max-width: 860px) {
+    .ag-ec-pres-grid {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+      max-width: 480px !important;
+    }
+    .ag-ec-presenters-wrap {
+      padding: 48px 16px !important;
+    }
+    .ag-ec-pres-media {
+      margin: 22px 20px 0 !important;
+      height: 150px !important;
+    }
+    .ag-ec-pres-photo {
+      width: 140px !important;
+      height: 140px !important;
+    }
+    .ag-ec-team-strip {
+      height: 150px !important;
+    }
+    .ag-ec-pres-info {
+      padding: 20px 22px 28px !important;
+    }
+  }
+</style>
+
+<div class="ag-ec-presenters-wrap">
+
+  <div class="ag-ec-pres-header">
+    <h2 class="ag-ec-pres-title">
+      Dos equipos, <em>un objetivo</em>:<br>
+      tu plaza en <span class="ag-ec-hand">Renfe</span>
+    </h2>
+  </div>
+
+  <div class="ag-ec-pres-grid">
+
+    <div class="ag-ec-pres-card"><div class="ag-ec-pres-card-in">
+      <div class="ag-ec-pres-media">
+        <div class="ag-ec-pres-photo">
+          <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/23a0e84-bdd6-3540-a5d2-8c51e0282407_4.png" alt="Jesu - Fundador de AG Academy">
+        </div>
+      </div>
+      <div class="ag-ec-pres-info">
+        <span class="ag-ec-pres-tag ag-ec-pres-tag-gold">AG Academy</span>
+        <h3 class="ag-ec-pres-name">Jesu</h3>
+        <p class="ag-ec-pres-role">Fundador de AG Academy</p>
+        <p class="ag-ec-pres-bio">
+          Creador del <strong>método más rápido para quitarte el inglés de encima</strong>
+          dedicándole el menor tiempo posible. Ha ayudado a miles de opositores y profesionales
+          que no tenían tiempo para el inglés. En esta masterclass te enseña cómo hacerlo
+          compatible con tu trabajo y tu oposición.
+        </p>
+      </div>
+    </div></div>
+
+    <div class="ag-ec-pres-card"><div class="ag-ec-pres-card-in">
+      <div class="ag-ec-pres-media">
+        <div class="ag-ec-team-strip">
+          <img src="https://tentuplaza.es/wp-content/uploads/2026/08/tentuplaza-foto-web-44-scaled-1.webp" alt="Equipo TenTuPlaza con alumnos">
+          <img src="https://tentuplaza.es/wp-content/uploads/2026/08/tentuplaza-foto-web-52-scaled-1.webp" alt="Equipo TenTuPlaza en clase">
+        </div>
+      </div>
+      <div class="ag-ec-pres-info">
+        <span class="ag-ec-pres-tag ag-ec-pres-tag-green">TenTuPlaza</span>
+        <h3 class="ag-ec-pres-name">Equipo TenTuPlaza</h3>
+        <p class="ag-ec-pres-role">Ex opositores, nº1 de promoción en ADIF</p>
+        <p class="ag-ec-pres-bio">
+          No nacieron academia, nacieron opositores. En menos de 5 años se han convertido
+          en <strong>la academia nº1 de España en plazas de ADIF y RENFE</strong>.
+          Saben lo que pesa cada pregunta del examen, y por eso quieren que el inglés
+          deje de ser lo que te frena.
+        </p>
+      </div>
+    </div></div>
+
+  </div>
+
+</div>
