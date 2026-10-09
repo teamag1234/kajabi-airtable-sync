@@ -1,0 +1,354 @@
+<style>
+  .ag-ec-s3 *, .ag-ec-s3 *::before, .ag-ec-s3 *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-s3 {
+    --ag-gold: #FFBD59;
+    --ttp-green: #0BF879;
+    --ttp-green-dark: #08AE55;
+    --ttp-forest: #01302C;
+    --ttp-black: #232323;
+    --ttp-beige: #F4F1EF;
+    --text-body: #4a4a4a;
+    --text-muted: #7a7a7a;
+    background: var(--ttp-beige) !important;
+    padding: 64px 24px !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  .ag-ec-s3-header {
+    text-align: center !important;
+    margin-bottom: 48px !important;
+  }
+
+  .ag-ec-s3-label {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--ttp-black) !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-s3-title {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: clamp(36px, 5.5vw, 60px) !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-s3-title em {
+    font-style: italic !important;
+  }
+
+  .ag-ec-s3-title .ag-ec-hand {
+    font-family: 'Caveat', cursive !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    color: var(--ttp-green-dark) !important;
+    font-size: 1.1em !important;
+  }
+
+  .ag-ec-s3-sub {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
+    color: var(--text-body) !important;
+    max-width: 580px !important;
+    margin: 0 auto !important;
+    line-height: 1.6 !important;
+  }
+
+  .ag-ec-s3-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+    max-width: 960px !important;
+    margin: 0 auto 64px !important;
+  }
+
+  .ag-ec-s3-col {
+    padding: 34px 30px !important;
+    clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px) !important;
+  }
+
+  .ag-ec-s3-col-pain {
+    background: var(--ttp-black) !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-s3-col-sol {
+    background: var(--ttp-green) !important;
+    color: var(--ttp-forest) !important;
+  }
+
+  .ag-ec-s3-col-head {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: 32px !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .ag-ec-s3-col-pain .ag-ec-s3-col-head { color: #ffffff !important; }
+  .ag-ec-s3-col-sol .ag-ec-s3-col-head { color: var(--ttp-forest) !important; }
+
+  .ag-ec-s3-list {
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .ag-ec-s3-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 13px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .ag-ec-s3-col-sol .ag-ec-s3-item {
+    border-bottom-color: rgba(1, 48, 44, 0.15) !important;
+  }
+
+  .ag-ec-s3-item:first-child { padding-top: 0 !important; }
+  .ag-ec-s3-item:last-child { border-bottom: none !important; padding-bottom: 0 !important; }
+
+  .ag-ec-s3-bullet {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    flex-shrink: 0 !important;
+    margin-top: 1px !important;
+  }
+
+  .ag-ec-s3-bullet-x {
+    background: rgba(255, 189, 89, 0.18) !important;
+    color: var(--ag-gold) !important;
+  }
+
+  .ag-ec-s3-bullet-ok {
+    background: var(--ttp-forest) !important;
+    color: var(--ttp-green) !important;
+  }
+
+  .ag-ec-s3-item-text {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15.5px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+  }
+
+  .ag-ec-s3-col-pain .ag-ec-s3-item-text { color: rgba(255, 255, 255, 0.9) !important; }
+  .ag-ec-s3-col-sol .ag-ec-s3-item-text { color: var(--ttp-forest) !important; }
+
+  .ag-ec-s3-learn-header {
+    text-align: center !important;
+    margin-bottom: 36px !important;
+  }
+
+  .ag-ec-s3-learn-title {
+    font-family: 'Instrument Serif', Georgia, serif !important;
+    font-size: clamp(32px, 4.5vw, 48px) !important;
+    font-weight: 400 !important;
+    color: var(--ttp-black) !important;
+    line-height: 1.1 !important;
+  }
+
+  .ag-ec-s3-learn-title span {
+    font-style: italic !important;
+    white-space: nowrap !important;
+    background: linear-gradient(transparent 62%, rgba(255, 189, 89, 0.85) 62%, rgba(255, 189, 89, 0.85) 88%, transparent 88%) !important;
+    padding: 0 4px !important;
+  }
+
+  .ag-ec-s3-learn-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    max-width: 960px !important;
+    margin: 0 auto !important;
+  }
+
+  .ag-ec-s3-learn-card {
+    background: var(--ttp-black) !important;
+    padding: 1.5px !important;
+    clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px) !important;
+    transition: transform 0.3s ease !important;
+    display: flex !important;
+  }
+
+  .ag-ec-s3-learn-card:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  .ag-ec-s3-learn-in {
+    background: #ffffff !important;
+    width: 100% !important;
+    padding: 24px 22px !important;
+    clip-path: polygon(15.4px 0, calc(100% - 15.4px) 0, 100% 15.4px, 100% calc(100% - 15.4px), calc(100% - 15.4px) 100%, 15.4px 100%, 0 calc(100% - 15.4px), 0 15.4px) !important;
+  }
+
+  .ag-ec-s3-learn-num {
+    display: inline-block !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1px !important;
+    color: var(--ttp-forest) !important;
+    background: var(--ttp-green) !important;
+    padding: 3px 9px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-s3-learn-in h3 {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: var(--ttp-black) !important;
+    margin-bottom: 8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .ag-ec-s3-learn-in p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.55 !important;
+  }
+
+  @media (max-width: 768px) {
+    .ag-ec-s3 {
+      padding: 48px 16px !important;
+    }
+    .ag-ec-s3-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+      margin-bottom: 48px !important;
+    }
+    .ag-ec-s3-col {
+      padding: 26px 22px !important;
+    }
+    .ag-ec-s3-learn-grid {
+      grid-template-columns: 1fr !important;
+      max-width: 420px !important;
+    }
+  }
+</style>
+
+<div class="ag-ec-s3">
+
+  <div class="ag-ec-s3-header">
+    <p class="ag-ec-s3-label">¿Te suena esto?</p>
+    <h2 class="ag-ec-s3-title">El inglés <em>no tiene por qué</em><br>ser tu <span class="ag-ec-hand">punto débil</span></h2>
+    <p class="ag-ec-s3-sub">
+      Si estás preparando Renfe mientras trabajas y el inglés es lo último en tu lista,
+      esta masterclass es para ti.
+    </p>
+  </div>
+
+  <div class="ag-ec-s3-grid">
+
+    <div class="ag-ec-s3-col ag-ec-s3-col-pain">
+      <h3 class="ag-ec-s3-col-head">Lo que te frena</h3>
+      <ul class="ag-ec-s3-list">
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-x">✕</span>
+          <span class="ag-ec-s3-item-text">Entre el curro, el temario y los psicos, el inglés nunca encuentra hueco</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-x">✕</span>
+          <span class="ag-ec-s3-item-text">Lo último que estudiaste de inglés fue en el instituto</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-x">✕</span>
+          <span class="ag-ec-s3-item-text">Las academias de inglés van a un ritmo que no te sirve</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-x">✕</span>
+          <span class="ag-ec-s3-item-text">No sabes qué nivel necesitas ni por dónde empezar</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-x">✕</span>
+          <span class="ag-ec-s3-item-text">Sabes que cada pregunta cuenta, y no quieres regalar ninguna</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="ag-ec-s3-col ag-ec-s3-col-sol">
+      <h3 class="ag-ec-s3-col-head">Lo que vas a descubrir</h3>
+      <ul class="ag-ec-s3-list">
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-ok">✓</span>
+          <span class="ag-ec-s3-item-text">Cómo avanzar con el inglés en solo 30 minutos al día</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-ok">✓</span>
+          <span class="ag-ec-s3-item-text">Qué necesitas de verdad y qué te puedes saltar</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-ok">✓</span>
+          <span class="ag-ec-s3-item-text">Cómo encajarlo en tu plan sin robarle horas al temario</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-ok">✓</span>
+          <span class="ag-ec-s3-item-text">Resultados en semanas, no en años de academia</span>
+        </li>
+        <li class="ag-ec-s3-item">
+          <span class="ag-ec-s3-bullet ag-ec-s3-bullet-ok">✓</span>
+          <span class="ag-ec-s3-item-text">Casos reales de gente que trabajaba y lo consiguió</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="ag-ec-s3-learn-header">
+    <h2 class="ag-ec-s3-learn-title">Todo esto en <span>60 minutos</span></h2>
+  </div>
+
+  <div class="ag-ec-s3-learn-grid">
+    <div class="ag-ec-s3-learn-card"><div class="ag-ec-s3-learn-in">
+      <span class="ag-ec-s3-learn-num">01</span>
+      <h3>El mapa del inglés para Renfe</h3>
+      <p>Qué te van a pedir, qué nivel necesitas y dónde se suelen escapar los puntos.</p>
+    </div></div>
+    <div class="ag-ec-s3-learn-card"><div class="ag-ec-s3-learn-in">
+      <span class="ag-ec-s3-learn-num">02</span>
+      <h3>El método rápido que funciona</h3>
+      <p>Cómo subir tu nivel en semanas dedicando solo media hora al día.</p>
+    </div></div>
+    <div class="ag-ec-s3-learn-card"><div class="ag-ec-s3-learn-in">
+      <span class="ag-ec-s3-learn-num">03</span>
+      <h3>Trabajo + oposición + inglés</h3>
+      <p>Cómo meterlo en tu semana sin quemarte ni dejar de lado el temario.</p>
+    </div></div>
+    <div class="ag-ec-s3-learn-card"><div class="ag-ec-s3-learn-in">
+      <span class="ag-ec-s3-learn-num">04</span>
+      <h3>Puntos que no puedes regalar</h3>
+      <p>En una oposición tan reñida, el inglés puede ser lo que te dé la plaza.</p>
+    </div></div>
+    <div class="ag-ec-s3-learn-card"><div class="ag-ec-s3-learn-in">
+      <span class="ag-ec-s3-learn-num">05</span>
+      <h3>Plan de acción claro</h3>
+      <p>Saldrás con una hoja de ruta: qué hacer, cuándo y cómo organizarte.</p>
+    </div></div>
+    <div class="ag-ec-s3-learn-card"><div class="ag-ec-s3-learn-in">
+      <span class="ag-ec-s3-learn-num">06</span>
+      <h3>Preguntas en directo</h3>
+      <p>Jesu y Jose responden todas tus dudas sobre inglés y oposiciones de Renfe.</p>
+    </div></div>
+  </div>
+
+</div>
