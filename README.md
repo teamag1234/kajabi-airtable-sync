@@ -122,7 +122,7 @@ En el plan Hobby de Vercel los crons se ejecutan en algún momento dentro de su 
 
 ### Atribución de renovaciones al email
 
-Los botones de oferta del email pasan por `/api/renewal-click`, que anota el clic en la fila del alumno y redirige al checkout de Kajabi con `utm_source=email`, `utm_medium=renovacion`, `utm_campaign=renovacion-paso-N` y `utm_content=<oferta>`. Cuando el importador detecta después una compra de renovación de ese alumno, amplía su fila (conserva el curso, suma **Nº renovaciones**, guarda **Última renovación**, **Oferta renovación**, **Importe renovación** y **Paso al renovar**) y marca **Renovado desde email** solo si hubo un clic en el email en los 30 días anteriores a la compra. Las renovaciones que llegan por otros caminos (enlaces que mandan los teachers, WhatsApp) quedan registradas pero sin esa marca.
+Los botones de oferta del email pasan por `/api/renewal-click`, que anota el clic en la fila del alumno y redirige al checkout de Kajabi con `utm_source=email`, `utm_medium=renovacion`, `utm_campaign=renovacion-paso-N` y `utm_content=<oferta>`. Cuando el importador detecta después una compra de renovación de ese alumno (o una **reinscripción**: un acceso nuevo para un alumno cuyo acceso anterior ya había terminado, aunque la oferta sea gratuita o no se llame "renovación"), amplía su fila (conserva el curso, suma **Nº renovaciones**, guarda **Última renovación**, **Oferta renovación**, **Importe renovación** y **Paso al renovar**) y marca **Renovado desde email** solo si hubo un clic en el email en los 30 días anteriores a la compra. Las renovaciones que llegan por otros caminos (enlaces que mandan los teachers, WhatsApp) quedan registradas pero sin esa marca.
 
 ### Tabla Renovaciones en Airtable
 
