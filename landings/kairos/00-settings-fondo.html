@@ -1,0 +1,67 @@
+<style>
+  /* ====== FONDO GLOBAL — Kairós × AG Academy ====== */
+
+  html {
+    background: #0B1B33 !important;
+  }
+
+  html body {
+    background: transparent !important;
+  }
+
+  /* Capa fija: azul noche con halos azul eléctrico y dorado */
+  html body::before {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    background:
+      radial-gradient(ellipse 55% 45% at 10% 0%, rgba(47, 107, 255, 0.40) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 45% at 95% 15%, rgba(212, 169, 106, 0.26) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 85% 95%, rgba(47, 107, 255, 0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 45% 40% at 5% 85%, rgba(255, 189, 89, 0.10) 0%, transparent 65%),
+      linear-gradient(180deg, #0B1B33 0%, #0A1730 50%, #08132A 100%) !important;
+  }
+
+  /* Rejilla fina que se desvanece hacia los bordes */
+  html body::after {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
+    background-size: 56px 56px !important;
+    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 0%, transparent 80%) !important;
+    mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 0%, transparent 80%) !important;
+  }
+
+  /* Secciones de Kajabi transparentes */
+  html body .section,
+  html body .section .sizer,
+  html body .section .container,
+  html body .background-image,
+  html body .section__overlay,
+  html body .header,
+  html body .footer {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  /* Nuestros bloques transparentes para que se vea el fondo */
+  html body .ag-ec-hero-wrap,
+  html body .ag-ec-presenters-wrap,
+  html body .ag-ec-s3,
+  html body .ag-ec-s4,
+  html body .ag-ec-ty {
+    background: transparent !important;
+  }
+
+  html body .ag-ec-hero-wrap::before,
+  html body .ag-ec-hero-wrap::after {
+    display: none !important;
+  }
+</style>
