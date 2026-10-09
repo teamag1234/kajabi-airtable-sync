@@ -7,21 +7,20 @@
 
   .ag-ec-hero-wrap {
     --ag-gold: #FFBD59;
+    --ag-gold-dark: #D98A1C;
     --kai-navy: #0B1B33;
     --kai-blue: #2F6BFF;
-    --kai-bronze: #D4A96A;
-    --text-soft: rgba(255, 255, 255, 0.72);
+    --text-soft: #4B5568;
     background:
-      radial-gradient(ellipse 60% 55% at 15% 10%, rgba(47, 107, 255, 0.45) 0%, transparent 60%),
-      radial-gradient(ellipse 55% 50% at 90% 20%, rgba(212, 169, 106, 0.30) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 60% at 50% 110%, rgba(47, 107, 255, 0.25) 0%, transparent 60%),
-      var(--kai-navy) !important;
-    padding: 64px 24px 24px !important;
+      radial-gradient(ellipse 55% 50% at 10% 0%, rgba(47, 107, 255, 0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 45% at 95% 10%, rgba(255, 189, 89, 0.22) 0%, transparent 65%),
+      #ffffff !important;
+    padding: 56px 24px 24px !important;
     font-family: 'Inter', sans-serif !important;
     text-align: center !important;
     position: relative !important;
     overflow: hidden !important;
-    color: #ffffff !important;
+    color: var(--kai-navy) !important;
   }
 
   /* Rejilla sutil */
@@ -30,8 +29,8 @@
     position: absolute !important;
     inset: 0 !important;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) !important;
+      linear-gradient(rgba(11, 27, 51, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 27, 51, 0.05) 1px, transparent 1px) !important;
     background-size: 56px 56px !important;
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 0%, transparent 75%) !important;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 0%, transparent 75%) !important;
@@ -40,7 +39,6 @@
 
   .ag-ec-hero-inner {
     position: relative !important;
-    z-index: 2 !important;
     max-width: 900px !important;
     margin: 0 auto !important;
   }
@@ -48,17 +46,13 @@
   .ag-ec-logo-bar {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 16px !important;
-    background: #ffffff !important;
-    border-radius: 999px !important;
-    padding: 8px 24px !important;
-    margin-bottom: 40px !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25) !important;
+    gap: 20px !important;
+    margin-bottom: 32px !important;
   }
 
   .ag-ec-logo-kai {
-    width: 120px !important;
-    height: 48px !important;
+    width: 140px !important;
+    height: 56px !important;
     overflow: hidden !important;
     display: flex !important;
     align-items: center !important;
@@ -66,21 +60,22 @@
   }
 
   .ag-ec-logo-kai img {
-    height: 116px !important;
+    height: 136px !important;
     width: auto !important;
     max-width: none !important;
     flex-shrink: 0 !important;
+    mix-blend-mode: multiply !important;
   }
 
   .ag-ec-logo-ag {
-    height: 36px !important;
+    height: 42px !important;
     width: auto !important;
   }
 
   .ag-ec-logo-sep {
     width: 1px !important;
-    height: 28px !important;
-    background: #e3e6ee !important;
+    height: 34px !important;
+    background: rgba(11, 27, 51, 0.18) !important;
   }
 
   .ag-ec-hero-chips {
@@ -98,27 +93,25 @@
     font-family: 'Inter', sans-serif !important;
     font-size: 13px !important;
     font-weight: 600 !important;
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.08) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
+    color: var(--kai-navy) !important;
+    background: rgba(11, 27, 51, 0.04) !important;
+    border: 1px solid rgba(11, 27, 51, 0.12) !important;
     border-radius: 999px !important;
     padding: 8px 16px !important;
   }
 
   .ag-ec-chip-gold {
-    color: var(--ag-gold) !important;
-    background: rgba(255, 189, 89, 0.10) !important;
-    border-color: rgba(255, 189, 89, 0.45) !important;
+    color: #A8650A !important;
+    background: rgba(255, 189, 89, 0.16) !important;
+    border-color: rgba(217, 138, 28, 0.40) !important;
   }
 
   .ag-ec-chip-dot {
     width: 7px !important;
     height: 7px !important;
     border-radius: 50% !important;
-    background: #4ade80 !important;
-    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.2) !important;
+    background: #22c55e !important;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18) !important;
     animation: ag-ec-pulse 2s ease-in-out infinite !important;
   }
 
@@ -129,16 +122,16 @@
 
   .ag-ec-hero-h1 {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-size: clamp(40px, 7.2vw, 84px) !important;
+    font-size: clamp(38px, 6.6vw, 76px) !important;
     font-weight: 800 !important;
-    line-height: 1.02 !important;
-    letter-spacing: -2.5px !important;
-    color: #ffffff !important;
+    line-height: 1.04 !important;
+    letter-spacing: -2.2px !important;
+    color: var(--kai-navy) !important;
     margin: 0 auto 24px !important;
   }
 
   .ag-ec-hero-h1 .ag-ec-grad {
-    background: linear-gradient(90deg, #8FB0FF 0%, var(--ag-gold) 55%, var(--kai-bronze) 100%) !important;
+    background: linear-gradient(90deg, var(--kai-blue) 0%, #7B5CFF 45%, var(--ag-gold-dark) 100%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
@@ -149,23 +142,22 @@
     font-size: 19px !important;
     line-height: 1.6 !important;
     color: var(--text-soft) !important;
-    max-width: 620px !important;
+    max-width: 640px !important;
     margin: 0 auto 36px !important;
   }
 
   .ag-ec-hero-sub strong {
-    color: #ffffff !important;
+    color: var(--kai-navy) !important;
     font-weight: 600 !important;
   }
 
   .ag-ec-hero-meta {
     display: inline-grid !important;
     grid-template-columns: auto auto auto !important;
-    background: rgba(255, 255, 255, 0.07) !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(11, 27, 51, 0.10) !important;
     border-radius: 20px !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 18px 50px rgba(11, 27, 51, 0.10) !important;
     overflow: hidden !important;
     margin-bottom: 18px !important;
   }
@@ -173,7 +165,7 @@
   .ag-ec-meta-cell {
     padding: 16px 26px !important;
     text-align: left !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-right: 1px solid rgba(11, 27, 51, 0.08) !important;
   }
 
   .ag-ec-meta-cell:last-child {
@@ -186,7 +178,7 @@
     font-weight: 600 !important;
     letter-spacing: 1.5px !important;
     text-transform: uppercase !important;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: #8A93A6 !important;
     margin-bottom: 4px !important;
   }
 
@@ -194,47 +186,46 @@
     font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: 18px !important;
     font-weight: 700 !important;
-    color: #ffffff !important;
+    color: var(--kai-navy) !important;
     white-space: nowrap !important;
   }
 
-  .ag-ec-meta-value-gold {
-    color: var(--ag-gold) !important;
+  .ag-ec-meta-value-accent {
+    color: var(--kai-blue) !important;
   }
 
   .ag-ec-spots-note {
     font-family: 'Inter', sans-serif !important;
     font-size: 13px !important;
-    color: rgba(255, 255, 255, 0.55) !important;
+    color: #6B7385 !important;
     margin-top: 4px !important;
   }
 
   .ag-ec-spots-note strong {
-    color: #ffffff !important;
+    color: var(--kai-navy) !important;
     font-weight: 600 !important;
   }
 
   @media (max-width: 640px) {
     .ag-ec-hero-wrap {
-      padding: 40px 16px 32px !important;
+      padding: 36px 16px 32px !important;
     }
     .ag-ec-logo-bar {
-      gap: 10px !important;
-      padding: 6px 16px !important;
-      margin-bottom: 28px !important;
+      gap: 14px !important;
+      margin-bottom: 24px !important;
     }
     .ag-ec-logo-kai {
-      width: 96px !important;
-      height: 40px !important;
+      width: 112px !important;
+      height: 46px !important;
     }
     .ag-ec-logo-kai img {
-      height: 94px !important;
+      height: 110px !important;
     }
     .ag-ec-logo-ag {
-      height: 28px !important;
+      height: 34px !important;
     }
     .ag-ec-hero-h1 {
-      letter-spacing: -1.5px !important;
+      letter-spacing: -1.4px !important;
     }
     .ag-ec-hero-sub {
       font-size: 16px !important;
@@ -251,7 +242,7 @@
     }
     .ag-ec-meta-cell:last-child {
       grid-column: 1 / -1 !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-top: 1px solid rgba(11, 27, 51, 0.08) !important;
     }
     .ag-ec-meta-value {
       font-size: 16px !important;
@@ -285,13 +276,14 @@
     </div>
 
     <h1 class="ag-ec-hero-h1">
-      Este es tu momento.<br>
-      Que el <span class="ag-ec-grad">inglés</span><br>no te lo quite.
+      Acredita tu inglés<br>
+      <span class="ag-ec-grad">en semanas</span> y suma<br>
+      puntos a tu oposición
     </h1>
 
     <p class="ag-ec-hero-sub">
-      Cómo sacarte el certificado de inglés <strong>en el menor tiempo posible</strong>,
-      sin quitarle horas a temas, supuestos y programación.
+      El método directo para sacarte el certificado oficial de inglés
+      <strong>sin quitarle horas a temas, supuestos y programación.</strong>
     </p>
 
     <div class="ag-ec-hero-meta">
@@ -305,7 +297,7 @@
       </div>
       <div class="ag-ec-meta-cell">
         <div class="ag-ec-meta-label">Formato</div>
-        <div class="ag-ec-meta-value ag-ec-meta-value-gold">Presencial y online</div>
+        <div class="ag-ec-meta-value ag-ec-meta-value-accent">Presencial y online</div>
       </div>
     </div>
 

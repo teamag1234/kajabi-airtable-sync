@@ -2,14 +2,14 @@
   /* ====== FONDO GLOBAL — Kairós × AG Academy ====== */
 
   html {
-    background: #0B1B33 !important;
+    background: #ffffff !important;
   }
 
   html body {
     background: transparent !important;
   }
 
-  /* Capa fija: azul noche con halos azul eléctrico y dorado */
+  /* Capa fija: blanco con halos suaves azul y dorado */
   html body::before {
     content: '' !important;
     position: fixed !important;
@@ -17,11 +17,11 @@
     z-index: -1 !important;
     pointer-events: none !important;
     background:
-      radial-gradient(ellipse 55% 45% at 10% 0%, rgba(47, 107, 255, 0.40) 0%, transparent 65%),
-      radial-gradient(ellipse 50% 45% at 95% 15%, rgba(212, 169, 106, 0.26) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 50% at 85% 95%, rgba(47, 107, 255, 0.22) 0%, transparent 65%),
-      radial-gradient(ellipse 45% 40% at 5% 85%, rgba(255, 189, 89, 0.10) 0%, transparent 65%),
-      linear-gradient(180deg, #0B1B33 0%, #0A1730 50%, #08132A 100%) !important;
+      radial-gradient(ellipse 55% 45% at 10% 0%, rgba(47, 107, 255, 0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 45% at 95% 12%, rgba(255, 189, 89, 0.20) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 90% 95%, rgba(47, 107, 255, 0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 45% 40% at 5% 85%, rgba(255, 189, 89, 0.12) 0%, transparent 65%),
+      linear-gradient(180deg, #ffffff 0%, #FAFBFE 60%, #F6F8FD 100%) !important;
   }
 
   /* Rejilla fina que se desvanece hacia los bordes */
@@ -32,8 +32,8 @@
     z-index: -1 !important;
     pointer-events: none !important;
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
+      linear-gradient(rgba(11, 27, 51, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 27, 51, 0.045) 1px, transparent 1px) !important;
     background-size: 56px 56px !important;
     -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 0%, transparent 80%) !important;
     mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 0%, transparent 80%) !important;
