@@ -97,28 +97,18 @@
     object-fit: cover !important;
     object-position: top center !important;
     display: block !important;
-    transform: scale(2.3) !important;
-    transform-origin: 50% 22% !important;
+    transform: scale(1.85) !important;
+    transform-origin: 50% 8% !important;
   }
 
-  .ag-ec-team-strip {
-    width: 100% !important;
-    height: 170px !important;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 6px !important;
-    clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px) !important;
+  .ag-ec-pres-photo-ttp {
+    border-color: var(--ttp-green) !important;
   }
 
-  .ag-ec-team-strip img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
+  .ag-ec-pres-photo-ttp img {
+    transform: none !important;
+    object-position: center 30% !important;
   }
-
-  .ag-ec-team-strip img:first-child { object-position: 42% 30% !important; }
-  .ag-ec-team-strip img:last-child { object-position: 50% 25% !important; }
 
   .ag-ec-pres-info {
     padding: 24px 28px 32px !important;
@@ -185,9 +175,6 @@
       width: 140px !important;
       height: 140px !important;
     }
-    .ag-ec-team-strip {
-      height: 150px !important;
-    }
     .ag-ec-pres-info {
       padding: 20px 22px 28px !important;
     }
@@ -198,7 +185,7 @@
 
   <div class="ag-ec-pres-header">
     <h2 class="ag-ec-pres-title">
-      Dos equipos, <em>un objetivo</em>:<br>
+      Dos expertos, <em>un objetivo</em>:<br>
       tu plaza en <span class="ag-ec-hand">Renfe</span>
     </h2>
   </div>
@@ -226,19 +213,18 @@
 
     <div class="ag-ec-pres-card"><div class="ag-ec-pres-card-in">
       <div class="ag-ec-pres-media">
-        <div class="ag-ec-team-strip">
-          <img src="https://tentuplaza.es/wp-content/uploads/2026/08/tentuplaza-foto-web-44-scaled-1.webp" alt="Equipo TenTuPlaza con alumnos">
-          <img src="https://tentuplaza.es/wp-content/uploads/2026/08/tentuplaza-foto-web-52-scaled-1.webp" alt="Equipo TenTuPlaza en clase">
+        <div class="ag-ec-pres-photo ag-ec-pres-photo-ttp">
+          <img src="https://media.licdn.com/dms/image/v2/D4E03AQGHHAPzcXFDjw/profile-displayphoto-scale_200_200/B4EZh9vynqGcAY-/0/1754456337659?e=2147483647&v=beta&t=qgQxqb0lKaiKDKPbAzaxD-mdWppHPC4jMpqkDn-oWAM" alt="Jose - TenTuPlaza">
         </div>
       </div>
       <div class="ag-ec-pres-info">
         <span class="ag-ec-pres-tag ag-ec-pres-tag-green">TenTuPlaza</span>
-        <h3 class="ag-ec-pres-name">Equipo TenTuPlaza</h3>
-        <p class="ag-ec-pres-role">Ex opositores, nº1 de promoción en ADIF</p>
+        <h3 class="ag-ec-pres-name">Jose</h3>
+        <p class="ag-ec-pres-role">Cofundador de TenTuPlaza</p>
         <p class="ag-ec-pres-bio">
-          No nacieron academia, nacieron opositores. En menos de 5 años se han convertido
-          en <strong>la academia nº1 de España en plazas de ADIF y RENFE</strong>.
-          Saben lo que pesa cada pregunta del examen, y por eso quieren que el inglés
+          Fue opositor antes que profe, y eso se nota. Junto a su equipo ha convertido TenTuPlaza
+          en <strong>la academia nº1 de España en plazas de ADIF y RENFE</strong> en menos de 5 años.
+          Sabe lo que pesa cada pregunta del examen, y por eso quiere que el inglés
           deje de ser lo que te frena.
         </p>
       </div>
