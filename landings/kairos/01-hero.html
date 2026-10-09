@@ -1,0 +1,333 @@
+<style>
+  .ag-ec-hero-wrap *, .ag-ec-hero-wrap *::before, .ag-ec-hero-wrap *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-hero-wrap {
+    --ag-gold: #FFBD59;
+    --kai-navy: #1F3A5F;
+    --kai-navy-dark: #152a46;
+    --kai-bronze: #B08D57;
+    --kai-bronze-soft: #f3ebdd;
+    --kai-blue: #1557b0;
+    --kai-cream: #FFFCF3;
+    --text-dark: #1f2a37;
+    --text-body: #474747;
+    --text-muted: #7d7d7d;
+    background: var(--kai-cream) !important;
+    padding: 56px 24px 16px !important;
+    font-family: 'Chivo', sans-serif !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Reloj decorativo (guiño al logo de Kairós) */
+  .ag-ec-hero-clock {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 760px !important;
+    height: 760px !important;
+    transform: translate(-50%, -46%) !important;
+    opacity: 0.055 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+  }
+
+  .ag-ec-logo-bar {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(31, 58, 95, 0.12) !important;
+    border-radius: 14px !important;
+    padding: 10px 22px !important;
+    margin-bottom: 36px !important;
+    box-shadow: 0 6px 24px rgba(31, 58, 95, 0.06) !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-logo-kai {
+    width: 140px !important;
+    height: 58px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-logo-kai img {
+    height: 138px !important;
+    width: auto !important;
+    max-width: none !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-logo-ag {
+    height: 44px !important;
+    width: auto !important;
+  }
+
+  .ag-ec-logo-x {
+    font-family: 'Cabin', sans-serif !important;
+    font-size: 22px !important;
+    color: var(--text-muted) !important;
+    line-height: 1 !important;
+  }
+
+  .ag-ec-hero-kicker {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-family: 'Cabin', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    color: var(--kai-bronze) !important;
+    margin-bottom: 22px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-hero-kicker::before,
+  .ag-ec-hero-kicker::after {
+    content: '' !important;
+    width: 34px !important;
+    height: 1.5px !important;
+    background: var(--kai-bronze) !important;
+    opacity: 0.6 !important;
+  }
+
+  .ag-ec-hero-pre {
+    font-family: 'Cabin', sans-serif !important;
+    font-size: clamp(20px, 2.6vw, 26px) !important;
+    font-weight: 400 !important;
+    font-style: italic !important;
+    color: var(--kai-bronze) !important;
+    margin-bottom: 10px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-hero-h1 {
+    font-family: 'Cabin', sans-serif !important;
+    font-size: clamp(34px, 6vw, 62px) !important;
+    font-weight: 700 !important;
+    line-height: 1.06 !important;
+    color: var(--kai-navy) !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.5px !important;
+    max-width: 860px !important;
+    margin: 0 auto 22px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-hero-h1 .ag-ec-h-accent {
+    color: var(--kai-bronze) !important;
+  }
+
+  .ag-ec-hero-h1 .ag-ec-h-mark {
+    background: linear-gradient(transparent 64%, rgba(255, 189, 89, 0.55) 64%, rgba(255, 189, 89, 0.55) 92%, transparent 92%) !important;
+    padding: 0 6px !important;
+    white-space: nowrap !important;
+  }
+
+  .ag-ec-hero-sub {
+    font-family: 'Chivo', sans-serif !important;
+    font-size: 18px !important;
+    line-height: 1.65 !important;
+    color: var(--text-body) !important;
+    max-width: 610px !important;
+    margin: 0 auto 32px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-hero-sub strong {
+    color: var(--kai-navy) !important;
+    font-weight: 700 !important;
+  }
+
+  .ag-ec-date-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    background: var(--kai-navy) !important;
+    border-radius: 16px !important;
+    padding: 14px 28px 14px 14px !important;
+    margin-bottom: 14px !important;
+    box-shadow: 0 10px 30px rgba(31, 58, 95, 0.2) !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .ag-ec-date-cal {
+    width: 54px !important;
+    height: 54px !important;
+    background: var(--kai-bronze) !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-date-cal-month {
+    font-family: 'Cabin', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    line-height: 1 !important;
+    opacity: 0.9 !important;
+  }
+
+  .ag-ec-date-cal-day {
+    font-family: 'Cabin', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1.05 !important;
+  }
+
+  .ag-ec-date-text {
+    text-align: left !important;
+  }
+
+  .ag-ec-date-text-main {
+    font-family: 'Cabin', sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 2px !important;
+  }
+
+  .ag-ec-date-text-detail {
+    font-family: 'Chivo', sans-serif !important;
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  .ag-ec-spots-note {
+    font-family: 'Chivo', sans-serif !important;
+    font-size: 13px !important;
+    color: var(--text-muted) !important;
+    position: relative !important;
+    z-index: 2 !important;
+    margin-top: 6px !important;
+  }
+
+  .ag-ec-spots-note strong {
+    color: var(--kai-navy) !important;
+    font-weight: 700 !important;
+  }
+
+  @media (max-width: 640px) {
+    .ag-ec-hero-wrap {
+      padding: 36px 16px 36px !important;
+    }
+    .ag-ec-hero-clock {
+      width: 520px !important;
+      height: 520px !important;
+    }
+    .ag-ec-logo-bar {
+      gap: 12px !important;
+      padding: 8px 16px !important;
+      margin-bottom: 28px !important;
+    }
+    .ag-ec-logo-kai {
+      width: 112px !important;
+      height: 48px !important;
+    }
+    .ag-ec-logo-kai img {
+      height: 112px !important;
+    }
+    .ag-ec-logo-ag {
+      height: 34px !important;
+    }
+    .ag-ec-hero-kicker {
+      font-size: 10.5px !important;
+      letter-spacing: 1px !important;
+      gap: 0 !important;
+    }
+    .ag-ec-hero-kicker::before,
+    .ag-ec-hero-kicker::after {
+      display: none !important;
+    }
+    .ag-ec-hero-sub {
+      font-size: 16px !important;
+    }
+    .ag-ec-date-pill {
+      padding: 12px 20px 12px 12px !important;
+      gap: 12px !important;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Chivo:wght@400;700&display=swap" rel="stylesheet">
+
+<div class="ag-ec-hero-wrap">
+
+  <svg class="ag-ec-hero-clock" viewBox="0 0 200 200" fill="none" stroke="#1F3A5F" stroke-width="1.2">
+    <circle cx="100" cy="100" r="92"/>
+    <circle cx="100" cy="100" r="80"/>
+    <g stroke-width="2.4">
+      <line x1="100" y1="22" x2="100" y2="34"/><line x1="100" y1="166" x2="100" y2="178"/>
+      <line x1="22" y1="100" x2="34" y2="100"/><line x1="166" y1="100" x2="178" y2="100"/>
+    </g>
+    <g stroke-width="1.4">
+      <line x1="139" y1="32.5" x2="135" y2="39.4"/><line x1="167.5" y1="61" x2="160.6" y2="65"/>
+      <line x1="167.5" y1="139" x2="160.6" y2="135"/><line x1="139" y1="167.5" x2="135" y2="160.6"/>
+      <line x1="61" y1="167.5" x2="65" y2="160.6"/><line x1="32.5" y1="139" x2="39.4" y2="135"/>
+      <line x1="32.5" y1="61" x2="39.4" y2="65"/><line x1="61" y1="32.5" x2="65" y2="39.4"/>
+    </g>
+    <line x1="100" y1="100" x2="100" y2="48" stroke-width="2.4"/>
+    <line x1="100" y1="100" x2="134" y2="118" stroke-width="2.4"/>
+    <circle cx="100" cy="100" r="3" fill="#1F3A5F"/>
+  </svg>
+
+  <div class="ag-ec-logo-bar">
+    <div class="ag-ec-logo-kai">
+      <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148726054/images/6556734-24b2-318-4171-0758b8d81123_1000179903.jpg" alt="Kairós Formación">
+    </div>
+    <span class="ag-ec-logo-x">×</span>
+    <img class="ag-ec-logo-ag" src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/7b72d3d-c25-14e8-202e-1368ac826_image-19.png" alt="AG Academy">
+  </div>
+
+  <br>
+
+  <div class="ag-ec-hero-kicker">Masterclass gratuita · Oposiciones docentes</div>
+
+  <p class="ag-ec-hero-pre">Este es tu momento.</p>
+
+  <h1 class="ag-ec-hero-h1">
+    Que el <span class="ag-ec-h-mark">inglés</span><br><span class="ag-ec-h-accent">no te lo quite</span>
+  </h1>
+
+  <p class="ag-ec-hero-sub">
+    Cómo sacarte el certificado de inglés <strong>en el menor tiempo posible</strong>,
+    sin quitarle horas a temas, supuestos y programación.
+    Los puntos de baremo que muchos opositores se dejan por el camino.
+  </p>
+
+  <div class="ag-ec-date-pill">
+    <div class="ag-ec-date-cal">
+      <span class="ag-ec-date-cal-month">OCT</span>
+      <span class="ag-ec-date-cal-day">22</span>
+    </div>
+    <div class="ag-ec-date-text">
+      <div class="ag-ec-date-text-main">Jueves 22 de octubre · 17:00h</div>
+      <div class="ag-ec-date-text-detail">Online por Zoom · Gratuita</div>
+    </div>
+  </div>
+
+  <p class="ag-ec-spots-note"><strong>Plazas limitadas</strong> · Exclusiva para la comunidad Kairós</p>
+
+</div>
