@@ -1,0 +1,255 @@
+<style>
+  .ag-ec-presenters-wrap *, .ag-ec-presenters-wrap *::before, .ag-ec-presenters-wrap *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-presenters-wrap {
+    --ag-gold: #FFBD59;
+    --kai-navy: #0B1B33;
+    --kai-blue: #2F6BFF;
+    --text-soft: rgba(255, 255, 255, 0.72);
+    background:
+      radial-gradient(ellipse 50% 50% at 0% 50%, rgba(47, 107, 255, 0.22) 0%, transparent 65%),
+      radial-gradient(ellipse 45% 50% at 100% 60%, rgba(255, 189, 89, 0.14) 0%, transparent 65%),
+      var(--kai-navy) !important;
+    padding: 72px 24px !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-pres-header {
+    text-align: center !important;
+    margin-bottom: 48px !important;
+  }
+
+  .ag-ec-pres-kicker {
+    display: inline-block !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--ag-gold) !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-pres-title {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: clamp(32px, 4.8vw, 52px) !important;
+    font-weight: 800 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -1.5px !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-pres-title .ag-ec-grad {
+    background: linear-gradient(90deg, #8FB0FF 0%, var(--ag-gold) 70%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .ag-ec-pres-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+    max-width: 960px !important;
+    margin: 0 auto !important;
+  }
+
+  .ag-ec-pres-card {
+    position: relative !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 24px !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    padding: 36px 32px 34px !important;
+    text-align: center !important;
+    overflow: hidden !important;
+    transition: transform 0.35s ease, border-color 0.35s ease !important;
+  }
+
+  .ag-ec-pres-card::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, transparent, var(--ag-gold), transparent) !important;
+  }
+
+  .ag-ec-pres-card-kai::before {
+    background: linear-gradient(90deg, transparent, #8FB0FF, transparent) !important;
+  }
+
+  .ag-ec-pres-card:hover {
+    transform: translateY(-6px) !important;
+    border-color: rgba(255, 255, 255, 0.24) !important;
+  }
+
+  .ag-ec-pres-photo {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    margin: 0 auto 24px !important;
+    background: linear-gradient(160deg, #1d3a6b 0%, #0f2346 100%) !important;
+    box-shadow: 0 0 0 3px var(--ag-gold), 0 0 0 9px rgba(255, 189, 89, 0.14) !important;
+  }
+
+  .ag-ec-pres-photo img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    display: block !important;
+    transform: scale(1.85) !important;
+    transform-origin: 50% 8% !important;
+  }
+
+  .ag-ec-pres-photo-kai {
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px #8FB0FF, 0 0 0 9px rgba(143, 176, 255, 0.16) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-pres-photo-kai img {
+    width: 112% !important;
+    height: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    transform: none !important;
+  }
+
+  .ag-ec-pres-tag {
+    display: inline-block !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-pres-tag-gold {
+    color: var(--ag-gold) !important;
+    background: rgba(255, 189, 89, 0.12) !important;
+    border: 1px solid rgba(255, 189, 89, 0.4) !important;
+  }
+
+  .ag-ec-pres-tag-blue {
+    color: #A9C2FF !important;
+    background: rgba(143, 176, 255, 0.12) !important;
+    border: 1px solid rgba(143, 176, 255, 0.4) !important;
+  }
+
+  .ag-ec-pres-name {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 30px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.8px !important;
+    color: #ffffff !important;
+    line-height: 1.1 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .ag-ec-pres-role {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    margin-bottom: 18px !important;
+  }
+
+  .ag-ec-pres-bio {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+    color: var(--text-soft) !important;
+  }
+
+  .ag-ec-pres-bio strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  @media (max-width: 860px) {
+    .ag-ec-presenters-wrap {
+      padding: 52px 16px !important;
+    }
+    .ag-ec-pres-header {
+      margin-bottom: 32px !important;
+    }
+    .ag-ec-pres-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+      max-width: 480px !important;
+    }
+    .ag-ec-pres-card {
+      padding: 30px 22px 28px !important;
+    }
+    .ag-ec-pres-photo {
+      width: 130px !important;
+      height: 130px !important;
+    }
+    .ag-ec-pres-name {
+      font-size: 26px !important;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ag-ec-presenters-wrap">
+
+  <div class="ag-ec-pres-header">
+    <span class="ag-ec-pres-kicker">Quién te lo cuenta</span>
+    <h2 class="ag-ec-pres-title">
+      Dos academias, <span style="white-space:nowrap">un objetivo:</span><br>
+      <span class="ag-ec-grad">tu plaza</span>
+    </h2>
+  </div>
+
+  <div class="ag-ec-pres-grid">
+
+    <div class="ag-ec-pres-card">
+      <div class="ag-ec-pres-photo">
+        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/23a0e84-bdd6-3540-a5d2-8c51e0282407_4.png" alt="Jesu - Fundador de AG Academy">
+      </div>
+      <span class="ag-ec-pres-tag ag-ec-pres-tag-gold">AG Academy</span>
+      <h3 class="ag-ec-pres-name">Jesu</h3>
+      <p class="ag-ec-pres-role">Fundador de AG Academy</p>
+      <p class="ag-ec-pres-bio">
+        Creador del <strong>método más directo para acreditar tu inglés</strong>
+        dedicándole el menor tiempo posible. Más de 6.000 alumnos y un 94% de aprobados,
+        muchos de ellos opositores docentes que no tenían ni una hora libre.
+        En esta masterclass te enseña cómo hacerlo sin descuidar la oposición.
+      </p>
+    </div>
+
+    <div class="ag-ec-pres-card ag-ec-pres-card-kai">
+      <div class="ag-ec-pres-photo ag-ec-pres-photo-kai">
+        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148726054/images/e1fbf3f-761-27a-782-6b375805852_Pegatina_Kair_s_Logo_frase.jpg" alt="Kairós Formación">
+      </div>
+      <span class="ag-ec-pres-tag ag-ec-pres-tag-blue">Kairós Formación</span>
+      <h3 class="ag-ec-pres-name">Equipo Kairós</h3>
+      <p class="ag-ec-pres-role">Preparación de oposiciones docentes</p>
+      <p class="ag-ec-pres-bio">
+        Te acompañan en <strong>temario, supuestos prácticos y programación</strong>
+        para que llegues al examen con todo bajo control. Saben lo que vale cada punto
+        del baremo, y por eso quieren que el inglés deje de ser
+        lo que te separa de tu plaza.
+      </p>
+    </div>
+
+  </div>
+
+</div>
