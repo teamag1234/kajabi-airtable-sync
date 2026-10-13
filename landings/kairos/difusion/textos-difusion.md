@@ -61,21 +61,27 @@ Miércoles 21 · 17:00h. Masterclass gratis sobre el certificado de inglés para
 
 ---
 
-## 3. Instagram — post de feed (instagram-post-kairos.png)
+## 3. Instagram — post de feed (instagram-post-kairos-sin-foto.png)
 
-Temas, supuestos, programación… y el inglés siempre para "luego".
+🎓 MASTERCLASS GRATUITA para opositores docentes
 
-Pero ese certificado son puntos en el baremo. Puntos que muchos opositores se dejan por el camino.
+¿Te falta el certificado de inglés para tu oposición? Este miércoles te contamos cómo sacarlo.
 
-El miércoles 21 de octubre a las 17:00h hacemos una masterclass gratuita con @agacademyaptis para contarte cómo acreditar tu inglés en semanas, sin quitarle horas a la oposición.
+📅 Miércoles 21 de octubre
+🕔 17:00h
+📍 En la academia Kairós o online por Zoom
+💸 Gratis · Solo para alumnos de Kairós
 
-📍 Aquí en la academia o desde casa
-🎟️ Exclusiva para alumnos de Kairós
-⏳ Plazas presenciales limitadas
+Lo que vas a ver:
+✅ Qué nivel y qué certificado de inglés te puntúa en el baremo
+✅ Por qué el APTIS es la forma más rápida de sacarlo
+✅ Cómo prepararlo en semanas sin quitarle horas al temario
 
-Reserva tu sitio en el enlace de la bio 🔗
+La imparte Jesu, fundador de @agacademyaptis, que ya ha ayudado a más de 6.000 alumnos a sacar su certificado (94% de aprobados).
 
-#oposiciones #oposicionesdocentes #opositores #maestros #profesores #inglés #certificadodeingles #aptis #baremo #kairos
+Las plazas presenciales son limitadas. Apúntate gratis en el enlace de la bio 🔗
+
+#oposiciones #oposicionesdocentes #opositores #maestros #profesores #certificadodeingles #aptis #baremo #kairos
 
 (Revisar que @agacademyaptis es el usuario correcto antes de publicar)
 
