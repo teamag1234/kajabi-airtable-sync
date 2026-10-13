@@ -74,8 +74,8 @@ Miércoles 21 · 17:00h. Masterclass gratis sobre el certificado de inglés para
 
 Lo que vas a ver:
 ✅ Qué nivel y qué certificado de inglés te puntúa en el baremo
-✅ Por qué el APTIS es la forma más rápida de sacarlo
-✅ Cómo prepararlo en semanas sin quitarle horas al temario
+✅ Cómo prepararlo sin quitarle horas al temario
+✅ Cómo sacarlo de forma fácil en pocas semanas
 
 La imparte Jesu, fundador de @agacademyaptis, que ya ha ayudado a más de 6.000 alumnos a sacar su certificado (94% de aprobados).
 
