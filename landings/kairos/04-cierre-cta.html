@@ -1,0 +1,208 @@
+<style>
+  .ag-ec-s4 *, .ag-ec-s4 *::before, .ag-ec-s4 *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-s4 {
+    --ag-gold: #FFBD59;
+    --kai-navy: #0B1B33;
+    --kai-sky: #8FB0FF;
+    background: var(--kai-navy) !important;
+    padding: 40px 24px 32px !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-s4-box {
+    position: relative !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    border-radius: 32px !important;
+    padding: 64px 40px 52px !important;
+    background:
+      radial-gradient(ellipse 70% 60% at 0% 0%, rgba(47, 107, 255, 0.35) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 60% at 100% 100%, rgba(255, 189, 89, 0.22) 0%, transparent 65%),
+      rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    overflow: hidden !important;
+  }
+
+  .ag-ec-s4-kicker {
+    display: inline-block !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--ag-gold) !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-s4-title {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: clamp(30px, 5vw, 54px) !important;
+    font-weight: 800 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -1.6px !important;
+    color: #ffffff !important;
+    margin-bottom: 20px !important;
+  }
+
+  .ag-ec-s4-title .ag-ec-grad {
+    background: linear-gradient(90deg, var(--kai-sky) 0%, var(--ag-gold) 70%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .ag-ec-s4-sub {
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.72) !important;
+    max-width: 560px !important;
+    margin: 0 auto 32px !important;
+  }
+
+  .ag-ec-s4-sub strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  .ag-ec-s4-points {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin-bottom: 36px !important;
+  }
+
+  .ag-ec-s4-point {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 999px !important;
+    padding: 10px 18px !important;
+  }
+
+  .ag-ec-s4-point svg {
+    width: 14px !important;
+    height: 14px !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+  }
+
+  .ag-ec-s4-point-hl {
+    color: var(--kai-navy) !important;
+    background: var(--ag-gold) !important;
+    border-color: var(--ag-gold) !important;
+  }
+
+  .ag-ec-s4-down {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-s4-arrow {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    border: 1px solid rgba(255, 189, 89, 0.5) !important;
+    background: rgba(255, 189, 89, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: ag-ec-bounce 1.8s ease-in-out infinite !important;
+  }
+
+  .ag-ec-s4-arrow svg {
+    width: 18px !important;
+    height: 18px !important;
+    display: block !important;
+  }
+
+  @keyframes ag-ec-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  .ag-ec-s4-note {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    margin-top: 22px !important;
+  }
+
+  .ag-ec-s4-note strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  @media (max-width: 640px) {
+    .ag-ec-s4 {
+      padding: 24px 16px 24px !important;
+    }
+    .ag-ec-s4-box {
+      border-radius: 24px !important;
+      padding: 44px 20px 38px !important;
+    }
+    .ag-ec-s4-sub {
+      font-size: 16px !important;
+    }
+    .ag-ec-s4-point {
+      font-size: 13px !important;
+      padding: 9px 14px !important;
+    }
+    .ag-ec-s4-sep {
+      display: none !important;
+    }
+    .ag-ec-s4-note strong {
+      display: block !important;
+      margin-top: 2px !important;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ag-ec-s4">
+  <div class="ag-ec-s4-box">
+
+    <span class="ag-ec-s4-kicker">Kairós: el momento oportuno</span>
+
+    <h2 class="ag-ec-s4-title">
+      Este es el tuyo.<br>
+      <span class="ag-ec-grad">No dejes que el inglés</span><br>
+      te lo quite.
+    </h2>
+
+    <p class="ag-ec-s4-sub">
+      Una tarde puede ahorrarte meses de dar vueltas.
+      <strong>Reserva tu sitio y te contamos cómo hacerlo.</strong>
+    </p>
+
+    <div class="ag-ec-s4-points">
+      <span class="ag-ec-s4-point"><svg viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-7" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Gratuita</span>
+      <span class="ag-ec-s4-point"><svg viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-7" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>En la academia Kairós u online</span>
+      <span class="ag-ec-s4-point ag-ec-s4-point-hl">Jueves 22 oct · 17:00h</span>
+    </div>
+
+    <div class="ag-ec-s4-down">
+      Apúntate aquí abajo
+      <span class="ag-ec-s4-arrow"><svg viewBox="0 0 18 18" fill="none"><path d="M9 3v12M4 10l5 5 5-5" stroke="#FFBD59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+
+    <p class="ag-ec-s4-note">Exclusiva para alumnos de Kairós<span class="ag-ec-s4-sep"> · </span><strong>Plazas presenciales limitadas</strong></p>
+
+  </div>
+</div>
