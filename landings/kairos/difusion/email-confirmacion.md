@@ -2,32 +2,35 @@
 
 Envío: automático al inscribirse (Kajabi → formulario de la landing → email de confirmación)
 Remitente: Jesu de AG Academy
+Tono: cercano, familiar
 
-Asunto: Estás dentro. Último paso: entra en el grupo
-Asunto alternativo: Tu sitio para el miércoles 21 está reservado
-Preheader: Sin el grupo de WhatsApp no te llega el enlace ni los avisos.
+Asunto: ¡Qué bien que te apuntes, {{ first_name }}!
+Asunto alternativo: Nos vemos el miércoles 😊
+Preheader: Solo te pido una cosa: entra en el grupo de WhatsApp.
 
 ---
 
-Hola {{ first_name }},
+¡Hola, {{ first_name }}!
 
-Ya tienes tu sitio en la masterclass de inglés para opositores con Kairós.
+Qué alegría que te hayas apuntado. De verdad.
+
+Sé lo que es estar opositando: temas, supuestos, programación… y encima el inglés ahí, pendiente, que nunca encuentra su momento. Pues el miércoles vamos a ponerle solución juntos.
+
+Te dejo los datos para que no se te escapen:
 
 📅 Miércoles 21 de octubre
-🕔 17:00h (hora peninsular)
-📍 En la academia Kairós o online por Zoom
+🕔 17:00h
+📍 En la academia Kairós o desde casa, como te venga mejor
 
-Ahora lo importante: entra en el grupo de WhatsApp. Por ahí te pasamos el enlace de Zoom, los recordatorios y los avisos si vienes a la academia.
+Solo te pido una cosita: entra en el grupo de WhatsApp. Ahí te mando el enlace de Zoom y te aviso un ratito antes de empezar, para que no tengas que estar pendiente de nada.
 
-👉 Entra aquí: https://chat.whatsapp.com/GmUdOay7QA88JBxvQyMVfC?mode=gi_t
+👉 https://chat.whatsapp.com/GmUdOay7QA88JBxvQyMVfC?mode=gi_t
 
-Si no estás en el grupo, no te llega el enlace. Así de simple.
+Y si te surge cualquier duda antes del miércoles, escríbela por ahí sin problema. Te leo.
 
-Apúntalo ya en el calendario. Es una tarde que te puede ahorrar meses dándole vueltas al inglés, y unos puntos en el baremo que muchos se dejan por el camino.
-
-Nos vemos el miércoles.
+Un abrazo y nos vemos muy pronto,
 
 Jesu
 AG Academy
 
-P.D. Si vienes presencial, las plazas en la academia son limitadas. Si al final no puedes ir, conéctate online, que el enlace te llega igual por el grupo.
+P.D. Si te apetece venir a la academia, genial, que nos encanta veros en persona. Y si no te cuadra, conéctate desde casa con un café, que vale exactamente igual.
