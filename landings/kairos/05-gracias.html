@@ -1,0 +1,408 @@
+<style>
+  .ag-ec-ty *, .ag-ec-ty *::before, .ag-ec-ty *::after {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .ag-ec-ty {
+    --ag-gold: #FFBD59;
+    --kai-navy: #0B1B33;
+    --kai-sky: #8FB0FF;
+    --wa-green: #25D366;
+    --text-soft: rgba(255, 255, 255, 0.72);
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 0%, rgba(47, 107, 255, 0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 50% at 95% 15%, rgba(212, 169, 106, 0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 50% 105%, rgba(37, 211, 102, 0.12) 0%, transparent 60%),
+      var(--kai-navy) !important;
+    padding: 56px 24px 48px !important;
+    font-family: 'Inter', sans-serif !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .ag-ec-ty-content {
+    position: relative !important;
+    max-width: 640px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Logos en blanco */
+  .ag-ec-ty-logos {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    margin-bottom: 40px !important;
+  }
+
+  .ag-ec-ty-kai {
+    width: 124px !important;
+    height: 50px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-ty-kai img {
+    height: 120px !important;
+    width: auto !important;
+    max-width: none !important;
+    flex-shrink: 0 !important;
+    filter: grayscale(1) invert(1) contrast(1.6) !important;
+    mix-blend-mode: screen !important;
+  }
+
+  .ag-ec-ty-sep {
+    width: 1px !important;
+    height: 30px !important;
+    background: rgba(255, 255, 255, 0.28) !important;
+  }
+
+  .ag-ec-ty-ag {
+    height: 36px !important;
+    width: auto !important;
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .ag-ec-ty-check {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 50% !important;
+    margin: 0 auto 24px !important;
+    background: rgba(255, 189, 89, 0.12) !important;
+    border: 2px solid var(--ag-gold) !important;
+    box-shadow: 0 0 0 10px rgba(255, 189, 89, 0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-ty-check svg {
+    width: 32px !important;
+    height: 32px !important;
+    display: block !important;
+  }
+
+  .ag-ec-ty-title {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: clamp(34px, 6vw, 58px) !important;
+    font-weight: 800 !important;
+    line-height: 1.06 !important;
+    letter-spacing: -1.8px !important;
+    color: #ffffff !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-ty-title .ag-ec-grad {
+    background: linear-gradient(90deg, var(--kai-sky) 0%, var(--ag-gold) 70%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  .ag-ec-ty-sub {
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+    color: var(--text-soft) !important;
+    margin-bottom: 32px !important;
+  }
+
+  .ag-ec-ty-sub strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  /* Tarjeta principal WhatsApp */
+  .ag-ec-ty-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(37, 211, 102, 0.35) !important;
+    border-radius: 24px !important;
+    padding: 32px 28px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 0 60px rgba(37, 211, 102, 0.08) !important;
+  }
+
+  .ag-ec-ty-card-tag {
+    display: inline-block !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: var(--wa-green) !important;
+    background: rgba(37, 211, 102, 0.12) !important;
+    border: 1px solid rgba(37, 211, 102, 0.4) !important;
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ag-ec-ty-card h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.6px !important;
+    color: #ffffff !important;
+    margin-bottom: 10px !important;
+  }
+
+  .ag-ec-ty-card p {
+    font-size: 15.5px !important;
+    line-height: 1.6 !important;
+    color: var(--text-soft) !important;
+    margin-bottom: 24px !important;
+  }
+
+  .ag-ec-ty-card p strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  .ag-ec-ty-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    background: var(--wa-green) !important;
+    border-radius: 999px !important;
+    padding: 18px 36px !important;
+    box-shadow: 0 12px 34px rgba(37, 211, 102, 0.35) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  }
+
+  .ag-ec-ty-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 18px 40px rgba(37, 211, 102, 0.45) !important;
+  }
+
+  .ag-ec-ty-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: #ffffff !important;
+    display: block !important;
+  }
+
+  .ag-ec-ty-card .ag-ec-ty-warn {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    margin: 16px 0 0 !important;
+  }
+
+  /* Datos del evento */
+  .ag-ec-ty-meta {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    margin-bottom: 36px !important;
+  }
+
+  .ag-ec-ty-meta-cell {
+    padding: 16px 14px !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+  }
+
+  .ag-ec-ty-meta-cell:last-child {
+    border-right: none !important;
+  }
+
+  .ag-ec-ty-meta-label {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    margin-bottom: 4px !important;
+  }
+
+  .ag-ec-ty-meta-value {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+  }
+
+  .ag-ec-ty-meta-gold {
+    color: var(--ag-gold) !important;
+  }
+
+  /* Pasos */
+  .ag-ec-ty-steps {
+    text-align: left !important;
+    margin-bottom: 36px !important;
+  }
+
+  .ag-ec-ty-steps-title {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: var(--ag-gold) !important;
+    text-align: center !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ag-ec-ty-step {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 14px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .ag-ec-ty-step:last-child {
+    border-bottom: none !important;
+  }
+
+  .ag-ec-ty-step-num {
+    flex-shrink: 0 !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 9px !important;
+    background: var(--ag-gold) !important;
+    color: var(--kai-navy) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .ag-ec-ty-step-text {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+    color: var(--text-soft) !important;
+    padding-top: 4px !important;
+  }
+
+  .ag-ec-ty-step-text strong {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+
+  .ag-ec-ty-footer {
+    font-size: 12.5px !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+
+  @media (max-width: 640px) {
+    .ag-ec-ty {
+      padding: 40px 16px 36px !important;
+    }
+    .ag-ec-ty-logos {
+      margin-bottom: 32px !important;
+    }
+    .ag-ec-ty-sub {
+      font-size: 16px !important;
+    }
+    .ag-ec-ty-card {
+      padding: 26px 18px !important;
+    }
+    .ag-ec-ty-card h2 {
+      font-size: 22px !important;
+    }
+    .ag-ec-ty-btn {
+      width: 100% !important;
+      padding: 17px 20px !important;
+      font-size: 17px !important;
+    }
+    .ag-ec-ty-meta {
+      grid-template-columns: 1fr 1fr !important;
+    }
+    .ag-ec-ty-meta-cell:nth-child(2) {
+      border-right: none !important;
+    }
+    .ag-ec-ty-meta-cell:last-child {
+      grid-column: 1 / -1 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+    }
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="ag-ec-ty">
+  <div class="ag-ec-ty-content">
+
+    <div class="ag-ec-ty-logos">
+      <div class="ag-ec-ty-kai">
+        <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148726054/images/6556734-24b2-318-4171-0758b8d81123_1000179903.jpg" alt="Kairós Formación">
+      </div>
+      <span class="ag-ec-ty-sep"></span>
+      <img class="ag-ec-ty-ag" src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2165343508/settings_images/7b72d3d-c25-14e8-202e-1368ac826_image-19.png" alt="AG Academy">
+    </div>
+
+    <div class="ag-ec-ty-check">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M8 16.5l5.5 5.5L24 11" stroke="#FFBD59" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <h1 class="ag-ec-ty-title">
+      Tu sitio está <span class="ag-ec-grad">reservado</span>
+    </h1>
+
+    <p class="ag-ec-ty-sub">
+      Te queda <strong>un último paso</strong> para no perderte nada.
+    </p>
+
+    <div class="ag-ec-ty-card">
+      <span class="ag-ec-ty-card-tag">Paso obligatorio</span>
+      <h2>Entra en el grupo de WhatsApp</h2>
+      <p>
+        Por ahí te pasamos <strong>el enlace de Zoom</strong>, los recordatorios
+        y toda la info si vienes a la academia.
+      </p>
+      <a href="https://chat.whatsapp.com/KHvMwRVxyokFX8gaF4Zl6A?mode=gi_t" class="ag-ec-ty-btn" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Unirme al grupo
+      </a>
+      <p class="ag-ec-ty-warn">Si no entras, no te llegará el enlace de la masterclass.</p>
+    </div>
+
+    <div class="ag-ec-ty-meta">
+      <div class="ag-ec-ty-meta-cell">
+        <div class="ag-ec-ty-meta-label">Fecha</div>
+        <div class="ag-ec-ty-meta-value">Miércoles 21 oct</div>
+      </div>
+      <div class="ag-ec-ty-meta-cell">
+        <div class="ag-ec-ty-meta-label">Hora</div>
+        <div class="ag-ec-ty-meta-value">17:00h</div>
+      </div>
+      <div class="ag-ec-ty-meta-cell">
+        <div class="ag-ec-ty-meta-label">Formato</div>
+        <div class="ag-ec-ty-meta-value ag-ec-ty-meta-gold">Presencial y online</div>
+      </div>
+    </div>
+
+    <div class="ag-ec-ty-steps">
+      <p class="ag-ec-ty-steps-title">Próximos pasos</p>
+      <div class="ag-ec-ty-step">
+        <span class="ag-ec-ty-step-num">1</span>
+        <span class="ag-ec-ty-step-text"><strong>Únete al grupo de WhatsApp</strong>, es donde te llega todo.</span>
+      </div>
+      <div class="ag-ec-ty-step">
+        <span class="ag-ec-ty-step-num">2</span>
+        <span class="ag-ec-ty-step-text"><strong>Apúntalo en tu agenda:</strong> miércoles 21 de octubre a las 17:00h.</span>
+      </div>
+      <div class="ag-ec-ty-step">
+        <span class="ag-ec-ty-step-num">3</span>
+        <span class="ag-ec-ty-step-text"><strong>Elige cómo vienes:</strong> en la academia Kairós o desde casa con el enlace de Zoom.</span>
+      </div>
+    </div>
+
+    <div class="ag-ec-ty-footer">
+      Kairós Formación × AG Academy · Masterclass 21 de octubre de 2026
+    </div>
+
+  </div>
+</div>
