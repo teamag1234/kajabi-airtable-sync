@@ -1,11 +1,11 @@
 # Kit de difusión Kairós × AG Academy — Masterclass miércoles 21 oct 17:00h
 
-Landing: [URL_LANDING] (cambiar por la URL de Kajabi)
+Landing: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026
 
 Enlaces con seguimiento:
-- Email: [URL_LANDING]?utm_source=kairos&utm_medium=email&utm_campaign=masterclass21oct
-- WhatsApp: [URL_LANDING]?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
-- Instagram (bio): [URL_LANDING]?utm_source=kairos&utm_medium=instagram&utm_campaign=masterclass21oct
+- Email: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=email&utm_campaign=masterclass21oct
+- WhatsApp: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
+- Instagram (bio): https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=instagram&utm_campaign=masterclass21oct
 
 Imágenes:
 - instagram-post-kairos.png (1080x1350, feed)
@@ -33,7 +33,7 @@ El miércoles 21 de octubre a las 17:00h hacemos una masterclass gratuita, solo 
 Puedes venir a la academia o conectarte online. Las plazas presenciales son limitadas.
 
 Reserva tu sitio aquí:
-[URL_LANDING]?utm_source=kairos&utm_medium=email&utm_campaign=masterclass21oct
+https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=email&utm_campaign=masterclass21oct
 
 Te esperamos.
 
@@ -52,12 +52,12 @@ Cómo sacarlo en semanas y sumar esos puntos al baremo, sin quitarle horas a tem
 Podéis venir a la academia o conectaros online. Es solo para alumnos de Kairós y las plazas presenciales son limitadas.
 
 Apuntaos aquí 👇
-[URL_LANDING]?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
+https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
 
 ### Versión corta (para estados o mensajes sueltos)
 
 Miércoles 21 · 17:00h. Masterclass gratis sobre el certificado de inglés para opositores, en la academia u online. Plazas limitadas 👇
-[URL_LANDING]?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
+https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
 
 ---
 
