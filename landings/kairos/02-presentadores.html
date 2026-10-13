@@ -8,7 +8,6 @@
   .ag-ec-presenters-wrap {
     --ag-gold: #FFBD59;
     --kai-navy: #0B1B33;
-    --kai-blue: #2F6BFF;
     --text-soft: rgba(255, 255, 255, 0.72);
     background:
       radial-gradient(ellipse 50% 50% at 0% 50%, rgba(47, 107, 255, 0.22) 0%, transparent 65%),
@@ -51,6 +50,10 @@
     -webkit-text-fill-color: transparent !important;
   }
 
+  .ag-ec-pres-nowrap {
+    white-space: nowrap !important;
+  }
+
   .ag-ec-pres-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
@@ -64,8 +67,6 @@
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 24px !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
     padding: 36px 32px 34px !important;
     text-align: center !important;
     overflow: hidden !important;
@@ -213,7 +214,7 @@
   <div class="ag-ec-pres-header">
     <span class="ag-ec-pres-kicker">Quién te lo cuenta</span>
     <h2 class="ag-ec-pres-title">
-      Dos academias, <span style="white-space:nowrap">un objetivo:</span><br>
+      Dos academias, <span class="ag-ec-pres-nowrap">un objetivo:</span><br>
       <span class="ag-ec-grad">tu plaza</span>
     </h2>
   </div>
