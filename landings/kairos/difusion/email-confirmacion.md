@@ -18,7 +18,7 @@ Sé lo que es estar opositando: temas, supuestos, programación… y encima el i
 
 Te dejo los datos para que no se te escapen:
 
-📅 Miércoles 21 de octubre
+📅 Miércoles 28 de octubre
 🕔 17:00h
 📍 En la academia Kairós o desde casa, como te venga mejor
 

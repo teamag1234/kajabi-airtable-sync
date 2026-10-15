@@ -1,11 +1,11 @@
-# Kit de difusión Kairós × AG Academy — Masterclass miércoles 21 oct 17:00h
+# Kit de difusión Kairós × AG Academy — Masterclass miércoles 28 oct 17:00h
 
 Landing: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026
 
 Enlaces con seguimiento:
-- Email: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=email&utm_campaign=masterclass21oct
-- WhatsApp: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
-- Instagram (bio): https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=instagram&utm_campaign=masterclass21oct
+- Email: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=email&utm_campaign=masterclass28oct
+- WhatsApp: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass28oct
+- Instagram (bio): https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=instagram&utm_campaign=masterclass28oct
 
 Imágenes:
 - instagram-post-kairos.png (1080x1350, feed)
@@ -18,7 +18,7 @@ Imágenes:
 
 Asunto: El inglés también suma en tu oposición
 Asunto alternativo: ¿Tienes ya el certificado de inglés?
-Preheader: Masterclass gratis el miércoles 21 a las 17:00h, aquí en la academia u online.
+Preheader: Masterclass gratis el miércoles 28 a las 17:00h, aquí en la academia u online.
 
 Hola,
 
@@ -28,12 +28,12 @@ El problema es que ese certificado son puntos en el baremo. Y en una oposición,
 
 Por eso hemos organizado algo con AG Academy, una academia especializada en que opositores como tú saquen su certificado oficial de inglés rápido, sin quitarle horas al estudio. Llevan más de 6.000 alumnos y un 94% de aprobados.
 
-El miércoles 21 de octubre a las 17:00h hacemos una masterclass gratuita, solo para alumnos de Kairós. Jesu, su fundador, te va a contar qué certificado te conviene, por qué el APTIS es la vía más rápida y cómo encajarlo en tu oposición.
+El miércoles 28 de octubre a las 17:00h hacemos una masterclass gratuita, solo para alumnos de Kairós. Jesu, su fundador, te va a contar qué certificado te conviene, por qué el APTIS es la vía más rápida y cómo encajarlo en tu oposición.
 
 Puedes venir a la academia o conectarte online. Las plazas presenciales son limitadas.
 
 Reserva tu sitio aquí:
-https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=email&utm_campaign=masterclass21oct
+https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=email&utm_campaign=masterclass28oct
 
 Te esperamos.
 
@@ -45,19 +45,19 @@ Equipo Kairós
 
 Hola a todos 👋
 
-El miércoles 21 a las 17:00h hacemos una masterclass gratuita con AG Academy sobre el certificado de inglés para oposiciones.
+El miércoles 28 a las 17:00h hacemos una masterclass gratuita con AG Academy sobre el certificado de inglés para oposiciones.
 
 Cómo sacarlo en semanas y sumar esos puntos al baremo, sin quitarle horas a temas ni supuestos.
 
 Podéis venir a la academia o conectaros online. Es solo para alumnos de Kairós y las plazas presenciales son limitadas.
 
 Apuntaos aquí 👇
-https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
+https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass28oct
 
 ### Versión corta (para estados o mensajes sueltos)
 
-Miércoles 21 · 17:00h. Masterclass gratis sobre el certificado de inglés para opositores, en la academia u online. Plazas limitadas 👇
-https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass21oct
+Miércoles 28 · 17:00h. Masterclass gratis sobre el certificado de inglés para opositores, en la academia u online. Plazas limitadas 👇
+https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&utm_medium=whatsapp&utm_campaign=masterclass28oct
 
 ---
 
@@ -67,7 +67,7 @@ https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&ut
 
 ¿Te falta el certificado de inglés para tu oposición? Este miércoles te contamos cómo sacarlo.
 
-📅 Miércoles 21 de octubre
+📅 Miércoles 28 de octubre
 🕔 17:00h
 📍 En la academia Kairós o online por Zoom
 💸 Gratis · Solo para alumnos de Kairós
@@ -94,22 +94,22 @@ Story 1: ¿Tienes ya el certificado de inglés para tu oposición? 🤔
 
 Story 2: Son puntos en el baremo. Y se pueden sacar en semanas, sin dejar el temario.
 
-Story 3: Masterclass gratis · Miércoles 21 · 17:00h. En la academia o online. Solo alumnos Kairós.
+Story 3: Masterclass gratis · Miércoles 28 · 17:00h. En la academia o online. Solo alumnos Kairós.
 (Sticker de enlace: "Reserva tu plaza" → enlace de Instagram con UTM)
 
 ---
 
 ## 5. Recordatorios para el grupo de WhatsApp de inscritos
 
-### Día anterior (martes 20)
+### Día anterior (martes 27)
 
 ¡Mañana es el día! 🙌
 
-Miércoles 21 a las 17:00h. Si vienes a la academia, te esperamos allí. Si te conectas desde casa, por aquí te pasamos el enlace un ratito antes.
+Miércoles 28 a las 17:00h. Si vienes a la academia, te esperamos allí. Si te conectas desde casa, por aquí te pasamos el enlace un ratito antes.
 
 Ve pensando tus dudas sobre el certificado, que habrá tiempo para resolverlas.
 
-### Mañana del evento (miércoles 21, ~10:00h)
+### Mañana del evento (miércoles 28, ~10:00h)
 
 Hoy a las 17:00h nos vemos 👋
 
