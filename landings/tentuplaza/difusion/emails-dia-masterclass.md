@@ -5,7 +5,7 @@ Lunes 19 de octubre · 18:00h (peninsular) · Online por Zoom
 
 ## EMAIL 1 · TenTuPlaza a sus alumnos (última llamada)
 Envío: mañana (10:00–12:00h). Reenvío a no-aperturas a las 16:00h.
-Firma: Jose
+Firma: Equipo TenTuPlaza
 
 Asunto: Esta tarde hablamos del inglés
 Asunto alternativo: Lo que nadie te cuenta del inglés en Renfe
@@ -13,18 +13,16 @@ Preheader: Hoy a las 18:00h, online y gratis. Aún hay sitio.
 
 Hola,
 
-Cuando preparaba mi oposición, el inglés era eso que siempre dejaba para la semana siguiente. Y la semana siguiente nunca llegaba.
+Lo vemos cada año: el temario y los psicos se llevan todas las horas, y el inglés se queda para la semana que viene. Y la semana que viene nunca llega.
 
-Hoy veo a muchos de vosotros igual. Con el temario y los psicos a tope, y el inglés ahí, esperando.
-
-Por eso esta tarde, a las 18:00h, hacemos una masterclass con Jesu, de AG Academy. Son los que más saben de quitarse el inglés de encima rápido y sin estudiar lo que no sirve. Yo estaré también para lo que tenga que ver con Renfe.
+Por eso esta tarde, a las 18:00h, hacemos una masterclass con Jesu, de AG Academy. Son especialistas en que opositores como tú se quiten el inglés de encima rápido, sin estudiar lo que no sirve. Jose estará también en directo para todo lo que tenga que ver con Renfe.
 
 Es online y gratis. Si quieres estar, te apuntas aquí en un minuto:
 [URL_LANDING]?utm_source=tentuplaza&utm_medium=email&utm_campaign=masterclass19oct
 
-Nos vemos luego.
+Nos vemos esta tarde.
 
-Jose
+Equipo TenTuPlaza
 
 ---
 
