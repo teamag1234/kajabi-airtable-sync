@@ -1,83 +1,110 @@
-# Emails del día de la masterclass — TenTuPlaza × AG Academy
-Lunes 19 de octubre · 18:00h (hora peninsular) · Online por Zoom
+# Comunicaciones del día — TenTuPlaza × AG Academy
+Lunes 19 de octubre · 18:00h (peninsular) · Online por Zoom
 
 ---
 
-## 1. Email de TenTuPlaza a sus alumnos (última llamada)
+## EMAIL 1 · TenTuPlaza a sus alumnos (última llamada)
+Envío: mañana (10:00–12:00h). Reenvío a no-aperturas a las 16:00h.
+Firma: Jose
 
-Envío: hoy por la mañana (10:00–12:00h). Si se puede, segundo envío a no-aperturas a las 15:30h.
-Firma: Jose, TenTuPlaza
-
-Asunto: Hoy a las 18:00h (aún llegas)
-Asunto alternativo: Esta tarde: el inglés para Renfe, resuelto
-Preheader: Masterclass gratis online. Te apuntas en un minuto.
+Asunto: Esta tarde hablamos del inglés
+Asunto alternativo: Lo que nadie te cuenta del inglés en Renfe
+Preheader: Hoy a las 18:00h, online y gratis. Aún hay sitio.
 
 Hola,
 
-Te escribo rápido porque es hoy.
+Cuando preparaba mi oposición, el inglés era eso que siempre dejaba para la semana siguiente. Y la semana siguiente nunca llegaba.
 
-Esta tarde a las 18:00h hacemos la masterclass gratuita con AG Academy sobre el inglés para las oposiciones de Renfe.
+Hoy veo a muchos de vosotros igual. Con el temario y los psicos a tope, y el inglés ahí, esperando.
 
-Ya sabes cómo va esto: el temario y los psicos se llevan todas tus horas, y el inglés se queda para el final. Hoy Jesu, fundador de AG Academy, te va a enseñar cómo quitártelo de encima en poco tiempo, sin robarle horas al estudio. Y yo estaré en directo para resolver tus dudas sobre Renfe.
+Por eso esta tarde, a las 18:00h, hacemos una masterclass con Jesu, de AG Academy. Son los que más saben de quitarse el inglés de encima rápido y sin estudiar lo que no sirve. Yo estaré también para lo que tenga que ver con Renfe.
 
-Es online, por Zoom, y gratis. Todavía estás a tiempo de apuntarte:
+Es online y gratis. Si quieres estar, te apuntas aquí en un minuto:
+[URL_LANDING]?utm_source=tentuplaza&utm_medium=email&utm_campaign=masterclass19oct
 
-👉 [URL_LANDING]?utm_source=tentuplaza&utm_medium=email&utm_campaign=masterclass19oct
-
-Al apuntarte te llega el acceso al grupo de WhatsApp, que es por donde mandamos el enlace un rato antes de empezar.
-
-Nos vemos esta tarde.
+Nos vemos luego.
 
 Jose
-TenTuPlaza
-
-P.D. Si lo estás leyendo después de comer, también llegas. Son dos minutos: te apuntas, entras al grupo y a las 18:00h te conectas.
 
 ---
 
-## 2. Email de AG Academy a los inscritos (recordatorio del día)
+## EMAIL 2 · AG Academy a los inscritos (recordatorio del día)
+Envío: 12:00h. Aviso corto a las 17:30h.
+Firma: Jesu
 
-Envío: hoy a las 12:00h. Recomendado repetir un aviso corto a las 17:30h (ver abajo).
-Firma: Jesu, AG Academy
-
-Asunto: Hoy a las 18:00h nos vemos, {{ first_name }}
-Asunto alternativo: Es hoy: tu masterclass de inglés para Renfe
-Preheader: El enlace de Zoom te llega por el grupo de WhatsApp.
-
-Hola, {{ first_name }}:
-
-Hoy es el día. A las 18:00h (hora peninsular) empezamos la masterclass con TenTuPlaza.
-
-📅 Hoy, lunes 19 de octubre
-🕕 18:00h
-💻 Online por Zoom
-
-Te voy a enseñar cómo quitarte el inglés de encima en el menor tiempo posible, sin dejar de trabajar y sin descuidar el temario. Y Jose, de TenTuPlaza, estará en directo para resolver dudas sobre Renfe.
-
-Lo único importante: el enlace de Zoom lo mandamos por el grupo de WhatsApp un rato antes de empezar. Si todavía no estás dentro, entra ahora:
-
-👉 https://chat.whatsapp.com/G3g87bP9cg10WcLdEHkjeB
-
-Te recomiendo conectarte 5 minutos antes desde un sitio tranquilo, con papel y boli. Y si tienes alguna duda sobre el inglés para la oposición, apúntala, que habrá tiempo para preguntas.
-
-Nos vemos a las 18:00h.
-
-Jesu
-AG Academy
-
-### Aviso corto a las 17:30h (opcional)
-
-Asunto: Empezamos en 30 minutos
-Preheader: Entra aquí a las 18:00h.
+Asunto: Hoy a las 18:00h
+Asunto alternativo: {{ first_name }}, nos vemos esta tarde
+Preheader: Solo te pido una cosa antes de empezar.
 
 Hola, {{ first_name }}:
 
-En media hora empezamos. Conéctate aquí a las 18:00h:
+Esta tarde a las 18:00h nos vemos en la masterclass con TenTuPlaza.
 
-👉 [ENLACE_ZOOM]
+Solo te pido una cosa: si todavía no estás en el grupo de WhatsApp, entra ahora. Por ahí te paso el enlace de Zoom un rato antes de empezar y es la forma más fácil de no perdértelo.
+https://chat.whatsapp.com/G3g87bP9cg10WcLdEHkjeB
 
-Si no te funciona, el enlace también está en el grupo de WhatsApp.
+Busca un rato tranquilo, coge papel y boli, y trae apuntada esa duda del inglés que llevas tiempo arrastrando. Hoy la resolvemos.
 
-¡Te veo dentro!
+Hasta luego,
 
 Jesu
+
+### Aviso de las 17:30h
+
+Asunto: En 30 minutos empezamos
+Preheader: Aquí tienes el enlace.
+
+{{ first_name }}, en media hora empezamos.
+
+Entra aquí a las 18:00h:
+[ENLACE_ZOOM]
+
+Te veo dentro.
+
+Jesu
+
+---
+
+## WHATSAPP · TenTuPlaza a sus grupos (última llamada)
+
+### Mañana (10:00–12:00h)
+
+Hoy a las 18:00h hacemos la masterclass de inglés para Renfe con AG Academy 🚆
+
+Online y gratis. Si el inglés es lo que tienes pendiente, esta tarde te contamos cómo quitártelo de encima rápido.
+
+Te apuntas aquí 👇
+[URL_LANDING]?utm_source=tentuplaza&utm_medium=whatsapp&utm_campaign=masterclass19oct
+
+### Tarde (16:00h)
+
+En dos horas empezamos ⏰
+
+Aún estás a tiempo de entrar 👇
+[URL_LANDING]?utm_source=tentuplaza&utm_medium=whatsapp&utm_campaign=masterclass19oct
+
+---
+
+## WHATSAPP · AG Academy al grupo de inscritos
+
+### Mañana (10:00h)
+
+Buenos días 👋 Hoy a las 18:00h nos vemos.
+
+Por aquí os paso el enlace un rato antes.
+
+### 1 hora antes (17:00h)
+
+En una hora empezamos 🙌
+
+Id buscando un sitio tranquilo, que merece la pena.
+
+### 10 minutos antes (17:50h)
+
+Ya está abierta la sala, entrad 👇
+[ENLACE_ZOOM]
+
+### En directo (18:05h)
+
+Ya hemos empezado. Si te acabas de acordar, aún llegas 👇
+[ENLACE_ZOOM]
