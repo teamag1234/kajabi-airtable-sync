@@ -14,15 +14,16 @@ const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const leer = (f) => readFileSync(path.join(raiz, f), 'utf8');
 
 /**
- * Cuelga cada selector de #ag-tn para ganar al tema de Kajabi: `.ag-tn-x` pasa
- * a `#ag-tn .ag-tn-x` y `.ag-tn …` (la raíz) a `#ag-tn …`.
+ * Cuelga cada selector del id del widget para ganar al tema de Kajabi: con
+ * `ag-tn`, `.ag-tn-x` pasa a `#ag-tn .ag-tn-x` y `.ag-tn …` (la raíz) a `#ag-tn …`.
  */
-function acotarSelectores(css) {
+function acotarSelectores(css, id) {
+  const raiz = new RegExp(`^\\.${id}(?![-\\w])`);
   return css.replace(/(^|[{}])([^{}@]+)\{/g, (m, antes, selectores) => {
     const acotados = selectores.split(',').map((s) => {
       const sel = s.trim();
-      if (/^\.ag-tn(?![-\w])/.test(sel)) return sel.replace(/^\.ag-tn/, '#ag-tn');
-      return `#ag-tn ${sel}`;
+      if (raiz.test(sel)) return sel.replace(raiz, `#${id}`);
+      return `#${id} ${sel}`;
     });
     const sangria = selectores.match(/^\s*/)[0];
     return `${antes}${sangria}${acotados.join(', ')} {`;
@@ -30,17 +31,18 @@ function acotarSelectores(css) {
 }
 
 /**
- * Añade !important a cada declaración y acota los selectores a #ag-tn, salvo
- * dentro de @keyframes (ahí no vale ninguna de las dos cosas).
+ * Añade !important a cada declaración y acota los selectores a #<id> (por
+ * defecto el del test), salvo dentro de @keyframes (ahí no vale ninguna de las
+ * dos cosas). También lo usa scripts/build-demo-curso.mjs.
  */
-export function conImportant(css) {
+export function conImportant(css, id = 'ag-tn') {
   let salida = '';
   let i = 0;
   while (i < css.length) {
     const kf = css.indexOf('@keyframes', i);
     const fin = kf === -1 ? css.length : kf;
     const trozo = css.slice(i, fin).replace(/\/\*[\s\S]*?\*\//g, '');
-    salida += acotarSelectores(trozo).replace(/([^{};]+:[^{};]+?)\s*(;|\})/g, (m, decl, cierre) => {
+    salida += acotarSelectores(trozo, id).replace(/([^{};]+:[^{};]+?)\s*(;|\})/g, (m, decl, cierre) => {
       if (/!important\s*$/.test(decl) || !/^\s*[-a-z]+\s*:/i.test(decl)) return m;
       return `${decl} !important${cierre}`;
     });

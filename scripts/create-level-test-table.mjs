@@ -1,14 +1,15 @@
 /**
  * Crea en Airtable las tablas del test de nivel ("Test de nivel" y
- * "Conversaciones agente"), o les añade los campos que falten si ya existen
- * (no toca los que ya están).
+ * "Conversaciones agente") y la de la demo del curso ("Demo curso"), o les
+ * añade los campos que falten si ya existen (no toca los que ya están).
  *   node scripts/create-level-test-table.mjs
  * Requiere AIRTABLE_TOKEN (con permiso schema.bases:write) y AIRTABLE_BASE_ID.
- * Los nombres salen de AIRTABLE_LEVEL_TEST_TABLE y AIRTABLE_AGENT_TABLE.
+ * Los nombres salen de AIRTABLE_LEVEL_TEST_TABLE, AIRTABLE_AGENT_TABLE y AIRTABLE_DEMO_TABLE.
  */
 import axios from 'axios';
 import { CAMPOS_TABLA, TABLA_TEST } from '../lib/level-test/lead.js';
 import { CAMPOS_CONVERSACIONES, TABLA_CONVERSACIONES } from '../lib/whatsapp/conversaciones.js';
+import { CAMPOS_TABLA_DEMO, TABLA_DEMO } from '../lib/demo-curso/lead.js';
 
 const url = `https://api.airtable.com/v0/meta/bases/${process.env.AIRTABLE_BASE_ID}/tables`;
 const headers = { Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}` };
@@ -32,3 +33,4 @@ async function asegurarTabla(nombre, campos, descripcion) {
 
 await asegurarTabla(TABLA_TEST(), CAMPOS_TABLA, 'Leads del test de nivel de agacademyaptis.com/test-nivel');
 await asegurarTabla(TABLA_CONVERSACIONES(), CAMPOS_CONVERSACIONES, 'Mensajes del agente de WhatsApp con los leads del test de nivel');
+await asegurarTabla(TABLA_DEMO(), CAMPOS_TABLA_DEMO, 'Leads de la demo del curso de la web de inicio');

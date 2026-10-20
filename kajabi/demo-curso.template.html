@@ -1,0 +1,549 @@
+<!--
+  AG ACADEMY · DEMO DEL CURSO (aula de prueba)
+  NO EDITES kajabi/demo-curso.html A MANO: se genera con `npm run build:demo-curso`
+  a partir de kajabi/demo-curso.template.html, lib/demo-curso/contenido.js y lib/level-test/quiz.js.
+  Pega el contenido de kajabi/demo-curso.html en un bloque "Custom Code" de la página de inicio.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/*__CSS__*/
+</style>
+<div id="ag-demo" class="ag-demo"><div class="ag-demo-app"><p class="ag-demo-muted">Cargando el aula…</p></div></div>
+<script>
+(function () {
+  'use strict';
+
+  // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────
+  var CONFIG = {
+    // Lecciones que se ven sin dejar el email. A partir de aquí se pide para seguir.
+    leccionesLibres: 2,
+    // Dónde se guarda el lead (Airtable). Vacío = no se envía nada.
+    endpoint: 'https://kajabi-airtable-sync-d9nm.vercel.app/api/demo-curso',
+    privacidad: 'https://www.agacademyaptis.com/privacidad',
+    testNivel: 'https://www.agacademyaptis.com/test-nivel',
+    whatsapp: '34601926127',
+    storageKey: 'ag_demo_v1'
+  };
+
+  // ─── TEMARIO DE LA DEMO (lib/demo-curso/contenido.js) ────────────────────
+  /*__CONTENIDO__*/
+
+  // ─── CURSOS (lib/level-test/quiz.js) ─────────────────────────────────────
+  /*__QUIZ__*/
+
+  // ─── ESTADO ───────────────────────────────────────────────────────────────
+  var root = document.getElementById('ag-demo');
+  var estado = cargar() || { vista: 'portada', leccion: DEMO_LECCIONES[0].id, hechas: [], ej: {} };
+
+  function cargar() {
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)); } catch (e) { return null; }
+  }
+  function guardar() {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function euros(n) { return n.toLocaleString('es-ES') + ' €'; }
+  function primerNombre() { return esc((estado.nombre || '').trim().split(/\s+/)[0]); }
+  function track(evento, datos) {
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: evento }, datos || {})); } catch (e) {}
+  }
+  function indice(id) { return DEMO_LECCIONES.findIndex(function (l) { return l.id === id; }); }
+  function hecha(id) { return estado.hechas.indexOf(id) !== -1; }
+  function registrado() { return Boolean(estado.email); }
+  // Lección que pide el email antes de abrirse (la primera después de las libres).
+  function requiereRegistro(id) { return !registrado() && indice(id) >= CONFIG.leccionesLibres; }
+  // Estado de cada ejercicio, guardado por lección para poder volver a ella.
+  function ej(id) { return estado.ej[id] || (estado.ej[id] = {}); }
+
+  // ─── ATRIBUCIÓN (GCLID + UTMs) ────────────────────────────────────────────
+  function param(n) { try { return new URLSearchParams(location.search).get(n) || ''; } catch (e) { return ''; } }
+  function cookie(n) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function gclid() {
+    var g = param('gclid');
+    try { g = g || localStorage.getItem('gclid') || ''; } catch (e) {}
+    return g || cookie('gclid');
+  }
+  function atribucion() {
+    return {
+      gclid: gclid(), utm_source: param('utm_source'), utm_medium: param('utm_medium'),
+      utm_campaign: param('utm_campaign'), utm_content: param('utm_content'), pagina: location.href.split('#')[0]
+    };
+  }
+  if (!estado.atribucion || (!estado.atribucion.gclid && gclid())) { estado.atribucion = atribucion(); guardar(); }
+
+  function enviar(datos) {
+    if (!CONFIG.endpoint) return;
+    var body = JSON.stringify(datos);
+    // text/plain evita la petición previa de CORS; el servidor lo lee como JSON.
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(CONFIG.endpoint, new Blob([body], { type: 'text/plain' }))) return;
+    } catch (e) {}
+    try { fetch(CONFIG.endpoint, { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+  }
+
+  // ─── ESTRUCTURA: barra superior + temario + lección ──────────────────────
+  // quieto = repintar sin mover el foco ni la página (al cargar y al contestar
+  // dentro de una lección, para que no salte arriba).
+  function pintar(quieto) {
+    pararSpeaking();
+    var contenido = estado.vista === 'portada' ? portada() : '<div class="ag-demo-player">' + temario() +
+      '<main class="ag-demo-main ag-demo-in">' + VISTAS[estado.vista]() + '</main></div>';
+    root.innerHTML = '<div class="ag-demo-app">' + barraSuperior() + contenido + '</div>';
+    if (estado.vista === 'writing') contarWriting();
+    if (quieto) return;
+    var foco = root.querySelector('[autofocus]');
+    if (foco) foco.focus({ preventScroll: true });
+    var top = root.getBoundingClientRect().top;
+    if (top < 0) window.scrollTo({ top: window.scrollY + top - 16, behavior: 'smooth' });
+  }
+
+  function barraSuperior() {
+    var pct = Math.round((estado.hechas.length / DEMO_LECCIONES.length) * 100);
+    return '<div class="ag-demo-top"><div class="ag-demo-brand"><span class="ag-demo-dot"></span>Aula AG Academy <span class="ag-demo-pill">Modo demo</span></div>' +
+      '<div class="ag-demo-top-progress"><span>' + estado.hechas.length + '/' + DEMO_LECCIONES.length + ' lecciones</span>' +
+      '<div class="ag-demo-bar"><div class="ag-demo-bar-fill" style="width:' + pct + '% !important"></div></div></div></div>';
+  }
+
+  function temario() {
+    var actual = estado.vista === 'fin' ? '' : estado.leccion;
+    var modulos = DEMO_MODULOS.map(function (m) {
+      var items = m.lecciones.map(function (l) {
+        if (m.bloqueado) return '<li class="ag-demo-item ag-demo-locked"><span class="ag-demo-ico">🔒</span><span>' + esc(l) + '</span></li>';
+        var cls = (l.id === actual ? ' ag-demo-on' : '') + (hecha(l.id) ? ' ag-demo-done' : '');
+        var ico = hecha(l.id) ? '✓' : requiereRegistro(l.id) ? '🔑' : '▶';
+        return '<li><button type="button" class="ag-demo-item' + cls + '" data-accion="ir" data-id="' + l.id + '">' +
+          '<span class="ag-demo-ico">' + ico + '</span><span>' + esc(l.titulo) + '<small>' + esc(l.duracion) + '</small></span></button></li>';
+      }).join('');
+      return '<div class="ag-demo-mod' + (m.bloqueado ? ' ag-demo-mod-locked' : '') + '"><p class="ag-demo-mod-t">' + esc(m.titulo) +
+        (m.bloqueado ? ' <span>En el curso completo</span>' : '') + '</p><ul>' + items + '</ul></div>';
+    }).join('');
+    var final = '<button type="button" class="ag-demo-item ag-demo-item-fin' + (estado.vista === 'fin' ? ' ag-demo-on' : '') + '" data-accion="fin">' +
+      '<span class="ag-demo-ico">★</span><span>¿Y ahora qué?</span></button>';
+    // En móvil el temario va plegado encima de la lección.
+    return '<aside class="ag-demo-side"><details class="ag-demo-toc"' + (window.innerWidth > 860 ? ' open' : '') + '>' +
+      '<summary>Temario de la demo</summary>' + modulos + final + '</details></aside>';
+  }
+
+  // ─── PORTADA ──────────────────────────────────────────────────────────────
+  function portada() {
+    var empezada = estado.hechas.length > 0;
+    return '<div class="ag-demo-cover ag-demo-in">' +
+      '<div class="ag-demo-badge">Prueba gratis · sin tarjeta</div>' +
+      '<h2 class="ag-demo-h1">Entra al curso <span class="ag-demo-gold">antes de apuntarte</span></h2>' +
+      '<p class="ag-demo-lead">Esto es el aula por dentro. Una lección de cada parte del APTIS, con los mismos ejercicios y trucos que usan nuestros alumnos. Pruébalo y decides después.</p>' +
+      '<ul class="ag-demo-steps"><li><b>5</b><span>lecciones reales</span></li><li><b>4</b><span>partes: Grammar, Reading, Writing y Speaking</span></li><li><b>20 min</b><span>y ves si el método va contigo</span></li></ul>' +
+      '<button type="button" class="ag-demo-btn" data-accion="empezar" autofocus>' + (empezada ? 'Seguir donde lo dejé →' : 'Entrar al aula →') + '</button>' +
+      '<p class="ag-demo-small">Las ' + CONFIG.leccionesLibres + ' primeras lecciones, sin dar ningún dato.</p></div>';
+  }
+
+  // ─── LECCIONES ────────────────────────────────────────────────────────────
+  function cabecera(l) {
+    var n = indice(l.id) + 1;
+    return '<p class="ag-demo-kicker">Lección ' + n + ' de ' + DEMO_LECCIONES.length + ' · ' + esc(l.duracion) + '</p>' +
+      '<h2 class="ag-demo-h2">' + esc(l.titulo) + '</h2>' + video(l.video) +
+      (l.intro ? '<p class="ag-demo-lead">' + esc(l.intro) + '</p>' : '');
+  }
+
+  function video(url) {
+    if (!url) return '';
+    return '<div class="ag-demo-video"><iframe src="' + esc(url) + '" title="Vídeo de la lección" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
+  }
+
+  function pie(l, listo) {
+    var i = indice(l.id);
+    var sig = DEMO_LECCIONES[i + 1];
+    var texto = sig ? 'Siguiente lección →' : 'Terminar la demo →';
+    return '<div class="ag-demo-foot">' +
+      (i > 0 ? '<button type="button" class="ag-demo-link" data-accion="ir" data-id="' + DEMO_LECCIONES[i - 1].id + '">← Anterior</button>' : '<span></span>') +
+      '<button type="button" class="ag-demo-btn ag-demo-btn-inline" data-accion="completar"' + (listo ? '' : ' disabled') + '>' + texto + '</button></div>';
+  }
+
+  function leccionActual() { return leccionDemo(estado.leccion) || DEMO_LECCIONES[0]; }
+
+  var VISTAS = {
+    intro: function () {
+      var l = leccionActual();
+      return cabecera(l) + '<div class="ag-demo-blocks">' + l.bloques.map(function (b, k) {
+        return '<div class="ag-demo-block"><span class="ag-demo-num">' + (k + 1) + '</span><div><h3>' + esc(b.titulo) + '</h3><p>' + esc(b.texto) + '</p></div></div>';
+      }).join('') + '</div><p class="ag-demo-tip"><b>Antes de empezar:</b> ' + esc(l.clave) + '</p>' + pie(l, true);
+    },
+
+    test: function () {
+      var l = leccionActual();
+      var r = ej(l.id).r || [];
+      var preguntas = l.preguntas.map(function (p, q) {
+        var elegida = r[q];
+        var opciones = p.opciones.map(function (o, k) {
+          var cls = elegida == null ? '' : k === p.correcta ? ' ag-demo-ok' : k === elegida ? ' ag-demo-ko' : ' ag-demo-dim';
+          return '<button type="button" class="ag-demo-opt' + cls + '" data-accion="test" data-q="' + q + '" data-k="' + k + '"' + (elegida == null ? '' : ' disabled') + '>' +
+            '<span class="ag-demo-key">' + 'ABC'[k] + '</span><span>' + esc(o) + '</span></button>';
+        }).join('');
+        var truco = elegida == null ? '' : '<p class="ag-demo-truco ' + (elegida === p.correcta ? 'ag-demo-truco-ok' : 'ag-demo-truco-ko') + '"><b>' +
+          (elegida === p.correcta ? '¡Bien! ' : 'Era la ' + 'ABC'[p.correcta] + '. ') + 'Truco:</b> ' + esc(p.truco) + '</p>';
+        var enunciado = esc(p.enunciado).replace(/_{3,}/g, '<span class="ag-demo-blank">_____</span>');
+        return '<div class="ag-demo-q"><p class="ag-demo-q-t"><span>' + (q + 1) + '</span>' + enunciado + '</p><div class="ag-demo-opts">' + opciones + '</div>' + truco + '</div>';
+      }).join('');
+      var contestadas = r.filter(function (x) { return x != null; }).length;
+      var aciertos = l.preguntas.filter(function (p, q) { return r[q] === p.correcta; }).length;
+      var resumen = contestadas === l.preguntas.length
+        ? '<p class="ag-demo-score">' + aciertos + ' de ' + l.preguntas.length + '. ' + (aciertos === l.preguntas.length ? 'Perfecta. Así se ve una pregunta en 5 segundos.' : 'Ahora ya conoces la trampa: la próxima vez no cae.') + '</p>'
+        : '';
+      return cabecera(l) + preguntas + resumen + pie(l, contestadas === l.preguntas.length);
+    },
+
+    ordenar: function () {
+      var l = leccionActual();
+      var e = ej(l.id);
+      if (!e.mezcla) { e.mezcla = mezclar(l.frases.map(function (_, k) { return k; })); guardar(); }
+      var orden = e.orden || [];
+      var corregido = e.corregido;
+      var colocadas = orden.map(function (k, pos) {
+        var cls = corregido ? (k === pos ? ' ag-demo-ok' : ' ag-demo-ko') : '';
+        return '<li class="ag-demo-slot' + cls + '"><span>' + (pos + 2) + '</span>' + esc(l.frases[k]) + '</li>';
+      }).join('');
+      var huecos = '';
+      for (var h = orden.length; h < l.frases.length; h++) huecos += '<li class="ag-demo-slot ag-demo-slot-empty"><span>' + (h + 2) + '</span>…</li>';
+      var pendientes = e.mezcla.filter(function (k) { return orden.indexOf(k) === -1; }).map(function (k) {
+        return '<button type="button" class="ag-demo-chip" data-accion="ordenar" data-k="' + k + '">' + esc(l.frases[k]) + '</button>';
+      }).join('');
+      var aciertos = orden.filter(function (k, pos) { return k === pos; }).length;
+      var acciones = corregido
+        ? '<p class="ag-demo-score">' + aciertos + ' de ' + l.frases.length + ' en su sitio.</p>' +
+          '<p class="ag-demo-truco ag-demo-truco-ok"><b>Truco:</b> ' + esc(l.truco) + '</p>' +
+          (aciertos < l.frases.length ? '<button type="button" class="ag-demo-link" data-accion="ordenar-reiniciar">Volver a intentarlo</button>' : '')
+        : orden.length === l.frases.length
+          ? '<button type="button" class="ag-demo-btn" data-accion="ordenar-corregir">Corregir</button>'
+          : orden.length ? '<button type="button" class="ag-demo-link" data-accion="ordenar-deshacer">Deshacer la última</button>' : '';
+      return cabecera(l) +
+        '<ol class="ag-demo-order"><li class="ag-demo-slot ag-demo-slot-first"><span>1</span>' + esc(l.primera) + '</li>' + colocadas + huecos + '</ol>' +
+        (pendientes ? '<div class="ag-demo-chips">' + pendientes + '</div>' : '') + acciones + pie(l, Boolean(corregido));
+    },
+
+    writing: function () {
+      var l = leccionActual();
+      var e = ej(l.id);
+      var plantilla = l.plantilla.map(function (p) {
+        return '<li><b>' + esc(p.frase) + '</b><small>' + esc(p.nota) + '</small></li>';
+      }).join('');
+      return cabecera(l) +
+        '<h3 class="ag-demo-h3">La plantilla</h3><ul class="ag-demo-template">' + plantilla + '</ul>' +
+        '<h3 class="ag-demo-h3">Ahora tú</h3><p class="ag-demo-task">' + esc(l.tarea) + '</p>' +
+        '<textarea class="ag-demo-textarea" data-accion="writing" rows="9" placeholder="Dear Sir or Madam,&#10;I am writing to…">' + esc(e.texto || '') + '</textarea>' +
+        '<p class="ag-demo-count" id="ag-demo-count"></p>' +
+        (e.modelo
+          ? '<h3 class="ag-demo-h3">Email modelo</h3><div class="ag-demo-model">' + resaltarPlantilla(l) + '</div>' +
+            '<p class="ag-demo-truco ag-demo-truco-ok"><b>Fíjate:</b> las frases en dorado son la plantilla. Lo demás es contenido. Así se escribe rápido y con la nota asegurada.</p>'
+          : '<button type="button" class="ag-demo-btn ag-demo-btn-ghost" data-accion="writing-modelo">Ver el email modelo</button>') +
+        pie(l, Boolean(e.modelo));
+    },
+
+    speaking: function () {
+      var l = leccionActual();
+      var e = ej(l.id);
+      var q = e.q || 0;
+      var p = l.preguntas[q];
+      var vistas = e.vistas || [];
+      var grabar = puedeGrabar()
+        ? '<button type="button" class="ag-demo-btn ag-demo-btn-ghost" data-accion="speaking-grabar">🎙️ Grabarme mientras respondo</button>'
+        : '';
+      return cabecera(l) +
+        '<p class="ag-demo-tip"><b>Estructura:</b> ' + esc(l.estructura) + '</p>' +
+        '<div class="ag-demo-speak"><p class="ag-demo-kicker">Pregunta ' + (q + 1) + ' de ' + l.preguntas.length + '</p>' +
+        '<p class="ag-demo-speak-q">' + esc(p.pregunta) + '</p>' +
+        '<div class="ag-demo-timer" id="ag-demo-timer">' + l.segundos + '</div>' +
+        '<div id="ag-demo-speak-acciones"><button type="button" class="ag-demo-btn" data-accion="speaking-empezar">Responder (' + l.segundos + ' s)</button>' + grabar + '</div>' +
+        '<div id="ag-demo-audio">' + (speak.url && speak.urlQ === q ? '<p class="ag-demo-small">Tu respuesta:</p><audio controls src="' + speak.url + '"></audio>' : '') + '</div>' +
+        (vistas.indexOf(q) !== -1
+          ? '<div class="ag-demo-model"><b>Respuesta modelo:</b> ' + esc(p.modelo) + '</div>'
+          : '<button type="button" class="ag-demo-link" data-accion="speaking-modelo">Ver respuesta modelo</button>') +
+        '</div>' +
+        '<div class="ag-demo-dots">' + l.preguntas.map(function (_, k) {
+          return '<button type="button" class="ag-demo-dotq' + (k === q ? ' ag-demo-on' : '') + (vistas.indexOf(k) !== -1 ? ' ag-demo-done' : '') + '" data-accion="speaking-ir" data-k="' + k + '" aria-label="Pregunta ' + (k + 1) + '">' + (k + 1) + '</button>';
+        }).join('') + '</div>' +
+        pie(l, vistas.length > 0);
+    },
+
+    registro: function () {
+      var l = leccionActual();
+      return '<div class="ag-demo-gate"><div class="ag-demo-check">🔑</div>' +
+        '<h2 class="ag-demo-h2">Desbloquea el resto del aula</h2>' +
+        '<p class="ag-demo-lead">Te quedan ' + (DEMO_LECCIONES.length - CONFIG.leccionesLibres) + ' lecciones: Reading, Writing y Speaking. Déjanos tus datos y entras ahora mismo. Así también guardamos tu progreso.</p>' +
+        '<form class="ag-demo-form" data-accion="registro" novalidate>' +
+        '<label class="ag-demo-label" for="ag-demo-nombre">Nombre</label>' +
+        '<input id="ag-demo-nombre" class="ag-demo-input" name="nombre" autocomplete="given-name" required maxlength="60" placeholder="Tu nombre" value="' + esc(estado.nombre) + '" autofocus>' +
+        '<label class="ag-demo-label" for="ag-demo-email">Email</label>' +
+        '<input id="ag-demo-email" class="ag-demo-input" type="email" name="email" autocomplete="email" required maxlength="120" placeholder="tu@email.com">' +
+        '<label class="ag-demo-label" for="ag-demo-tel">WhatsApp</label>' +
+        '<input id="ag-demo-tel" class="ag-demo-input" type="tel" name="telefono" autocomplete="tel" required maxlength="20" placeholder="600 000 000">' +
+        '<label class="ag-demo-consent"><input type="checkbox" name="acepto" required> <span>Acepto la <a href="' + CONFIG.privacidad + '" target="_blank" rel="noopener">política de privacidad</a> y que AG Academy me escriba sobre el curso.</span></label>' +
+        '<p class="ag-demo-error" hidden></p>' +
+        '<button class="ag-demo-btn" type="submit">Desbloquear: ' + esc(l.titulo) + ' →</button></form></div>';
+    },
+
+    fin: function () {
+      var saludo = estado.nombre ? primerNombre() + ', ' : '';
+      var todas = estado.hechas.length === DEMO_LECCIONES.length;
+      var cursos = Object.keys(CURSOS_TEST).map(function (k) {
+        var c = CURSOS_TEST[k];
+        return '<div class="ag-demo-course' + (k === 'express' ? ' ag-demo-course-top' : '') + '">' +
+          (k === 'express' ? '<span class="ag-demo-course-tag">El más elegido</span>' : '') +
+          '<h3>' + esc(c.nombre) + '</h3><p class="ag-demo-course-sub">' + esc(c.subtitulo) + '</p>' +
+          '<ul class="ag-demo-list">' + c.incluye.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+          '<p class="ag-demo-course-price">' + euros(c.precio) + '<small>o 3 cuotas sin intereses con Klarna</small></p>' +
+          '<a class="ag-demo-btn' + (k === 'express' ? '' : ' ag-demo-btn-ghost') + '" data-accion="comprar" data-curso="' + k + '" href="' + urlCheckout(k) + '">Empezar con este →</a></div>';
+      }).join('');
+      return '<div class="ag-demo-center"><div class="ag-demo-check">' + (todas ? '✓' : '★') + '</div>' +
+        '<h2 class="ag-demo-h2">' + (todas ? saludo + 'has hecho la demo entera' : saludo + 'esto es lo que te espera dentro') + '</h2>' +
+        '<p class="ag-demo-lead">Lo que acabas de probar es como se trabaja cada parte del curso: explicación corta, ejercicio tipo examen y el truco para no fallarlo. Dentro tienes el resto de partes, simulacros y clases en directo.</p></div>' +
+        '<div class="ag-demo-courses">' + cursos + '</div>' +
+        '<p class="ag-demo-guarantee"><span>🛡️</span> <span><b>15 días de prueba.</b> Entra, mira las clases, prueba el método. Si no te convence, te devolvemos el dinero. Sin preguntas.</span></p>' +
+        '<div class="ag-demo-help"><p><b>¿No sabes cuál te encaja?</b> Escríbenos y te lo decimos en 2 minutos, o haz el <a href="' + CONFIG.testNivel + '">test de nivel gratis</a> y te lo recomienda él.</p>' +
+        '<a class="ag-demo-btn ag-demo-btn-wa" data-accion="whatsapp" href="' + urlWhatsApp() + '" target="_blank" rel="noopener">Tengo dudas, os escribo por WhatsApp</a></div>';
+    }
+  };
+
+  function urlCheckout(key) {
+    return CURSOS_TEST[key].url + '?utm_source=demo-curso&utm_medium=web&utm_campaign=demo-curso&utm_content=' + key;
+  }
+
+  function urlWhatsApp() {
+    var nombre = (estado.nombre || '').trim().split(/\s+/)[0];
+    var texto = 'Hola!' + (nombre ? ' Soy ' + nombre + '.' : '') + ' He probado la demo del curso en la web y tengo unas dudas antes de apuntarme 🙂';
+    return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(texto);
+  }
+
+  function resaltarPlantilla(l) {
+    var html = esc(l.modelo);
+    l.plantilla.forEach(function (p) {
+      p.frase.split(/\s*(?:\/|…)\s*/).forEach(function (trozo) {
+        var t = esc(trozo.replace(/[,.]+$/, '').trim());
+        if (t.length > 4) html = html.split(t).join('<mark>' + t + '</mark>');
+      });
+    });
+    return html.replace(/\n/g, '<br>');
+  }
+
+  function mezclar(arr) {
+    var a = arr.slice();
+    do {
+      for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    } while (a.every(function (x, k) { return x === k; }));
+    return a;
+  }
+
+  function contarWriting() {
+    var area = root.querySelector('.ag-demo-textarea');
+    var el = document.getElementById('ag-demo-count');
+    if (!area || !el) return;
+    var l = leccionActual();
+    var n = contarPalabras(area.value);
+    var ok = n >= l.minimo && n <= l.maximo;
+    el.textContent = n + ' palabras · objetivo ' + l.minimo + '-' + l.maximo;
+    el.className = 'ag-demo-count' + (ok ? ' ag-demo-count-ok' : '');
+  }
+
+  // ─── SPEAKING: cuenta atrás y grabación (nada sale del navegador) ────────
+  var speak = { intervalo: null, rec: null, stream: null, trozos: [], url: null, urlQ: null };
+  function puedeGrabar() { return Boolean(window.MediaRecorder && navigator.mediaDevices && navigator.mediaDevices.getUserMedia); }
+
+  function pararSpeaking() {
+    clearInterval(speak.intervalo);
+    speak.intervalo = null;
+    if (speak.rec && speak.rec.state !== 'inactive') { speak.rec.onstop = null; speak.rec.stop(); }
+    if (speak.stream) speak.stream.getTracks().forEach(function (t) { t.stop(); });
+    speak.rec = null;
+    speak.stream = null;
+  }
+
+  function cuentaAtras(conGrabacion) {
+    var l = leccionActual();
+    var restante = l.segundos;
+    var timer = document.getElementById('ag-demo-timer');
+    var acciones = document.getElementById('ag-demo-speak-acciones');
+    if (acciones) acciones.innerHTML = '<button type="button" class="ag-demo-link" data-accion="speaking-parar">He terminado</button>';
+    if (timer) { timer.textContent = restante; timer.classList.add('ag-demo-timer-on'); }
+    track('demo_curso_speaking', { grabando: conGrabacion });
+    speak.intervalo = setInterval(function () {
+      restante -= 1;
+      if (timer) timer.textContent = Math.max(restante, 0);
+      if (restante <= 0) terminarRespuesta();
+    }, 1000);
+  }
+
+  function terminarRespuesta() {
+    clearInterval(speak.intervalo);
+    speak.intervalo = null;
+    var l = leccionActual();
+    var e = ej(l.id);
+    e.vistas = e.vistas || [];
+    if (e.vistas.indexOf(e.q || 0) === -1) e.vistas.push(e.q || 0);
+    guardar();
+    if (speak.rec && speak.rec.state !== 'inactive') {
+      speak.rec.onstop = function () {
+        if (speak.stream) speak.stream.getTracks().forEach(function (t) { t.stop(); });
+        var blob = new Blob(speak.trozos, { type: speak.rec.mimeType || 'audio/webm' });
+        if (speak.url) URL.revokeObjectURL(speak.url);
+        speak.url = URL.createObjectURL(blob);
+        speak.urlQ = e.q || 0;
+        speak.rec = null;
+        speak.stream = null;
+        pintar(true);
+      };
+      speak.rec.stop();
+    } else {
+      pintar(true);
+    }
+  }
+
+  function grabarYEmpezar() {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      speak.stream = stream;
+      speak.trozos = [];
+      speak.rec = new MediaRecorder(stream);
+      speak.rec.ondataavailable = function (ev) { if (ev.data && ev.data.size) speak.trozos.push(ev.data); };
+      speak.rec.start();
+      cuentaAtras(true);
+    }).catch(function () {
+      // Sin permiso de micro: responde igual, sin grabar.
+      cuentaAtras(false);
+    });
+  }
+
+  // ─── NAVEGACIÓN ───────────────────────────────────────────────────────────
+  function abrir(id) {
+    var l = leccionDemo(id);
+    if (!l) return;
+    estado.leccion = id;
+    estado.vista = requiereRegistro(id) ? 'registro' : l.tipo;
+    if (estado.vista === 'registro') track('demo_curso_registro_visto', { leccion: id });
+    guardar();
+    pintar();
+  }
+
+  function completar() {
+    var l = leccionActual();
+    if (!hecha(l.id)) {
+      estado.hechas.push(l.id);
+      track('demo_curso_leccion', { leccion: l.id, numero: indice(l.id) + 1 });
+      if (registrado()) enviar({ evento: 'progreso', email: estado.email, hechas: estado.hechas, leccion: l.id });
+      if (estado.hechas.length === DEMO_LECCIONES.length) track('demo_curso_completada');
+    }
+    var sig = DEMO_LECCIONES[indice(l.id) + 1];
+    if (sig) { abrir(sig.id); return; }
+    estado.vista = 'fin';
+    guardar();
+    pintar();
+  }
+
+  function registrar(form) {
+    var nombre = form.nombre.value.trim();
+    var email = form.email.value.trim();
+    var tel = form.telefono.value.replace(/[^\d+]/g, '');
+    var error = form.querySelector('.ag-demo-error');
+    var msg = !nombre ? '¿Cómo te llamas?'
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? 'Revisa el email, parece que falta algo.'
+      : tel.replace(/\D/g, '').length < 9 ? 'Pon tu número de WhatsApp (9 cifras).'
+      : !form.acepto.checked ? 'Necesitamos que aceptes la política de privacidad para darte acceso.' : '';
+    if (msg) { error.textContent = msg; error.hidden = false; return; }
+
+    estado.nombre = nombre;
+    estado.email = email;
+    estado.telefono = tel;
+    enviar({
+      evento: 'alta', nombre: nombre, email: email, telefono: tel,
+      hechas: estado.hechas, leccion: estado.leccion, atribucion: estado.atribucion
+    });
+    track('demo_curso_lead', { lecciones_hechas: estado.hechas.length });
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Demo curso' }); } catch (e) {}
+    abrir(estado.leccion);
+  }
+
+  root.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (ev.target.getAttribute('data-accion') === 'registro') registrar(ev.target);
+  });
+
+  root.addEventListener('input', function (ev) {
+    if (ev.target.getAttribute('data-accion') !== 'writing') return;
+    ej(estado.leccion).texto = ev.target.value;
+    guardar();
+    contarWriting();
+  });
+
+  root.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-accion]');
+    if (!el || el.tagName === 'FORM' || el.tagName === 'TEXTAREA' || el.disabled) return;
+    var accion = el.getAttribute('data-accion');
+    var l = leccionActual();
+    var e = ej(l.id);
+
+    if (accion === 'comprar') {
+      var curso = el.getAttribute('data-curso');
+      if (registrado()) enviar({ evento: 'clic', email: estado.email, curso: curso });
+      track('demo_curso_oferta_click', { curso: curso });
+      return; // el enlace sigue su curso
+    }
+    if (accion === 'whatsapp') {
+      if (registrado()) enviar({ evento: 'whatsapp', email: estado.email });
+      track('demo_curso_whatsapp');
+      return; // el enlace abre WhatsApp
+    }
+    if (accion === 'empezar') {
+      if (!estado.hechas.length) track('demo_curso_inicio');
+      abrir(estado.leccion);
+      return;
+    }
+    if (accion === 'ir') { abrir(el.getAttribute('data-id')); return; }
+    if (accion === 'fin') { estado.vista = 'fin'; guardar(); pintar(); return; }
+    if (accion === 'completar') { completar(); return; }
+
+    if (accion === 'test') {
+      e.r = e.r || [];
+      e.r[Number(el.getAttribute('data-q'))] = Number(el.getAttribute('data-k'));
+    } else if (accion === 'ordenar') {
+      e.orden = (e.orden || []).concat(Number(el.getAttribute('data-k')));
+    } else if (accion === 'ordenar-deshacer') {
+      e.orden = (e.orden || []).slice(0, -1);
+    } else if (accion === 'ordenar-corregir') {
+      e.corregido = true;
+    } else if (accion === 'ordenar-reiniciar') {
+      e.orden = [];
+      e.corregido = false;
+    } else if (accion === 'writing-modelo') {
+      e.modelo = true;
+    } else if (accion === 'speaking-modelo') {
+      e.vistas = (e.vistas || []).concat(e.q || 0);
+    } else if (accion === 'speaking-ir') {
+      e.q = Number(el.getAttribute('data-k'));
+    } else if (accion === 'speaking-empezar') {
+      cuentaAtras(false);
+      return;
+    } else if (accion === 'speaking-grabar') {
+      grabarYEmpezar();
+      return;
+    } else if (accion === 'speaking-parar') {
+      terminarRespuesta();
+      return;
+    } else {
+      return;
+    }
+    guardar();
+    pintar(true);
+  });
+
+  // Si guardó una vista que ya no existe (cambio de temario), vuelve a la portada.
+  if (estado.vista !== 'portada' && !VISTAS[estado.vista]) estado.vista = 'portada';
+  if (!leccionDemo(estado.leccion)) estado.leccion = DEMO_LECCIONES[0].id;
+  estado.hechas = estado.hechas.filter(function (id) { return leccionDemo(id); });
+  pintar(true);
+})();
+</script>

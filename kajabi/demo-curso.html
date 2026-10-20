@@ -1,0 +1,1220 @@
+<!--
+  AG ACADEMY · DEMO DEL CURSO (aula de prueba)
+  NO EDITES kajabi/demo-curso.html A MANO: se genera con `npm run build:demo-curso`
+  a partir de kajabi/demo-curso.template.html, lib/demo-curso/contenido.js y lib/level-test/quiz.js.
+  Pega el contenido de kajabi/demo-curso.html en un bloque "Custom Code" de la página de inicio.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+#ag-demo {
+  --ag-navy: #0a0e27 !important;
+  --ag-navy-2: #121838;
+  --ag-navy-3: #1b2350;
+  --ag-gold: #FFBD59 !important;
+  --ag-gold-2: #ffcf85;
+  --ag-text: #f3f4fa !important;
+  --ag-muted: #a7acc9 !important;
+  --ag-ok: #3ddc97 !important;
+  --ag-ko: #ff8a8a !important;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+  color: var(--ag-text) !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 24px 16px !important;
+  box-sizing: border-box !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+}
+#ag-demo *, #ag-demo *::before, #ag-demo *::after { box-sizing: border-box !important; }
+#ag-demo h2, #ag-demo h3, #ag-demo p, #ag-demo ul, #ag-demo ol, #ag-demo li { font-family: inherit !important; color: inherit !important; margin: 0 !important; padding: 0 !important; letter-spacing: 0 !important; text-transform: none !important; }
+#ag-demo button, #ag-demo a, #ag-demo input, #ag-demo textarea, #ag-demo summary { letter-spacing: 0 !important; text-transform: none !important; }
+#ag-demo .ag-demo-app {
+  background: radial-gradient(120% 80% at 100% 0%, rgba(255, 189, 89, 0.10) 0%, rgba(255, 189, 89, 0) 55%), linear-gradient(180deg, var(--ag-navy-2) 0%, var(--ag-navy) 100%) !important;
+  border: 1px solid rgba(255, 189, 89, 0.18) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 24px 60px rgba(10, 14, 39, 0.35) !important;
+  overflow: hidden !important;
+  min-height: 460px !important;
+}
+#ag-demo .ag-demo-in { animation: ag-demo-in 0.35s ease both !important; }
+@keyframes ag-demo-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+#ag-demo .ag-demo-top { display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 16px !important; padding: 14px 22px !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; background: rgba(10, 14, 39, 0.5) !important; }
+#ag-demo .ag-demo-brand { display: flex !important; align-items: center !important; gap: 10px !important; font-weight: 700 !important; font-size: 15px !important; color: #fff !important; }
+#ag-demo .ag-demo-dot { width: 10px !important; height: 10px !important; border-radius: 50% !important; background: var(--ag-gold) !important; box-shadow: 0 0 0 4px rgba(255, 189, 89, 0.18) !important; }
+#ag-demo .ag-demo-pill { font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; color: var(--ag-navy) !important; background: var(--ag-gold) !important; border-radius: 999px !important; padding: 3px 10px !important; }
+#ag-demo .ag-demo-top-progress { display: flex !important; align-items: center !important; gap: 10px !important; font-size: 13px !important; color: var(--ag-muted) !important; white-space: nowrap !important; }
+#ag-demo .ag-demo-bar { width: 120px !important; height: 6px !important; background: rgba(255, 255, 255, 0.08) !important; border-radius: 999px !important; overflow: hidden !important; }
+#ag-demo .ag-demo-bar-fill { height: 100% !important; background: linear-gradient(90deg, #f5a623, #FFBD59) !important; border-radius: 999px !important; transition: width 0.6s ease !important; }
+
+#ag-demo .ag-demo-cover { max-width: 640px !important; margin: 0 auto !important; padding: 44px 24px 48px !important; text-align: center !important; }
+#ag-demo .ag-demo-badge { display: inline-block !important; background: rgba(255, 189, 89, 0.14) !important; color: var(--ag-gold) !important; border: 1px solid rgba(255, 189, 89, 0.35) !important; border-radius: 999px !important; padding: 6px 14px !important; font-size: 13px !important; font-weight: 600 !important; margin-bottom: 18px !important; }
+#ag-demo .ag-demo-h1 { font-size: 34px !important; line-height: 1.2 !important; font-weight: 800 !important; margin-bottom: 14px !important; color: #fff !important; }
+#ag-demo .ag-demo-h2 { font-size: 26px !important; line-height: 1.25 !important; font-weight: 800 !important; margin-bottom: 14px !important; color: #fff !important; }
+#ag-demo .ag-demo-h3 { font-size: 17px !important; font-weight: 700 !important; color: var(--ag-gold) !important; margin: 26px 0 12px !important; }
+#ag-demo .ag-demo-gold { color: var(--ag-gold) !important; }
+#ag-demo .ag-demo-lead { font-size: 16px !important; color: var(--ag-muted) !important; margin-bottom: 22px !important; }
+#ag-demo .ag-demo-muted { color: var(--ag-muted) !important; font-size: 14px !important; padding: 24px !important; }
+#ag-demo .ag-demo-small { color: var(--ag-muted) !important; font-size: 13px !important; margin-top: 14px !important; }
+#ag-demo .ag-demo-center { text-align: center !important; }
+#ag-demo .ag-demo-steps { list-style: none !important; display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; margin-bottom: 26px !important; text-align: left !important; }
+#ag-demo .ag-demo-steps li { background: rgba(255, 255, 255, 0.04) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 14px !important; padding: 14px 12px !important; list-style: none !important; }
+#ag-demo .ag-demo-steps b { display: block !important; color: var(--ag-gold) !important; font-size: 18px !important; font-weight: 700 !important; }
+#ag-demo .ag-demo-steps span { display: block !important; font-size: 12.5px !important; color: var(--ag-muted) !important; line-height: 1.35 !important; margin-top: 2px !important; }
+
+#ag-demo .ag-demo-player { display: grid !important; grid-template-columns: 290px 1fr !important; min-height: 560px !important; }
+#ag-demo .ag-demo-side { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; background: rgba(10, 14, 39, 0.35) !important; padding: 18px 14px !important; }
+#ag-demo .ag-demo-toc summary { list-style: none !important; cursor: pointer !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; color: var(--ag-muted) !important; padding: 0 8px 12px !important; }
+#ag-demo .ag-demo-toc summary::-webkit-details-marker { display: none !important; }
+#ag-demo .ag-demo-mod { margin-bottom: 14px !important; }
+#ag-demo .ag-demo-mod-t { font-size: 13px !important; font-weight: 700 !important; color: #fff !important; padding: 0 8px 6px !important; }
+#ag-demo .ag-demo-mod-t span { display: block !important; font-size: 11px !important; font-weight: 500 !important; color: var(--ag-muted) !important; }
+#ag-demo .ag-demo-mod ul { list-style: none !important; }
+#ag-demo .ag-demo-mod li { list-style: none !important; }
+#ag-demo .ag-demo-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  text-align: left !important;
+  font-family: inherit !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  color: var(--ag-text) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  padding: 9px 8px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+}
+#ag-demo .ag-demo-item small { display: block !important; font-size: 11.5px !important; color: var(--ag-muted) !important; margin-top: 2px !important; }
+#ag-demo .ag-demo-ico { flex: none !important; width: 22px !important; height: 22px !important; border-radius: 50% !important; background: rgba(255, 255, 255, 0.08) !important; color: var(--ag-gold) !important; font-size: 10px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+#ag-demo .ag-demo-on { background: rgba(255, 189, 89, 0.14) !important; color: #fff !important; }
+#ag-demo .ag-demo-done .ag-demo-ico { background: var(--ag-ok) !important; color: var(--ag-navy) !important; font-weight: 700 !important; }
+#ag-demo .ag-demo-locked { color: rgba(167, 172, 201, 0.7) !important; cursor: default !important; }
+#ag-demo .ag-demo-locked .ag-demo-ico { background: transparent !important; }
+#ag-demo .ag-demo-mod-locked .ag-demo-mod-t { color: var(--ag-muted) !important; }
+#ag-demo .ag-demo-item-fin { margin-top: 6px !important; border-top: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 0 0 10px 10px !important; padding-top: 14px !important; font-weight: 700 !important; color: var(--ag-gold) !important; }
+
+#ag-demo .ag-demo-main { padding: 32px 36px 36px !important; min-width: 0 !important; }
+#ag-demo .ag-demo-kicker { color: var(--ag-gold) !important; font-weight: 700 !important; font-size: 12px !important; letter-spacing: 0.1em !important; text-transform: uppercase !important; margin-bottom: 8px !important; }
+#ag-demo .ag-demo-video { position: relative !important; padding-top: 56.25% !important; border-radius: 16px !important; overflow: hidden !important; background: #000 !important; margin-bottom: 20px !important; }
+#ag-demo .ag-demo-video iframe { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; border: 0 !important; }
+
+#ag-demo .ag-demo-blocks { display: flex !important; flex-direction: column !important; gap: 12px !important; margin-bottom: 20px !important; }
+#ag-demo .ag-demo-block { display: flex !important; gap: 14px !important; background: rgba(255, 255, 255, 0.04) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 14px !important; padding: 16px !important; }
+#ag-demo .ag-demo-block h3 { font-size: 16px !important; font-weight: 700 !important; color: #fff !important; margin-bottom: 4px !important; }
+#ag-demo .ag-demo-block p { font-size: 14.5px !important; color: var(--ag-text) !important; }
+#ag-demo .ag-demo-num { flex: none !important; width: 30px !important; height: 30px !important; border-radius: 9px !important; background: var(--ag-gold) !important; color: var(--ag-navy) !important; font-weight: 800 !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+#ag-demo .ag-demo-tip { font-size: 14.5px !important; background: rgba(255, 189, 89, 0.08) !important; border: 1px solid rgba(255, 189, 89, 0.3) !important; border-radius: 12px !important; padding: 12px 14px !important; margin-bottom: 18px !important; }
+#ag-demo .ag-demo-tip b { color: var(--ag-gold) !important; }
+
+#ag-demo .ag-demo-q { margin-bottom: 22px !important; }
+#ag-demo .ag-demo-q-t { display: flex !important; gap: 10px !important; font-size: 18px !important; font-weight: 600 !important; color: #fff !important; margin-bottom: 12px !important; }
+#ag-demo .ag-demo-q-t > span { flex: none !important; color: var(--ag-gold) !important; }
+#ag-demo .ag-demo-blank { color: var(--ag-gold) !important; letter-spacing: 0.1em !important; }
+#ag-demo .ag-demo-opts { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+#ag-demo .ag-demo-opt {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  text-align: left !important;
+  font-family: inherit !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+  padding: 11px 12px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  line-height: 1.3 !important;
+  transition: border-color 0.15s, background 0.15s !important;
+}
+#ag-demo .ag-demo-opt:disabled { cursor: default !important; }
+#ag-demo .ag-demo-key { flex: none !important; width: 26px !important; height: 26px !important; border-radius: 8px !important; background: rgba(255, 255, 255, 0.08) !important; color: var(--ag-gold) !important; font-weight: 700 !important; font-size: 13px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+#ag-demo .ag-demo-ok { border-color: var(--ag-ok) !important; background: rgba(61, 220, 151, 0.14) !important; }
+#ag-demo .ag-demo-ok .ag-demo-key { background: var(--ag-ok) !important; color: var(--ag-navy) !important; }
+#ag-demo .ag-demo-ko { border-color: var(--ag-ko) !important; background: rgba(255, 138, 138, 0.12) !important; }
+#ag-demo .ag-demo-ko .ag-demo-key { background: var(--ag-ko) !important; color: var(--ag-navy) !important; }
+#ag-demo .ag-demo-dim { opacity: 0.45 !important; }
+#ag-demo .ag-demo-truco { font-size: 14px !important; border-radius: 12px !important; padding: 11px 14px !important; margin-top: 10px !important; }
+#ag-demo .ag-demo-truco-ok { background: rgba(61, 220, 151, 0.1) !important; border: 1px solid rgba(61, 220, 151, 0.35) !important; color: #d8fbe9 !important; }
+#ag-demo .ag-demo-truco-ko { background: rgba(255, 189, 89, 0.08) !important; border: 1px solid rgba(255, 189, 89, 0.35) !important; color: var(--ag-text) !important; }
+#ag-demo .ag-demo-truco b { color: #fff !important; }
+#ag-demo .ag-demo-score { font-size: 15px !important; font-weight: 600 !important; color: #fff !important; background: rgba(255, 255, 255, 0.05) !important; border-radius: 12px !important; padding: 12px 14px !important; margin: 6px 0 4px !important; }
+
+#ag-demo .ag-demo-order { list-style: none !important; display: flex !important; flex-direction: column !important; gap: 8px !important; margin-bottom: 16px !important; }
+#ag-demo .ag-demo-slot { display: flex !important; gap: 12px !important; align-items: flex-start !important; list-style: none !important; background: #fdfaf3 !important; color: #1c1f33 !important; border-radius: 12px !important; padding: 11px 14px !important; font-size: 15px !important; border: 2px solid transparent !important; }
+#ag-demo .ag-demo-slot > span { flex: none !important; width: 24px !important; height: 24px !important; border-radius: 7px !important; background: #0a0e27 !important; color: #FFBD59 !important; font-weight: 700 !important; font-size: 12px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+#ag-demo .ag-demo-slot-first { box-shadow: inset 4px 0 0 #FFBD59 !important; }
+#ag-demo .ag-demo-slot-empty { background: rgba(255, 255, 255, 0.04) !important; color: var(--ag-muted) !important; border: 2px dashed rgba(255, 255, 255, 0.14) !important; }
+#ag-demo .ag-demo-slot-empty > span { background: rgba(255, 255, 255, 0.08) !important; }
+#ag-demo .ag-demo-slot.ag-demo-ok { border-color: #3ddc97 !important; background: #effcf5 !important; }
+#ag-demo .ag-demo-slot.ag-demo-ko { border-color: #ff8a8a !important; background: #fff1f1 !important; }
+#ag-demo .ag-demo-chips { display: flex !important; flex-direction: column !important; gap: 8px !important; margin-bottom: 10px !important; }
+#ag-demo .ag-demo-chip { font-family: inherit !important; font-size: 15px !important; text-align: left !important; color: #fff !important; background: rgba(255, 189, 89, 0.08) !important; border: 1.5px solid rgba(255, 189, 89, 0.4) !important; border-radius: 12px !important; padding: 11px 14px !important; margin: 0 !important; cursor: pointer !important; line-height: 1.4 !important; }
+
+#ag-demo .ag-demo-template { list-style: none !important; display: flex !important; flex-direction: column !important; gap: 8px !important; }
+#ag-demo .ag-demo-template li { list-style: none !important; background: rgba(255, 255, 255, 0.04) !important; border-left: 3px solid var(--ag-gold) !important; border-radius: 0 10px 10px 0 !important; padding: 10px 14px !important; }
+#ag-demo .ag-demo-template b { display: block !important; color: #fff !important; font-size: 15px !important; }
+#ag-demo .ag-demo-template small { display: block !important; color: var(--ag-muted) !important; font-size: 13px !important; }
+#ag-demo .ag-demo-task { font-size: 15px !important; background: rgba(255, 255, 255, 0.05) !important; border-radius: 12px !important; padding: 12px 14px !important; margin-bottom: 12px !important; }
+#ag-demo .ag-demo-textarea {
+  width: 100% !important;
+  font-family: inherit !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  outline: none !important;
+  resize: vertical !important;
+  min-height: 200px !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+#ag-demo .ag-demo-textarea:focus { border-color: var(--ag-gold) !important; }
+#ag-demo .ag-demo-count { font-size: 13px !important; color: var(--ag-muted) !important; margin: 6px 0 4px !important; text-align: right !important; }
+#ag-demo .ag-demo-count-ok { color: var(--ag-ok) !important; }
+#ag-demo .ag-demo-model { background: #fdfaf3 !important; color: #1c1f33 !important; border-radius: 14px !important; padding: 18px 20px !important; font-size: 15px !important; line-height: 1.7 !important; margin-top: 12px !important; }
+#ag-demo .ag-demo-model b { color: #0a0e27 !important; }
+#ag-demo .ag-demo-model mark { background: #FFBD59 !important; color: #0a0e27 !important; border-radius: 4px !important; padding: 0 3px !important; }
+
+#ag-demo .ag-demo-speak { text-align: center !important; background: rgba(255, 255, 255, 0.04) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 18px !important; padding: 24px 20px !important; }
+#ag-demo .ag-demo-speak-q { font-size: 22px !important; font-weight: 700 !important; color: #fff !important; margin-bottom: 14px !important; }
+#ag-demo .ag-demo-speak .ag-demo-btn { max-width: 340px !important; margin-left: auto !important; margin-right: auto !important; }
+#ag-demo .ag-demo-speak .ag-demo-model { text-align: left !important; }
+#ag-demo .ag-demo-speak audio { width: 100% !important; max-width: 360px !important; margin-top: 6px !important; }
+#ag-demo .ag-demo-timer { width: 84px !important; height: 84px !important; margin: 0 auto 6px !important; border-radius: 50% !important; border: 4px solid rgba(255, 189, 89, 0.25) !important; color: var(--ag-gold) !important; font-size: 30px !important; font-weight: 800 !important; display: flex !important; align-items: center !important; justify-content: center !important; font-variant-numeric: tabular-nums !important; }
+#ag-demo .ag-demo-timer-on { border-color: var(--ag-gold) !important; animation: ag-demo-pulse 1s ease-in-out infinite !important; }
+@keyframes ag-demo-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 189, 89, 0.5); } 50% { box-shadow: 0 0 0 10px rgba(255, 189, 89, 0); } }
+#ag-demo .ag-demo-dots { display: flex !important; justify-content: center !important; gap: 8px !important; margin-top: 14px !important; }
+#ag-demo .ag-demo-dotq { width: 34px !important; height: 34px !important; border-radius: 50% !important; font-family: inherit !important; font-weight: 700 !important; font-size: 14px !important; color: var(--ag-muted) !important; background: rgba(255, 255, 255, 0.06) !important; border: 1.5px solid rgba(255, 255, 255, 0.12) !important; cursor: pointer !important; padding: 0 !important; margin: 0 !important; }
+#ag-demo .ag-demo-dotq.ag-demo-done { background: rgba(61, 220, 151, 0.18) !important; color: var(--ag-ok) !important; border-color: rgba(61, 220, 151, 0.5) !important; }
+#ag-demo .ag-demo-dotq.ag-demo-on { border-color: var(--ag-gold) !important; color: var(--ag-gold) !important; }
+
+#ag-demo .ag-demo-btn {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  font-family: inherit !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: var(--ag-navy) !important;
+  background: var(--ag-gold) !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  padding: 15px 20px !important;
+  margin: 10px 0 0 !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  line-height: 1.3 !important;
+  transition: transform 0.15s, background 0.15s !important;
+  box-shadow: 0 10px 24px rgba(255, 189, 89, 0.25) !important;
+}
+#ag-demo .ag-demo-btn:disabled { opacity: 0.4 !important; cursor: not-allowed !important; box-shadow: none !important; }
+#ag-demo .ag-demo-btn-inline { width: auto !important; display: inline-block !important; margin: 0 !important; padding: 13px 22px !important; font-size: 15px !important; }
+#ag-demo .ag-demo-btn-ghost { background: transparent !important; color: var(--ag-gold) !important; border: 1.5px solid var(--ag-gold) !important; box-shadow: none !important; }
+#ag-demo .ag-demo-btn-wa { background: #25D366 !important; color: #06331b !important; box-shadow: 0 10px 24px rgba(37, 211, 102, 0.25) !important; }
+#ag-demo .ag-demo-link { background: none !important; border: 0 !important; padding: 6px 0 !important; margin: 6px 0 0 !important; font: inherit !important; font-size: 14px !important; color: var(--ag-gold) !important; text-decoration: underline !important; cursor: pointer !important; }
+#ag-demo .ag-demo-foot { display: flex !important; justify-content: space-between !important; align-items: center !important; gap: 12px !important; margin-top: 28px !important; padding-top: 20px !important; border-top: 1px solid rgba(255, 255, 255, 0.08) !important; }
+#ag-demo .ag-demo-foot .ag-demo-link { margin: 0 !important; }
+
+#ag-demo .ag-demo-gate { max-width: 460px !important; margin: 0 auto !important; text-align: center !important; }
+#ag-demo .ag-demo-check { width: 64px !important; height: 64px !important; margin: 0 auto 16px !important; border-radius: 50% !important; background: rgba(61, 220, 151, 0.15) !important; color: var(--ag-ok) !important; font-size: 28px !important; font-weight: 700 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+#ag-demo .ag-demo-form { display: flex !important; flex-direction: column !important; gap: 8px !important; text-align: left !important; }
+#ag-demo .ag-demo-label { font-size: 14px !important; font-weight: 600 !important; color: #fff !important; margin-top: 4px !important; }
+#ag-demo .ag-demo-input {
+  width: 100% !important;
+  font-family: inherit !important;
+  font-size: 16px !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+  padding: 13px 16px !important;
+  outline: none !important;
+  height: auto !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+#ag-demo .ag-demo-input::placeholder, #ag-demo .ag-demo-textarea::placeholder { color: rgba(167, 172, 201, 0.6) !important; }
+#ag-demo .ag-demo-input:focus { border-color: var(--ag-gold) !important; background: rgba(255, 189, 89, 0.06) !important; }
+#ag-demo .ag-demo-consent { display: flex !important; gap: 10px !important; align-items: flex-start !important; font-size: 13px !important; color: var(--ag-muted) !important; margin-top: 6px !important; cursor: pointer !important; }
+#ag-demo .ag-demo-consent input { margin-top: 3px !important; accent-color: #FFBD59 !important; width: 16px !important; height: 16px !important; flex: none !important; }
+#ag-demo .ag-demo-consent a, #ag-demo .ag-demo-help p a { color: var(--ag-gold) !important; text-decoration: underline !important; }
+#ag-demo .ag-demo-error { color: var(--ag-ko) !important; font-size: 14px !important; }
+
+#ag-demo .ag-demo-courses { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 14px !important; margin: 8px 0 18px !important; }
+#ag-demo .ag-demo-course { position: relative !important; display: flex !important; flex-direction: column !important; background: rgba(255, 255, 255, 0.04) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; border-radius: 18px !important; padding: 24px 18px 18px !important; }
+#ag-demo .ag-demo-course-top { border: 1.5px solid #FFBD59 !important; background: linear-gradient(180deg, rgba(255, 189, 89, 0.12) 0%, rgba(255, 189, 89, 0.03) 100%) !important; }
+#ag-demo .ag-demo-course-tag { position: absolute !important; top: -12px !important; left: 18px !important; background: #FFBD59 !important; color: #0a0e27 !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; padding: 3px 10px !important; border-radius: 999px !important; }
+#ag-demo .ag-demo-course h3 { font-size: 17px !important; font-weight: 800 !important; color: #fff !important; line-height: 1.25 !important; }
+#ag-demo .ag-demo-course-sub { color: var(--ag-gold) !important; font-size: 13px !important; font-weight: 600 !important; margin: 4px 0 12px !important; }
+#ag-demo .ag-demo-list { list-style: none !important; margin-bottom: 14px !important; flex: 1 !important; }
+#ag-demo .ag-demo-list li { position: relative !important; padding-left: 22px !important; font-size: 13.5px !important; margin-bottom: 6px !important; list-style: none !important; color: var(--ag-text) !important; }
+#ag-demo .ag-demo-list li::before { content: '✓' !important; position: absolute !important; left: 0 !important; top: 0 !important; color: var(--ag-ok) !important; font-weight: 700 !important; }
+#ag-demo .ag-demo-course-price { font-size: 28px !important; font-weight: 800 !important; color: #fff !important; line-height: 1.1 !important; }
+#ag-demo .ag-demo-course-price small { display: block !important; font-size: 12px !important; font-weight: 500 !important; color: var(--ag-muted) !important; margin-top: 4px !important; }
+#ag-demo .ag-demo-course .ag-demo-btn { font-size: 15px !important; padding: 13px 14px !important; }
+#ag-demo .ag-demo-guarantee { display: flex !important; gap: 10px !important; align-items: flex-start !important; font-size: 14px !important; background: rgba(255, 255, 255, 0.04) !important; border-radius: 12px !important; padding: 12px 14px !important; margin-bottom: 18px !important; }
+#ag-demo .ag-demo-guarantee b { color: #fff !important; }
+#ag-demo .ag-demo-help { text-align: center !important; background: rgba(37, 211, 102, 0.08) !important; border: 1.5px solid rgba(37, 211, 102, 0.45) !important; border-radius: 18px !important; padding: 20px !important; }
+#ag-demo .ag-demo-help p { font-size: 14.5px !important; }
+#ag-demo .ag-demo-help b { color: #fff !important; }
+#ag-demo .ag-demo-help .ag-demo-btn { max-width: 420px !important; margin: 12px auto 0 !important; }
+
+@media (hover: hover) {
+  #ag-demo .ag-demo-btn:hover:not(:disabled) { background: var(--ag-gold-2) !important; transform: translateY(-1px) !important; color: var(--ag-navy) !important; text-decoration: none !important; }
+  #ag-demo .ag-demo-btn-ghost:hover:not(:disabled) { background: rgba(255, 189, 89, 0.12) !important; color: var(--ag-gold) !important; }
+  #ag-demo .ag-demo-btn-wa:hover { background: #3ee07a !important; color: #06331b !important; }
+  #ag-demo .ag-demo-item:hover:not(.ag-demo-locked) { background: rgba(255, 255, 255, 0.06) !important; }
+  #ag-demo .ag-demo-opt:hover:not(:disabled) { border-color: rgba(255, 189, 89, 0.7) !important; background: rgba(255, 189, 89, 0.08) !important; }
+  #ag-demo .ag-demo-chip:hover { border-color: #FFBD59 !important; background: rgba(255, 189, 89, 0.16) !important; }
+}
+
+@media (max-width: 860px) {
+  #ag-demo .ag-demo-player { grid-template-columns: 1fr !important; min-height: 0 !important; }
+  #ag-demo .ag-demo-side { border-right: 0 !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; padding: 12px 14px !important; }
+  #ag-demo .ag-demo-toc summary { padding: 4px 8px !important; }
+  #ag-demo .ag-demo-toc summary::after { content: ' ▾' !important; }
+  #ag-demo .ag-demo-toc[open] summary { padding-bottom: 12px !important; }
+  #ag-demo .ag-demo-courses { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 560px) {
+  #ag-demo { padding: 12px 0 !important; }
+  #ag-demo .ag-demo-app { border-radius: 18px !important; }
+  #ag-demo .ag-demo-top { padding: 12px 16px !important; }
+  #ag-demo .ag-demo-pill { display: none !important; }
+  #ag-demo .ag-demo-bar { width: 60px !important; }
+  #ag-demo .ag-demo-cover { padding: 32px 18px 36px !important; }
+  #ag-demo .ag-demo-main { padding: 24px 18px 26px !important; }
+  #ag-demo .ag-demo-h1 { font-size: 26px !important; }
+  #ag-demo .ag-demo-h2 { font-size: 22px !important; }
+  #ag-demo .ag-demo-steps { grid-template-columns: 1fr !important; }
+  #ag-demo .ag-demo-steps li { display: flex !important; gap: 10px !important; align-items: baseline !important; }
+  #ag-demo .ag-demo-opts { grid-template-columns: 1fr !important; }
+  #ag-demo .ag-demo-q-t { font-size: 16px !important; }
+  #ag-demo .ag-demo-speak-q { font-size: 19px !important; }
+  #ag-demo .ag-demo-foot .ag-demo-btn-inline { flex: 1 !important; }
+}
+</style>
+<div id="ag-demo" class="ag-demo"><div class="ag-demo-app"><p class="ag-demo-muted">Cargando el aula…</p></div></div>
+<script>
+(function () {
+  'use strict';
+
+  // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────
+  var CONFIG = {
+    // Lecciones que se ven sin dejar el email. A partir de aquí se pide para seguir.
+    leccionesLibres: 2,
+    // Dónde se guarda el lead (Airtable). Vacío = no se envía nada.
+    endpoint: 'https://kajabi-airtable-sync-d9nm.vercel.app/api/demo-curso',
+    privacidad: 'https://www.agacademyaptis.com/privacidad',
+    testNivel: 'https://www.agacademyaptis.com/test-nivel',
+    whatsapp: '34601926127',
+    storageKey: 'ag_demo_v1'
+  };
+
+  // ─── TEMARIO DE LA DEMO (lib/demo-curso/contenido.js) ────────────────────
+  /**
+ * Demo del curso: el temario de prueba que se ve en la web de inicio.
+ *
+ * Lo usan el servidor (/api/demo-curso) y el widget de Kajabi:
+ * scripts/build-demo-curso.mjs lo incrusta tal cual en kajabi/demo-curso.html.
+ * Por eso no importa nada y solo usa JS de navegador.
+ *
+ * Cada lección tiene un `tipo` que el widget sabe pintar:
+ *   intro     bloques de texto (y vídeo si `video` tiene la URL de embed)
+ *   test      preguntas con corrección al momento y el truco de cada una
+ *   ordenar   Reading Part 2: ordenar frases tocándolas
+ *   writing   plantilla + tarea para escribir + email modelo
+ *   speaking  preguntas con cuenta atrás, grabación opcional y respuesta modelo
+ * `video` admite el enlace de embed de Vimeo, YouTube o Wistia. Vacío = sin vídeo.
+ * Los módulos con `bloqueado: true` solo se enseñan con candado en el temario.
+ */
+
+const DEMO_MODULOS = [
+  {
+    titulo: 'Empieza aquí',
+    lecciones: [
+      {
+        id: 'aptis-por-dentro',
+        tipo: 'intro',
+        titulo: 'El APTIS por dentro',
+        duracion: '3 min',
+        video: '',
+        bloques: [
+          { titulo: 'Qué te vas a encontrar', texto: 'El APTIS tiene una parte común de Grammar y Vocabulary y luego las cuatro destrezas: Reading, Listening, Writing y Speaking. Todo por ordenador y en una sola sesión de unas 3 horas.' },
+          { titulo: 'Cómo te puntúan', texto: 'Cada destreza va de 0 a 50 y te da un nivel del Marco Europeo (A1-C). Según lo que te pidan, cuenta tu nivel global o tu nivel en cada destreza.' },
+          { titulo: 'Por qué se suspende', texto: 'Casi nunca es por falta de inglés. Es por no conocer el formato: el tiempo de cada parte, qué espera el corrector y dónde se regalan puntos. Eso es justo lo que se entrena.' },
+        ],
+        clave: 'En esta demo vas a probar una lección de cada parte, igual que dentro del curso. Haz los ejercicios de verdad: es la única forma de ver si el método va contigo.',
+      },
+    ],
+  },
+  {
+    titulo: 'Grammar & Vocabulary',
+    lecciones: [
+      {
+        id: 'grammar-trampas',
+        tipo: 'test',
+        titulo: '5 trampas de Grammar que caen siempre',
+        duracion: '4 min',
+        video: '',
+        intro: 'Elige la respuesta y mira el truco. En el examen tienes unos 30 segundos por pregunta: aquí aprendes a verlas en 5.',
+        preguntas: [
+          { enunciado: 'I ___ in Madrid since 2015.', opciones: ['live', 'have lived', 'am living'], correcta: 1, truco: '"Since" o "for" con algo que sigue pasando hoy = present perfect. Si ves "since", ni lo pienses.' },
+          { enunciado: 'If I ___ more time, I would study every day.', opciones: ['had', 'have', 'will have'], correcta: 0, truco: 'Ves "would" en la otra mitad → segundo condicional → pasado simple después de "if".' },
+          { enunciado: 'She is used to ___ up early.', opciones: ['get', 'getting', 'got'], correcta: 1, truco: '"Be used to" va siempre con -ing. "Used to" a secas (sin be) va con infinitivo. Es de las que más caen.' },
+          { enunciado: 'This is the ___ exam I have ever taken.', opciones: ['more difficult', 'most difficult', 'difficultest'], correcta: 1, truco: '"Ever" detrás de "I have" pide superlativo: the most + adjetivo largo.' },
+          { enunciado: "You ___ wear a uniform. It's not compulsory.", opciones: ["mustn't", "don't have to", "can't"], correcta: 1, truco: 'No es obligatorio = "don\'t have to". Está prohibido = "mustn\'t". El examen pone las dos juntas para pillarte.' },
+        ],
+      },
+    ],
+  },
+  {
+    titulo: 'Reading',
+    lecciones: [
+      {
+        id: 'reading-ordenar',
+        tipo: 'ordenar',
+        titulo: 'Reading Part 2: ordenar sin leerlo todo',
+        duracion: '4 min',
+        video: '',
+        intro: 'Te dan la primera frase y tienes que ordenar el resto. Toca las frases en el orden correcto.',
+        primera: 'Last summer, Laura decided to take the APTIS exam to finish her degree.',
+        frases: [
+          'First, she looked for information about the different parts of the test.',
+          'Then she found out that she needed a B1 in all four skills.',
+          'With this in mind, she made a study plan of one hour a day.',
+          'After two months, she felt ready and booked her exam.',
+          'Finally, she passed it and was able to graduate that same year.',
+        ],
+        truco: 'No hace falta entender cada palabra. Busca los conectores de tiempo (First, Then, After, Finally) y las palabras que apuntan atrás ("this", "it", "she"): "With this in mind" solo puede ir después de algo que haya que tener en cuenta.',
+      },
+    ],
+  },
+  {
+    titulo: 'Writing',
+    lecciones: [
+      {
+        id: 'writing-email-formal',
+        tipo: 'writing',
+        titulo: 'Writing Part 4: el email formal con plantilla',
+        duracion: '6 min',
+        video: '',
+        intro: 'El email formal es la parte del Writing que más puntúa. Con una estructura fija dejas de pensar en cómo empezar y te centras en el contenido.',
+        plantilla: [
+          { frase: 'Dear Sir or Madam,', nota: 'Si no sabes el nombre. Si lo sabes: Dear Mr/Ms + apellido.' },
+          { frase: 'I am writing to complain about / to ask about…', nota: 'Primera línea = motivo del email. Directo.' },
+          { frase: 'Firstly, … In addition, … However, …', nota: 'Un conector al principio de cada idea. El corrector los busca.' },
+          { frase: 'I would be grateful if you could…', nota: 'Pide lo que quieres de forma educada.' },
+          { frase: 'I look forward to hearing from you.', nota: 'Cierre fijo. Siempre el mismo.' },
+          { frase: 'Yours faithfully, / Yours sincerely,', nota: 'Faithfully con "Sir or Madam". Sincerely si has puesto el nombre.' },
+        ],
+        tarea: 'Your gym is going to close for three months for renovation, but you have already paid for the whole year. Write an email to the manager. Say how you feel and what you would like them to do. (120-150 words)',
+        minimo: 120,
+        maximo: 150,
+        modelo: 'Dear Sir or Madam,\n\nI am writing to complain about the closure of the gym for three months. I have been a member for two years and I have already paid for the whole year.\n\nFirstly, I was very disappointed that members were not informed before the renewal. If I had known, I would not have paid for twelve months. In addition, there is no other gym near my house, so I will not be able to train during this time.\n\nHowever, I understand that the renovation is necessary. I would be grateful if you could refund the three months or, alternatively, extend my membership until next spring. I would also like to know if there is any other centre I could use in the meantime.\n\nI look forward to hearing from you.\n\nYours faithfully,\nLaura Gómez',
+      },
+    ],
+  },
+  {
+    titulo: 'Speaking',
+    lecciones: [
+      {
+        id: 'speaking-part-1',
+        tipo: 'speaking',
+        titulo: 'Speaking Part 1: 30 segundos que no se te escapan',
+        duracion: '4 min',
+        video: '',
+        intro: 'Te hacen 3 preguntas personales y tienes 30 segundos para cada una. Responde en voz alta. Si nos das permiso para el micro, puedes grabarte y escucharte (no se guarda ni se envía nada).',
+        segundos: 30,
+        estructura: 'Respuesta directa + un detalle + un ejemplo o tu opinión. Con eso llenas los 30 segundos sin quedarte en blanco.',
+        preguntas: [
+          { pregunta: 'Please tell me about your hometown.', modelo: "I'm from Seville, in the south of Spain. It's a beautiful city with lots of history and the weather is really nice. For example, in spring the streets smell of orange blossom, and I think it's the best time to visit." },
+          { pregunta: 'What do you usually do at the weekend?', modelo: 'At the weekend I usually relax and spend time with my family. On Saturdays we often go for a walk in the park. In my opinion, it\'s important to disconnect from work, so I try not to check my emails.' },
+          { pregunta: 'Tell me about the last film you watched.', modelo: 'The last film I watched was a comedy on Netflix. It was about two friends who travel around Italy. I really enjoyed it because it was funny and the landscapes were amazing. I would recommend it.' },
+        ],
+      },
+    ],
+  },
+  { titulo: 'Listening', bloqueado: true, lecciones: ['Las 4 partes con audios tipo examen', 'Cómo usar el tiempo antes de cada audio'] },
+  { titulo: 'Writing y Speaking completos', bloqueado: true, lecciones: ['Plantillas de todas las partes', 'Speaking Part 2, 3 y 4: describir y comparar fotos'] },
+  { titulo: 'Simulacros', bloqueado: true, lecciones: ['Simulacros tipo examen real con soluciones'] },
+  { titulo: 'Clases en directo', bloqueado: true, lecciones: ['7 clases en directo cada semana'] },
+];
+
+/** Lecciones que se pueden hacer en la demo, en orden. */
+const DEMO_LECCIONES = DEMO_MODULOS.filter((m) => !m.bloqueado).flatMap((m) => m.lecciones);
+
+function leccionDemo(id) {
+  return DEMO_LECCIONES.find((l) => l.id === id) || null;
+}
+
+/** Recuento de palabras para el Writing (igual en el widget y en los tests). */
+function contarPalabras(texto) {
+  const t = String(texto || '').trim();
+  return t ? t.split(/\s+/).length : 0;
+}
+
+  // ─── CURSOS (lib/level-test/quiz.js) ─────────────────────────────────────
+  /**
+ * Test de nivel APTIS: preguntas, corrección, nivel y curso recomendado.
+ *
+ * Este archivo lo usan tanto el servidor (/api/test-nivel) como el widget de
+ * Kajabi: scripts/build-test-nivel.mjs lo incrusta tal cual en
+ * kajabi/test-nivel.html. Por eso no importa nada y solo usa JS de navegador.
+ *
+ * Las preguntas son las 34 puntuables del assessment de Kajabi (/test-nivel).
+ * `correcta` es el índice de la opción buena. El 100% equivale a B2.
+ */
+
+const SECCIONES = {
+  writing: { titulo: 'Writing', intro: 'Mensajes cortos, un texto breve y emails formales e informales. Igual que en el examen.' },
+  reading: { titulo: 'Reading', intro: 'Un email con 5 huecos. Elige la palabra que encaja en cada uno.' },
+  grammar: { titulo: 'Grammar', intro: '10 frases. Elige la opción correcta.' },
+  vocab: { titulo: 'Vocabulary', intro: 'Definiciones y palabras que suelen ir juntas. Aquí se ve el nivel de verdad.' },
+};
+
+const MUSIC = 'Te has unido a un club de música. Otro miembro te escribe. Responde en 1-5 palabras.';
+const EMAILS = 'En el Aptis escribirás un email informal y otro formal. ¿Sabes cómo se hacen?';
+const CARTA = 'Dear Susan,\nThank you for offering to find information about Technology courses in London.\nI want to come from the {1} of July. I {2} love to share a flat with other students. And remember I only want to attend classes {3} the evening, ok?\nAnd if possible, could we go on a {4} together for a weekend to know the place?\nI {5} from you.\nBest wishes,\nSteven.';
+const GRAMMAR = 'Elige la opción correcta.';
+const DEFINICIONES = ['Make out', 'Take after', 'Aid', 'Purchase', 'Control', 'Sprint', 'Empty', 'Lay', 'Remove', 'Calculate'];
+const COLOCACIONES = ['Bomb', 'Audition', 'Scissors', 'Rod', 'Classes', 'Strings', 'Salesman', 'Seep', 'Minister', 'Seat'];
+
+const PREGUNTAS = [
+  { seccion: 'writing', contexto: MUSIC, enunciado: 'What do you do?', opciones: ["I'm listening to music.", 'I am an engineer.', 'I work right now.'], correcta: 1 },
+  { seccion: 'writing', contexto: MUSIC, enunciado: 'Can you play any musical instruments?', opciones: ["No, I'm not.", 'I know play the guitar.', 'Yes, I play the piano.'], correcta: 2 },
+  { seccion: 'writing', contexto: MUSIC, enunciado: "What's your favourite music band?", opciones: ['My favourite band is Coldplay.', 'I love a Rolling Stones.', 'I play with my friends in a band.'], correcta: 0 },
+  { seccion: 'writing', contexto: MUSIC, enunciado: 'What are you doing this weekend?', opciones: ['I play with my band', "I'm meeting my cousins", 'I go for lunch'], correcta: 1 },
+  {
+    seccion: 'writing', contexto: 'Completa tu ficha del club con frases completas (20-30 palabras).',
+    enunciado: 'Please, tell us who you currently enjoy your free time with and what type of music you like.',
+    opciones: [
+      'I like to stay with my friends in my free time because we really love staying together.',
+      'Nowadays I love to spend time with my friend Joe. We always listen to our favourite kind of music, hip hop.',
+      'I used to like pop music and spend time together. We are so happy when we do these things.',
+    ],
+    correcta: 1,
+  },
+  { seccion: 'writing', contexto: EMAILS, enunciado: 'How would you start a formal email for the secretary of the club?', opciones: ['Dear Madam,', 'Hello Mrs Secretary,', 'Dear Sir or Madam,'], correcta: 2 },
+  { seccion: 'writing', contexto: EMAILS, enunciado: "What's the best way to finish an informal email?", opciones: ['Yours sincerely.', 'Yours faithfully.', 'Take care.'], correcta: 2 },
+  { seccion: 'writing', contexto: EMAILS, enunciado: 'Which sentence belongs to a formal email?', opciones: ['How are things? I hope everything is ok.', 'Let me know if you need further information.', 'Send me the information soon, please.'], correcta: 1 },
+  {
+    seccion: 'writing', contexto: EMAILS, enunciado: 'Choose the correct statement:',
+    opciones: ['Phrasal verbs cannot be used in informal emails.', 'You can use contractions in formal emails, but not phrasal verbs.', 'You can use phrasal verbs and contractions in informal emails.'],
+    correcta: 2,
+  },
+  { seccion: 'reading', texto: CARTA, hueco: 1, enunciado: 'Hueco 1', opciones: ['end', 'ending', 'begin'], correcta: 0 },
+  { seccion: 'reading', texto: CARTA, hueco: 2, enunciado: 'Hueco 2', opciones: ['–', 'would', 'could'], correcta: 1 },
+  { seccion: 'reading', texto: CARTA, hueco: 3, enunciado: 'Hueco 3', opciones: ['for', 'in', 'at'], correcta: 1 },
+  { seccion: 'reading', texto: CARTA, hueco: 4, enunciado: 'Hueco 4', opciones: ['hotel', 'trip', 'travel'], correcta: 1 },
+  { seccion: 'reading', texto: CARTA, hueco: 5, enunciado: 'Hueco 5', opciones: ['am looking forward to hearing', 'look forward to hear', 'would like to hearing'], correcta: 0 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'If you were a better cook, you _____ need to eat out all the time.', opciones: ["hadn't", "wouldn't", "won't"], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'She reads every day _____ she isn’t serious.', opciones: ['but', 'because', 'and'], correcta: 0 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'The children _____ playing football for two hours before it started raining.', opciones: ['have been', 'had been', 'has been'], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: "I don't think it's right _____ children to play with toy guns.", opciones: ['for', 'that', 'to'], correcta: 0 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'I _____ to work when I saw Steve.', opciones: ['went', 'going', 'was going'], correcta: 2 },
+  { seccion: 'grammar', contexto: "That man's so unreliable – you can't trust him.", enunciado: '¿Qué respuesta suena natural?', opciones: ['I wouldn’t work frankly with him.', 'Frankly, I wouldn’t work with him.', 'I wouldn’t frankly work with him.'], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'We could cook dinner. _____, we could buy some take away food.', opciones: ['Although', 'Therefore', 'On the other hand'], correcta: 2 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'In those days, my father _____ never eat dinner after eight o’clock.', opciones: ['will', 'used to', 'would'], correcta: 2 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'There were _____ than fifty people in the audience last night.', opciones: ['lesser', 'fewer', 'few'], correcta: 1 },
+  { seccion: 'grammar', contexto: GRAMMAR, enunciado: 'We _____ have caught the early train, as the football match was delayed.', opciones: ["didn't", "mustn't", "needn't"], correcta: 2 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To run quickly is to…', opciones: DEFINICIONES, correcta: 5 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To look like an older member of your family is to…', opciones: DEFINICIONES, correcta: 1 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To help is to…', opciones: DEFINICIONES, correcta: 2 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To remove or consume the contents is to…', opciones: DEFINICIONES, correcta: 6 },
+  { seccion: 'vocab', contexto: 'Elige la palabra que corresponde a la definición.', enunciado: 'To determine by mathematical methods is to…', opciones: DEFINICIONES, correcta: 9 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Aerobics', opciones: COLOCACIONES, correcta: 4 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Agriculture', opciones: COLOCACIONES, correcta: 8 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Aisle', opciones: COLOCACIONES, correcta: 9 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Apron', opciones: COLOCACIONES, correcta: 5 },
+  { seccion: 'vocab', contexto: '¿Qué palabra se usa más con esta?', enunciado: 'Atom', opciones: COLOCACIONES, correcta: 0 },
+];
+
+/** Preguntas de perfil (no puntúan). Deciden el curso recomendado. */
+const PERFIL = {
+  para: {
+    pregunta: '¿Para qué necesitas el APTIS?',
+    opciones: [
+      { valor: 'oposiciones', texto: 'Oposiciones docentes' },
+      { valor: 'universidad', texto: 'Terminar la carrera / máster' },
+      { valor: 'policia', texto: 'Policía Nacional' },
+      { valor: 'trabajo', texto: 'Trabajo' },
+      { valor: 'otro', texto: 'Otro motivo' },
+    ],
+  },
+  necesita: {
+    pregunta: '¿Qué nivel te piden?',
+    opciones: [
+      { valor: 'A2', texto: 'A2' },
+      { valor: 'B1', texto: 'B1' },
+      { valor: 'B2', texto: 'B2' },
+      { valor: 'C1', texto: 'C1' },
+      { valor: 'no-se', texto: 'Aún no lo sé' },
+    ],
+  },
+  cuando: {
+    pregunta: '¿Cuándo quieres examinarte?',
+    opciones: [
+      { valor: 'menos-1-mes', texto: 'En menos de 1 mes' },
+      { valor: '1-3-meses', texto: 'En 1-3 meses' },
+      { valor: '3-6-meses', texto: 'En 3-6 meses' },
+      { valor: 'sin-fecha', texto: 'Aún no tengo fecha' },
+    ],
+  },
+};
+
+const NIVELES = ['A1', 'A2', 'B1', 'B2', 'C1'];
+
+/**
+ * Porcentaje de aciertos → nivel. El 100% es B2 (el test no llega a medir C1).
+ * El umbral es el mínimo de aciertos (%) para tener ese nivel.
+ */
+const UMBRALES = [
+  { nivel: 'B2', desde: 85 },
+  { nivel: 'B1', desde: 55 },
+  { nivel: 'A2', desde: 30 },
+  { nivel: 'A1', desde: 0 },
+];
+
+function nivelDesdePorcentaje(porcentaje) {
+  return UMBRALES.find((u) => porcentaje >= u.desde).nivel;
+}
+
+/**
+ * Corrige las respuestas (array de índices, una por pregunta, null si falta).
+ * Devuelve aciertos, nota sobre 10, porcentaje, nivel y aciertos por sección.
+ */
+function corregir(respuestas = []) {
+  const porSeccion = {};
+  let aciertos = 0;
+  PREGUNTAS.forEach((p, i) => {
+    const s = (porSeccion[p.seccion] ||= { aciertos: 0, total: 0 });
+    s.total += 1;
+    if (respuestas[i] === p.correcta) {
+      s.aciertos += 1;
+      aciertos += 1;
+    }
+  });
+  const total = PREGUNTAS.length;
+  const porcentaje = Math.round((aciertos / total) * 100);
+  return {
+    aciertos,
+    total,
+    porcentaje,
+    nota: Math.round((aciertos / total) * 100) / 10,
+    nivel: nivelDesdePorcentaje(porcentaje),
+    porSeccion,
+  };
+}
+
+/**
+ * Cursos de la store. `url` es el checkout de Kajabi. El descuento del test se
+ * resta del precio y se aplica con el cupón en la URL.
+ */
+const CURSOS_TEST = {
+  level: {
+    nombre: 'APTIS Level',
+    subtitulo: '3 meses · A2 y B1',
+    precio: 647,
+    url: 'https://www.agacademyaptis.com/offers/aLwrqozM/checkout',
+    incluye: ['3 meses de acceso completo', 'Material por niveles (A1-A2-B1)', '7 clases en directo cada semana', 'Guías paso a paso de cada parte del examen', 'Simulacros con soluciones'],
+  },
+  express: {
+    nombre: 'Directo a tu Certificado Express',
+    subtitulo: '6 meses · del A1 al C2 · garantía de aprobado',
+    precio: 947,
+    url: 'https://www.agacademyaptis.com/offers/TRchWq3V/checkout',
+    incluye: ['6 meses de acceso (A1 a C2)', '+500 lecciones con trucos y atajos', '7 clases en directo cada semana', '+10 simulacros tipo examen real', 'Garantía: si no apruebas, te pagamos los exámenes'],
+  },
+  tutorizado: {
+    nombre: 'Directo a tu Certificado Tutorizado',
+    subtitulo: '6 meses · tutor personal · garantía de aprobado',
+    precio: 1247,
+    url: 'https://www.agacademyaptis.com/offers/422hix8o/checkout',
+    incluye: ['Todo lo del Express', '10 sesiones 1 a 1 de Speaking y Writing', 'WhatsApp directo con tus tutores', 'Seguimiento personalizado', 'Garantía: te pagamos todos los exámenes hasta aprobar'],
+  },
+};
+
+const OBJETIVO = { A2: 1, B1: 2, B2: 3, C1: 4, 'no-se': 2 };
+
+/**
+ * Elige el curso según el nivel actual, el que le piden y el tiempo que tiene.
+ * Level solo llega a B1; para B2/C1 siempre es Directo. Cuanto más salto de
+ * nivel y menos tiempo, más acompañamiento (Tutorizado).
+ */
+function recomendarCurso({ necesita, cuando } = {}, nivel) {
+  const actual = NIVELES.indexOf(nivel);
+  const objetivo = OBJETIVO[necesita] ?? 2;
+  const nivelObjetivo = NIVELES[objetivo];
+  const salto = objetivo - actual;
+  const prisa = cuando === 'menos-1-mes';
+  const pocoTiempo = prisa || cuando === '1-3-meses';
+  const plazo = prisa ? 'en menos de un mes' : pocoTiempo ? 'en pocos meses' : 'a tu ritmo';
+
+  let curso;
+  let motivo;
+  if (salto <= 0) {
+    curso = objetivo >= 3 ? 'express' : 'level';
+    motivo = `Ya tienes el ${nivelObjetivo}. Lo que te falta es conocer el examen por dentro y no dejar puntos por el camino.`;
+  } else if (objetivo >= 3) {
+    curso = salto >= 2 || prisa ? 'tutorizado' : 'express';
+    motivo = curso === 'tutorizado'
+      ? `Pasar de ${nivel} a ${nivelObjetivo} ${plazo} se hace mucho más fácil con alguien que te corrija y te diga qué te falta.`
+      : `Para el ${nivelObjetivo} necesitas el método completo, del nivel que tienes hasta el que te piden.`;
+  } else if (salto === 1) {
+    curso = prisa ? 'express' : 'level';
+    motivo = prisa
+      ? `Te separa un nivel del ${nivelObjetivo} y vas con el tiempo justo: necesitas ir directo a lo que puntúa.`
+      : `Te separa un solo nivel del ${nivelObjetivo}. Con 3 meses de método bien organizado llegas.`;
+  } else {
+    curso = pocoTiempo ? 'tutorizado' : 'express';
+    motivo = pocoTiempo
+      ? `De ${nivel} a ${nivelObjetivo} ${plazo} se puede, pero no solo. Con tutor sabes cada semana dónde estás.`
+      : `De ${nivel} a ${nivelObjetivo} hay camino, y con 6 meses y el método completo lo recorres sin agobios.`;
+  }
+  return { curso, motivo, nivelObjetivo, salto };
+}
+
+/**
+ * Referencia corta del lead (p. ej. "TN4K9Z2Q") que viaja en el WhatsApp que
+ * nos escribe desde el resultado. Sale del email, así el servidor y el
+ * navegador calculan la misma sin guardarla en ningún sitio. Hash FNV-1a.
+ */
+function referenciaLead(email) {
+  let h = 0x811c9dc5;
+  for (const c of String(email || '').trim().toLowerCase()) {
+    h ^= c.codePointAt(0);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return `TN${h.toString(36).toUpperCase().padStart(7, '0')}`;
+}
+
+  // ─── ESTADO ───────────────────────────────────────────────────────────────
+  var root = document.getElementById('ag-demo');
+  var estado = cargar() || { vista: 'portada', leccion: DEMO_LECCIONES[0].id, hechas: [], ej: {} };
+
+  function cargar() {
+    try { return JSON.parse(localStorage.getItem(CONFIG.storageKey)); } catch (e) { return null; }
+  }
+  function guardar() {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function euros(n) { return n.toLocaleString('es-ES') + ' €'; }
+  function primerNombre() { return esc((estado.nombre || '').trim().split(/\s+/)[0]); }
+  function track(evento, datos) {
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: evento }, datos || {})); } catch (e) {}
+  }
+  function indice(id) { return DEMO_LECCIONES.findIndex(function (l) { return l.id === id; }); }
+  function hecha(id) { return estado.hechas.indexOf(id) !== -1; }
+  function registrado() { return Boolean(estado.email); }
+  // Lección que pide el email antes de abrirse (la primera después de las libres).
+  function requiereRegistro(id) { return !registrado() && indice(id) >= CONFIG.leccionesLibres; }
+  // Estado de cada ejercicio, guardado por lección para poder volver a ella.
+  function ej(id) { return estado.ej[id] || (estado.ej[id] = {}); }
+
+  // ─── ATRIBUCIÓN (GCLID + UTMs) ────────────────────────────────────────────
+  function param(n) { try { return new URLSearchParams(location.search).get(n) || ''; } catch (e) { return ''; } }
+  function cookie(n) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function gclid() {
+    var g = param('gclid');
+    try { g = g || localStorage.getItem('gclid') || ''; } catch (e) {}
+    return g || cookie('gclid');
+  }
+  function atribucion() {
+    return {
+      gclid: gclid(), utm_source: param('utm_source'), utm_medium: param('utm_medium'),
+      utm_campaign: param('utm_campaign'), utm_content: param('utm_content'), pagina: location.href.split('#')[0]
+    };
+  }
+  if (!estado.atribucion || (!estado.atribucion.gclid && gclid())) { estado.atribucion = atribucion(); guardar(); }
+
+  function enviar(datos) {
+    if (!CONFIG.endpoint) return;
+    var body = JSON.stringify(datos);
+    // text/plain evita la petición previa de CORS; el servidor lo lee como JSON.
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(CONFIG.endpoint, new Blob([body], { type: 'text/plain' }))) return;
+    } catch (e) {}
+    try { fetch(CONFIG.endpoint, { method: 'POST', body: body, keepalive: true, headers: { 'Content-Type': 'text/plain' } }); } catch (e) {}
+  }
+
+  // ─── ESTRUCTURA: barra superior + temario + lección ──────────────────────
+  // quieto = repintar sin mover el foco ni la página (al cargar y al contestar
+  // dentro de una lección, para que no salte arriba).
+  function pintar(quieto) {
+    pararSpeaking();
+    var contenido = estado.vista === 'portada' ? portada() : '<div class="ag-demo-player">' + temario() +
+      '<main class="ag-demo-main ag-demo-in">' + VISTAS[estado.vista]() + '</main></div>';
+    root.innerHTML = '<div class="ag-demo-app">' + barraSuperior() + contenido + '</div>';
+    if (estado.vista === 'writing') contarWriting();
+    if (quieto) return;
+    var foco = root.querySelector('[autofocus]');
+    if (foco) foco.focus({ preventScroll: true });
+    var top = root.getBoundingClientRect().top;
+    if (top < 0) window.scrollTo({ top: window.scrollY + top - 16, behavior: 'smooth' });
+  }
+
+  function barraSuperior() {
+    var pct = Math.round((estado.hechas.length / DEMO_LECCIONES.length) * 100);
+    return '<div class="ag-demo-top"><div class="ag-demo-brand"><span class="ag-demo-dot"></span>Aula AG Academy <span class="ag-demo-pill">Modo demo</span></div>' +
+      '<div class="ag-demo-top-progress"><span>' + estado.hechas.length + '/' + DEMO_LECCIONES.length + ' lecciones</span>' +
+      '<div class="ag-demo-bar"><div class="ag-demo-bar-fill" style="width:' + pct + '% !important"></div></div></div></div>';
+  }
+
+  function temario() {
+    var actual = estado.vista === 'fin' ? '' : estado.leccion;
+    var modulos = DEMO_MODULOS.map(function (m) {
+      var items = m.lecciones.map(function (l) {
+        if (m.bloqueado) return '<li class="ag-demo-item ag-demo-locked"><span class="ag-demo-ico">🔒</span><span>' + esc(l) + '</span></li>';
+        var cls = (l.id === actual ? ' ag-demo-on' : '') + (hecha(l.id) ? ' ag-demo-done' : '');
+        var ico = hecha(l.id) ? '✓' : requiereRegistro(l.id) ? '🔑' : '▶';
+        return '<li><button type="button" class="ag-demo-item' + cls + '" data-accion="ir" data-id="' + l.id + '">' +
+          '<span class="ag-demo-ico">' + ico + '</span><span>' + esc(l.titulo) + '<small>' + esc(l.duracion) + '</small></span></button></li>';
+      }).join('');
+      return '<div class="ag-demo-mod' + (m.bloqueado ? ' ag-demo-mod-locked' : '') + '"><p class="ag-demo-mod-t">' + esc(m.titulo) +
+        (m.bloqueado ? ' <span>En el curso completo</span>' : '') + '</p><ul>' + items + '</ul></div>';
+    }).join('');
+    var final = '<button type="button" class="ag-demo-item ag-demo-item-fin' + (estado.vista === 'fin' ? ' ag-demo-on' : '') + '" data-accion="fin">' +
+      '<span class="ag-demo-ico">★</span><span>¿Y ahora qué?</span></button>';
+    // En móvil el temario va plegado encima de la lección.
+    return '<aside class="ag-demo-side"><details class="ag-demo-toc"' + (window.innerWidth > 860 ? ' open' : '') + '>' +
+      '<summary>Temario de la demo</summary>' + modulos + final + '</details></aside>';
+  }
+
+  // ─── PORTADA ──────────────────────────────────────────────────────────────
+  function portada() {
+    var empezada = estado.hechas.length > 0;
+    return '<div class="ag-demo-cover ag-demo-in">' +
+      '<div class="ag-demo-badge">Prueba gratis · sin tarjeta</div>' +
+      '<h2 class="ag-demo-h1">Entra al curso <span class="ag-demo-gold">antes de apuntarte</span></h2>' +
+      '<p class="ag-demo-lead">Esto es el aula por dentro. Una lección de cada parte del APTIS, con los mismos ejercicios y trucos que usan nuestros alumnos. Pruébalo y decides después.</p>' +
+      '<ul class="ag-demo-steps"><li><b>5</b><span>lecciones reales</span></li><li><b>4</b><span>partes: Grammar, Reading, Writing y Speaking</span></li><li><b>20 min</b><span>y ves si el método va contigo</span></li></ul>' +
+      '<button type="button" class="ag-demo-btn" data-accion="empezar" autofocus>' + (empezada ? 'Seguir donde lo dejé →' : 'Entrar al aula →') + '</button>' +
+      '<p class="ag-demo-small">Las ' + CONFIG.leccionesLibres + ' primeras lecciones, sin dar ningún dato.</p></div>';
+  }
+
+  // ─── LECCIONES ────────────────────────────────────────────────────────────
+  function cabecera(l) {
+    var n = indice(l.id) + 1;
+    return '<p class="ag-demo-kicker">Lección ' + n + ' de ' + DEMO_LECCIONES.length + ' · ' + esc(l.duracion) + '</p>' +
+      '<h2 class="ag-demo-h2">' + esc(l.titulo) + '</h2>' + video(l.video) +
+      (l.intro ? '<p class="ag-demo-lead">' + esc(l.intro) + '</p>' : '');
+  }
+
+  function video(url) {
+    if (!url) return '';
+    return '<div class="ag-demo-video"><iframe src="' + esc(url) + '" title="Vídeo de la lección" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
+  }
+
+  function pie(l, listo) {
+    var i = indice(l.id);
+    var sig = DEMO_LECCIONES[i + 1];
+    var texto = sig ? 'Siguiente lección →' : 'Terminar la demo →';
+    return '<div class="ag-demo-foot">' +
+      (i > 0 ? '<button type="button" class="ag-demo-link" data-accion="ir" data-id="' + DEMO_LECCIONES[i - 1].id + '">← Anterior</button>' : '<span></span>') +
+      '<button type="button" class="ag-demo-btn ag-demo-btn-inline" data-accion="completar"' + (listo ? '' : ' disabled') + '>' + texto + '</button></div>';
+  }
+
+  function leccionActual() { return leccionDemo(estado.leccion) || DEMO_LECCIONES[0]; }
+
+  var VISTAS = {
+    intro: function () {
+      var l = leccionActual();
+      return cabecera(l) + '<div class="ag-demo-blocks">' + l.bloques.map(function (b, k) {
+        return '<div class="ag-demo-block"><span class="ag-demo-num">' + (k + 1) + '</span><div><h3>' + esc(b.titulo) + '</h3><p>' + esc(b.texto) + '</p></div></div>';
+      }).join('') + '</div><p class="ag-demo-tip"><b>Antes de empezar:</b> ' + esc(l.clave) + '</p>' + pie(l, true);
+    },
+
+    test: function () {
+      var l = leccionActual();
+      var r = ej(l.id).r || [];
+      var preguntas = l.preguntas.map(function (p, q) {
+        var elegida = r[q];
+        var opciones = p.opciones.map(function (o, k) {
+          var cls = elegida == null ? '' : k === p.correcta ? ' ag-demo-ok' : k === elegida ? ' ag-demo-ko' : ' ag-demo-dim';
+          return '<button type="button" class="ag-demo-opt' + cls + '" data-accion="test" data-q="' + q + '" data-k="' + k + '"' + (elegida == null ? '' : ' disabled') + '>' +
+            '<span class="ag-demo-key">' + 'ABC'[k] + '</span><span>' + esc(o) + '</span></button>';
+        }).join('');
+        var truco = elegida == null ? '' : '<p class="ag-demo-truco ' + (elegida === p.correcta ? 'ag-demo-truco-ok' : 'ag-demo-truco-ko') + '"><b>' +
+          (elegida === p.correcta ? '¡Bien! ' : 'Era la ' + 'ABC'[p.correcta] + '. ') + 'Truco:</b> ' + esc(p.truco) + '</p>';
+        var enunciado = esc(p.enunciado).replace(/_{3,}/g, '<span class="ag-demo-blank">_____</span>');
+        return '<div class="ag-demo-q"><p class="ag-demo-q-t"><span>' + (q + 1) + '</span>' + enunciado + '</p><div class="ag-demo-opts">' + opciones + '</div>' + truco + '</div>';
+      }).join('');
+      var contestadas = r.filter(function (x) { return x != null; }).length;
+      var aciertos = l.preguntas.filter(function (p, q) { return r[q] === p.correcta; }).length;
+      var resumen = contestadas === l.preguntas.length
+        ? '<p class="ag-demo-score">' + aciertos + ' de ' + l.preguntas.length + '. ' + (aciertos === l.preguntas.length ? 'Perfecta. Así se ve una pregunta en 5 segundos.' : 'Ahora ya conoces la trampa: la próxima vez no cae.') + '</p>'
+        : '';
+      return cabecera(l) + preguntas + resumen + pie(l, contestadas === l.preguntas.length);
+    },
+
+    ordenar: function () {
+      var l = leccionActual();
+      var e = ej(l.id);
+      if (!e.mezcla) { e.mezcla = mezclar(l.frases.map(function (_, k) { return k; })); guardar(); }
+      var orden = e.orden || [];
+      var corregido = e.corregido;
+      var colocadas = orden.map(function (k, pos) {
+        var cls = corregido ? (k === pos ? ' ag-demo-ok' : ' ag-demo-ko') : '';
+        return '<li class="ag-demo-slot' + cls + '"><span>' + (pos + 2) + '</span>' + esc(l.frases[k]) + '</li>';
+      }).join('');
+      var huecos = '';
+      for (var h = orden.length; h < l.frases.length; h++) huecos += '<li class="ag-demo-slot ag-demo-slot-empty"><span>' + (h + 2) + '</span>…</li>';
+      var pendientes = e.mezcla.filter(function (k) { return orden.indexOf(k) === -1; }).map(function (k) {
+        return '<button type="button" class="ag-demo-chip" data-accion="ordenar" data-k="' + k + '">' + esc(l.frases[k]) + '</button>';
+      }).join('');
+      var aciertos = orden.filter(function (k, pos) { return k === pos; }).length;
+      var acciones = corregido
+        ? '<p class="ag-demo-score">' + aciertos + ' de ' + l.frases.length + ' en su sitio.</p>' +
+          '<p class="ag-demo-truco ag-demo-truco-ok"><b>Truco:</b> ' + esc(l.truco) + '</p>' +
+          (aciertos < l.frases.length ? '<button type="button" class="ag-demo-link" data-accion="ordenar-reiniciar">Volver a intentarlo</button>' : '')
+        : orden.length === l.frases.length
+          ? '<button type="button" class="ag-demo-btn" data-accion="ordenar-corregir">Corregir</button>'
+          : orden.length ? '<button type="button" class="ag-demo-link" data-accion="ordenar-deshacer">Deshacer la última</button>' : '';
+      return cabecera(l) +
+        '<ol class="ag-demo-order"><li class="ag-demo-slot ag-demo-slot-first"><span>1</span>' + esc(l.primera) + '</li>' + colocadas + huecos + '</ol>' +
+        (pendientes ? '<div class="ag-demo-chips">' + pendientes + '</div>' : '') + acciones + pie(l, Boolean(corregido));
+    },
+
+    writing: function () {
+      var l = leccionActual();
+      var e = ej(l.id);
+      var plantilla = l.plantilla.map(function (p) {
+        return '<li><b>' + esc(p.frase) + '</b><small>' + esc(p.nota) + '</small></li>';
+      }).join('');
+      return cabecera(l) +
+        '<h3 class="ag-demo-h3">La plantilla</h3><ul class="ag-demo-template">' + plantilla + '</ul>' +
+        '<h3 class="ag-demo-h3">Ahora tú</h3><p class="ag-demo-task">' + esc(l.tarea) + '</p>' +
+        '<textarea class="ag-demo-textarea" data-accion="writing" rows="9" placeholder="Dear Sir or Madam,&#10;I am writing to…">' + esc(e.texto || '') + '</textarea>' +
+        '<p class="ag-demo-count" id="ag-demo-count"></p>' +
+        (e.modelo
+          ? '<h3 class="ag-demo-h3">Email modelo</h3><div class="ag-demo-model">' + resaltarPlantilla(l) + '</div>' +
+            '<p class="ag-demo-truco ag-demo-truco-ok"><b>Fíjate:</b> las frases en dorado son la plantilla. Lo demás es contenido. Así se escribe rápido y con la nota asegurada.</p>'
+          : '<button type="button" class="ag-demo-btn ag-demo-btn-ghost" data-accion="writing-modelo">Ver el email modelo</button>') +
+        pie(l, Boolean(e.modelo));
+    },
+
+    speaking: function () {
+      var l = leccionActual();
+      var e = ej(l.id);
+      var q = e.q || 0;
+      var p = l.preguntas[q];
+      var vistas = e.vistas || [];
+      var grabar = puedeGrabar()
+        ? '<button type="button" class="ag-demo-btn ag-demo-btn-ghost" data-accion="speaking-grabar">🎙️ Grabarme mientras respondo</button>'
+        : '';
+      return cabecera(l) +
+        '<p class="ag-demo-tip"><b>Estructura:</b> ' + esc(l.estructura) + '</p>' +
+        '<div class="ag-demo-speak"><p class="ag-demo-kicker">Pregunta ' + (q + 1) + ' de ' + l.preguntas.length + '</p>' +
+        '<p class="ag-demo-speak-q">' + esc(p.pregunta) + '</p>' +
+        '<div class="ag-demo-timer" id="ag-demo-timer">' + l.segundos + '</div>' +
+        '<div id="ag-demo-speak-acciones"><button type="button" class="ag-demo-btn" data-accion="speaking-empezar">Responder (' + l.segundos + ' s)</button>' + grabar + '</div>' +
+        '<div id="ag-demo-audio">' + (speak.url && speak.urlQ === q ? '<p class="ag-demo-small">Tu respuesta:</p><audio controls src="' + speak.url + '"></audio>' : '') + '</div>' +
+        (vistas.indexOf(q) !== -1
+          ? '<div class="ag-demo-model"><b>Respuesta modelo:</b> ' + esc(p.modelo) + '</div>'
+          : '<button type="button" class="ag-demo-link" data-accion="speaking-modelo">Ver respuesta modelo</button>') +
+        '</div>' +
+        '<div class="ag-demo-dots">' + l.preguntas.map(function (_, k) {
+          return '<button type="button" class="ag-demo-dotq' + (k === q ? ' ag-demo-on' : '') + (vistas.indexOf(k) !== -1 ? ' ag-demo-done' : '') + '" data-accion="speaking-ir" data-k="' + k + '" aria-label="Pregunta ' + (k + 1) + '">' + (k + 1) + '</button>';
+        }).join('') + '</div>' +
+        pie(l, vistas.length > 0);
+    },
+
+    registro: function () {
+      var l = leccionActual();
+      return '<div class="ag-demo-gate"><div class="ag-demo-check">🔑</div>' +
+        '<h2 class="ag-demo-h2">Desbloquea el resto del aula</h2>' +
+        '<p class="ag-demo-lead">Te quedan ' + (DEMO_LECCIONES.length - CONFIG.leccionesLibres) + ' lecciones: Reading, Writing y Speaking. Déjanos tus datos y entras ahora mismo. Así también guardamos tu progreso.</p>' +
+        '<form class="ag-demo-form" data-accion="registro" novalidate>' +
+        '<label class="ag-demo-label" for="ag-demo-nombre">Nombre</label>' +
+        '<input id="ag-demo-nombre" class="ag-demo-input" name="nombre" autocomplete="given-name" required maxlength="60" placeholder="Tu nombre" value="' + esc(estado.nombre) + '" autofocus>' +
+        '<label class="ag-demo-label" for="ag-demo-email">Email</label>' +
+        '<input id="ag-demo-email" class="ag-demo-input" type="email" name="email" autocomplete="email" required maxlength="120" placeholder="tu@email.com">' +
+        '<label class="ag-demo-label" for="ag-demo-tel">WhatsApp</label>' +
+        '<input id="ag-demo-tel" class="ag-demo-input" type="tel" name="telefono" autocomplete="tel" required maxlength="20" placeholder="600 000 000">' +
+        '<label class="ag-demo-consent"><input type="checkbox" name="acepto" required> <span>Acepto la <a href="' + CONFIG.privacidad + '" target="_blank" rel="noopener">política de privacidad</a> y que AG Academy me escriba sobre el curso.</span></label>' +
+        '<p class="ag-demo-error" hidden></p>' +
+        '<button class="ag-demo-btn" type="submit">Desbloquear: ' + esc(l.titulo) + ' →</button></form></div>';
+    },
+
+    fin: function () {
+      var saludo = estado.nombre ? primerNombre() + ', ' : '';
+      var todas = estado.hechas.length === DEMO_LECCIONES.length;
+      var cursos = Object.keys(CURSOS_TEST).map(function (k) {
+        var c = CURSOS_TEST[k];
+        return '<div class="ag-demo-course' + (k === 'express' ? ' ag-demo-course-top' : '') + '">' +
+          (k === 'express' ? '<span class="ag-demo-course-tag">El más elegido</span>' : '') +
+          '<h3>' + esc(c.nombre) + '</h3><p class="ag-demo-course-sub">' + esc(c.subtitulo) + '</p>' +
+          '<ul class="ag-demo-list">' + c.incluye.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+          '<p class="ag-demo-course-price">' + euros(c.precio) + '<small>o 3 cuotas sin intereses con Klarna</small></p>' +
+          '<a class="ag-demo-btn' + (k === 'express' ? '' : ' ag-demo-btn-ghost') + '" data-accion="comprar" data-curso="' + k + '" href="' + urlCheckout(k) + '">Empezar con este →</a></div>';
+      }).join('');
+      return '<div class="ag-demo-center"><div class="ag-demo-check">' + (todas ? '✓' : '★') + '</div>' +
+        '<h2 class="ag-demo-h2">' + (todas ? saludo + 'has hecho la demo entera' : saludo + 'esto es lo que te espera dentro') + '</h2>' +
+        '<p class="ag-demo-lead">Lo que acabas de probar es como se trabaja cada parte del curso: explicación corta, ejercicio tipo examen y el truco para no fallarlo. Dentro tienes el resto de partes, simulacros y clases en directo.</p></div>' +
+        '<div class="ag-demo-courses">' + cursos + '</div>' +
+        '<p class="ag-demo-guarantee"><span>🛡️</span> <span><b>15 días de prueba.</b> Entra, mira las clases, prueba el método. Si no te convence, te devolvemos el dinero. Sin preguntas.</span></p>' +
+        '<div class="ag-demo-help"><p><b>¿No sabes cuál te encaja?</b> Escríbenos y te lo decimos en 2 minutos, o haz el <a href="' + CONFIG.testNivel + '">test de nivel gratis</a> y te lo recomienda él.</p>' +
+        '<a class="ag-demo-btn ag-demo-btn-wa" data-accion="whatsapp" href="' + urlWhatsApp() + '" target="_blank" rel="noopener">Tengo dudas, os escribo por WhatsApp</a></div>';
+    }
+  };
+
+  function urlCheckout(key) {
+    return CURSOS_TEST[key].url + '?utm_source=demo-curso&utm_medium=web&utm_campaign=demo-curso&utm_content=' + key;
+  }
+
+  function urlWhatsApp() {
+    var nombre = (estado.nombre || '').trim().split(/\s+/)[0];
+    var texto = 'Hola!' + (nombre ? ' Soy ' + nombre + '.' : '') + ' He probado la demo del curso en la web y tengo unas dudas antes de apuntarme 🙂';
+    return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(texto);
+  }
+
+  function resaltarPlantilla(l) {
+    var html = esc(l.modelo);
+    l.plantilla.forEach(function (p) {
+      p.frase.split(/\s*(?:\/|…)\s*/).forEach(function (trozo) {
+        var t = esc(trozo.replace(/[,.]+$/, '').trim());
+        if (t.length > 4) html = html.split(t).join('<mark>' + t + '</mark>');
+      });
+    });
+    return html.replace(/\n/g, '<br>');
+  }
+
+  function mezclar(arr) {
+    var a = arr.slice();
+    do {
+      for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    } while (a.every(function (x, k) { return x === k; }));
+    return a;
+  }
+
+  function contarWriting() {
+    var area = root.querySelector('.ag-demo-textarea');
+    var el = document.getElementById('ag-demo-count');
+    if (!area || !el) return;
+    var l = leccionActual();
+    var n = contarPalabras(area.value);
+    var ok = n >= l.minimo && n <= l.maximo;
+    el.textContent = n + ' palabras · objetivo ' + l.minimo + '-' + l.maximo;
+    el.className = 'ag-demo-count' + (ok ? ' ag-demo-count-ok' : '');
+  }
+
+  // ─── SPEAKING: cuenta atrás y grabación (nada sale del navegador) ────────
+  var speak = { intervalo: null, rec: null, stream: null, trozos: [], url: null, urlQ: null };
+  function puedeGrabar() { return Boolean(window.MediaRecorder && navigator.mediaDevices && navigator.mediaDevices.getUserMedia); }
+
+  function pararSpeaking() {
+    clearInterval(speak.intervalo);
+    speak.intervalo = null;
+    if (speak.rec && speak.rec.state !== 'inactive') { speak.rec.onstop = null; speak.rec.stop(); }
+    if (speak.stream) speak.stream.getTracks().forEach(function (t) { t.stop(); });
+    speak.rec = null;
+    speak.stream = null;
+  }
+
+  function cuentaAtras(conGrabacion) {
+    var l = leccionActual();
+    var restante = l.segundos;
+    var timer = document.getElementById('ag-demo-timer');
+    var acciones = document.getElementById('ag-demo-speak-acciones');
+    if (acciones) acciones.innerHTML = '<button type="button" class="ag-demo-link" data-accion="speaking-parar">He terminado</button>';
+    if (timer) { timer.textContent = restante; timer.classList.add('ag-demo-timer-on'); }
+    track('demo_curso_speaking', { grabando: conGrabacion });
+    speak.intervalo = setInterval(function () {
+      restante -= 1;
+      if (timer) timer.textContent = Math.max(restante, 0);
+      if (restante <= 0) terminarRespuesta();
+    }, 1000);
+  }
+
+  function terminarRespuesta() {
+    clearInterval(speak.intervalo);
+    speak.intervalo = null;
+    var l = leccionActual();
+    var e = ej(l.id);
+    e.vistas = e.vistas || [];
+    if (e.vistas.indexOf(e.q || 0) === -1) e.vistas.push(e.q || 0);
+    guardar();
+    if (speak.rec && speak.rec.state !== 'inactive') {
+      speak.rec.onstop = function () {
+        if (speak.stream) speak.stream.getTracks().forEach(function (t) { t.stop(); });
+        var blob = new Blob(speak.trozos, { type: speak.rec.mimeType || 'audio/webm' });
+        if (speak.url) URL.revokeObjectURL(speak.url);
+        speak.url = URL.createObjectURL(blob);
+        speak.urlQ = e.q || 0;
+        speak.rec = null;
+        speak.stream = null;
+        pintar(true);
+      };
+      speak.rec.stop();
+    } else {
+      pintar(true);
+    }
+  }
+
+  function grabarYEmpezar() {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+      speak.stream = stream;
+      speak.trozos = [];
+      speak.rec = new MediaRecorder(stream);
+      speak.rec.ondataavailable = function (ev) { if (ev.data && ev.data.size) speak.trozos.push(ev.data); };
+      speak.rec.start();
+      cuentaAtras(true);
+    }).catch(function () {
+      // Sin permiso de micro: responde igual, sin grabar.
+      cuentaAtras(false);
+    });
+  }
+
+  // ─── NAVEGACIÓN ───────────────────────────────────────────────────────────
+  function abrir(id) {
+    var l = leccionDemo(id);
+    if (!l) return;
+    estado.leccion = id;
+    estado.vista = requiereRegistro(id) ? 'registro' : l.tipo;
+    if (estado.vista === 'registro') track('demo_curso_registro_visto', { leccion: id });
+    guardar();
+    pintar();
+  }
+
+  function completar() {
+    var l = leccionActual();
+    if (!hecha(l.id)) {
+      estado.hechas.push(l.id);
+      track('demo_curso_leccion', { leccion: l.id, numero: indice(l.id) + 1 });
+      if (registrado()) enviar({ evento: 'progreso', email: estado.email, hechas: estado.hechas, leccion: l.id });
+      if (estado.hechas.length === DEMO_LECCIONES.length) track('demo_curso_completada');
+    }
+    var sig = DEMO_LECCIONES[indice(l.id) + 1];
+    if (sig) { abrir(sig.id); return; }
+    estado.vista = 'fin';
+    guardar();
+    pintar();
+  }
+
+  function registrar(form) {
+    var nombre = form.nombre.value.trim();
+    var email = form.email.value.trim();
+    var tel = form.telefono.value.replace(/[^\d+]/g, '');
+    var error = form.querySelector('.ag-demo-error');
+    var msg = !nombre ? '¿Cómo te llamas?'
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? 'Revisa el email, parece que falta algo.'
+      : tel.replace(/\D/g, '').length < 9 ? 'Pon tu número de WhatsApp (9 cifras).'
+      : !form.acepto.checked ? 'Necesitamos que aceptes la política de privacidad para darte acceso.' : '';
+    if (msg) { error.textContent = msg; error.hidden = false; return; }
+
+    estado.nombre = nombre;
+    estado.email = email;
+    estado.telefono = tel;
+    enviar({
+      evento: 'alta', nombre: nombre, email: email, telefono: tel,
+      hechas: estado.hechas, leccion: estado.leccion, atribucion: estado.atribucion
+    });
+    track('demo_curso_lead', { lecciones_hechas: estado.hechas.length });
+    try { if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Demo curso' }); } catch (e) {}
+    abrir(estado.leccion);
+  }
+
+  root.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (ev.target.getAttribute('data-accion') === 'registro') registrar(ev.target);
+  });
+
+  root.addEventListener('input', function (ev) {
+    if (ev.target.getAttribute('data-accion') !== 'writing') return;
+    ej(estado.leccion).texto = ev.target.value;
+    guardar();
+    contarWriting();
+  });
+
+  root.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-accion]');
+    if (!el || el.tagName === 'FORM' || el.tagName === 'TEXTAREA' || el.disabled) return;
+    var accion = el.getAttribute('data-accion');
+    var l = leccionActual();
+    var e = ej(l.id);
+
+    if (accion === 'comprar') {
+      var curso = el.getAttribute('data-curso');
+      if (registrado()) enviar({ evento: 'clic', email: estado.email, curso: curso });
+      track('demo_curso_oferta_click', { curso: curso });
+      return; // el enlace sigue su curso
+    }
+    if (accion === 'whatsapp') {
+      if (registrado()) enviar({ evento: 'whatsapp', email: estado.email });
+      track('demo_curso_whatsapp');
+      return; // el enlace abre WhatsApp
+    }
+    if (accion === 'empezar') {
+      if (!estado.hechas.length) track('demo_curso_inicio');
+      abrir(estado.leccion);
+      return;
+    }
+    if (accion === 'ir') { abrir(el.getAttribute('data-id')); return; }
+    if (accion === 'fin') { estado.vista = 'fin'; guardar(); pintar(); return; }
+    if (accion === 'completar') { completar(); return; }
+
+    if (accion === 'test') {
+      e.r = e.r || [];
+      e.r[Number(el.getAttribute('data-q'))] = Number(el.getAttribute('data-k'));
+    } else if (accion === 'ordenar') {
+      e.orden = (e.orden || []).concat(Number(el.getAttribute('data-k')));
+    } else if (accion === 'ordenar-deshacer') {
+      e.orden = (e.orden || []).slice(0, -1);
+    } else if (accion === 'ordenar-corregir') {
+      e.corregido = true;
+    } else if (accion === 'ordenar-reiniciar') {
+      e.orden = [];
+      e.corregido = false;
+    } else if (accion === 'writing-modelo') {
+      e.modelo = true;
+    } else if (accion === 'speaking-modelo') {
+      e.vistas = (e.vistas || []).concat(e.q || 0);
+    } else if (accion === 'speaking-ir') {
+      e.q = Number(el.getAttribute('data-k'));
+    } else if (accion === 'speaking-empezar') {
+      cuentaAtras(false);
+      return;
+    } else if (accion === 'speaking-grabar') {
+      grabarYEmpezar();
+      return;
+    } else if (accion === 'speaking-parar') {
+      terminarRespuesta();
+      return;
+    } else {
+      return;
+    }
+    guardar();
+    pintar(true);
+  });
+
+  // Si guardó una vista que ya no existe (cambio de temario), vuelve a la portada.
+  if (estado.vista !== 'portada' && !VISTAS[estado.vista]) estado.vista = 'portada';
+  if (!leccionDemo(estado.leccion)) estado.leccion = DEMO_LECCIONES[0].id;
+  estado.hechas = estado.hechas.filter(function (id) { return leccionDemo(id); });
+  pintar(true);
+})();
+</script>

@@ -60,6 +60,7 @@ Si `CRON_SECRET` está definido, todos los endpoints exigen `Authorization: Bear
 - `PATCH /api/renewal-enroll` - Marcar aprobado / pausar / aplicar renovación
 - `GET /api/renewal-summary` - Recuento por estado
 - `POST /api/test-nivel` - Leads del test de nivel de la web (público, lo llama el widget; ver abajo)
+- `POST /api/demo-curso` - Leads y progreso de la demo del curso de la web de inicio (público, lo llama el widget; ver abajo)
 - `GET /api/renewal-aprobado?t=<token>` - Página pública del botón "Ya lo he conseguido" (marca Aprobado y pide reseña en Google o WhatsApp a Jesu)
 - `GET /api/renewal-click?t=<token>&o=<oferta>&p=<paso>` - Enlace de las ofertas del email: registra el clic (Clics, Último clic, Oferta clicada, Paso del clic) y redirige al checkout con UTMs
 - `GET /` - Dashboard
@@ -210,6 +211,36 @@ Cambiar cupón, importe, minutos de la oferta o WhatsApp: bloque `CONFIG` al pri
 **Kajabi**: al terminar el test el servidor envía el formulario de Kajabi `Test de nivel` (o el de `KAJABI_LEVEL_TEST_FORM`) con nombre, email y teléfono, así que se crea el contacto y saltan las etiquetas, secuencias y automatizaciones de ese formulario. El resultado queda en el campo `Kajabi` de la fila. Necesita que la clave de la API de Kajabi tenga permiso de escritura.
 
 Eventos para Google Tag Manager (`dataLayer`): `test_nivel_inicio`, `test_nivel_completado` (nivel, nota, curso_recomendado) y `test_nivel_oferta_click` (curso, con_descuento). Si está el píxel de Meta se lanza `Lead`. El GCLID que ya guardáis en `localStorage`/cookie viaja con el lead a Airtable.
+
+## 🎓 Demo del curso en la web de inicio
+
+Un "aula de prueba" que imita el reproductor del curso para que quien llega de Google lo pruebe por dentro antes de apuntarse: temario a la izquierda (con los módulos del curso completo con candado) y 5 lecciones reales, una de cada parte:
+
+| Lección | Qué hace |
+|---|---|
+| El APTIS por dentro | Formato, puntuación y por qué se suspende |
+| 5 trampas de Grammar | 5 preguntas con corrección al momento y el truco de cada una |
+| Reading Part 2 | Ordenar frases tocándolas, con corrección |
+| Writing Part 4 | Plantilla del email formal, tarea con contador de palabras y email modelo con la plantilla resaltada |
+| Speaking Part 1 | 3 preguntas con cuenta atrás de 30 s, grabación opcional (no sale del navegador) y respuesta modelo |
+
+Las 2 primeras lecciones se ven sin dar datos; para seguir pide nombre, email y WhatsApp. Al final enseña los 3 cursos con su checkout (con UTMs `utm_source=demo-curso`), la garantía de 15 días, el test de nivel y un botón de WhatsApp para dudas. El progreso se guarda en el navegador.
+
+- `lib/demo-curso/contenido.js` – temario, ejercicios y textos. Cada lección tiene un campo `video`: pon la URL de embed (Vimeo, YouTube o Wistia) y sale encima de la lección.
+- `kajabi/demo-curso.template.html` + `kajabi/demo-curso.css` – pantallas y estilos.
+- `kajabi/demo-curso.html` – **generado** con `npm run build:demo-curso`. Es lo que se pega en Kajabi. Un test falla si no está al día.
+- `POST /api/demo-curso` – guarda cada lead en la tabla `Demo curso` (una fila por email) con lecciones hechas, última lección, si la ha terminado, el curso en el que hace clic y si nos escribe por WhatsApp. También envía el formulario de Kajabi `Demo curso` (o el de `KAJABI_DEMO_FORM`) para que salten sus etiquetas y secuencias.
+
+Puesta en marcha:
+
+1. **Tabla en Airtable**: `node scripts/create-level-test-table.mjs` (crea también `Demo curso`).
+2. **Formulario en Kajabi** llamado `Demo curso` (con nombre, email y teléfono), con la etiqueta o secuencia que queráis para estos leads.
+3. **Página de inicio de Kajabi**: añade una sección con un bloque *Custom Code* y pega todo `kajabi/demo-curso.html`. Recomendable que el bloque ocupe el ancho completo; en móvil el temario se pliega encima de la lección. También se puede poner en una página propia (p. ej. `/prueba-gratis`) para las campañas de Google Ads.
+4. Prueba el flujo completo y comprueba que aparece la fila en Airtable.
+
+Cambiar cuántas lecciones son libres, el WhatsApp o el enlace del test: bloque `CONFIG` de la plantilla y `npm run build:demo-curso`. Cambiar lecciones, textos o vídeos: `contenido.js` y lo mismo.
+
+Eventos para Google Tag Manager (`dataLayer`): `demo_curso_inicio`, `demo_curso_leccion` (leccion, numero), `demo_curso_registro_visto`, `demo_curso_lead`, `demo_curso_completada`, `demo_curso_oferta_click` (curso), `demo_curso_whatsapp` y `demo_curso_speaking`. Si está el píxel de Meta se lanza `Lead` al registrarse. El GCLID y las UTMs viajan con el lead a Airtable.
 
 ## 💬 Agente de WhatsApp para los leads del test
 
