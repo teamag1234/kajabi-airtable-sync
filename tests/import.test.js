@@ -83,3 +83,28 @@ test('un Pack Turbo vigente se trata como acceso paralelo que pausa la secuencia
   const viejo = mapearCompra({ purchase: purchase({ effective_start_at: '2026-01-01T00:00:00Z', deactivated_at: '2026-02-10T00:00:00Z' }), offer: o, customer, hoy: '2026-10-07' });
   assert.equal(viejo.omitido, 'acceso paralelo terminado');
 });
+
+test('una desactivación a mano muy anterior a la caducidad prevista es una baja', () => {
+  const o = offer('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€');
+  const baja = mapearCompra({ purchase: purchase({ effective_start_at: '2026-06-01T00:00:00Z', deactivated_at: '2026-08-10T00:00:00Z', deactivation_reason: 'admin' }), offer: o, customer, hoy: '2026-08-12' });
+  assert.equal(baja.baja, true);
+  assert.equal(baja.fechaFin, '2026-08-10');
+  // la misma desactivación "admin" en la fecha prevista es una caducidad normal
+  const normal = mapearCompra({ purchase: purchase({ effective_start_at: '2026-02-10T00:00:00Z', deactivated_at: '2026-08-10T00:00:00Z', deactivation_reason: 'admin' }), offer: o, customer, hoy: '2026-08-12' });
+  assert.equal(normal.baja, false);
+  // una caducidad programada (access_expired) nunca es baja
+  const prog = mapearCompra({ purchase: purchase({ effective_start_at: '2026-06-01T00:00:00Z', deactivated_at: '2026-08-10T00:00:00Z', deactivation_reason: 'access_expired' }), offer: o, customer, hoy: '2026-08-12' });
+  assert.equal(prog.baja, false);
+  // una desactivación futura no es baja todavía
+  const futura = mapearCompra({ purchase: purchase({ effective_start_at: '2026-06-01T00:00:00Z', deactivated_at: '2026-09-10T00:00:00Z', deactivation_reason: 'admin' }), offer: o, customer, hoy: '2026-08-12' });
+  assert.equal(futura.baja, false);
+});
+
+test('consolidarAccesos: un acceso vigente gana a una baja', () => {
+  const r = consolidarAccesos([
+    { email: 'a@x.com', cursoKey: 'directo-express', familia: 'directo', fechaFin: '2026-08-10', baja: true },
+    { email: 'a@x.com', cursoKey: 'directo', familia: 'directo', fechaFin: '2026-07-01', baja: false },
+  ]);
+  assert.equal(r.length, 1);
+  assert.equal(r[0].baja, false);
+});

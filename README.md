@@ -118,6 +118,7 @@ En el plan Hobby de Vercel los crons se ejecutan en algún momento dentro de su 
 
 - **Aprobado** (casilla): el alumno ya tiene el título. Cada email lleva un botón "Ya lo he conseguido" con un enlace firmado que marca la casilla al pulsarlo y pide una reseña. También por API: `PATCH /api/renewal-enroll` con `{ "email": "...", "aprobado": true }`.
 - **Pausar** (casilla): no enviar nada temporalmente.
+- **Baja** (estado automático): si en Kajabi se retira el acceso a mano claramente antes de la caducidad prevista (baja, pausa del curso, cancelación), la fila pasa a Baja y no recibe la secuencia. Si se le devuelve el acceso, vuelve a Activo sola.
 - **Renovación**: si el sync detecta el pago de una oferta de renovación (o llega `PATCH` con `{ "email": "...", "renovar": { "meses": 6 } }`), se amplía la fecha de fin desde el fin anterior y la secuencia se reinicia para el nuevo periodo.
 
 ### Atribución de renovaciones al email
@@ -139,7 +140,7 @@ La tabla `Renovaciones` ya existe en la base **CURSOS ONLINE** (`appN0vx5OPGi81z
 | Días acceso | Número (solo cursos con acceso en días, como Level Express) |
 | Fecha fin | Fecha |
 | Fecha límite renovación | Fecha |
-| Estado | Selección única (Activo, En secuencia, Cerrado, Aprobado, Pausado) |
+| Estado | Selección única (Activo, En secuencia, Cerrado, Aprobado, Pausado, Baja) |
 | Aprobado | Casilla |
 | Pausar | Casilla |
 | Último paso enviado | Número |
