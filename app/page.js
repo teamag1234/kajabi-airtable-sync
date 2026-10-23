@@ -165,6 +165,7 @@ export default function Home() {
               ['Cerrados', renewals.cerrados],
               ['Aprobados', renewals.aprobados],
               ['Pausados', renewals.pausados],
+              ['Bajas', renewals.bajas],
               ['Con clic en oferta', renewals.conClic],
               ['Renovados', renewals.renovados],
               ['Renovados desde email', renewals.renovadosDesdeEmail],
