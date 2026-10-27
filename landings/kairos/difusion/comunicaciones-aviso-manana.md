@@ -1,5 +1,5 @@
 # Comunicaciones del día antes — Kairós × AG Academy
-Envío: hoy martes 27 de octubre. Masterclass: mañana miércoles 28 · 17:00h · Academia Kairós u online
+Envío: hoy martes 27 de octubre. Masterclass: mañana miércoles 28 · 18:00h · Academia Kairós u online
 
 Landing: https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026
 Grupo inscritos: https://chat.whatsapp.com/GmUdOay7QA88JBxvQyMVfC?mode=gi_t
@@ -11,13 +11,13 @@ Imágenes: whatsapp-aviso-manana-kairos.png (1080x1080) · historia-aviso-manana
 Envío: hoy por la tarde (17:00–19:00h).
 Firma: Equipo Kairós
 
-Asunto: Mañana a las 17:00h, el inglés
+Asunto: Mañana a las 18:00h, el inglés
 Asunto alternativo: ¿Vienes mañana a la masterclass?
 Preheader: Gratis, en la academia u online. Aún puedes apuntarte.
 
 Hola,
 
-Mañana miércoles a las 17:00h hacemos la masterclass con AG Academy sobre el certificado de inglés para la oposición.
+Mañana miércoles a las 18:00h hacemos la masterclass con AG Academy sobre el certificado de inglés para la oposición.
 
 Sabemos que es de esas cosas que siempre se quedan para "cuando tenga tiempo". Pero ese certificado son puntos en el baremo, y es una pena dejárselos cuando se pueden sacar en pocas semanas.
 
@@ -42,12 +42,12 @@ Envío: hoy a las 19:00h.
 Firma: Jesu
 
 Asunto: Mañana nos vemos, {{ first_name }}
-Asunto alternativo: Todo listo para mañana a las 17:00h
+Asunto alternativo: Todo listo para mañana a las 18:00h
 Preheader: Te cuento cómo va a ir la masterclass.
 
 Hola, {{ first_name }}:
 
-Mañana miércoles a las 17:00h nos vemos en la masterclass con Kairós, y quería escribirte antes para contarte cómo va a ir.
+Mañana miércoles a las 18:00h nos vemos en la masterclass con Kairós, y quería escribirte antes para contarte cómo va a ir.
 
 Sé que entre temas, supuestos y programación casi no queda hueco, y que el inglés es lo que siempre se queda para el final. Mañana te voy a enseñar qué certificado y qué nivel te puntúan de verdad, cómo prepararlo sin quitarle horas al temario y cómo sacarlo de forma fácil en pocas semanas.
 
@@ -64,7 +64,7 @@ Jesu
 
 ## WHATSAPP · Kairós a sus grupos de alumnos (con whatsapp-aviso-manana-kairos.png)
 
-Mañana miércoles a las 17:00h es la masterclass del certificado de inglés con AG Academy 🎓
+Mañana miércoles a las 18:00h es la masterclass del certificado de inglés con AG Academy 🎓
 
 Os contamos cómo sacarlo de forma fácil en pocas semanas y sumar esos puntos al baremo, sin quitarle horas al temario. Podéis venir a la academia o conectaros online.
 
@@ -77,7 +77,7 @@ https://www.agacademyaptis.com/kairos-ag-academy-21-10-2026?utm_source=kairos&ut
 
 Buenas tardes a todos 👋
 
-Soy Jesu, de AG Academy. Mañana a las 17:00h nos vemos en la masterclass con Kairós, y quería escribiros hoy para que lo tengáis todo listo.
+Soy Jesu, de AG Academy. Mañana a las 18:00h nos vemos en la masterclass con Kairós, y quería escribiros hoy para que lo tengáis todo listo.
 
 Sé que entre temas, supuestos y programación casi no os queda tiempo, y que el inglés siempre acaba en el último lugar de la lista. Precisamente de eso va la clase de mañana. Os voy a contar qué certificado y qué nivel os puntúan de verdad en el baremo, cómo prepararlo sin quitarle horas al temario y cómo sacarlo de forma fácil en pocas semanas.
 
