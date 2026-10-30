@@ -41,7 +41,9 @@ test('renovación: curso base y meses del nombre de la oferta', () => {
 test('omite ofertas fuera de catálogo, suscripciones activas y accesos ya cerrados', () => {
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z' }), offer: offer('SÁCATE EL INGLÉS'), customer, hoy: '2026-09-22' }).omitido, 'oferta no catalogada');
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'subscription' }), offer: offer('Aptis Infinity ⭐️'), customer, hoy: '2026-09-22' }).paralelo, 'Aptis Infinity');
-  assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'subscription' }), offer: offer('Ten tu Aptis MENSUAL', 'TEN TU APTIS RENOVACIÓN MENSUAL'), customer, hoy: '2026-09-22' }).omitido, 'suscripción activa');
+  const sub = mapearCompra({ purchase: purchase({ effective_start_at: '2026-09-01T00:00:00Z', payment_type: 'subscription' }), offer: offer('Ten tu Aptis MENSUAL', 'TEN TU APTIS RENOVACIÓN MENSUAL'), customer, hoy: '2026-09-22' });
+  assert.equal(sub.fuenteFin, 'suscripcion');
+  assert.equal(sub.fechaFin, '2026-10-22');
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-01-01T00:00:00Z', deactivated_at: '2026-09-10T00:00:00Z', deactivation_reason: 'admin' }), offer: offer('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€'), customer, hoy: '2026-09-22' }).omitido, 'acceso terminado fuera de ventana');
   assert.equal(mapearCompra({ purchase: purchase({ effective_start_at: '2026-03-15T00:00:00Z', deactivated_at: '2026-09-16T00:00:00Z', deactivation_reason: 'access_expired' }), offer: offer('"DIRECTO AL APTIS EXPRESS" 1 PAGO 647€'), customer, hoy: '2026-09-22' }).fechaFin, '2026-09-16');
 });
