@@ -190,7 +190,7 @@ Creado con ❤️ para automatizar el seguimiento de pagos de tu academia.
 
 ## 🎯 Test de nivel con oferta (agacademyaptis.com/test-nivel)
 
-Sustituye el assessment de Kajabi por un test interactivo: 34 preguntas tipo APTIS, nota sobre 10, nivel (100% = B2), desglose por partes y el curso que mejor le encaja con 300 € de descuento durante 20 minutos.
+Sustituye el assessment de Kajabi por un test interactivo: 34 preguntas tipo APTIS, nota sobre 10, nivel (100% = B2), desglose por partes y el curso que mejor le encaja con su precio del test durante 20 minutos (Level 387 €, Express 697 €, Tutorizado 1.047 €).
 
 - `lib/level-test/quiz.js` – preguntas con su respuesta correcta, tramos de nivel (A1 < 30% ≤ A2 < 55% ≤ B1 < 85% ≤ B2) y reglas de recomendación. Lo usan el widget y el servidor.
 - `kajabi/test-nivel.template.html` + `kajabi/test-nivel.css` – pantallas y estilos.
@@ -199,12 +199,12 @@ Sustituye el assessment de Kajabi por un test interactivo: 34 preguntas tipo APT
 
 Puesta en marcha:
 
-1. **Cupón en Kajabi** (Sales → Coupons): código `TEST300`, importe fijo 300 €, válido en las 3 ofertas de la store (Level `aLwrqozM`, Express `TRchWq3V`, Tutorizado `422hix8o`). El widget lo aplica solo con `?coupon_code=TEST300` en el checkout; nunca se muestra el código.
+1. **Cupones en Kajabi** (Sales → Coupons), importe fijo y cada uno solo para su oferta: `TEST260` (260 €, Level `aLwrqozM`), `TEST250` (250 €, Express `TRchWq3V`) y `TEST200` (200 €, Tutorizado `422hix8o`). El widget los aplica solo con `?coupon_code=` en el checkout; nunca se muestra el código. Precios y cupones: `CURSOS_TEST` en `lib/level-test/quiz.js`.
 2. **Tabla en Airtable**: `node scripts/create-level-test-table.mjs` (token con `schema.bases:write`), o créala a mano con los campos de `CAMPOS_TABLA` en `lib/level-test/lead.js`.
 3. **Página de Kajabi** `/test-nivel`: quita el bloque del assessment y añade un bloque *Custom Code* con todo el contenido de `kajabi/test-nivel.html`.
 4. Prueba el flujo completo y verifica que en el checkout aparece el descuento aplicado.
 
-Cambiar cupón, importe, minutos de la oferta o WhatsApp: bloque `CONFIG` al principio del `<script>` de la plantilla, y `npm run build:test-nivel`. Cambiar preguntas, tramos o reglas de curso: `quiz.js` y lo mismo.
+Cambiar precios del test o cupones: `CURSOS_TEST` en `quiz.js`. Minutos de la oferta o WhatsApp: bloque `CONFIG` al principio del `<script>` de la plantilla, y `npm run build:test-nivel`. Cambiar preguntas, tramos o reglas de curso: `quiz.js` y lo mismo.
 
 **Para los closers**: cada fila llega con `Mensaje WhatsApp` ya escrito (nombre, nivel, nivel que le piden, si contestó a la carrera y el curso que miró) y `Enviar WhatsApp`, un enlace que abre el chat con ese texto. `Estado closer` lo rellenan ellos. El texto se genera en `lib/level-test/mensaje.js`.
 

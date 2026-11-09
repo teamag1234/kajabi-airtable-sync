@@ -98,3 +98,11 @@ test('referencia del lead estable y sin distinguir mayúsculas', async () => {
   assert.equal(filaDesdeWhatsApp({ email: 'ana@mail.com' }).fields['Pidió plan por WhatsApp'], true);
   assert.ok(filaDesdeWhatsApp({ email: 'x' }).error);
 });
+
+test('precios del test y cupones por curso', async () => {
+  const { CURSOS_TEST, descuentoTest } = await import('../lib/level-test/quiz.js');
+  assert.deepEqual(
+    Object.fromEntries(Object.entries(CURSOS_TEST).map(([k, c]) => [k, [c.precio, c.precioTest, descuentoTest(c), c.cupon]])),
+    { level: [647, 387, 260, 'TEST260'], express: [947, 697, 250, 'TEST250'], tutorizado: [1247, 1047, 200, 'TEST200'] },
+  );
+});
