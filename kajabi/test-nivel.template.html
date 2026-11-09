@@ -16,9 +16,7 @@
 
   // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────
   var CONFIG = {
-    // Cupón de Kajabi (importe fijo, 300 €) válido en las 3 ofertas. Se aplica solo en el checkout.
-    cupon: 'TEST300',
-    descuento: 300,
+    // Precio con descuento y cupón de cada curso: CURSOS_TEST en lib/level-test/quiz.js.
     // Minutos que dura la oferta desde que ve el resultado.
     minutosOferta: 20,
     // Dónde se guarda el lead (Airtable). Vacío = no se envía nada.
@@ -55,7 +53,8 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-  function euros(n) { return n.toLocaleString('es-ES') + ' €'; }
+  // Con punto de miles también en 4 cifras (1.247 €), como en la store; toLocaleString('es-ES') no lo pone.
+  function euros(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €'; }
   function primerNombre() { return esc((estado.nombre || '').trim().split(/\s+/)[0]); }
   function track(evento, datos) {
     try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: evento }, datos || {})); } catch (e) {}
@@ -245,12 +244,12 @@
 
   function urlCheckout(key, conCupon) {
     var u = CURSOS_TEST[key].url + '?utm_source=test-nivel&utm_medium=web&utm_campaign=oferta-test-nivel&utm_content=' + key;
-    return conCupon ? u + '&coupon_code=' + encodeURIComponent(CONFIG.cupon) : u;
+    return conCupon ? u + '&coupon_code=' + encodeURIComponent(CURSOS_TEST[key].cupon) : u;
   }
 
   function oferta(curso, rec) {
     var activo = vigente();
-    var precio = activo ? curso.precio - CONFIG.descuento : curso.precio;
+    var precio = activo ? curso.precioTest : curso.precio;
     return '<div class="ag-tn-offer' + (activo ? '' : ' ag-tn-offer-off') + '">' +
       '<div class="ag-tn-offer-tag">Tu plan recomendado</div>' +
       '<h3 class="ag-tn-offer-name">' + curso.nombre + '</h3>' +
@@ -258,7 +257,7 @@
       '<p class="ag-tn-offer-why">' + rec.motivo + '</p>' +
       '<ul class="ag-tn-list">' + curso.incluye.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
       (activo
-        ? '<div class="ag-tn-gift"><b>Solo por hacer el test:</b> ' + CONFIG.descuento + ' € menos. Se aplica solo al entrar, sin códigos.</div>' +
+        ? '<div class="ag-tn-gift"><b>Solo por hacer el test:</b> ' + descuentoTest(curso) + ' € menos. Se aplica solo al entrar, sin códigos.</div>' +
           '<div class="ag-tn-price"><s>' + euros(curso.precio) + '</s><b>' + euros(precio) + '</b></div>' +
           '<div class="ag-tn-timer">Tu descuento se guarda <b id="ag-tn-clock">--:--</b></div>'
         : '<div class="ag-tn-gift ag-tn-gift-off">El descuento del test ya no está activo. Si te has quedado a medias, escríbenos y lo vemos.</div>' +
@@ -274,7 +273,7 @@
       var c = CURSOS_TEST[k];
       return '<a class="ag-tn-alt" data-accion="comprar" data-curso="' + k + '" href="' + urlCheckout(k, activo) + '">' +
         '<span><b>' + c.nombre + '</b><small>' + c.subtitulo + '</small></span>' +
-        '<span class="ag-tn-alt-price">' + (activo ? '<s>' + euros(c.precio) + '</s> ' : '') + euros(activo ? c.precio - CONFIG.descuento : c.precio) + '</span></a>';
+        '<span class="ag-tn-alt-price">' + (activo ? '<s>' + euros(c.precio) + '</s> ' : '') + euros(activo ? c.precioTest : c.precio) + '</span></a>';
     }).join('');
     return '<details class="ag-tn-others"><summary>Ver las otras opciones' + (activo ? ' (también con el descuento)' : '') + '</summary>' + items + '</details>';
   }
