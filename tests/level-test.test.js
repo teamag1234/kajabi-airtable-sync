@@ -99,10 +99,17 @@ test('referencia del lead estable y sin distinguir mayúsculas', async () => {
   assert.ok(filaDesdeWhatsApp({ email: 'x' }).error);
 });
 
-test('precios del test y cupones por curso', async () => {
+test('precios del test y su oferta de Kajabi por curso', async () => {
   const { CURSOS_TEST, descuentoTest } = await import('../lib/level-test/quiz.js');
   assert.deepEqual(
-    Object.fromEntries(Object.entries(CURSOS_TEST).map(([k, c]) => [k, [c.precio, c.precioTest, descuentoTest(c), c.cupon]])),
-    { level: [647, 387, 260, 'TEST260'], express: [947, 697, 250, 'TEST250'], tutorizado: [1247, 1047, 200, 'TEST200'] },
+    Object.fromEntries(Object.entries(CURSOS_TEST).map(([k, c]) => [k, [c.precio, c.precioTest, descuentoTest(c), c.urlTest.match(/offers\/(\w+)\//)[1]]])),
+    { level: [647, 387, 260, 'yKSFwAdN'], express: [947, 697, 250, 'BoKoLB46'], tutorizado: [1247, 1047, 200, 'CzhjuhvB'] },
   );
+});
+
+test('public/test-nivel.js está al día y es JavaScript válido', async () => {
+  const { construirJs } = await import('../scripts/build-test-nivel.mjs');
+  const js = readFileSync(new URL('../public/test-nivel.js', import.meta.url), 'utf8');
+  assert.equal(js, construirJs());
+  assert.doesNotThrow(() => new Function(js));
 });

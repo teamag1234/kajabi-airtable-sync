@@ -141,7 +141,8 @@ test('historial para Claude: alterna roles, marca a los closers y empieza por el
 
 test('las instrucciones llevan los enlaces con el cupón y el contexto los datos del test', () => {
   const i = instrucciones();
-  assert.match(i, /offers\/aLwrqozM\/checkout\?coupon_code=TEST260/);
+  assert.match(i, /offers\/yKSFwAdN\/checkout\?utm_source=whatsapp-agente/);
+  assert.doesNotMatch(i, /coupon_code/);
   assert.match(i, /por venir del test 387 € \(260 € menos\)/);
   assert.match(i, /asistente de AG Academy/);
   const c = contextoLead({ Nombre: 'Ana', Nivel: 'A2', Nota: 5.3, Aciertos: 18, Writing: '5/9', 'Nivel que necesita': 'B1' });

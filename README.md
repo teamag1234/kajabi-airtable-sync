@@ -194,17 +194,22 @@ Sustituye el assessment de Kajabi por un test interactivo: 34 preguntas tipo APT
 
 - `lib/level-test/quiz.js` – preguntas con su respuesta correcta, tramos de nivel (A1 < 30% ≤ A2 < 55% ≤ B1 < 85% ≤ B2) y reglas de recomendación. Lo usan el widget y el servidor.
 - `kajabi/test-nivel.template.html` + `kajabi/test-nivel.css` – pantallas y estilos.
-- `kajabi/test-nivel.html` – **generado** con `npm run build:test-nivel`. Es lo que se pega en Kajabi. Un test falla si no está al día.
+- `public/test-nivel.js` y `kajabi/test-nivel.html` – **generados** con `npm run build:test-nivel` (el .js es el que carga Kajabi). Un test falla si no están al día.
 - `POST /api/test-nivel` – guarda cada lead en la tabla `Test de nivel` (una fila por email, recalculando la nota) y anota el clic en la oferta.
 
 Puesta en marcha:
 
-1. **Cupones en Kajabi** (Sales → Coupons), importe fijo y cada uno solo para su oferta: `TEST260` (260 €, Level `aLwrqozM`), `TEST250` (250 €, Express `TRchWq3V`) y `TEST200` (200 €, Tutorizado `422hix8o`). El widget los aplica solo con `?coupon_code=` en el checkout; nunca se muestra el código. Precios y cupones: `CURSOS_TEST` en `lib/level-test/quiz.js`.
+1. **Ofertas del test en Kajabi** (ya publicadas, sin cupones): Level 387 € `yKSFwAdN`, Directo al Aptis Express 697 € `BoKoLB46`, Directo al Aptis Tutorizado 1.047 € `CzhjuhvB`. Mientras dura la oferta del resultado, los botones llevan a esas; después, a las de la store. Precios y enlaces: `CURSOS_TEST` en `lib/level-test/quiz.js`.
 2. **Tabla en Airtable**: `node scripts/create-level-test-table.mjs` (token con `schema.bases:write`), o créala a mano con los campos de `CAMPOS_TABLA` en `lib/level-test/lead.js`.
-3. **Página de Kajabi** `/test-nivel`: quita el bloque del assessment y añade un bloque *Custom Code* con todo el contenido de `kajabi/test-nivel.html`.
+3. **Página de Kajabi** `/test-nivel`: el bloque *Custom Code* solo lleva estas dos líneas, que cargan el test desde Vercel (`public/test-nivel.js`). Cada cambio se publica con el deploy, sin volver a pegar nada:
+   ```html
+   <div id="ag-tn" class="ag-tn"></div>
+   <script src="https://kajabi-airtable-sync-d9nm.vercel.app/test-nivel.js" defer></script>
+   ```
+   `kajabi/test-nivel.html` sigue generándose por si alguna vez hace falta pegar el test completo.
 4. Prueba el flujo completo y verifica que en el checkout aparece el descuento aplicado.
 
-Cambiar precios del test o cupones: `CURSOS_TEST` en `quiz.js`. Minutos de la oferta o WhatsApp: bloque `CONFIG` al principio del `<script>` de la plantilla, y `npm run build:test-nivel`. Cambiar preguntas, tramos o reglas de curso: `quiz.js` y lo mismo.
+Cambiar precios u ofertas del test: `CURSOS_TEST` en `quiz.js`. Minutos de la oferta o WhatsApp: bloque `CONFIG` al principio del `<script>` de la plantilla, y `npm run build:test-nivel`. Cambiar preguntas, tramos o reglas de curso: `quiz.js` y lo mismo.
 
 **Para los closers**: cada fila llega con `Mensaje WhatsApp` ya escrito (nombre, nivel, nivel que le piden, si contestó a la carrera y el curso que miró) y `Enviar WhatsApp`, un enlace que abre el chat con ese texto. `Estado closer` lo rellenan ellos. El texto se genera en `lib/level-test/mensaje.js`.
 
