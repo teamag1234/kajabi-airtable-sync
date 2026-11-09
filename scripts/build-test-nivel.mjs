@@ -6,7 +6,7 @@
  *
  * Uso: npm run build:test-nivel
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -70,8 +70,49 @@ export function construir() {
     .replace('/*__QUIZ__*/', () => quizParaNavegador(leer('lib/level-test/quiz.js')));
 }
 
+/** Lo que se pega en el bloque Custom Code de Kajabi: carga public/test-nivel.js desde Vercel. */
+export const SNIPPET_KAJABI = '<div id="ag-tn" class="ag-tn"></div>\n<script src="https://kajabi-airtable-sync-d9nm.vercel.app/test-nivel.js" defer></script>';
+
+/**
+ * El mismo widget como un solo .js (public/test-nivel.js, servido por Vercel):
+ * mete la fuente y los estilos en <head>, crea el contenedor si falta y
+ * ejecuta el script. Así cada cambio se publica con un deploy, sin volver a
+ * pegar nada en Kajabi.
+ */
+export function construirJs(html = construir()) {
+  const css = html.match(/<style>([\s\S]*?)<\/style>/)[1];
+  const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  return `/* AG Academy · Test de nivel. Generado con npm run build:test-nivel; no editar a mano. */
+(function () {
+  var head = document.head;
+  if (!document.querySelector('link[data-ag-tn]')) {
+    var font = document.createElement('link');
+    font.rel = 'stylesheet';
+    font.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap';
+    font.setAttribute('data-ag-tn', '');
+    head.appendChild(font);
+  }
+  var style = document.createElement('style');
+  style.textContent = ${JSON.stringify(css)};
+  head.appendChild(style);
+  if (!document.getElementById('ag-tn')) {
+    var root = document.createElement('div');
+    root.id = 'ag-tn';
+    root.className = 'ag-tn';
+    var aqui = document.currentScript;
+    if (aqui && aqui.parentNode) aqui.parentNode.insertBefore(root, aqui);
+    else document.body.appendChild(root);
+  }
+})();
+${script.trim()}
+`;
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const html = construir();
   writeFileSync(path.join(raiz, 'kajabi/test-nivel.html'), html);
   console.log(`kajabi/test-nivel.html generado (${Math.round(html.length / 1024)} KB)`);
+  mkdirSync(path.join(raiz, 'public'), { recursive: true });
+  writeFileSync(path.join(raiz, 'public/test-nivel.js'), construirJs(html));
+  console.log('public/test-nivel.js generado');
 }

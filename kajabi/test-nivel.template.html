@@ -16,7 +16,7 @@
 
   // ─── CONFIGURACIÓN ────────────────────────────────────────────────────────
   var CONFIG = {
-    // Precio con descuento y cupón de cada curso: CURSOS_TEST en lib/level-test/quiz.js.
+    // Precio del test y su oferta de Kajabi de cada curso: CURSOS_TEST en lib/level-test/quiz.js.
     // Minutos que dura la oferta desde que ve el resultado.
     minutosOferta: 20,
     // Dónde se guarda el lead (Airtable). Vacío = no se envía nada.
@@ -242,9 +242,10 @@
 
   function vigente() { return estado.expira && Date.now() < estado.expira; }
 
-  function urlCheckout(key, conCupon) {
-    var u = CURSOS_TEST[key].url + '?utm_source=test-nivel&utm_medium=web&utm_campaign=oferta-test-nivel&utm_content=' + key;
-    return conCupon ? u + '&coupon_code=' + encodeURIComponent(CURSOS_TEST[key].cupon) : u;
+  // Con la oferta activa se compra en la oferta de Kajabi con el precio del test; si no, en la de la store.
+  function urlCheckout(key, precioTest) {
+    var c = CURSOS_TEST[key];
+    return (precioTest ? c.urlTest : c.url) + '?utm_source=test-nivel&utm_medium=web&utm_campaign=oferta-test-nivel&utm_content=' + key;
   }
 
   function oferta(curso, rec) {
@@ -257,7 +258,7 @@
       '<p class="ag-tn-offer-why">' + rec.motivo + '</p>' +
       '<ul class="ag-tn-list">' + curso.incluye.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
       (activo
-        ? '<div class="ag-tn-gift"><b>Solo por hacer el test:</b> ' + descuentoTest(curso) + ' € menos. Se aplica solo al entrar, sin códigos.</div>' +
+        ? '<div class="ag-tn-gift"><b>Solo por hacer el test:</b> ' + descuentoTest(curso) + ' € menos. Ya va aplicado al entrar, sin códigos.</div>' +
           '<div class="ag-tn-price"><s>' + euros(curso.precio) + '</s><b>' + euros(precio) + '</b></div>' +
           '<div class="ag-tn-timer">Tu descuento se guarda <b id="ag-tn-clock">--:--</b></div>'
         : '<div class="ag-tn-gift ag-tn-gift-off">El descuento del test ya no está activo. Si te has quedado a medias, escríbenos y lo vemos.</div>' +
