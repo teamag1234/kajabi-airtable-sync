@@ -70,8 +70,14 @@ export function construir() {
     .replace('/*__QUIZ__*/', () => quizParaNavegador(leer('lib/level-test/quiz.js')));
 }
 
-/** Lo que se pega en el bloque Custom Code de Kajabi: carga public/test-nivel.js desde Vercel. */
-export const SNIPPET_KAJABI = '<div id="ag-tn" class="ag-tn"></div>\n<script src="https://kajabi-airtable-sync-d9nm.vercel.app/test-nivel.js" defer></script>';
+/**
+ * Lo que hay en el bloque Custom Code de Kajabi: carga public/test-nivel.js
+ * desde Vercel y, si falla (p. ej. un rollback a un despliegue sin el archivo),
+ * la copia de jsDelivr fijada a un commit. Al cambiar el widget, actualiza ese
+ * commit en Kajabi para que el respaldo no se quede atrás.
+ */
+export const SNIPPET_KAJABI = `<div id="ag-tn" class="ag-tn"></div>
+<script src="https://kajabi-airtable-sync-d9nm.vercel.app/test-nivel.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/teamag1234/kajabi-airtable-sync@93e2127/public/test-nivel.js';document.body.appendChild(s);"></script>`;
 
 /**
  * El mismo widget como un solo .js (public/test-nivel.js, servido por Vercel):

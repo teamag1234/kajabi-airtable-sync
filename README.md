@@ -204,8 +204,9 @@ Puesta en marcha:
 3. **Página de Kajabi** `/test-nivel`: el bloque *Custom Code* solo lleva estas dos líneas, que cargan el test desde Vercel (`public/test-nivel.js`). Cada cambio se publica con el deploy, sin volver a pegar nada:
    ```html
    <div id="ag-tn" class="ag-tn"></div>
-   <script src="https://kajabi-airtable-sync-d9nm.vercel.app/test-nivel.js" defer></script>
+   <script src="https://kajabi-airtable-sync-d9nm.vercel.app/test-nivel.js" defer onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/teamag1234/kajabi-airtable-sync@93e2127/public/test-nivel.js';document.body.appendChild(s);"></script>
    ```
+   Si Vercel no sirve el archivo (por ejemplo, tras un rollback a un despliegue antiguo), carga la copia de jsDelivr fijada al commit `93e2127`. Cuando cambie el widget, actualiza ese commit en Kajabi (`SNIPPET_KAJABI` en `scripts/build-test-nivel.mjs`).
    `kajabi/test-nivel.html` sigue generándose por si alguna vez hace falta pegar el test completo.
 4. Prueba el flujo completo y verifica que en el checkout aparece el descuento aplicado.
 
